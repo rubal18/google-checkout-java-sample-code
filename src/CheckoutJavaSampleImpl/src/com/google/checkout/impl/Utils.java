@@ -1,5 +1,7 @@
 package com.google.checkout.impl;
 
+import java.util.Date;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -124,5 +126,20 @@ public class Utils {
 		{
 			parent.appendChild(children[i]);	
 		}		
+	}
+
+	public static Date getElementDateValue(Document document, Element expiration, String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static long getElementLongValue(Document document, Element mcfs, String string) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public static Element findElementAndSetElseCreateAndSet(Document document, Element expiration, String string, Date date) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

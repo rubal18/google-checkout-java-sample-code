@@ -223,7 +223,7 @@ public class CheckoutShoppingCartRequestImpl extends
 
 		Element expiration = Utils.findElementOrContainer(document, shoppingCart, "cart-expiration");
         if (expiration == null) {return null;}		
-		Element goodUntil = Utils.getElementDateValue(document, expiration, "good-until-date");
+		return Utils.getElementDateValue(document, expiration, "good-until-date");
 	}
 
 	/* (non-Javadoc)
@@ -280,7 +280,7 @@ public class CheckoutShoppingCartRequestImpl extends
 	public long getPlatformID() {
 
 		Element mcfs = Utils.findElementOrContainer(document, checkoutFlowSupport, "merchant-checkout-flow-support");	
-        if (mcfs == null) {return "";}				        		
+        if (mcfs == null) {return 0l;}				        		
 		return Utils.getElementLongValue(document, mcfs, "platform-id");
 	}
 
