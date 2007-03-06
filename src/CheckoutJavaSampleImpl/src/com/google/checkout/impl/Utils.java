@@ -75,7 +75,7 @@ public class Utils {
 			parent.appendChild(document.createElement(child));
 		}
 		Element ret = (Element) parent.getElementsByTagName(child).item(0);
-		ret.setTextContent(value);
+		ret.setNodeValue(value);
 		return ret;		
 	}
 	
@@ -90,7 +90,7 @@ public class Utils {
 	public static Element createNewElementAndSet(Document document, Element parent, String childElement, String childValue) {
 		Element child = (Element) document.createElement(childElement);
 		parent.appendChild(child);
-		child.setTextContent(childValue);
+		child.setNodeValue(childValue);
 		return child;
 	}
 	
@@ -108,11 +108,11 @@ public class Utils {
 		if (nl.getLength() == 0) {
 			return "";
 		}
-		return nl.item(0).getTextContent();			
+		return nl.item(0).getNodeValue();			
 	}
 	
 	public static boolean getElementBooleanValue(Document document, Element parent, String element) {
-		return Boolean.parseBoolean(getElementStringValue(document, parent, element));		
+		return Boolean.valueOf(getElementStringValue(document, parent, element)).booleanValue();		
 	}
 	
 	public static float getElementFloatValue(Document document, Element parent, String element) {
