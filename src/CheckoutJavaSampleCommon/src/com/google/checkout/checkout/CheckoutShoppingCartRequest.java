@@ -16,6 +16,7 @@
 
 package com.google.checkout.checkout;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.w3c.dom.Element;
@@ -64,8 +65,7 @@ public interface CheckoutShoppingCartRequest extends CheckoutRequest {
 	     <param name="Quantity">The number of this item that is included in the 
 	     order. This value corresponds to the value of the &lt;quantity&gt; tag 
 	     in the Checkout API request.</param>*/
-	    public void addItem(String name, String description,
-	      float price, int quantity, String merchantItemID);
+	    public void addItem(String name, String description, float price, int quantity, String merchantItemID);
 	     
 /**	     This method adds an item to an order. This method handles items that 
 	     have &lt;merchant-private-item-data&gt; XML blocks associated with them.
@@ -87,7 +87,7 @@ public interface CheckoutShoppingCartRequest extends CheckoutRequest {
 	     &lt;merchant-private-item-data&gt; tag in the Checkout API 
 	     request.</param>
 */	    public void addItem(String name, String description, float price,
-	      int quantity, Element merchantPrivateItemData);
+	      int quantity, Element[] merchantPrivateItemData);
 
 	     
 /**	     This method adds an item to an order. This method handles items that 
@@ -110,56 +110,8 @@ public interface CheckoutShoppingCartRequest extends CheckoutRequest {
 	     corresponds to the value of the value of the 
 	     &lt;merchant-private-item-data&gt; tag in the Checkout API 
 	     request.</param>
-*/	    //public void addItem(String name, String description, String merchantItemID,
-	    //  float price, int quantity, Element merchantPrivateItemData);
-
-	     
-/**	     This method adds an item to an order. This method handles items that 
-	     have &lt;merchant-private-item-data&gt; XML blocks associated with them.
-	     
-	     <param name="Name">The name of the item. This value corresponds to the 
-	     value of the &lt;item-name&gt; tag in the Checkout API request.</param>
-	     <param name="Description">The description of the item. This value 
-	     corresponds to the value of the &lt;item-description&gt; tag in the 
-	     Checkout API request.</param>
-	     <param name="Price">The price of the item. This value corresponds to 
-	     the value of the &lt;unit-price&gt; tag in the Checkout API 
-	     request.</param>
-	     <param name="Quantity">The number of this item that is included in the 
-	     order. This value corresponds to the value of the &lt;quantity&gt; tag 
-	     in the Checkout API request.</param>
-	     <param name="MerchantPrivateItemData">An array of XML nodes that should be 
-	     associated with the item in the Checkout API request. This value 
-	     corresponds to the value of the value of the 
-	     &lt;merchant-private-item-data&gt; tag in the Checkout API 
-	     request.</param>*/
-	    //public void addItem(String name, String description, float price,
-	    //  int quantity, Element[] merchantPrivateItemData);
-
-	     
-/**	     This method adds an item to an order. This method handles items that 
-	     have &lt;merchant-private-item-data&gt; XML blocks associated with them.
-	     
-	     <param name="Name">The name of the item. This value corresponds to the 
-	     value of the &lt;item-name&gt; tag in the Checkout API request.</param>
-	     <param name="Description">The description of the item. This value 
-	     corresponds to the value of the &lt;item-description&gt; tag in the 
-	     Checkout API request.</param>
-	     <param name="MerchantItemID">The Merchant Item Id that uniquely identifies the product in your system.</param>
-	     <param name="Price">The price of the item. This value corresponds to 
-	     the value of the &lt;unit-price&gt; tag in the Checkout API 
-	     request.</param>
-	     <param name="Quantity">The number of this item that is included in the 
-	     order. This value corresponds to the value of the &lt;quantity&gt; tag 
-	     in the Checkout API request.</param>
-	     <param name="MerchantPrivateItemData">An array of XML nodes that should be 
-	     associated with the item in the Checkout API request. This value 
-	     corresponds to the value of the value of the 
-	     &lt;merchant-private-item-data&gt; tag in the Checkout API 
-	     request.</param>
-*/	    //public void addItem(String name, String description, String merchantItemID,
-	    //  float price, int quantity, Element[] merchantPrivateItemData);
-	    
+*/	    public void addItem(String name, String description,
+	      float price, int quantity, String merchantItemID, Element[] merchantPrivateItemData, String taxTableSelector);	    
 	     
 /**	     This method adds a flat-rate shipping method to an order. This method 
 	     handles flat-rate shipping methods that do not have shipping 
@@ -217,44 +169,34 @@ public interface CheckoutShoppingCartRequest extends CheckoutRequest {
 	     displayed on the Google Checkout order review page.</param>
 	     <param name="Cost">The cost associated with the shipping method.</param>
 */	    public void addPickupShippingMethod(String name, float cost);
-
 	     
-/**	     This method adds a tax rule associated with a zip code pattern.
-	     
-	     <param name="ZipPattern">The zip pattern.</param>
-	     <param name="TaxRate">The tax rate associated with a tax rule. Tax rates 
-	     are expressed as float values. For example, a value of 0.0825 
-	     specifies a tax rate of 8.25%.</param>
-	     <param name="ShippingTaxed">
-	     If this parameter has a value of <b>true</b>, then shipping costs will
-	     be taxed for items that use the associated tax rule.
-	     </param>
-*/	    public void addZipTaxRule(String aipPattern, double taxRate,
-	      boolean shippingTaxed);
-
-	     
-/**	     Add an already <see cref="System.Web.HttpUtility.UrlEncode(String)"/> Url
-	     
+/**	     Add an already <see cref="System.Web.HttpUtility.UrlEncode(String)"/> Url	     
 	     <param name="url">The UrlEncoded &lt;parameterized-url&gt; to add to the collection</param>
 */	    
-public ParameterizedUrl addParameterizedUrl(String url);
+		public void addParameterizedUrl(String url);
 
-	     
 /**	     Add a Third Party Tracking URL.
 	     
 	     <param name="url">The &lt;parameterized-url&gt; to add to the collection</param>
 	     <param name="urlEncode">true if you need the url to be <see cref="System.Web.HttpUtility.UrlEncode(String)"/></param>
 	     <returns>A new <see cref="ParameterizedUrl" /></returns>
-*/	    public ParameterizedUrl addParameterizedUrl(String url, boolean urlEncode);
+*/	    
+		public void addParameterizedUrl(String url, boolean urlEncode);
+	     
+		/**	     Add an already <see cref="System.Web.HttpUtility.UrlEncode(String)"/> Url	     
+		<param name="url">The UrlEncoded &lt;parameterized-url&gt; to add to the collection</param>
+		*/	    
+		public void addParameterizedUrl(String url, Collection parameters);
+		
+		/**	     Add a Third Party Tracking URL.
+		
+		<param name="url">The &lt;parameterized-url&gt; to add to the collection</param>
+		<param name="urlEncode">true if you need the url to be <see cref="System.Web.HttpUtility.UrlEncode(String)"/></param>
+		<returns>A new <see cref="ParameterizedUrl" /></returns>
+		*/	    
+		public void addParameterizedUrl(String url, boolean urlEncode, Collection parameters);
 
-	     
-/**	     Add a Third Party Tracking URL.
-	     
-	     <param name="url">The &lt;parameterized-url&gt; object to add to the collection</param>
-	     <returns>A new <see cref="ParameterizedUrl" /></returns>
-*/	    public void addParameterizedUrl(ParameterizedUrl url);
 
-	     
 /**	     This method verifies that a given zip code pattern is valid. Zip code 
 	     patterns may be five-digit numbers or they may be one- to four-digit 
 	     numbers followed by an asterisk.
@@ -270,20 +212,12 @@ public ParameterizedUrl addParameterizedUrl(String url);
 */	    public boolean isValidZipPattern(String zipPattern);
 
 	     
-/**	     This method adds a tax rule associated with a particular state.
-	     
-	     <param name="StateCode">This parameter contains a two-letter U.S. state 
-	     code associated with a tax rule.</param>
-	     <param name="TaxRate">The tax rate associated with a tax rule. Tax 
-	     rates are expressed as float values. For example, a value of 0.0825 
-	     specifies a tax rate of 8.25%.</param>
-	     <param name="ShippingTaxed">
-	     If this parameter has a value of <b>true</b>, then shipping costs will
-	     be taxed for items that use the associated tax rule.
-	     </param>
-*/	    public void addStateTaxRule(String StateCode, double TaxRate,
-	      boolean shippingTaxed);
 
+	    public void addDefaultTaxRule(double taxRate, boolean shippingTaxed, TaxArea taxArea);
+
+	    public void addAlternateTaxRule(String tableName, boolean standalone, double taxRate, TaxArea taxArea);
+	    
+	    
 	     
 /**	     Adds the country tax rule.
 	     This method adds a tax rule associated with a particular state.
@@ -446,36 +380,20 @@ public ParameterizedUrl addParameterizedUrl(String url);
 */	    public void setMerchantCalculationsUrl(String url);
 
 	    
+	     	    
 	     
 /**	     Retrieves the value of the 
 	     &lt;merchant-private-data&gt; element.
 	     
 	     <value>The &lt;merchant-private-data&gt; element value.</value>
-	    [Obsolete("merchant-private-data is now a XmlNode array. please use the AddMerchantPrivateDataNode method.")]
-*/	    public String getMerchantPrivateData();
+*/	    public Element[] getMerchantPrivateDataNodes();
 
 	     
 /**	     Sets the value of the 
 	     &lt;merchant-private-data&gt; element.
 	     
 	     <value>The &lt;merchant-private-data&gt; element value.</value>
-	    [Obsolete("merchant-private-data is now a XmlNode array. please use the AddMerchantPrivateDataNode method.")]
-*/	    public void setMerchantPrivateData(String mpd);
-
-	    
-	     
-/**	     Retrieves the value of the 
-	     &lt;merchant-private-data&gt; element.
-	     
-	     <value>The &lt;merchant-private-data&gt; element value.</value>
-*/	    //public Element getMerchantPrivateDataNodes();
-
-	     
-/**	     Sets the value of the 
-	     &lt;merchant-private-data&gt; element.
-	     
-	     <value>The &lt;merchant-private-data&gt; element value.</value>
-*/	    //public void setMerchantPrivateDataNodes(Element[] nodes);
+*/	    public void setMerchantPrivateDataNodes(Element[] nodes);
 
 	    
 	     
@@ -603,35 +521,5 @@ public ParameterizedUrl addParameterizedUrl(String url);
 	     </remarks>
 	     <value>The &lt;analytics-data&gt; element value.</value>
 */	    public void setPlatformID(long platformId);
-
-	    
-	    
-	     
-/**	     The &lt;parameterized-urls&gt; tag
-	     
-	     <remarks>
-	     It contains information about all of the
-	     web beacons that the merchant wants to add to the Google Checkout order 
-	     confirmation page. This tag encapsulates a list of one or more
-	     &lt;parameterized-url&gt; (<see cref="ParameterizedUrl"/>) tags.
-	     See
-	     http://code.google.com/apis/checkout/developer/checkout_pixel_tracking.html
-	     For additional information on Third-Party Conversion Tracking
-	     </remarks>
-*/	    public ParameterizedUrls getParameterizedUrls();
-
-	     
-/**	     The &lt;parameterized-urls&gt; tag
-	     </summary>
-	     <remarks>
-	     It contains information about all of the
-	     web beacons that the merchant wants to add to the Google Checkout order 
-	     confirmation page. This tag encapsulates a list of one or more
-	     &lt;parameterized-url&gt; (<see cref="ParameterizedUrl"/>) tags.
-	     See
-	     http://code.google.com/apis/checkout/developer/checkout_pixel_tracking.html
-	     For additional information on Third-Party Conversion Tracking
-	     </remarks>
-*/	    public void setParameterizedUrls(ParameterizedUrls urls);
 
 }

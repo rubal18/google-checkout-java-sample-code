@@ -16,6 +16,8 @@
 
 package com.google.checkout.checkout;
 
+import org.w3c.dom.Element;
+
 public interface ShippingRestrictions {
 
 	/**
@@ -43,7 +45,7 @@ public interface ShippingRestrictions {
 	 * 
 	 * <param name="CountryArea">The country area.</param>
 	 */
-	public void addAllowedCountryArea(USArea CountryArea);
+	public void addAllowedCountryArea(USArea countryArea);
 
 	/**
 	 * This method adds an excluded zip code pattern to a &lt;us-zip-area&gt;
@@ -71,13 +73,6 @@ public interface ShippingRestrictions {
 	 * <param name="CountryArea">The country area.</param>
 	 */
 	public void addExcludedCountryArea(USArea countryArea);
-
-	/**
-	 * This method returns the complete set of shipping restrictions for a
-	 * Checkout API request.
-	 * 
-	 * <value>The XML restrictions.</value>
-	 */
-	public String getXmlRestrictions();
-
+	
+	public Element getRootElement();
 }
