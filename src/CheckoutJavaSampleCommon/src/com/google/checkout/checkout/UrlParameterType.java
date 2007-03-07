@@ -106,12 +106,11 @@ public class UrlParameterType {
 
 	private String param;
 
-	public UrlParameterType(String param) {
+	private UrlParameterType(String param) {
 		this.param = param;
 	}
 
-	public String getparam() {
+	public String toString() {
 		return param;
 	}
-
 }
