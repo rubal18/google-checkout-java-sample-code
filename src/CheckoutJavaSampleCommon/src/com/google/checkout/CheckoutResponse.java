@@ -16,6 +16,14 @@
 
 package com.google.checkout;
 
+/**
+ * @author 		simonjsmith, ksim
+ * @date   		March 6th, 2007
+ * @version		1.1
+ * @todo		Not unit tested yet.
+ *
+ */
+
 public interface CheckoutResponse {
 
 	/**
@@ -23,7 +31,7 @@ public interface CheckoutResponse {
 	 * <value> <c>true</c> if the response did not indicate an error;
 	 * otherwise, <c>false</c>. </value>
 	 */
-	public boolean isGood();
+	public boolean isValidRequest();
 
 	/**
 	 * Gets the serial number. Google attaches a unique serial number to every
