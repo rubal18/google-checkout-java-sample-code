@@ -12,19 +12,28 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*************************************************/
+ *************************************************/
 
 package com.google.checkout.checkout;
 
-/** The Url Paramter class used in the <see cref="ParameterizedUrl"/>*/
-public interface UrlParameter {
+/** The Url Paramter class used in the <see cref="ParameterizedUrl"/> */
+public class UrlParameter {
 
-/** The url parameter*/
-public String getName();
+	private String name;
+	private UrlParameterType type;
+	
+	public UrlParameter(String name, UrlParameterType type) {
+		this.name = name;
+		this.type = type;
+	}
+	
+	/** The url parameter */
+	public String getName() {
+		return name;
+	}
 
-/** The <see cref="UrlParameterType"/>*/
-public UrlParameterType getParamType();
-
-/** The url parameter*/
-public String getSerializedValue();
+	/** The <see cref="UrlParameterType"/> */
+	public UrlParameterType getParamType() {
+		return type;
+	}
 }
