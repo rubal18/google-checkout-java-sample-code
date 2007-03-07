@@ -103,7 +103,14 @@ public class Utils {
 	public static Element createNewElementAndSet(Document document, Element parent, String childElement, int childValue) {
 		return createNewElementAndSet(document, parent, childElement, ""+childValue);
 	}
-	
+
+	public static Element createNewElementAndSet(Document document, Element parent, String childElement, boolean childValue) {
+		return createNewElementAndSet(document, parent, childElement, ""+childValue);
+	}
+
+	public static Element createNewElementAndSet(Document document, Element parent, String childElement, double childValue) {
+		return createNewElementAndSet(document, parent, childElement, ""+childValue);
+	}
 	
 	public static String getElementStringValue(Document document, Element parent, String element) {
 		NodeList nl = parent.getElementsByTagName(element);
@@ -128,18 +135,43 @@ public class Utils {
 		}		
 	}
 
-	public static Date getElementDateValue(Document document, Element expiration, String string) {
+	public static Date getElementDateValue(Document document, Element parent, String string) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static long getElementLongValue(Document document, Element mcfs, String string) {
+	public static long getElementLongValue(Document document, Element parent, String string) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public static Element findElementAndSetElseCreateAndSet(Document document, Element expiration, String string, Date date) {
+	public static Element findElementAndSetElseCreateAndSet(Document document, Element parent, String string, Date date) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public static Element[] getElements(Document document, Element parent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Element findContainerWithAttributeValueElseCreate(Document document, Element parent, String element, String attributeName, String attributeValue) {
+
+		NodeList nl = parent.getElementsByTagName(element);
+		Element e;
+		for (int i = 0; i < nl.getLength(); i++)
+		{
+			e = (Element) nl.item(i);
+			if (e.getAttribute(attributeName).equals(attributeValue))
+			{
+				return e;
+			}			
+		}
+		
+		e = document.createElement(element);
+		parent.appendChild(e);
+		e.setAttribute(attributeName, attributeValue);
+	
+		return e;
 	}
 }
