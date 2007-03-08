@@ -20,17 +20,6 @@ public interface CheckoutRequest {
 	
 	public String getPostUrl();	 
 	public String getXml();
+	public String getXmlPretty();
 	public CheckoutResponse send();	
-
-	public String getEnv();
-	public void setEnv(String env);
-	
-	public String getMerchantId();
-	public void setMerchantId(String merchantId);
-
-	public String getMerchantKey();
-	public void setMerchantKey(String merchantKey);
-	
-	public String getCurrencyCode();
-	public void setCurrencyCode(String currencyCode);
 }
