@@ -1,5 +1,6 @@
 package com.google.checkout.impl;
 
+import java.io.StringWriter;
 import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -48,6 +49,26 @@ public class Utils {
 		e.printStackTrace();
 	  }
 	}	
+	
+	public static String documentToString(Document document) {
+		String output = new String();
+		try { 
+			
+	        TransformerFactory tFactory = TransformerFactory.newInstance();
+	        Transformer transformer = tFactory.newTransformer();
+
+	        DOMSource source = new DOMSource(document);
+	        StreamResult result = new StreamResult(new StringWriter());
+
+			transformer.transform(source, result);
+			
+			output = result.getWriter().toString();
+		
+		  } catch (TransformerException e) {
+			e.printStackTrace();
+		  }
+		  return output;
+		}
 	
 	public static Element findElementOrContainer(Document document, Element parent, String element) {
 		NodeList nl = parent.getElementsByTagName(element);
