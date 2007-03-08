@@ -3,7 +3,10 @@
  */
 package com.google.checkout.checkout.impl;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.Collection;
@@ -13,27 +16,33 @@ import java.util.Iterator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.google.checkout.checkout.AbstractCheckoutShoppingCartRequest;
+import com.google.checkout.CheckoutConstants;
+import com.google.checkout.CheckoutResponse;
+import com.google.checkout.MerchantConstants;
+import com.google.checkout.checkout.CheckoutShoppingCartRequest;
 import com.google.checkout.checkout.ShippingRestrictions;
 import com.google.checkout.checkout.TaxArea;
 import com.google.checkout.checkout.UrlParameter;
+import com.google.checkout.impl.CheckoutResponseImpl;
 import com.google.checkout.impl.Utils;
+import com.google.checkout.impl.util.Base64Coder;
 
 /**
  * @author simonjsmith
  *
  */
-public class CheckoutShoppingCartRequestImpl extends
-		AbstractCheckoutShoppingCartRequest {
+public class CheckoutShoppingCartRequestImpl implements CheckoutShoppingCartRequest {
 
+	MerchantConstants merchantConstants;
+	CheckoutConstants checkoutConstants;
+	
 	Document document;
 	Element root;
 	Element shoppingCart;
 	Element checkoutFlowSupport;
 	
-	public CheckoutShoppingCartRequestImpl(String merchantId, String merchantKey, String env, String currencyCode, int expirationMinutesFromNow) {
-		super(merchantId, merchantKey, env, currencyCode, expirationMinutesFromNow);
-      
+	public CheckoutShoppingCartRequestImpl(MerchantConstants merchantConstants) {
+		
       document = Utils.newEmptyDocument();
       root =  (Element) document.createElementNS("http://checkout.google.com/schema/2", "checkout-shopping-cart"); 
       document.appendChild(root);
@@ -44,11 +53,10 @@ public class CheckoutShoppingCartRequestImpl extends
       root.appendChild(shoppingCart);
       root.appendChild(checkoutFlowSupport);	  
       
-      this.setMerchantId(merchantId);
-      this.setMerchantKey(merchantKey);
-      this.setEnv(env);
-      this.setCurrencyCode(currencyCode);
-      this.setExpirationMinutesFromNow(expirationMinutesFromNow);
+      this.merchantConstants = merchantConstants;
+      this.checkoutConstants = checkoutConstants;
+      
+      //this.setExpirationMinutesFromNow(expirationMinutesFromNow);
    	
 	}
 
@@ -65,10 +73,10 @@ public class CheckoutShoppingCartRequestImpl extends
         newShip.setAttribute("name", name);
         
         Element price = Utils.createNewElementAndSet(document, newShip, "price", cost);
-        price.setAttribute("currency", this.getCurrencyCode());
+        price.setAttribute("currency", merchantConstants.getCurrencyCode());
         
         if (restrictions != null) {
-        	Utils.addElements(document, newShip, new Element[] {restrictions.getRootElement()});
+        	Utils.importElements(document, newShip, new Element[] {restrictions.getRootElement()});
         }        
 	}
 
@@ -103,14 +111,15 @@ public class CheckoutShoppingCartRequestImpl extends
         Element item = Utils.createNewContainer(document, items, "item");
         Utils.createNewElementAndSet(document, item, "item-name", name);
         Utils.createNewElementAndSet(document, item, "item-description", description);
-        Utils.createNewElementAndSet(document, item, "unit-price", price);
+        Element ePrice = Utils.createNewElementAndSet(document, item, "unit-price", price);
+        ePrice.setAttribute("currency", merchantConstants.getCurrencyCode());
         Utils.createNewElementAndSet(document, item, "quantity", quantity);
         if (merchantItemID != null) {
         	Utils.createNewElementAndSet(document, item, "merchant-item-id", merchantItemID);
         }
         if (merchantPrivateItemData != null) {
         	Element privateItemData = Utils.createNewContainer(document, item, "merchant-private-item-data");
-        	Utils.addElements(document, privateItemData, merchantPrivateItemData);
+        	Utils.importElements(document, privateItemData, merchantPrivateItemData);
         }
         if (taxTableSelector != null) {
         	Utils.createNewElementAndSet(document, item, "tax-table-selector", taxTableSelector);
@@ -138,10 +147,10 @@ public class CheckoutShoppingCartRequestImpl extends
         newShip.setAttribute("name", name);
 
         Element price = Utils.createNewElementAndSet(document, newShip, "price", defaultCost);
-        price.setAttribute("currency", this.getCurrencyCode());
+        price.setAttribute("currency", merchantConstants.getCurrencyCode());
         
         if (restrictions != null) {
-        	Utils.addElements(document, newShip, new Element[] {restrictions.getRootElement()});
+        	Utils.importElements(document, newShip, new Element[] {restrictions.getRootElement()});
         }        
 	}
 
@@ -157,7 +166,7 @@ public class CheckoutShoppingCartRequestImpl extends
         newShip.setAttribute("name", name);
 
         Element price = Utils.createNewElementAndSet(document, newShip, "price", cost);
-        price.setAttribute("currency", this.getCurrencyCode());
+        price.setAttribute("currency", merchantConstants.getCurrencyCode());
 	}
 
 	/* (non-Javadoc)
@@ -388,7 +397,7 @@ public class CheckoutShoppingCartRequestImpl extends
 
 	public void setMerchantPrivateDataNodes(Element[] nodes) {
 		Element mpd = Utils.findContainerElseCreate(document, shoppingCart, "merchant-private-data");
-		Utils.addElements(document, mpd, nodes);
+		Utils.importElements(document, mpd, nodes);
 	}	
 	
 	/* (non-Javadoc)
@@ -403,8 +412,7 @@ public class CheckoutShoppingCartRequestImpl extends
 	 * @see com.google.checkout.CheckoutRequest#getXml()
 	 */
 	public String getXml() {
-		Utils.documentToStdOut(document);
-		return "";
+		return Utils.documentToString(document);
 	}
 
 	public void addAlternateTaxRule(String tableName, boolean standalone, double taxRate, TaxArea taxArea) {
@@ -416,7 +424,7 @@ public class CheckoutShoppingCartRequestImpl extends
         
         Element newRule = Utils.createNewContainer(document, alternateTaxRules, "alternate-tax-rule");
         Utils.createNewElementAndSet(document, newRule, "rate", taxRate);
-        Utils.addElements(document, newRule, new Element[] {taxArea.getRootElement()});   
+        Utils.importElements(document, newRule, new Element[] {taxArea.getRootElement()});   
 	}
 
 	public void addDefaultTaxRule(double taxRate, boolean shippingTaxed, TaxArea taxArea) {
@@ -429,7 +437,7 @@ public class CheckoutShoppingCartRequestImpl extends
         Element newRule = Utils.createNewContainer(document, taxRules, "tax-rule");
         Utils.createNewElementAndSet(document, newRule, "shipping-taxed", shippingTaxed);
         Utils.createNewElementAndSet(document, newRule, "rate", taxRate);
-        Utils.addElements(document, newRule, new Element[] {taxArea.getRootElement()});   
+        Utils.importElements(document, newRule, new Element[] {taxArea.getRootElement()});   
 	}
 
 	public void addParameterizedUrl(String url) {
@@ -469,5 +477,28 @@ public class CheckoutShoppingCartRequestImpl extends
 			eParam.setAttribute("name", param.getName());
 			eParam.setAttribute("type", param.getParamType().toString());
 		}
+	}
+
+	public CheckoutResponse send() {
+		try {
+			String xml = this.getXml();
+			String encoded = Base64Coder.encode(xml);
+			String url = "https://sandbox.google.com/checkout/cws/v2/Merchant/"+merchantConstants.getMerchantId()+"/request";
+			String response;
+			response = Transmitter.transmit(merchantConstants, new URL(url), encoded);
+
+			System.out.println(response);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public String getXmlPretty() {
+		return Utils.documentToStringPretty(document);
 	}
 }
