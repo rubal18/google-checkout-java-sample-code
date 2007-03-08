@@ -11,11 +11,11 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import com.google.checkout.AbstractCheckoutRequest;
-import com.google.checkout.impl.Base64Coder;
 import com.google.checkout.impl.CheckoutResponseImpl;
 import com.google.checkout.impl.Constants;
 import com.google.checkout.impl.EnvironmentType;
 import com.google.checkout.impl.StringUtil;
+import com.google.checkout.impl.base64.Base64Coder;
 
 /**
  * @author 		simonjsmith, ksim
