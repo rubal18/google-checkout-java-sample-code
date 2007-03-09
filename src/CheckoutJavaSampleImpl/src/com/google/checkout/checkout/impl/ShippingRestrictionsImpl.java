@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
 
 import com.google.checkout.checkout.ShippingRestrictions;
 import com.google.checkout.checkout.USArea;
-import com.google.checkout.impl.Utils;
+import com.google.checkout.impl.util.Utils;
 
 /**
  * @author simonjsmith

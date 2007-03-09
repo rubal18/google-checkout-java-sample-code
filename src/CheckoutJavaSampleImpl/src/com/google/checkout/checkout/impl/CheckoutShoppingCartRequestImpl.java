@@ -24,8 +24,8 @@ import com.google.checkout.checkout.ShippingRestrictions;
 import com.google.checkout.checkout.TaxArea;
 import com.google.checkout.checkout.UrlParameter;
 import com.google.checkout.impl.CheckoutResponseImpl;
-import com.google.checkout.impl.Utils;
 import com.google.checkout.impl.util.Base64Coder;
+import com.google.checkout.impl.util.Utils;
 
 /**
  * @author simonjsmith
