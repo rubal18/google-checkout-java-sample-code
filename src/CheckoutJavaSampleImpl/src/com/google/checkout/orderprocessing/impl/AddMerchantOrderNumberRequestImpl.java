@@ -3,7 +3,7 @@ package com.google.checkout.orderprocessing.impl;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.google.checkout.impl.Utils;
+import com.google.checkout.impl.util.Utils;
 import com.google.checkout.orderprocessing.AbstractAddMerchantOrderNumberRequest;
 
 /**
