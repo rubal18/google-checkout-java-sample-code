@@ -1,23 +1,17 @@
 package com.google.checkout.orderprocessing;
 
+import com.google.checkout.MerchantConstants;
+
 public abstract class AbstractCancelOrderRequest implements CancelOrderRequest {
 
-	public AbstractCancelOrderRequest(String merchantId, String merchantKey,
-			String env, String googleOrderNo, String reason) {
+	public AbstractCancelOrderRequest(MerchantConstants merchantConstants, String googleOrderNo, String reason) {
 
-		this.setMerchantId(merchantId);
-		this.setMerchantKey(merchantKey);
-		this.setEnv(env);
 		this.setGoogleOrderNo(googleOrderNo);
 		this.setReason(reason);
 	}
 
-	public AbstractCancelOrderRequest(String merchantId, String merchantKey,
-			String env, String googleOrderNo, String reason, String comment) {
+	public AbstractCancelOrderRequest(MerchantConstants merchantConstants, String googleOrderNo, String reason, String comment) {
 
-		this.setMerchantId(merchantId);
-		this.setMerchantKey(merchantKey);
-		this.setEnv(env);
 		this.setGoogleOrderNo(googleOrderNo);
 		this.setReason(reason);
 		this.setComment(comment);

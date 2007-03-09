@@ -1,14 +1,12 @@
 package com.google.checkout.orderprocessing;
 
+import com.google.checkout.MerchantConstants;
+
 public abstract class AbstractArchiveOrderRequest implements
 		ArchiveOrderRequest {
 
-	public AbstractArchiveOrderRequest(String merchantId, String merchantKey, 
-		      String env, String googleOrderNo) {
+	public AbstractArchiveOrderRequest(MerchantConstants merchantConstants, String googleOrderNo) {
 		
-		this.setMerchantId(merchantId);
-		this.setMerchantKey(merchantKey);
-		this.setEnv(env);
 		this.setGoogleOrderNo(googleOrderNo);
 	}
 

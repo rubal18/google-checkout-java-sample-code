@@ -1,6 +1,7 @@
 package com.google.checkout.orderprocessing;
 
 import com.google.checkout.AbstractCheckoutRequest;
+import com.google.checkout.MerchantConstants;
 
 public abstract class AbstractAddMerchantOrderNumberRequest 
 		extends AbstractCheckoutRequest implements
@@ -9,12 +10,8 @@ public abstract class AbstractAddMerchantOrderNumberRequest
 	private String googleOrderNo;
 	private String merchantOrderNo;
 
-	public AbstractAddMerchantOrderNumberRequest(String merchantId, String merchantKey,
-		      String env, String googleOrderNo, String merchantOrderNo) {
+	public AbstractAddMerchantOrderNumberRequest(MerchantConstants merchantConstants, String googleOrderNo, String merchantOrderNo) {
 		
-		this.setMerchantId(merchantId);
-		this.setMerchantKey(merchantKey);
-		this.setEnv(env);
 		this.setGoogleOrderNo(googleOrderNo);
 		this.setMerchantOrderNo(merchantOrderNo);
 	}
