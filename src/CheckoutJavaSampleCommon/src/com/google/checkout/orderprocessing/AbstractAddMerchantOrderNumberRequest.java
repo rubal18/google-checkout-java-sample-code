@@ -12,6 +12,7 @@ public abstract class AbstractAddMerchantOrderNumberRequest
 
 	public AbstractAddMerchantOrderNumberRequest(MerchantConstants merchantConstants, String googleOrderNo, String merchantOrderNo) {
 		
+		super(merchantConstants);
 		this.setGoogleOrderNo(googleOrderNo);
 		this.setMerchantOrderNo(merchantOrderNo);
 	}
