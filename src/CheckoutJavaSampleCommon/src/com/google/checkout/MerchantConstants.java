@@ -12,4 +12,7 @@ public interface MerchantConstants {
 	
 	public String getCurrencyCode();
 	public void setCurrencyCode(String currencyCode);
+	
+	public String getCheckoutUrl();
+	public String getRequestUrl();
 }
