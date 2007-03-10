@@ -3,6 +3,7 @@ package com.google.checkout.orderprocessing.impl;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.google.checkout.MerchantConstants;
 import com.google.checkout.impl.util.Utils;
 import com.google.checkout.orderprocessing.AbstractAddMerchantOrderNumberRequest;
 
@@ -20,11 +21,9 @@ public class AddMerchantOrderNumberRequestImpl extends AbstractAddMerchantOrderN
 	Element root;
 	Element merchantOrderNumber;
 	
-	public AddMerchantOrderNumberRequestImpl(String merchantId, String merchantKey,
-		      String env, String googleOrderNo, String merchantOrderNo) {
-		super(merchantId, merchantKey, env, googleOrderNo, merchantOrderNo);
+	public AddMerchantOrderNumberRequestImpl(MerchantConstants merchantConstants, String googleOrderNo, String merchantOrderNo) {
+		super(merchantConstants, googleOrderNo, merchantOrderNo);
 
-		
 	      document = Utils.newEmptyDocument();
 	      root =  (Element) document.createElementNS("http://checkout.google.com/schema/2", "add-merchant-order-number"); 
 	      root.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns", "http://checkout.google.com/schema/2");
@@ -39,9 +38,6 @@ public class AddMerchantOrderNumberRequestImpl extends AbstractAddMerchantOrderN
 	      //root.appendChild(checkoutFlowSupport);	  
 	   	  //What about order-processing-support?
 	      
-		  this.setMerchantId(merchantId);
-		  this.setMerchantKey(merchantKey);
-		  this.setEnv(env);
 		  this.setGoogleOrderNo(googleOrderNo);
 		  this.setMerchantOrderNo(merchantOrderNo);
 		  /*
