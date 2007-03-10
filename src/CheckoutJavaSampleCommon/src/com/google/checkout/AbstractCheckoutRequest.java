@@ -26,16 +26,14 @@ import com.google.checkout.impl.base64.Base64Coder;
  */
 
 public abstract class AbstractCheckoutRequest implements CheckoutRequest {
-
-	private String merchantId;
-	private String merchantKey;
-	private String env = EnvironmentType.Sandbox;
-	private String currencyCode;
 	
-	/** <summary>Method that is called to produce the Xml message that can be posted to Google Checkout.</summary> */
-    public abstract String getXml();
-
-    private static String getAuthorization(String user, String password) {
+	protected MerchantConstants merchantConstants;
+	
+	public AbstractCheckoutRequest(MerchantConstants merchantConstants) {
+		this.merchantConstants = merchantConstants;
+	}
+	
+    protected static String getAuthorization(String user, String password) {
       return Base64Coder.encode(new StringBuffer(user).append(":").append(password).toString());
     }
     
@@ -96,37 +94,5 @@ public abstract class AbstractCheckoutRequest implements CheckoutRequest {
     	  }
       }
       return "";
-    }
-    
-	public String getCurrencyCode() {
-      return currencyCode;
-	}
-
-	public String getEnv() {
-		return env;
-	}
-
-	public String getMerchantId() {
-		return merchantId;
-	}
-
-	public String getMerchantKey() {
-      return merchantKey;
-	}
-
-	public void setCurrencyCode(String currencyCode) {
-      this.currencyCode = currencyCode;
-	}
-
-	public void setEnv(String env) {
-      this.env = env;
-	}
-
-	public void setMerchantId(String merchantId) {
-      this.merchantId = merchantId;
-	}
-
-	public void setMerchantKey(String merchantKey) {
-      this.merchantKey = merchantKey;
-	}
+    }    
 }
