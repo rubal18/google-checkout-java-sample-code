@@ -16,7 +16,7 @@ import java.util.Iterator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.google.checkout.CheckoutConstants;
+import com.google.checkout.AbstractCheckoutRequest;
 import com.google.checkout.CheckoutResponse;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.checkout.CheckoutShoppingCartRequest;
@@ -31,11 +31,8 @@ import com.google.checkout.impl.util.Utils;
  * @author simonjsmith
  *
  */
-public class CheckoutShoppingCartRequestImpl implements CheckoutShoppingCartRequest {
+public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest implements CheckoutShoppingCartRequest {
 
-	MerchantConstants merchantConstants;
-	CheckoutConstants checkoutConstants;
-	
 	Document document;
 	Element root;
 	Element shoppingCart;
@@ -43,6 +40,7 @@ public class CheckoutShoppingCartRequestImpl implements CheckoutShoppingCartRequ
 	
 	public CheckoutShoppingCartRequestImpl(MerchantConstants merchantConstants) {
 		
+	  super(merchantConstants);
       document = Utils.newEmptyDocument();
       root =  (Element) document.createElementNS("http://checkout.google.com/schema/2", "checkout-shopping-cart"); 
       document.appendChild(root);
@@ -52,9 +50,6 @@ public class CheckoutShoppingCartRequestImpl implements CheckoutShoppingCartRequ
    	  
       root.appendChild(shoppingCart);
       root.appendChild(checkoutFlowSupport);	  
-      
-      this.merchantConstants = merchantConstants;
-      this.checkoutConstants = checkoutConstants;
       
       //this.setExpirationMinutesFromNow(expirationMinutesFromNow);
    	
