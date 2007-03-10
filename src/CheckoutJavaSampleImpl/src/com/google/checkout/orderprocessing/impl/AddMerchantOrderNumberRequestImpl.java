@@ -5,7 +5,6 @@ import org.w3c.dom.Element;
 
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.impl.util.Utils;
-import com.google.checkout.orderprocessing.AbstractAddMerchantOrderNumberRequest;
 
 /**
  * @author 		ksim
@@ -51,8 +50,15 @@ public class AddMerchantOrderNumberRequestImpl extends AbstractAddMerchantOrderN
 	
 	public String getXml() {
 		return Utils.documentToString(document);
-		//Utils.documentToStdOut(document);
-		//return "";
+	}
+
+	public String getXmlPretty() {
+		return Utils.documentToStringPretty(document);
+	}
+
+	public String getPostUrl() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

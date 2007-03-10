@@ -16,7 +16,6 @@ import java.util.Iterator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.google.checkout.AbstractCheckoutRequest;
 import com.google.checkout.CheckoutResponse;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.checkout.CheckoutShoppingCartRequest;
@@ -394,14 +393,6 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest imp
 		Element mpd = Utils.findContainerElseCreate(document, shoppingCart, "merchant-private-data");
 		Utils.importElements(document, mpd, nodes);
 	}	
-	
-	/* (non-Javadoc)
-	 * @see com.google.checkout.CheckoutRequest#getPostUrl()
-	 */
-	public String getPostUrl() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	/* (non-Javadoc)
 	 * @see com.google.checkout.CheckoutRequest#getXml()
@@ -474,26 +465,27 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest imp
 		}
 	}
 
-	public CheckoutResponse send() {
-		try {
-			String xml = this.getXml();
-			String encoded = Base64Coder.encode(xml);
-			String url = "https://sandbox.google.com/checkout/cws/v2/Merchant/"+merchantConstants.getMerchantId()+"/request";
-			String response;
-			response = Transmitter.transmit(merchantConstants, new URL(url), encoded);
-
-			System.out.println(response);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	public String getXmlPretty() {
 		return Utils.documentToStringPretty(document);
 	}
+	
+    /** <summary> Get the post URL to output </summary> */
+    public String getPostUrl() {
+      return "https://sandbox.google.com/checkout/cws/v2/Merchant/"+merchantConstants.getMerchantId()+"/merchantCheckout";	
+    	
+//      if (merchantConstants.getEnv().equals(EnvironmentType.Sandbox)) {
+//        return StringUtil.replaceMultipleStrings(
+//          Constants.sandboxPostURL,
+//          merchantConstants.getMerchantId());
+//      }
+//      else {
+//    	  if (merchantConstants.getEnv().equals(EnvironmentType.Production)) {
+//    	        return StringUtil.replaceMultipleStrings(
+//    	          Constants.checkoutPostURL,
+//    	          merchantConstants.getMerchantId());
+//    	  }
+//      }
+//      return "";
+    }    
+
 }

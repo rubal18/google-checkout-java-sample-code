@@ -1,7 +1,7 @@
 package com.google.checkout.impl;
 
-import com.google.checkout.AbstractCheckoutResponse;
 import com.google.checkout.CheckoutResponse;
+import com.google.checkout.checkout.impl.AbstractCheckoutResponse;
 
 /**
  * @author 		ksim
@@ -13,6 +13,8 @@ import com.google.checkout.CheckoutResponse;
 
 public class CheckoutResponseImpl extends AbstractCheckoutResponse{
 	
+	String response;
+	
 	public CheckoutResponseImpl() {
 		processResponse("");
 	}
@@ -23,7 +25,7 @@ public class CheckoutResponseImpl extends AbstractCheckoutResponse{
 
 	protected void processResponse(String response)
 	{
-		
+		this.response = response;
 	}
 	
 	public boolean isValidRequest()
@@ -67,6 +69,6 @@ public class CheckoutResponseImpl extends AbstractCheckoutResponse{
 	 */
 	public String getResponseXml()
 	{
-		return "";
+		return response;
 	}
 }
