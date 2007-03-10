@@ -13,11 +13,8 @@ package com.google.checkout;
 
 public class EnvironmentType {
 	/** <summary>Use the Sandbox account to post the messages</summary> */
-	public static final String Sandbox = "0";
+	public static final String Sandbox = "Sandbox";
 	
 	/** <summary>Use the Production account to post the messages</summary> */
-    public static final String Production = "1";
-    
-    /** <summary>Unknown account.</summary> */
-    public static final String Unknown = "2";
+    public static final String Production = "Production";
 }
