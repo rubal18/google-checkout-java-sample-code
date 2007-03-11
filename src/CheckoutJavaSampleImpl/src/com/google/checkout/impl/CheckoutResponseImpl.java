@@ -1,19 +1,19 @@
 package com.google.checkout.impl;
 
-import com.google.checkout.CheckoutResponse;
-import com.google.checkout.checkout.impl.AbstractCheckoutResponse;
+import com.google.checkout.AbstractCheckoutResponse;
 
 /**
  * @author 		ksim
  * @date   		March 6th, 2007
- * @version		1.0
- * @todo		Not unit tested yet.
+ * @version		1.0 - ksim - March 7th, 2007 - 	Initial Version to separate interface and implementation		
+ * @todo		Not unit tested yet, but tested fairly well over all.
+ * 				Still missing extra function implementations
  *
  */
 
 public class CheckoutResponseImpl extends AbstractCheckoutResponse{
 	
-	String response;
+	String strCResponse;
 	
 	public CheckoutResponseImpl() {
 		processResponse("");
@@ -25,7 +25,7 @@ public class CheckoutResponseImpl extends AbstractCheckoutResponse{
 
 	protected void processResponse(String response)
 	{
-		this.response = response;
+		strCResponse = response;
 	}
 	
 	public boolean isValidRequest()
@@ -69,6 +69,6 @@ public class CheckoutResponseImpl extends AbstractCheckoutResponse{
 	 */
 	public String getResponseXml()
 	{
-		return response;
+		return strCResponse;
 	}
 }
