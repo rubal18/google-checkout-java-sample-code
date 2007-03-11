@@ -17,6 +17,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+/**
+ * @author 		simonjsmith, ksim
+ * @date   		March 6th, 2007
+ * @version		1.1 - ksim - March 6th, 2007 - 	Added functions regarding streaming
+ * @version		1.2 - ksim - March 10th, 2007 - Added functions regarding DOM manipulation
+ *
+ */
+
 public class Utils {
 
 	public static Document newEmptyDocument() {
@@ -57,6 +65,21 @@ public class Utils {
 		parent.appendChild(child);
 		return child;
 	}
+	
+	public static Element findElementElseCreateAndSet(Document document, Element parent, String child, String value) {
+		Element ret = null;
+		NodeList nl = parent.getElementsByTagName(child);
+		if (nl.getLength() == 0) {
+			parent.appendChild(document.createElement(child));
+			ret = (Element) parent.getElementsByTagName(child).item(0);
+			ret.appendChild(document.createTextNode(value));
+		}	
+		return ret;		
+	}
+	
+	public static Element findElementElseCreateAndSet(Document document, Element parent, String child, boolean value) {
+		return findElementElseCreateAndSet(document, parent, child, value+"");
+	}
 
 	public static Element findElementAndSetElseCreateAndSet(Document document, Element parent, String child, String value) {
 		NodeList nl = parent.getElementsByTagName(child);
@@ -81,6 +104,12 @@ public class Utils {
 		parent.appendChild(child);
 		child.setNodeValue(childValue);
 		child.appendChild(document.createTextNode(childValue));
+		return child;
+	}
+	
+	public static Element createNewElementAndSetAndAttribute(Document document, Element parent, String childElement, String childValue, String attributeName, String attributeValue) {
+		Element child = createNewElementAndSet(document, parent, childElement, childValue);
+		child.setAttribute(attributeName, attributeValue);
 		return child;
 	}
 	
@@ -160,6 +189,36 @@ public class Utils {
 		parent.appendChild(e);
 		e.setAttribute(attributeName, attributeValue);
 	
+		return e;
+	}
+	
+	public static Element findContainerWithAttributeValueElseCreateAndSet(Document document, Element parent, String element, String value, String attributeName, String attributeValue) {
+
+		Element e = findContainerWithAttributeValueElseCreate(document, parent, element, attributeName, attributeValue);
+		e.appendChild(document.createTextNode(value));
+		
+		return e;
+	}
+	
+	public static Element findElementElseCreateAndAttribute(Document document, Element parent, String element, String attributeName, String attributeValue) {
+		NodeList nl = parent.getElementsByTagName(element);
+		Element e = null;
+		
+		if (nl.getLength() == 0) {
+			parent.appendChild(document.createElement(element));
+			e = (Element) parent.getElementsByTagName(element).item(0);
+			e.setAttribute(attributeName, attributeValue);
+		}	
+
+		return e;
+	}
+	
+	public static Element findElementElseCreateAndSetAndAttribute(Document document, Element parent, String element, String value, String attributeName, String attributeValue) {
+
+		Element e = findElementElseCreateAndAttribute(document, parent, element, attributeName, attributeValue);
+		if (e != null)
+			e.appendChild(document.createTextNode(value));
+		
 		return e;
 	}
 
