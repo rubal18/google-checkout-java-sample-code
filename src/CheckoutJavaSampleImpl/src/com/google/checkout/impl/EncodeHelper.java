@@ -3,6 +3,7 @@ package com.google.checkout.impl;
 import java.util.regex.*;
 
 import com.google.checkout.impl.util.Constants;
+import com.google.checkout.impl.util.StringTuple;
 
 /**
  * @author 		ksim

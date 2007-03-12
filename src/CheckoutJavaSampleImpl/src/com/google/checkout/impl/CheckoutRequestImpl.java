@@ -16,7 +16,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.google.checkout.AbstractCheckoutRequest;
+import com.google.checkout.impl.AbstractCheckoutRequest;
 import com.google.checkout.CheckoutResponse;
 import com.google.checkout.EnvironmentType;
 import com.google.checkout.MerchantConstants;
@@ -83,7 +83,7 @@ public abstract class CheckoutRequestImpl extends AbstractCheckoutRequest
 		      connection.setDoInput(true);
 		      
 		      connection.setRequestProperty("Authorization","Basic "
-            		  	+getAuthorization(this.getMerchantId(), this.getMerchantKey()));
+            		  	+getAuthorization(merchantConstants.getMerchantId(), merchantConstants.getMerchantKey()));
 		      
 		      //System.out.println(this.getMerchantId());
 		      //System.out.println(this.getMerchantKey());
@@ -195,16 +195,16 @@ DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
 			//System.out.println("SandBox URL: "+Constants.sandboxPostURL);
 			
 		
-	      if (this.getEnv().compareTo(EnvironmentType.Sandbox) == 0) {
+	      if (merchantConstants.getEnv().compareTo(EnvironmentType.Sandbox) == 0) {
 	        return StringUtil.replaceMultipleStrings(
 	          Constants.sandboxPostURL,
-	          this.getMerchantId());
+	          merchantConstants.getMerchantId());
 	      }
 	      else {
-	    	  if (this.getEnv().compareTo(EnvironmentType.Sandbox) == 0) {
+	    	  if (merchantConstants.getEnv().compareTo(EnvironmentType.Sandbox) == 0) {
 	    	        return StringUtil.replaceMultipleStrings(
 	    	          Constants.checkoutPostURL,
-	    	          this.getMerchantId());
+	    	          merchantConstants.getMerchantId());
 	    	  }
 	      }
 	      return "";

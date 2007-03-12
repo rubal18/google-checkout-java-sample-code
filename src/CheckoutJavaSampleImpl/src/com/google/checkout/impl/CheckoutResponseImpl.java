@@ -1,6 +1,5 @@
 package com.google.checkout.impl;
 
-import com.google.checkout.AbstractCheckoutResponse;
 
 /**
  * @author 		ksim
