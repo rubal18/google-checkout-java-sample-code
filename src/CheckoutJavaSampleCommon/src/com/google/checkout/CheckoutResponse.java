@@ -58,6 +58,8 @@ public interface CheckoutResponse {
 	 * Gets the response XML sent by Google. <value>The response XML sent by
 	 * Google.</value>
 	 */
-	public String getResponseXml();
+	public String getXml();
+
+	public String getXmlPretty();
 
 }
