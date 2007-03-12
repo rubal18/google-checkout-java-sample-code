@@ -22,8 +22,7 @@ import com.google.checkout.checkout.CheckoutShoppingCartRequest;
 import com.google.checkout.checkout.ShippingRestrictions;
 import com.google.checkout.checkout.TaxArea;
 import com.google.checkout.checkout.UrlParameter;
-import com.google.checkout.impl.CheckoutRequestImpl;
-import com.google.checkout.impl.CheckoutResponseImpl;
+import com.google.checkout.impl.AbstractCheckoutRequest;
 import com.google.checkout.impl.util.Base64Coder;
 import com.google.checkout.impl.util.Utils;
 
@@ -31,7 +30,7 @@ import com.google.checkout.impl.util.Utils;
  * @author simonjsmith
  *
  */
-public class CheckoutShoppingCartRequestImpl extends CheckoutRequestImpl implements CheckoutShoppingCartRequest {
+public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest implements CheckoutShoppingCartRequest {
 
 	Document document;
 	Element root;
@@ -68,7 +67,7 @@ public class CheckoutShoppingCartRequestImpl extends CheckoutRequestImpl impleme
         newShip.setAttribute("name", name);
         
         Element price = Utils.createNewElementAndSet(document, newShip, "price", cost);
-        price.setAttribute("currency", this.getCurrencyCode());
+        price.setAttribute("currency", merchantConstants.getCurrencyCode());
         
         if (restrictions != null) {
         	Utils.importElements(document, newShip, new Element[] {restrictions.getRootElement()});
@@ -107,7 +106,7 @@ public class CheckoutShoppingCartRequestImpl extends CheckoutRequestImpl impleme
         Utils.createNewElementAndSet(document, item, "item-name", name);
         Utils.createNewElementAndSet(document, item, "item-description", description);
         Element ePrice = Utils.createNewElementAndSet(document, item, "unit-price", price);
-        ePrice.setAttribute("currency", this.getCurrencyCode());
+        ePrice.setAttribute("currency", merchantConstants.getCurrencyCode());
         Utils.createNewElementAndSet(document, item, "quantity", quantity);
         if (merchantItemID != null) {
         	Utils.createNewElementAndSet(document, item, "merchant-item-id", merchantItemID);
@@ -142,7 +141,7 @@ public class CheckoutShoppingCartRequestImpl extends CheckoutRequestImpl impleme
         newShip.setAttribute("name", name);
 
         Element price = Utils.createNewElementAndSet(document, newShip, "price", defaultCost);
-        price.setAttribute("currency", this.getCurrencyCode());
+        price.setAttribute("currency", merchantConstants.getCurrencyCode());
         
         if (restrictions != null) {
         	Utils.importElements(document, newShip, new Element[] {restrictions.getRootElement()});
@@ -161,7 +160,7 @@ public class CheckoutShoppingCartRequestImpl extends CheckoutRequestImpl impleme
         newShip.setAttribute("name", name);
 
         Element price = Utils.createNewElementAndSet(document, newShip, "price", cost);
-        price.setAttribute("currency", this.getCurrencyCode());
+        price.setAttribute("currency", merchantConstants.getCurrencyCode());
 	}
 
 	/* (non-Javadoc)
@@ -472,7 +471,7 @@ public class CheckoutShoppingCartRequestImpl extends CheckoutRequestImpl impleme
 	
     /** <summary> Get the post URL to output </summary> */
     public String getPostUrl() {
-      return "https://sandbox.google.com/checkout/cws/v2/Merchant/"+this.getMerchantId()+"/merchantCheckout";	
+      return "https://sandbox.google.com/checkout/cws/v2/Merchant/"+merchantConstants.getMerchantId()+"/merchantCheckout";	
     	
 //      if (merchantConstants.getEnv().equals(EnvironmentType.Sandbox)) {
 //        return StringUtil.replaceMultipleStrings(
