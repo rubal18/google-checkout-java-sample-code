@@ -11,7 +11,7 @@ package com.google.checkout.impl.util;
 
 public final class StringTuple extends Tuple
 {
-		StringTuple(String fElement, String sElement)
+		public StringTuple(String fElement, String sElement)
 		{
 			super(fElement, sElement);
 		}
