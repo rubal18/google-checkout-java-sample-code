@@ -4,9 +4,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.google.checkout.MerchantConstants;
+import com.google.checkout.impl.AbstractCheckoutRequest;
 import com.google.checkout.impl.util.Constants;
 import com.google.checkout.impl.util.Utils;
-import com.google.checkout.orderprocessing.AbstractRefundOrderRequest;
+import com.google.checkout.orderprocessing.RefundOrderRequest;
 
 /**
  * @author 		ksim
@@ -15,12 +16,12 @@ import com.google.checkout.orderprocessing.AbstractRefundOrderRequest;
  *
  */
 
-public final class RefundOrderRequestImpl extends AbstractRefundOrderRequest {
+public final class RefundOrderRequestImpl extends AbstractCheckoutRequest implements RefundOrderRequest {
 	Document document;
 	Element root;
 	
 	public RefundOrderRequestImpl(MerchantConstants merchantConstants, String googleOrderNo, String reason) {
-		super(merchantConstants, googleOrderNo, reason);
+		super(merchantConstants);
 		
 		if (!isWithinRefundStringLimits(reason, ""))
 		{
@@ -49,7 +50,7 @@ public final class RefundOrderRequestImpl extends AbstractRefundOrderRequest {
 			System.err.println(Constants.refundErrorString);
 		}
 		
-	    Utils.createNewElementAndSetAndAttribute(document, root, "amount", new Float(amount).toString(), "currency", this.getCurrencyCode());
+	    Utils.createNewElementAndSetAndAttribute(document, root, "amount", new Float(amount).toString(), "currency", merchantConstants.getCurrencyCode());
 	    Utils.createNewElementAndSet(document, root, "comment", comment);
 	}
 	
@@ -66,7 +67,7 @@ public final class RefundOrderRequestImpl extends AbstractRefundOrderRequest {
 	
 	public void addAmount(float amt)
 	{
-		Utils.findElementElseCreateAndSetAndAttribute(document, root, "amount", new Float(amt).toString(), "currency", this.getCurrencyCode());	
+		Utils.findElementElseCreateAndSetAndAttribute(document, root, "amount", new Float(amt).toString(), "currency", merchantConstants.getCurrencyCode());	
 	}
 	
 	public void addComment(String cmt)
@@ -87,5 +88,50 @@ public final class RefundOrderRequestImpl extends AbstractRefundOrderRequest {
 	public String getXmlPretty() {
 		return Utils.documentToString(document);
 
+	}
+
+	public String getPostUrl() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public float getAmount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public String getComment() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getGoogleOrderNo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getReason() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setAmount(float amount) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setComment(String comment) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setGoogleOrderNo(String googleOrderNo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setReason(String reason) {
+		// TODO Auto-generated method stub
+		
 	}
 }

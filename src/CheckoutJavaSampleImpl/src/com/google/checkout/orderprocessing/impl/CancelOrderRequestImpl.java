@@ -4,9 +4,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.google.checkout.MerchantConstants;
+import com.google.checkout.impl.AbstractCheckoutRequest;
 import com.google.checkout.impl.util.Constants;
 import com.google.checkout.impl.util.Utils;
-import com.google.checkout.orderprocessing.AbstractCancelOrderRequest;
+import com.google.checkout.orderprocessing.CancelOrderRequest;
 
 /**
  * @author 		ksim
@@ -15,12 +16,12 @@ import com.google.checkout.orderprocessing.AbstractCancelOrderRequest;
  *
  */
 
-public final class CancelOrderRequestImpl extends AbstractCancelOrderRequest {
+public final class CancelOrderRequestImpl extends AbstractCheckoutRequest implements CancelOrderRequest {
 	Document document;
 	Element root;
 	
 	public CancelOrderRequestImpl(MerchantConstants merchantConstants, String googleOrderNo, String reason) {
-		super(merchantConstants, googleOrderNo, reason);
+		super(merchantConstants);
 		
 		if (!isWithinCancelStringLimits(reason, ""))
 		{
@@ -81,5 +82,40 @@ public final class CancelOrderRequestImpl extends AbstractCancelOrderRequest {
 	public String getXmlPretty() {
 		return Utils.documentToString(document);
 
+	}
+
+	public String getPostUrl() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getComment() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getGoogleOrderNo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getReason() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setComment(String comment) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setGoogleOrderNo(String googleOrderNo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setReason(String reason) {
+		// TODO Auto-generated method stub
+		
 	}
 }

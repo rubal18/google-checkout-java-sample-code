@@ -4,9 +4,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.google.checkout.MerchantConstants;
+import com.google.checkout.impl.AbstractCheckoutRequest;
 import com.google.checkout.impl.util.Constants;
 import com.google.checkout.impl.util.Utils;
-import com.google.checkout.orderprocessing.AbstractSendBuyerMessageRequest;
+import com.google.checkout.orderprocessing.SendBuyerMessageRequest;
 
 /**
  * @author 		ksim
@@ -15,12 +16,12 @@ import com.google.checkout.orderprocessing.AbstractSendBuyerMessageRequest;
  *
  */
 
-public final class SendBuyerMessageRequestImpl extends AbstractSendBuyerMessageRequest{
+public final class SendBuyerMessageRequestImpl extends AbstractCheckoutRequest implements SendBuyerMessageRequest {
 	Document document;
 	Element root;
 	
 	public SendBuyerMessageRequestImpl(MerchantConstants merchantConstants, String googleOrderNo, String message) {
-		super(merchantConstants, googleOrderNo, message);
+		super(merchantConstants);
 		
 		if (!isWithinMessageStringLimits(message))
 		{
@@ -68,5 +69,40 @@ public final class SendBuyerMessageRequestImpl extends AbstractSendBuyerMessageR
 	public String getXmlPretty() {
 		return Utils.documentToString(document);
 
+	}
+
+	public String getPostUrl() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getGoogleOrderNo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean isSendEmail() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void setGoogleOrderNo(String googleOrderNo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setMessage(String message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setSendEmail(boolean sendEmail) {
+		// TODO Auto-generated method stub
+		
 	}
 }

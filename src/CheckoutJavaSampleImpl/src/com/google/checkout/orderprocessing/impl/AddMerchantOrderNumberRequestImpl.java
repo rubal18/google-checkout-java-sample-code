@@ -4,9 +4,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.google.checkout.MerchantConstants;
+import com.google.checkout.impl.AbstractCheckoutRequest;
 import com.google.checkout.impl.util.Constants;
 import com.google.checkout.impl.util.Utils;
-import com.google.checkout.orderprocessing.AbstractAddMerchantOrderNumberRequest;
+import com.google.checkout.orderprocessing.AddMerchantOrderNumberRequest;
 
 /**
  * @author 		ksim
@@ -16,13 +17,13 @@ import com.google.checkout.orderprocessing.AbstractAddMerchantOrderNumberRequest
  *
  */
 
-public final class AddMerchantOrderNumberRequestImpl extends AbstractAddMerchantOrderNumberRequest {
+public final class AddMerchantOrderNumberRequestImpl extends AbstractCheckoutRequest implements AddMerchantOrderNumberRequest {
 
 	Document document;
 	Element root;
 	
 	public AddMerchantOrderNumberRequestImpl(MerchantConstants merchantConstants, String googleOrderNo, String merchantOrderNo) {
-		super(merchantConstants, googleOrderNo, merchantOrderNo);
+		super(merchantConstants);
 
 		
 	      document = Utils.newEmptyDocument();
@@ -41,5 +42,30 @@ public final class AddMerchantOrderNumberRequestImpl extends AbstractAddMerchant
 	public String getXmlPretty() {
 		return Utils.documentToString(document);
 
+	}
+
+	public String getGoogleOrderNo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getMerchantOrderNo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setGoogleOrderNo(String googleOrderNo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setMerchantOrderNo(String merchantOrderNo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String getPostUrl() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

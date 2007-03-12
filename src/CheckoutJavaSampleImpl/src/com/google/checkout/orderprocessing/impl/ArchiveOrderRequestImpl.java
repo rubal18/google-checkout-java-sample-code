@@ -4,9 +4,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.google.checkout.MerchantConstants;
+import com.google.checkout.impl.AbstractCheckoutRequest;
 import com.google.checkout.impl.util.Constants;
 import com.google.checkout.impl.util.Utils;
-import com.google.checkout.orderprocessing.AbstractArchiveOrderRequest;
+import com.google.checkout.orderprocessing.ArchiveOrderRequest;
 
 /**
  * @author 		ksim
@@ -15,13 +16,13 @@ import com.google.checkout.orderprocessing.AbstractArchiveOrderRequest;
  *
  */
 
-public final class ArchiveOrderRequestImpl extends AbstractArchiveOrderRequest{
+public final class ArchiveOrderRequestImpl extends AbstractCheckoutRequest implements ArchiveOrderRequest {
 	
 	Document document;
 	Element root;
 	
 	public ArchiveOrderRequestImpl(MerchantConstants merchantConstants, String googleOrderNo) {
-		super(merchantConstants, googleOrderNo);
+		  super(merchantConstants);
 
 		
 	      document = Utils.newEmptyDocument();
@@ -37,6 +38,21 @@ public final class ArchiveOrderRequestImpl extends AbstractArchiveOrderRequest{
 	
 	public String getXmlPretty() {
 		return Utils.documentToString(document);
+	}
+
+	public String getGoogleOrderNo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setGoogleOrderNo(String googleOrderNo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String getPostUrl() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

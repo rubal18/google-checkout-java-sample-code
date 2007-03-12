@@ -3,10 +3,12 @@ package com.google.checkout.orderprocessing.impl;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.google.checkout.CheckoutResponse;
 import com.google.checkout.MerchantConstants;
+import com.google.checkout.impl.AbstractCheckoutRequest;
 import com.google.checkout.impl.util.Constants;
 import com.google.checkout.impl.util.Utils;
-import com.google.checkout.orderprocessing.AbstractDeliverOrderRequest;
+import com.google.checkout.orderprocessing.DeliverOrderRequest;
 
 /**
  * @author 		ksim
@@ -15,13 +17,13 @@ import com.google.checkout.orderprocessing.AbstractDeliverOrderRequest;
  *
  */
 
-public final class DeliverOrderRequestImpl extends AbstractDeliverOrderRequest {
+public final class DeliverOrderRequestImpl extends AbstractCheckoutRequest implements DeliverOrderRequest {
 	
 	Document document;
 	Element root;
 	
 	public DeliverOrderRequestImpl(MerchantConstants merchantConstants, String googleOrderNo) {
-		super(merchantConstants, googleOrderNo);
+		super(merchantConstants);
 
 	      document = Utils.newEmptyDocument();
 	      root =  (Element) document.createElementNS(Constants.checkoutNamespace, "deliver-order"); 
@@ -60,5 +62,55 @@ public final class DeliverOrderRequestImpl extends AbstractDeliverOrderRequest {
 	public String getXmlPretty() {
 		return Utils.documentToString(document);
 
+	}
+
+	public String getCarrier() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getGoogleOrderNo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getTrackingNo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean isSendEmail() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void setCarrier(String carrier) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setGoogleOrderNo(String googleOrderNo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setSendEmail(boolean sendEmail) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setTrackingNo(String trackingNo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String getPostUrl() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public CheckoutResponse send() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
