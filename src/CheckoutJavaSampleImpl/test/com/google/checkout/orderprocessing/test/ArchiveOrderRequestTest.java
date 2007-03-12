@@ -28,7 +28,7 @@ public final class ArchiveOrderRequestTest {
 		System.out.println("XML To Send: "+aor.getXml());
 		
 		cResponse = aor.send();
-		cResponseStr = cResponse.getResponseXml();
+		cResponseStr = cResponse.getXml();
 		
 		if (cResponseStr != null)
 			System.out.println(new StringBuffer("XML Received: ").append(cResponseStr));

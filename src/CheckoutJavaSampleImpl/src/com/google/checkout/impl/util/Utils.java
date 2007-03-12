@@ -1,5 +1,7 @@
 package com.google.checkout.impl.util;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Date;
 
@@ -16,6 +18,8 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  * @author 		simonjsmith, ksim
@@ -249,5 +253,29 @@ public class Utils {
 	    	  tEx.printStackTrace();
 	      }
 		return null;	
+	}
+
+	public static Document newDocumentFromString(String xmlString) {
+		DocumentBuilderFactory factory = null;
+		DocumentBuilder builder = null;
+		Document ret = null;
+		
+		try {
+			factory = DocumentBuilderFactory.newInstance();
+		    builder = factory.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			ret = builder.parse(new InputSource(new StringReader(xmlString)));
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return ret;
 	}
 }

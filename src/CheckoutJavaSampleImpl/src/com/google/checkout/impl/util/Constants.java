@@ -21,7 +21,7 @@ public class Constants {
 	
 	// Checkout Post URL
 	public static final String sandboxPostURL = "https://sandbox.google.com/checkout/cws/v2/Merchant/{0}/request";
-	public static final String checkoutPostURL = "https://checkout.google.com/checkout/cws/v2/Merchant/{0}/request";
+	public static final String checkoutPostURL = "https://checkout.google.com/cws/v2/Merchant/{0}/request";
 	
 	public static final String checkoutNamespace = "http://checkout.google.com/schema/2";
 	

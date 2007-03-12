@@ -27,7 +27,7 @@ public final class ProcessOrderRequestTest {
 		System.out.println("XML To Send: "+por.getXml());
 		
 		cResponse = por.send();
-		cResponseStr = cResponse.getResponseXml();
+		cResponseStr = cResponse.getXml();
 		
 		if (cResponseStr != null)
 			System.out.println(new StringBuffer("XML Received: ").append(cResponseStr));

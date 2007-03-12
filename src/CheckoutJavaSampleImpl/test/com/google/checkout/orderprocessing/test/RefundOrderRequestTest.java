@@ -28,7 +28,7 @@ public final class RefundOrderRequestTest {
 		
 		cResponse = ror.send();
 		
-		cResponseStr = cResponse.getResponseXml();
+		cResponseStr = cResponse.getXml();
 		
 		if (cResponseStr != null)
 			System.out.println(new StringBuffer("XML Received: ").append(cResponseStr));
@@ -55,7 +55,7 @@ public final class RefundOrderRequestTest {
 		
 		cResponse = ror.send();
 		
-		cResponseStr = cResponse.getResponseXml();
+		cResponseStr = cResponse.getXml();
 		
 		if (cResponseStr != null)
 			System.out.println(new StringBuffer("XML Received: ").append(cResponseStr));
@@ -82,7 +82,7 @@ public final class RefundOrderRequestTest {
 		
 		cResponse = ror.send();
 		
-		cResponseStr = cResponse.getResponseXml();
+		cResponseStr = cResponse.getXml();
 		
 		if (cResponseStr != null)
 			System.out.println(new StringBuffer("XML Received: ").append(cResponseStr));
@@ -113,7 +113,7 @@ public final class RefundOrderRequestTest {
 		
 		cResponse = ror.send();
 		
-		cResponseStr = cResponse.getResponseXml();
+		cResponseStr = cResponse.getXml();
 		
 		if (cResponseStr != null)
 			System.out.println(new StringBuffer("XML Received: ").append(cResponseStr));

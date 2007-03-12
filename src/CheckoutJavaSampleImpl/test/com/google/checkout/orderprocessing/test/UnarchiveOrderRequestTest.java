@@ -28,7 +28,7 @@ public final class UnarchiveOrderRequestTest {
 		System.out.println("XML To Send: "+uor.getXml());
 		
 		cResponse = uor.send();
-		cResponseStr = cResponse.getResponseXml();
+		cResponseStr = cResponse.getXml();
 		
 		if (cResponseStr != null)
 			System.out.println(new StringBuffer("XML Received: ").append(cResponseStr));

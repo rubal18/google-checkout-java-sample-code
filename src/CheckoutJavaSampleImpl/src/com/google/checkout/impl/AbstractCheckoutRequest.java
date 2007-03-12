@@ -2,6 +2,7 @@ package com.google.checkout.impl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -63,20 +64,28 @@ public abstract class AbstractCheckoutRequest implements CheckoutRequest {
 	      output.flush();
 	      output.close();
 	      
-	      InputStreamReader sReader = null;
-	      try {
-	        sReader = new InputStreamReader(connection.getInputStream());
-	      } catch (IOException ex) {
-	        sReader = new InputStreamReader(connection.getErrorStream());
+	      int responseCode = ((HttpURLConnection) connection).getResponseCode();
+	      InputStream inputStream;
+	      
+	      if (responseCode == HttpURLConnection.HTTP_OK) {
+	        inputStream = ((HttpURLConnection) connection).getInputStream();
+	      } else {
+	        inputStream = ((HttpURLConnection) connection).getErrorStream();
 	      }
-	      BufferedReader reader = new BufferedReader(sReader);
-	      StringBuffer buffer = new StringBuffer();
-	      String line = null;
-	      while (null != (line = reader.readLine())) {
-	        buffer.append(line);
-	      }
-        
-	      return new CheckoutResponseImpl(buffer.toString());
+	      
+	      // Get the response
+          BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+          StringBuffer responseXml = new StringBuffer();   
+          String line;
+          
+          while ((line = reader.readLine()) != null) {
+        	  responseXml.append(line+"\n");
+          }
+
+          reader.close();
+	      
+	      return new CheckoutResponseImpl(responseXml.toString());
       }
       
       catch (MalformedURLException murle) {

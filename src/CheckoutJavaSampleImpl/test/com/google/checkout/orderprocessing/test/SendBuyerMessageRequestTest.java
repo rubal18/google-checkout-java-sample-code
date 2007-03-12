@@ -28,7 +28,7 @@ public class SendBuyerMessageRequestTest {
 		
 		cResponse = sbmr.send();
 		
-		cResponseStr = cResponse.getResponseXml();
+		cResponseStr = cResponse.getXml();
 		
 		if (cResponseStr != null)
 			System.out.println(new StringBuffer("XML Received: ").append(cResponseStr));
@@ -54,7 +54,7 @@ public class SendBuyerMessageRequestTest {
 		
 		cResponse = sbmr.send();
 		
-		cResponseStr = cResponse.getResponseXml();
+		cResponseStr = cResponse.getXml();
 		
 		if (cResponseStr != null)
 			System.out.println(new StringBuffer("XML Received: ").append(cResponseStr));
@@ -80,7 +80,7 @@ public class SendBuyerMessageRequestTest {
 		
 		cResponse = sbmr.send();
 		
-		cResponseStr = cResponse.getResponseXml();
+		cResponseStr = cResponse.getXml();
 		
 		if (cResponseStr != null)
 			System.out.println(new StringBuffer("XML Received: ").append(cResponseStr));
@@ -109,7 +109,7 @@ public class SendBuyerMessageRequestTest {
 		
 		cResponse = sbmr.send();
 		
-		cResponseStr = cResponse.getResponseXml();
+		cResponseStr = cResponse.getXml();
 		
 		if (cResponseStr != null)
 			System.out.println(new StringBuffer("XML Received: ").append(cResponseStr));

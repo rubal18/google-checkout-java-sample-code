@@ -1,5 +1,10 @@
 package com.google.checkout.impl;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import com.google.checkout.impl.util.Utils;
+
 
 /**
  * @author 		ksim
@@ -12,7 +17,7 @@ package com.google.checkout.impl;
 
 public class CheckoutResponseImpl extends AbstractCheckoutResponse{
 	
-	String strCResponse;
+	Document document;
 	
 	public CheckoutResponseImpl() {
 		processResponse("");
@@ -24,7 +29,7 @@ public class CheckoutResponseImpl extends AbstractCheckoutResponse{
 
 	protected void processResponse(String response)
 	{
-		strCResponse = response;
+	    document = Utils.newDocumentFromString(response);
 	}
 	
 	public boolean isValidRequest()
@@ -59,15 +64,16 @@ public class CheckoutResponseImpl extends AbstractCheckoutResponse{
 	 */
 	public String getRedirectUrl()
 	{
-		return "";
+		Element redirect = Utils.findElementOrContainer(document, document.getDocumentElement(), "redirect-url");
+		if (redirect != null) {return redirect.getTextContent();}
+		return "<error!>";
 	}
 
-	/**
-	 * Gets the response XML sent by Google. <value>The response XML sent by
-	 * Google.</value>
-	 */
-	public String getResponseXml()
-	{
-		return strCResponse;
+	public String getXml() {
+		return Utils.documentToString(document);
+	}
+
+	public String getXmlPretty() {
+		return Utils.documentToStringPretty(document);
 	}
 }
