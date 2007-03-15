@@ -15,4 +15,6 @@ public interface MerchantConstants {
 	
 	public String getCheckoutUrl();
 	public String getRequestUrl();
+
+    public String getHttpAuth();
 }
