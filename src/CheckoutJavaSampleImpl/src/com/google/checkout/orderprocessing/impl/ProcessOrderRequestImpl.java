@@ -20,15 +20,17 @@ public final class ProcessOrderRequestImpl extends AbstractCheckoutRequest imple
 	Document document;
 	Element root;
 	
-	public ProcessOrderRequestImpl(MerchantConstants merchantConstants, String googleOrderNo) {
+	public ProcessOrderRequestImpl(MerchantConstants merchantConstants) {
 		super(merchantConstants);
-
-		
-	      document = Utils.newEmptyDocument();
-	      root = (Element) document.createElementNS(Constants.checkoutNamespace, "process-order"); 
-	      root.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns", Constants.checkoutNamespace);
-	      root.setAttribute("google-order-number", googleOrderNo);
-	      document.appendChild(root);
+	    document = Utils.newEmptyDocument();
+	    root = (Element) document.createElementNS(Constants.checkoutNamespace, "process-order"); 
+	    root.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns", Constants.checkoutNamespace);
+	    document.appendChild(root);
+	}	
+	
+	public ProcessOrderRequestImpl(MerchantConstants merchantConstants, String googleOrderNo) {
+		this(merchantConstants);
+		this.setGoogleOrderNo(googleOrderNo);
 	}
 	
 	public String getXml() {
@@ -36,21 +38,19 @@ public final class ProcessOrderRequestImpl extends AbstractCheckoutRequest imple
 	}
 	
 	public String getXmlPretty() {
-		return Utils.documentToString(document);
+		return Utils.documentToStringPretty(document);
 	}
 
 	public String getGoogleOrderNo() {
-		// TODO Auto-generated method stub
-		return null;
+		return root.getAttribute("google-order-number");
 	}
 
 	public void setGoogleOrderNo(String googleOrderNo) {
-		// TODO Auto-generated method stub
-		
+		root.setAttribute("google-order-number", googleOrderNo);
 	}
 
 	public String getPostUrl() {
 		// TODO Auto-generated method stub
-		return null;
+	    return "https://sandbox.google.com/checkout/cws/v2/Merchant/"+merchantConstants.getMerchantId()+"/request";	
 	}
 }

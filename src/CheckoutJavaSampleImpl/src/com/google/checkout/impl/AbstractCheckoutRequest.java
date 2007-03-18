@@ -36,10 +36,6 @@ public abstract class AbstractCheckoutRequest implements CheckoutRequest {
 		this.merchantConstants = merchantConstants;
 	}
 	
-    protected String getAuthorization() {
-      return Base64Coder.encode(new StringBuffer(merchantConstants.getMerchantId()).append(":").append(merchantConstants.getMerchantKey()).toString());
-    }
-    
     /** <summary>Send the Message to Google Checkout</summary> */
     public CheckoutResponse send() {
       try {
@@ -52,7 +48,7 @@ public abstract class AbstractCheckoutRequest implements CheckoutRequest {
 	      connection.setInstanceFollowRedirects(true);
 	      connection.setRequestMethod("POST");
 	      connection.setRequestProperty("Authorization", "Basic "
-	          + getAuthorization());
+	          + merchantConstants.getHttpAuth());
 	      connection.setRequestProperty("Host", connection.getURL().getHost());
 
 	      // Changed to allow i18n character sets to be processed properly

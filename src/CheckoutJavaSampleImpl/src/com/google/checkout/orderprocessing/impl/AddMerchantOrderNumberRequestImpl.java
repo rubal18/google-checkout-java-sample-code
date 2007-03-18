@@ -21,18 +21,20 @@ public final class AddMerchantOrderNumberRequestImpl extends AbstractCheckoutReq
 
 	Document document;
 	Element root;
-	
-	public AddMerchantOrderNumberRequestImpl(MerchantConstants merchantConstants, String googleOrderNo, String merchantOrderNo) {
+
+	public AddMerchantOrderNumberRequestImpl(MerchantConstants merchantConstants) {
 		super(merchantConstants);
 
-		
 	      document = Utils.newEmptyDocument();
 	      root =  (Element) document.createElementNS(Constants.checkoutNamespace, "add-merchant-order-number"); 
 	      root.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns", Constants.checkoutNamespace);
-	      root.setAttribute("google-order-number", googleOrderNo);
-	      document.appendChild(root);
-	      	
-	      Utils.createNewElementAndSet(document, root, "merchant-order-number", merchantOrderNo);
+	      document.appendChild(root);      	
+	}
+	
+	public AddMerchantOrderNumberRequestImpl(MerchantConstants merchantConstants, String googleOrderNo, String merchantOrderNo) {
+		this(merchantConstants);
+		this.setGoogleOrderNo(googleOrderNo);
+		this.setMerchantOrderNo(merchantOrderNo);
 	}
 	
 	public String getXml() {
@@ -40,32 +42,28 @@ public final class AddMerchantOrderNumberRequestImpl extends AbstractCheckoutReq
 	}
 	
 	public String getXmlPretty() {
-		return Utils.documentToString(document);
+		return Utils.documentToStringPretty(document);
 
 	}
 
 	public String getGoogleOrderNo() {
-		// TODO Auto-generated method stub
-		return null;
+		return root.getAttribute("google-order-number");
 	}
 
 	public String getMerchantOrderNo() {
-		// TODO Auto-generated method stub
-		return null;
+		return Utils.getElementStringValue(document, root, "merchant-order-number");
 	}
 
 	public void setGoogleOrderNo(String googleOrderNo) {
-		// TODO Auto-generated method stub
-		
+		root.setAttribute("google-order-number", googleOrderNo);
 	}
 
 	public void setMerchantOrderNo(String merchantOrderNo) {
-		// TODO Auto-generated method stub
-		
+		Utils.createNewElementAndSet(document, root, "merchant-order-number", merchantOrderNo);
 	}
 
 	public String getPostUrl() {
 		// TODO Auto-generated method stub
-		return null;
+	    return "https://sandbox.google.com/checkout/cws/v2/Merchant/"+merchantConstants.getMerchantId()+"/request";	
 	}
 }

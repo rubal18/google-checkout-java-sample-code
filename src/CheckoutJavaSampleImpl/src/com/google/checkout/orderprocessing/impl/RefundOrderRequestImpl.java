@@ -20,38 +20,26 @@ public final class RefundOrderRequestImpl extends AbstractCheckoutRequest implem
 	Document document;
 	Element root;
 	
-	public RefundOrderRequestImpl(MerchantConstants merchantConstants, String googleOrderNo, String reason) {
+	public RefundOrderRequestImpl(MerchantConstants merchantConstants) {
 		super(merchantConstants);
-		
-		if (!isWithinRefundStringLimits(reason, ""))
-		{
-			reason = "";
-			System.err.println(Constants.refundErrorString);
-		}
-
 	      document = Utils.newEmptyDocument();
 	      root =  (Element) document.createElementNS(Constants.checkoutNamespace, "refund-order"); 
 	      root.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns", Constants.checkoutNamespace);
-	      root.setAttribute("google-order-number", googleOrderNo);
-	      document.appendChild(root);
-	      
-	      Element reasonTag;
-	      reasonTag =  (Element) document.createElement("reason");
-	      root.appendChild(reasonTag);
-	      reasonTag.appendChild(document.createTextNode(reason));
+	      document.appendChild(root);	
+	}
+	
+	public RefundOrderRequestImpl(MerchantConstants merchantConstants, String googleOrderNo, String reason) {
+		this(merchantConstants);
+		this.setGoogleOrderNo(googleOrderNo);
+		this.setReason(reason);
 	}
 	
 	public RefundOrderRequestImpl(MerchantConstants merchantConstants, String googleOrderNo, String reason, float amount, String comment) {
-		this(merchantConstants, googleOrderNo, reason);
-		
-		if (!isWithinRefundStringLimits("", comment))
-		{
-			comment = "";
-			System.err.println(Constants.refundErrorString);
-		}
-		
-	    Utils.createNewElementAndSetAndAttribute(document, root, "amount", new Float(amount).toString(), "currency", merchantConstants.getCurrencyCode());
-	    Utils.createNewElementAndSet(document, root, "comment", comment);
+		this(merchantConstants);
+		this.setGoogleOrderNo(googleOrderNo);
+		this.setReason(reason);
+		this.setAmount(amount);
+		this.setComment(comment);
 	}
 	
 	public boolean isWithinRefundStringLimits(String reason, String comment)
@@ -65,73 +53,65 @@ public final class RefundOrderRequestImpl extends AbstractCheckoutRequest implem
 			return false;
 	}
 	
-	public void addAmount(float amt)
-	{
-		Utils.findElementElseCreateAndSetAndAttribute(document, root, "amount", new Float(amt).toString(), "currency", merchantConstants.getCurrencyCode());	
-	}
-	
-	public void addComment(String cmt)
-	{
-		if (!isWithinRefundStringLimits("", cmt))
-		{
-			System.err.println(Constants.refundErrorString);
-			return;
-		}
-		
-		Utils.findElementElseCreateAndSet(document, root, "comment", cmt);
-	}
-	
 	public String getXml() {
 		return Utils.documentToString(document);
 	}
 	
 	public String getXmlPretty() {
-		return Utils.documentToString(document);
-
+		return Utils.documentToStringPretty(document);
 	}
 
 	public String getPostUrl() {
 		// TODO Auto-generated method stub
-		return null;
+	      return "https://sandbox.google.com/checkout/cws/v2/Merchant/"+merchantConstants.getMerchantId()+"/request";	
 	}
 
 	public float getAmount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Utils.getElementFloatValue(document, root, "amount");
 	}
 
 	public String getComment() {
-		// TODO Auto-generated method stub
-		return null;
+		return Utils.getElementStringValue(document, root, "comment");
 	}
 
 	public String getGoogleOrderNo() {
-		// TODO Auto-generated method stub
-		return null;
+		return Utils.getElementStringValue(document, root, "google-order-number");
 	}
 
 	public String getReason() {
-		// TODO Auto-generated method stub
-		return null;
+		return Utils.getElementStringValue(document, root, "reason");
 	}
 
-	public void setAmount(float amount) {
-		// TODO Auto-generated method stub
-		
+	public void setAmount(float amount) {	    
+		Element e = Utils.findElementAndSetElseCreateAndSet(document, root, "amount", amount);
+		e.setAttribute("currency", merchantConstants.getCurrencyCode());
 	}
 
 	public void setComment(String comment) {
-		// TODO Auto-generated method stub
+		if (!isWithinRefundStringLimits("", comment))
+		{
+			comment = "";
+			System.err.println(Constants.refundErrorString);
+		}
 		
+	    Utils.createNewElementAndSet(document, root, "comment", comment);
 	}
 
 	public void setGoogleOrderNo(String googleOrderNo) {
-		// TODO Auto-generated method stub
-		
+	      root.setAttribute("google-order-number", googleOrderNo);
 	}
 
 	public void setReason(String reason) {
-		// TODO Auto-generated method stub
-		
+		if (!isWithinRefundStringLimits(reason, ""))
+		{
+			reason = "";
+			System.err.println(Constants.refundErrorString);
+		}
+
+	      
+	      Element reasonTag;
+	      reasonTag =  (Element) document.createElement("reason");
+	      root.appendChild(reasonTag);
+	      reasonTag.appendChild(document.createTextNode(reason));
 	}
 }

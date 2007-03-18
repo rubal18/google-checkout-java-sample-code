@@ -20,19 +20,22 @@ public final class AddTrackingDataRequestImpl extends AbstractCheckoutRequest im
 	
 	Document document;
 	Element root;
-	
-	public AddTrackingDataRequestImpl(MerchantConstants merchantConstants, String googleOrderNo, String carrier, String trackingNo) {
-		  super(merchantConstants);
-		
+
+	public AddTrackingDataRequestImpl(MerchantConstants merchantConstants) {
+		super(merchantConstants);
+
 	      document = Utils.newEmptyDocument();
 	      root =  (Element) document.createElementNS(Constants.checkoutNamespace, "add-tracking-data"); 
 	      root.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns", Constants.checkoutNamespace);
-	      root.setAttribute("google-order-number", googleOrderNo);
 	      document.appendChild(root);
-		
-		Element trackingDataTag = Utils.findContainerElseCreate(document, root, "tracking-data");	
-        Utils.createNewElementAndSet(document, trackingDataTag, "carrier", carrier);
-        Utils.createNewElementAndSet(document, trackingDataTag, "tracking-number", trackingNo);	
+	}
+
+
+	public AddTrackingDataRequestImpl(MerchantConstants merchantConstants, String googleOrderNo, String carrier, String trackingNo) {
+		this(merchantConstants);
+		this.setGoogleOrderNo(googleOrderNo);
+		this.setCarrier(carrier);
+		this.setTrackingNo(trackingNo);
 	}
 	
 	public String getXml() {
@@ -40,42 +43,38 @@ public final class AddTrackingDataRequestImpl extends AbstractCheckoutRequest im
 	}
 	
 	public String getXmlPretty() {
-		return Utils.documentToString(document);
-
+		return Utils.documentToStringPretty(document);
 	}
 
 	public String getPostUrl() {
-		// TODO Auto-generated method stub
-		return null;
+		return "https://sandbox.google.com/checkout/cws/v2/Merchant/"+merchantConstants.getMerchantId()+"/request";	
 	}
 
 	public String getCarrier() {
-		// TODO Auto-generated method stub
-		return null;
+		Element trackingDataTag = Utils.findContainerElseCreate(document, root, "tracking-data");	
+        return Utils.getElementStringValue(document, trackingDataTag, "carrier");		
 	}
 
 	public String getGoogleOrderNo() {
-		// TODO Auto-generated method stub
-		return null;
+		return Utils.getElementStringValue(document, root, "google-order-number");
 	}
 
 	public String getTrackingNo() {
-		// TODO Auto-generated method stub
-		return null;
+		Element trackingDataTag = Utils.findContainerElseCreate(document, root, "tracking-data");	
+        return Utils.getElementStringValue(document, trackingDataTag, "tracking-number");	
 	}
 
 	public void setCarrier(String carrier) {
-		// TODO Auto-generated method stub
-		
+		Element trackingDataTag = Utils.findContainerElseCreate(document, root, "tracking-data");	
+        Utils.createNewElementAndSet(document, trackingDataTag, "carrier", carrier);
 	}
 
 	public void setGoogleOrderNo(String googleOrderNo) {
-		// TODO Auto-generated method stub
-		
+	      root.setAttribute("google-order-number", googleOrderNo);
 	}
 
 	public void setTrackingNo(String trackingNo) {
-		// TODO Auto-generated method stub
-		
+		Element trackingDataTag = Utils.findContainerElseCreate(document, root, "tracking-data");	
+        Utils.createNewElementAndSet(document, trackingDataTag, "tracking-number", trackingNo);	
 	}
 }

@@ -4,6 +4,7 @@
 package com.google.checkout.checkout.impl;
 
 import com.google.checkout.MerchantConstants;
+import com.google.checkout.impl.util.Base64Coder;
 
 /**
  * @author simonjsmith
@@ -96,6 +97,10 @@ public class MerchantConstantsImpl implements MerchantConstants {
 	public String getRequestUrl() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public String getHttpAuth() {
+	  return Base64Coder.encode(new StringBuffer(getMerchantId()).append(":").append(getMerchantKey()).toString());
 	}
 
 }

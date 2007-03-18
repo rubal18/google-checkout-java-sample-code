@@ -30,22 +30,16 @@ public final class ChargeOrderRequestImpl extends AbstractCheckoutRequest implem
 	}
 
 	public ChargeOrderRequestImpl(MerchantConstants merchantConstants, String googleOrderNo) {
-		super(merchantConstants);
-
-	      document = Utils.newEmptyDocument();
-	      root =  (Element) document.createElementNS(Constants.checkoutNamespace, "charge-order"); 
-	      root.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns", Constants.checkoutNamespace);
-	      document.appendChild(root);
+		  
+		this(merchantConstants);
+	      setGoogleOrderNo(googleOrderNo);
 	}	
 	
 	public ChargeOrderRequestImpl(MerchantConstants merchantConstants, String googleOrderNo, float amt) {
-		this(merchantConstants, googleOrderNo);
-	    Utils.findElementElseCreateAndSetAndAttribute(document, root, "amount", new Float(amt).toString(), "currency", merchantConstants.getCurrencyCode());	
-	}
-	
-	public void addAmount(float amt)
-	{
-		Utils.findElementElseCreateAndSetAndAttribute(document, root, "amount", new Float(amt).toString(), "currency", merchantConstants.getCurrencyCode());	
+	 	
+		this(merchantConstants);
+	 	this.setGoogleOrderNo(googleOrderNo);
+        this.setAmount(amt);
 	}
 	
 	public String getXml() {
@@ -74,6 +68,7 @@ public final class ChargeOrderRequestImpl extends AbstractCheckoutRequest implem
 	}
 
 	public String getPostUrl() {
+		//TODO
 	      return "https://sandbox.google.com/checkout/cws/v2/Merchant/"+merchantConstants.getMerchantId()+"/request";	
 	}
 }

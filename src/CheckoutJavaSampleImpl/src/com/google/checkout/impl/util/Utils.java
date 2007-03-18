@@ -3,6 +3,8 @@ package com.google.checkout.impl.util;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -138,7 +140,7 @@ public class Utils {
 		if (nl.getLength() == 0) {
 			return "";
 		}
-		return nl.item(0).getNodeValue();			
+		return nl.item(0).getFirstChild().getNodeValue();			
 	}
 	
 	public static boolean getElementBooleanValue(Document document, Element parent, String element) {
@@ -157,18 +159,15 @@ public class Utils {
 	}
 
 	public static Date getElementDateValue(Document document, Element parent, String string) {
-		// TODO Auto-generated method stub
-		return null;
+		return parseDate(getElementStringValue(document, parent, string));	
 	}
 
 	public static long getElementLongValue(Document document, Element parent, String string) {
-		// TODO Auto-generated method stub
-		return 0;
+		return Long.parseLong(getElementStringValue(document, parent, string));
 	}
 
 	public static Element findElementAndSetElseCreateAndSet(Document document, Element parent, String string, Date date) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("not implemented");
 	}
 
 	public static Element[] getElements(Document document, Element parent) {
@@ -277,5 +276,21 @@ public class Utils {
 			e.printStackTrace();
 		}	
 		return ret;
+	}
+
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+    
+	public static Date parseDate(String date) {
+		try {
+			return sdf.parse(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static String getDateString(Date date) {
+		return sdf.format(date);
 	}
 }

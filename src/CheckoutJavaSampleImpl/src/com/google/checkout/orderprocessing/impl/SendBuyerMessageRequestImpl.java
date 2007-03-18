@@ -20,31 +20,25 @@ public final class SendBuyerMessageRequestImpl extends AbstractCheckoutRequest i
 	Document document;
 	Element root;
 	
-	public SendBuyerMessageRequestImpl(MerchantConstants merchantConstants, String googleOrderNo, String message) {
+	public SendBuyerMessageRequestImpl(MerchantConstants merchantConstants) {
 		super(merchantConstants);
-		
-		if (!isWithinMessageStringLimits(message))
-		{
-			message = "";
-			System.err.println(Constants.messageErrorString);
-		}
-
 	      document = Utils.newEmptyDocument();
 	      root =  (Element) document.createElementNS(Constants.checkoutNamespace, "send-buyer-message"); 
 	      root.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns", Constants.checkoutNamespace);
-	      root.setAttribute("google-order-number", googleOrderNo);
 	      document.appendChild(root);
-	      
-	      Element messageTag;
-	      messageTag =  (Element) document.createElement("message");
-	      root.appendChild(messageTag);
-	      messageTag.appendChild(document.createTextNode(message));
+	}
+	
+	public SendBuyerMessageRequestImpl(MerchantConstants merchantConstants, String googleOrderNo, String message) {
+		this(merchantConstants);
+		this.setGoogleOrderNo(googleOrderNo);
+		this.setMessage(message);
 	}
 	
 	public SendBuyerMessageRequestImpl(MerchantConstants merchantConstants, String googleOrderNo, String message, boolean sendEmail) {
 		this(merchantConstants, googleOrderNo, message);
-		
-	    Utils.createNewElementAndSet(document, root, "send-email", sendEmail);
+		this.setGoogleOrderNo(googleOrderNo);
+		this.setMessage(message);
+		this.setSendEmail(sendEmail);
 	}
 	
 	public boolean isWithinMessageStringLimits(String message)
@@ -57,52 +51,51 @@ public final class SendBuyerMessageRequestImpl extends AbstractCheckoutRequest i
 			return false;
 	}
 	
-	public void addSendEmail(boolean sEmail)
-	{
-		Utils.findElementElseCreateAndSet(document, root, "send-email", sEmail);
-	}
-	
 	public String getXml() {
 		return Utils.documentToString(document);
 	}
 	
 	public String getXmlPretty() {
-		return Utils.documentToString(document);
+		return Utils.documentToStringPretty(document);
 
 	}
 
 	public String getPostUrl() {
 		// TODO Auto-generated method stub
-		return null;
+	    return "https://sandbox.google.com/checkout/cws/v2/Merchant/"+merchantConstants.getMerchantId()+"/request";	
 	}
 
 	public String getGoogleOrderNo() {
-		// TODO Auto-generated method stub
-		return null;
+		return root.getAttribute("google-order-number");
 	}
 
 	public String getMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		return Utils.getElementStringValue(document, root, "message");
 	}
 
 	public boolean isSendEmail() {
-		// TODO Auto-generated method stub
-		return false;
+		return Utils.getElementBooleanValue(document, root, "send-email");
 	}
 
 	public void setGoogleOrderNo(String googleOrderNo) {
-		// TODO Auto-generated method stub
-		
+	      root.setAttribute("google-order-number", googleOrderNo);
 	}
 
 	public void setMessage(String message) {
-		// TODO Auto-generated method stub
-		
+		if (!isWithinMessageStringLimits(message))
+		{
+			message = "";
+			System.err.println(Constants.messageErrorString);
+		}
+
+	      
+	      Element messageTag;
+	      messageTag =  (Element) document.createElement("message");
+	      root.appendChild(messageTag);
+	      messageTag.appendChild(document.createTextNode(message));
 	}
 
 	public void setSendEmail(boolean sendEmail) {
-		// TODO Auto-generated method stub
-		
+        Utils.createNewElementAndSet(document, root, "send-email", sendEmail);		
 	}
 }
