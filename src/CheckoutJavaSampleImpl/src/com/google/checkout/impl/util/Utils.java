@@ -291,6 +291,10 @@ public class Utils {
 	}
 	
 	public static String getDateString(Date date) {
+		if (date == null) 
+		{
+			return "null";
+		}
 		return sdf.format(date);
 	}
 }
