@@ -83,7 +83,7 @@
 	  responseXml = res.getXmlPretty();
 
 	  GoogleOrder order = GoogleOrder.findOrCreate(mc.getMerchantId(), orderNumber);
-	  order.addOutgoingMessage(new Date(), "<cancel-order>", prettyXml, responseXml);  
+	  order.addOutgoingMessage(new Date(), "cancel-order", prettyXml, responseXml);  
   }
 %>
   <p>

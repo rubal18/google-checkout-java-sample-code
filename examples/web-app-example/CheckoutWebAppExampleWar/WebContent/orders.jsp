@@ -57,8 +57,8 @@
 	  <td><%=amount%></td>
 	  <td>
         <select id="act_<%=i %>">
-		  <option value ="chargeorder.jsp?orderNumber=<%=orderNumber%>">Charge Order</option>
-	  	  <option value ="refundorder.jsp?orderNumber=<%=orderNumber%>">Refund Order</option>
+		  <option value ="chargeorder.jsp?orderNumber=<%=orderNumber%>&amount=<%=amount %>">Charge Order</option>
+	  	  <option value ="refundorder.jsp?orderNumber=<%=orderNumber%>&amount=<%=amount %>">Refund Order</option>
 	  	  <option value ="cancelorder.jsp?orderNumber=<%=orderNumber%>">Cancel Order</option>
 	  	  <option value ="authorizeorder.jsp?orderNumber=<%=orderNumber%>">Authorize Order</option>
 	  	  <option value ="processorder.jsp?orderNumber=<%=orderNumber%>">Process Order</option>

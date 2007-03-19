@@ -79,7 +79,7 @@
 	  responseXml = res.getXmlPretty();
 
 	  GoogleOrder order = GoogleOrder.findOrCreate(mc.getMerchantId(), orderNumber);
-	  order.addOutgoingMessage(new Date(), "<add-merchant-order-number>", prettyXml, responseXml);  
+	  order.addOutgoingMessage(new Date(), "add-merchant-order-number", prettyXml, responseXml);  
   }
 %>
   <p>

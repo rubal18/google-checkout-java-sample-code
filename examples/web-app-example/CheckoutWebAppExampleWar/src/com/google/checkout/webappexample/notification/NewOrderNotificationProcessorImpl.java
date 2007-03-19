@@ -31,7 +31,7 @@ public class NewOrderNotificationProcessorImpl extends AbstractNotificationProce
 			String lastFinStatus = Utils.getElementStringValue(document, document.getDocumentElement(), "financial-order-state");
 			Element billing = Utils.findElementOrContainer(document, document.getDocumentElement(), "buyer-billing-address");
 			String buyerEmail = Utils.getElementStringValue(document, billing, "email");
-			String orderAmount = Utils.getElementStringValue(document, document.getDocumentElement(), "order=total");
+			String orderAmount = Utils.getElementStringValue(document, document.getDocumentElement(), "order-total");
 			
 			GoogleOrder order = GoogleOrder.findOrCreate(merchantConstants.getMerchantId(), orderNumber);			
 			order.setLastFulStatus(lastFulStatus);
