@@ -1,5 +1,7 @@
 package com.google.checkout.webappexample;
 
+import java.util.ResourceBundle;
+
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.checkout.CheckoutShoppingCartRequest;
 import com.google.checkout.checkout.ShippingRestrictions;
@@ -51,7 +53,13 @@ public class CheckoutRequestFactory {
 	
 	public static MerchantConstants getMerchantConstants() {
 		if (mc == null) {
-			mc = new MerchantConstantsImpl("501024660803001", "yytyDNmQdyTYBmwMbPlLaQ", "Sandbox", "USD", "baseCheckoutUrl", "baseRequestUrl");    		
+			ResourceBundle bundle = ResourceBundle.getBundle("com_google_checkout_settings");
+			String merchantId = bundle.getString("MerchantId");
+			String merchantKey = bundle.getString("MerchantKey");
+			String env = bundle.getString("Env");
+			String currencyCode = bundle.getString("CurrencyCode");
+			
+			mc = new MerchantConstantsImpl(merchantId, merchantKey, env, currencyCode, "baseCheckoutUrl", "baseRequestUrl");    		
 		}
 		return mc;
 	}
