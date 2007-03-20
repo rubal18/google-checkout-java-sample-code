@@ -12,7 +12,7 @@ public class CallbackProcessorImpl implements CallbackProcessor {
 	}
 	
 	public String process(String callbackXML) {
-		// TODO Auto-generated method stub
+		// TODO
 		return null;
 	}
 
