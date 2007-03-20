@@ -1,4 +1,4 @@
-package com.google.checkout.webappexample.notification;
+package com.google.checkout.example.notification;
 
 import java.util.Date;
 
@@ -6,18 +6,18 @@ import org.w3c.dom.Document;
 
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.impl.util.Utils;
-import com.google.checkout.notification.ChargebackNotificationProcessor;
+import com.google.checkout.notification.RiskInformationNotificationProcessor;
 import com.google.checkout.webappexample.util.GoogleOrder;
 
-public class ChargebackNotificationProcessorImpl extends AbstractNotificationProcessor implements
-		ChargebackNotificationProcessor {
+public class RiskInformationNotificationProcessorImpl extends AbstractNotificationProcessor implements
+		RiskInformationNotificationProcessor {
 
 	MerchantConstants merchantConstants;
 	
-	public ChargebackNotificationProcessorImpl(MerchantConstants merchantConstants) {
+	public RiskInformationNotificationProcessorImpl(MerchantConstants merchantConstants) {
 		this.merchantConstants = merchantConstants;
 	}
-
+	
 	public String process(String callbackXML) {
 
 		String ack = "";
@@ -37,4 +37,5 @@ public class ChargebackNotificationProcessorImpl extends AbstractNotificationPro
 		}
 		return ack;
 	}
+
 }

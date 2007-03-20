@@ -1,4 +1,4 @@
-package com.google.checkout.webappexample.notification;
+package com.google.checkout.example.notification;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

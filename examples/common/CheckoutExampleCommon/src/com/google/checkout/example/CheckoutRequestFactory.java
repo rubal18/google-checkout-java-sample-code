@@ -12,6 +12,13 @@ import com.google.checkout.checkout.impl.MerchantConstantsImpl;
 import com.google.checkout.checkout.impl.ShippingRestrictionsImpl;
 import com.google.checkout.checkout.impl.TaxAreaImpl;
 import com.google.checkout.example.merchantcalculation.CallbackProcessorImpl;
+import com.google.checkout.example.notification.AuthorizationNotificationProcessorImpl;
+import com.google.checkout.example.notification.ChargeNotificationProcessorImpl;
+import com.google.checkout.example.notification.ChargebackNotificationProcessorImpl;
+import com.google.checkout.example.notification.NewOrderNotificationProcessorImpl;
+import com.google.checkout.example.notification.OrderStateChangeNotificationProcessorImpl;
+import com.google.checkout.example.notification.RefundNotificationProcessorImpl;
+import com.google.checkout.example.notification.RiskInformationNotificationProcessorImpl;
 import com.google.checkout.merchantcalculation.CallbackProcessor;
 import com.google.checkout.notification.AuthorizationNotificationProcessor;
 import com.google.checkout.notification.ChargeNotificationProcessor;
@@ -42,13 +49,6 @@ import com.google.checkout.orderprocessing.impl.ProcessOrderRequestImpl;
 import com.google.checkout.orderprocessing.impl.RefundOrderRequestImpl;
 import com.google.checkout.orderprocessing.impl.SendBuyerMessageRequestImpl;
 import com.google.checkout.orderprocessing.impl.UnarchiveOrderRequestImpl;
-import com.google.checkout.webappexample.notification.AuthorizationNotificationProcessorImpl;
-import com.google.checkout.webappexample.notification.ChargeNotificationProcessorImpl;
-import com.google.checkout.webappexample.notification.ChargebackNotificationProcessorImpl;
-import com.google.checkout.webappexample.notification.NewOrderNotificationProcessorImpl;
-import com.google.checkout.webappexample.notification.OrderStateChangeNotificationProcessorImpl;
-import com.google.checkout.webappexample.notification.RefundNotificationProcessorImpl;
-import com.google.checkout.webappexample.notification.RiskInformationNotificationProcessorImpl;
 
 public class CheckoutRequestFactory {
 

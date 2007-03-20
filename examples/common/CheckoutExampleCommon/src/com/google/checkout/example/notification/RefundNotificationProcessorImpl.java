@@ -1,4 +1,4 @@
-package com.google.checkout.webappexample.notification;
+package com.google.checkout.example.notification;
 
 import java.util.Date;
 
@@ -6,15 +6,15 @@ import org.w3c.dom.Document;
 
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.impl.util.Utils;
-import com.google.checkout.notification.RiskInformationNotificationProcessor;
+import com.google.checkout.notification.RefundNotificationProcessor;
 import com.google.checkout.webappexample.util.GoogleOrder;
 
-public class RiskInformationNotificationProcessorImpl extends AbstractNotificationProcessor implements
-		RiskInformationNotificationProcessor {
+public class RefundNotificationProcessorImpl extends AbstractNotificationProcessor implements
+		RefundNotificationProcessor {
 
 	MerchantConstants merchantConstants;
 	
-	public RiskInformationNotificationProcessorImpl(MerchantConstants merchantConstants) {
+	public RefundNotificationProcessorImpl(MerchantConstants merchantConstants) {
 		this.merchantConstants = merchantConstants;
 	}
 	

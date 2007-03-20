@@ -1,4 +1,4 @@
-package com.google.checkout.webappexample.merchantcalculation;
+package com.google.checkout.example.merchantcalculation;
 
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.merchantcalculation.CallbackProcessor;

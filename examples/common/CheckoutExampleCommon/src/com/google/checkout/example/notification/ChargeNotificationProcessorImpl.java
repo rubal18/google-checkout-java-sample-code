@@ -1,4 +1,4 @@
-package com.google.checkout.webappexample.notification;
+package com.google.checkout.example.notification;
 
 import java.util.Date;
 
@@ -6,15 +6,15 @@ import org.w3c.dom.Document;
 
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.impl.util.Utils;
-import com.google.checkout.notification.RefundNotificationProcessor;
+import com.google.checkout.notification.ChargeNotificationProcessor;
 import com.google.checkout.webappexample.util.GoogleOrder;
 
-public class RefundNotificationProcessorImpl extends AbstractNotificationProcessor implements
-		RefundNotificationProcessor {
+public class ChargeNotificationProcessorImpl extends AbstractNotificationProcessor implements
+		ChargeNotificationProcessor {
 
 	MerchantConstants merchantConstants;
 	
-	public RefundNotificationProcessorImpl(MerchantConstants merchantConstants) {
+	public ChargeNotificationProcessorImpl(MerchantConstants merchantConstants) {
 		this.merchantConstants = merchantConstants;
 	}
 	
@@ -28,7 +28,6 @@ public class RefundNotificationProcessorImpl extends AbstractNotificationProcess
 			Date timestamp = Utils.getElementDateValue(document, document.getDocumentElement(), "timestamp");
 			
 			GoogleOrder order = GoogleOrder.findOrCreate(merchantConstants.getMerchantId(), orderNumber);
-			ack = getAckString();
 			
 			order.addIncomingMessage(timestamp, document.getDocumentElement().getNodeName(), Utils.documentToStringPretty(document), ack);
 		} catch (Exception e) {
@@ -37,5 +36,4 @@ public class RefundNotificationProcessorImpl extends AbstractNotificationProcess
 		}
 		return ack;
 	}
-
 }
