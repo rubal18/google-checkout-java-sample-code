@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar id="ejb-jar_1" xmlns="http://java.sun.com/xml/ns/j2ee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  version="2.1">
+<!--  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd" -->
+   <description>CheckoutNotificationEjb</description>
+   <display-name>CheckoutNotificationEjb</display-name>
+   <enterprise-beans>
+      <message-driven id="CheckoutNotificationEjb">
+         <description></description>
+         <ejb-name>CheckoutNotificationEjb</ejb-name>
+         <ejb-class>com.google.checkout.j2eeexample.NotificationEjb</ejb-class>
+         <messaging-type>javax.jms.MessageListener</messaging-type>
+         <transaction-type>Container</transaction-type>
+         <message-destination-type>javax.jms.Queue</message-destination-type>
+      </message-driven>
+   </enterprise-beans>
+</ejb-jar>

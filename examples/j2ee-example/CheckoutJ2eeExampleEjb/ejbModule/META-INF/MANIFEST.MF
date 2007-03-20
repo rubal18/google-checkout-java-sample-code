@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: CheckoutJavaSampleCommon.jar 
+ CheckoutJavaSampleImpl.jar 
+ CheckoutExampleCommon.jar
+

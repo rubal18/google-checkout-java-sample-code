@@ -1,0 +1,8 @@
+<jboss>
+  <enterprise-beans>
+    <message-driven>
+      <ejb-name>CheckoutNotificationEjb</ejb-name>
+      <destination-jndi-name>queue/GoogleCheckoutInbox</destination-jndi-name>    
+    </message-driven>
+  </enterprise-beans>
+</jboss> 
