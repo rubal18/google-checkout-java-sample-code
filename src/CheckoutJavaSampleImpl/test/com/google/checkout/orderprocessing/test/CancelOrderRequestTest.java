@@ -48,7 +48,7 @@ public final class CancelOrderRequestTest {
 		CancelOrderRequest cor = 
 			new CancelOrderRequestImpl(myMConstants, "375053533130049", "User Decided to Cancel the Order");
 		
-		((CancelOrderRequestImpl)cor).addComment("Not too much to comment on");
+		cor.setComment("Not too much to comment on");
 		
 		System.out.println("XML To Send: "+cor.getXml());
 		
@@ -74,7 +74,7 @@ public final class CancelOrderRequestTest {
 		CancelOrderRequest cor = 
 			new CancelOrderRequestImpl(myMConstants, "375053533130049", "User Decided to Cancel the Order, but here are extra characters: hfaoehfoahefiahfoiaheoifhaewoihaoiwehfoiawhfeoiahfeoihefoihfoihaefoihaefoihaefoihaoifehfoieahfoahefoiahofhaefhoaehffhaiehfao");
 
-		((CancelOrderRequestImpl)cor).addComment("Not too much to comment on, but here are extra characters: hfaoehfoahefiahfoiaheoifhaewoihaoiwehfoiawhfeoiahfeoihefoihfoihaefoihaefoihaefoihaoife");
+		cor.setComment("Not too much to comment on, but here are extra characters: hfaoehfoahefiahfoiaheoifhaewoihaoiwehfoiawhfeoiahfeoihefoihfoihaefoihaefoihaefoihaoife");
 		
 		System.out.println("XML To Send: "+cor.getXml());
 		
@@ -101,8 +101,8 @@ public final class CancelOrderRequestTest {
 		CancelOrderRequest cor = 
 			new CancelOrderRequestImpl(myMConstants, "375053533130049", "User Decided to Cancel the Order");
 		
-		((CancelOrderRequestImpl)cor).addComment("Not too much to comment on");
-		((CancelOrderRequestImpl)cor).addComment("Not too much to comment on");
+		cor.setComment("Not too much to comment on");
+		cor.setComment("Not too much to comment on");
 		
 		System.out.println("XML To Send: "+cor.getXml());
 		

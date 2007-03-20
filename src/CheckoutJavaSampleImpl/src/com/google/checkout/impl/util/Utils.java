@@ -93,6 +93,9 @@ public class Utils {
 			parent.appendChild(document.createElement(child));
 		}
 		Element ret = (Element) parent.getElementsByTagName(child).item(0);
+		if (ret.getFirstChild() != null) {
+			ret.removeChild(ret.getFirstChild());
+		}
 		ret.appendChild(document.createTextNode(value));
 		return ret;		
 	}
@@ -269,10 +272,8 @@ public class Utils {
 		try {
 			ret = builder.parse(new InputSource(new StringReader(xmlString)));
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
+			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 		return ret;
@@ -284,7 +285,6 @@ public class Utils {
 		try {
 			return sdf.parse(date);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
