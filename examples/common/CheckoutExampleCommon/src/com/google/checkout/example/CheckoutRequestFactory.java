@@ -56,7 +56,7 @@ public class CheckoutRequestFactory {
 	
 	public static MerchantConstants getMerchantConstants() {
 		if (mc == null) {
-			ResourceBundle bundle = ResourceBundle.getBundle("com_google_checkout_settings");
+			ResourceBundle bundle = ResourceBundle.getBundle("com_google_checkout_example_settings");
 			String merchantId = bundle.getString("MerchantId");
 			String merchantKey = bundle.getString("MerchantKey");
 			String env = bundle.getString("Env");
