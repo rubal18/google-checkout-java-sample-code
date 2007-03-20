@@ -1,0 +1,39 @@
+package com.google.checkout.example.notification;
+
+import java.util.Date;
+
+import org.w3c.dom.Document;
+
+import com.google.checkout.MerchantConstants;
+import com.google.checkout.example.GoogleOrder;
+import com.google.checkout.impl.util.Utils;
+import com.google.checkout.notification.AuthorizationNotificationProcessor;
+
+public class AuthorizationNotificationProcessorImpl extends AbstractNotificationProcessor implements
+    AuthorizationNotificationProcessor {
+
+	MerchantConstants merchantConstants;
+	
+	public AuthorizationNotificationProcessorImpl(MerchantConstants merchantConstants) {
+		this.merchantConstants = merchantConstants;
+	}
+	
+	public String process(String callbackXML) {
+
+		String ack = "";
+		try {
+			Document document = Utils.newDocumentFromString(callbackXML);
+			
+			String orderNumber = Utils.getElementStringValue(document, document.getDocumentElement(), "google-order-number");
+			Date timestamp = Utils.getElementDateValue(document, document.getDocumentElement(), "timestamp");
+			
+			GoogleOrder order = GoogleOrder.findOrCreate(merchantConstants.getMerchantId(), orderNumber);
+			
+			order.addIncomingMessage(timestamp, document.getDocumentElement().getNodeName(), Utils.documentToStringPretty(document), ack);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ack;
+	}
+
+}
