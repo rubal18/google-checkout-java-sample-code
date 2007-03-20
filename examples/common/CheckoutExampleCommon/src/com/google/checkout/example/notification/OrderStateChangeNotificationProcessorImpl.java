@@ -5,9 +5,9 @@ import java.util.Date;
 import org.w3c.dom.Document;
 
 import com.google.checkout.MerchantConstants;
+import com.google.checkout.example.GoogleOrder;
 import com.google.checkout.impl.util.Utils;
 import com.google.checkout.notification.OrderStateChangeNotificationProcessor;
-import com.google.checkout.webappexample.util.GoogleOrder;
 
 public class OrderStateChangeNotificationProcessorImpl extends AbstractNotificationProcessor implements
 		OrderStateChangeNotificationProcessor {

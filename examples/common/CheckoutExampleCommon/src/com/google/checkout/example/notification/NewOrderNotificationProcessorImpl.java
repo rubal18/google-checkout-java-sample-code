@@ -6,9 +6,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.google.checkout.MerchantConstants;
+import com.google.checkout.example.GoogleOrder;
 import com.google.checkout.impl.util.Utils;
 import com.google.checkout.notification.NewOrderNotificationProcessor;
-import com.google.checkout.webappexample.util.GoogleOrder;
 
 public class NewOrderNotificationProcessorImpl extends AbstractNotificationProcessor implements
 		NewOrderNotificationProcessor {
