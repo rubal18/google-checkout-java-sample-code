@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-<%@ page import="com.google.checkout.webappexample.util.GoogleOrder" %>
+<%@ page import="com.google.checkout.example.GoogleOrder" %>
 <%@ page import="com.google.checkout.MerchantConstants" %>
-<%@ page import="com.google.checkout.webappexample.CheckoutRequestFactory" %>
+<%@ page import="com.google.checkout.example.CheckoutRequestFactory" %>
 <%@ page import="com.google.checkout.impl.util.Utils" %>
 
     
@@ -34,8 +34,8 @@
 <td><b>Action</b></td>
 
 </tr>
-<% 
-  MerchantConstants mc = CheckoutRequestFactory.getMerchantConstants();
+<%
+  MerchantConstants mc = com.google.checkout.example.CheckoutRequestFactory.getMerchantConstants();
 
   GoogleOrder[] orders = GoogleOrder.findAll(mc.getMerchantId());
   for (int i = 0; i < orders.length; i++)
@@ -46,8 +46,7 @@
 	  String fulStatus = orders[i].getLastFulStatus();
 	  String buyer = orders[i].getBuyerEmail();
 	  String amount = orders[i].getOrderAmount();
-	  
-	  %>
+%>
 	  <tr>
 	  <td><%=lastUpdated%></td>
 	  <td><a href="order_detail.jsp?orderNumber=<%=orderNumber%>"><%=orderNumber%></a></td>

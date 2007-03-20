@@ -4,11 +4,11 @@
 <%@ page import="java.util.Collection" %>
 <%@ page import="java.util.Iterator" %>
 
-<%@ page import="com.google.checkout.webappexample.util.GoogleOrder" %>
-<%@ page import="com.google.checkout.webappexample.util.Message" %>
+<%@ page import="com.google.checkout.example.GoogleOrder" %>
+<%@ page import="com.google.checkout.example.Message" %>
 <%@ page import="com.google.checkout.impl.util.EncodeHelper" %>
 <%@ page import="com.google.checkout.MerchantConstants" %>
-<%@ page import="com.google.checkout.webappexample.CheckoutRequestFactory" %>
+<%@ page import="com.google.checkout.example.CheckoutRequestFactory" %>
 
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -42,8 +42,8 @@
   };
 </script>
 <h1>Order Detail</h1>
-<% 
-  MerchantConstants mc = CheckoutRequestFactory.getMerchantConstants();
+<%
+  MerchantConstants mc = com.google.checkout.example.CheckoutRequestFactory.getMerchantConstants();
   String orderNumber = request.getParameter("orderNumber");
   
   GoogleOrder order = GoogleOrder.findOrCreate(mc.getMerchantId(), orderNumber);
@@ -56,7 +56,7 @@
 	  m = (Message) it.next();
 	  String body = m.getBody();
  	  String header = EncodeHelper.EscapeXmlChars(m.getHeader());
- 	  %>
+%>
 		<a href="javascript:toggle('<%=count %>');"><strong><%=header %></strong></a>
 		<br/>
 		<div id="div_<%=count %>" style='display:none;'>

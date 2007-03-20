@@ -37,12 +37,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.checkout.MerchantConstants;
-import com.google.checkout.notification.ChargeNotificationProcessor;
-import com.google.checkout.notification.ChargebackNotificationProcessor;
-import com.google.checkout.notification.NewOrderNotificationProcessor;
-import com.google.checkout.notification.OrderStateChangeNotificationProcessor;
-import com.google.checkout.notification.RefundNotificationProcessor;
-import com.google.checkout.notification.RiskInformationNotificationProcessor;
+import com.google.checkout.example.CheckoutRequestFactory;
 
 /**
  * The <b>CallBackServlet</b> class is designed to handle concurrent Merchant 

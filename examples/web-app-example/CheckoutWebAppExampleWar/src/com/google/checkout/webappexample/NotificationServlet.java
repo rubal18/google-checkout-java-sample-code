@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.checkout.MerchantConstants;
+import com.google.checkout.example.CheckoutRequestFactory;
+import com.google.checkout.notification.AuthorizationNotificationProcessor;
 import com.google.checkout.notification.ChargeNotificationProcessor;
 import com.google.checkout.notification.ChargebackNotificationProcessor;
 import com.google.checkout.notification.NewOrderNotificationProcessor;
@@ -118,7 +120,8 @@ import com.google.checkout.notification.RiskInformationNotificationProcessor;
 			return processor.process(notification);
 		}
 		if (notification.indexOf("authorization-amount-notification") > -1) {
-			throw new Exception("Notification not supported.");
+			AuthorizationNotificationProcessor processor = CheckoutRequestFactory.newAuthorizationNotificationProcessor();
+			return processor.process(notification);
 		}
 		throw new Exception("Notification not recoginsed.");
 	}

@@ -17,11 +17,11 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="java.util.Date" %>
-<%@ page import="com.google.checkout.webappexample.util.GoogleOrder" %>
+<%@ page import="com.google.checkout.example.GoogleOrder" %>
 <%@ page import="com.google.checkout.MerchantConstants" %>
 <%@ page import="com.google.checkout.orderprocessing.SendBuyerMessageRequest" %>
 <%@ page import="com.google.checkout.CheckoutResponse" %>
-<%@ page import="com.google.checkout.webappexample.CheckoutRequestFactory" %>
+<%@ page import="com.google.checkout.example.CheckoutRequestFactory" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -36,10 +36,10 @@
      document.forms[0].submit();
   };
 </script>
-<% 
+<%
     String button = request.getParameter("button");
 
-    MerchantConstants mc = CheckoutRequestFactory.getMerchantConstants();
+    MerchantConstants mc = com.google.checkout.example.CheckoutRequestFactory.getMerchantConstants();
 
     SendBuyerMessageRequest messageRequest;
 	String orderNumber = request.getParameter("orderNumber") == null ? "" : request.getParameter("orderNumber");
@@ -50,13 +50,13 @@
 	String responseXml = null;
 	
   if (button == null || button.equals("")) {
-	  messageRequest = CheckoutRequestFactory.newSendBuyerMessageRequest();
+	  messageRequest = com.google.checkout.example.CheckoutRequestFactory.newSendBuyerMessageRequest();
 	  session.setAttribute("messageRequest", messageRequest);
 	  prettyXml = messageRequest.getXmlPretty();
 	  responseXml = "";
   }
   else if (button.equals("NewRequest")) {
-	  messageRequest = CheckoutRequestFactory.newSendBuyerMessageRequest();
+	  messageRequest = com.google.checkout.example.CheckoutRequestFactory.newSendBuyerMessageRequest();
 	  session.setAttribute("messageRequest", messageRequest);
 	  prettyXml = messageRequest.getXmlPretty();
 	  responseXml = "";
