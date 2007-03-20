@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Class-Path: CheckoutJavaSampleCommon.jar 
- CheckoutJavaSampleImpl.jar 
- CheckoutExampleCommon.jar
+Class-Path: CheckoutExampleCommon.jar 
+ CheckoutJavaSampleCommon.jar 
+ CheckoutJavaSampleImpl.jar
 
