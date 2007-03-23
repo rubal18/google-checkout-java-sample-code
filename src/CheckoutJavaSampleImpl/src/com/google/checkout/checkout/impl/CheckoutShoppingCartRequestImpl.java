@@ -1,6 +1,19 @@
-/**
+/*******************************************************************************
+ * Copyright (C) 2007 Google Inc.
  * 
- */
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ ******************************************************************************/
+
 package com.google.checkout.checkout.impl;
 
 import java.io.IOException;
@@ -27,8 +40,9 @@ import com.google.checkout.impl.util.Base64Coder;
 import com.google.checkout.impl.util.Utils;
 
 /**
+ * The default implementation of the CheckoutShoppingCartRequest interface.
+ * 
  * @author simonjsmith
- *
  */
 public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest implements CheckoutShoppingCartRequest {
 
@@ -37,6 +51,13 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest imp
 	Element shoppingCart;
 	Element checkoutFlowSupport;
 	
+  /**
+   * Constructor which takes an instance of MerchantConstants.
+   * 
+   * @param merchantConstants The MerchantConstants.
+   * 
+   * @see MerchantConstants
+   */
 	public CheckoutShoppingCartRequestImpl(MerchantConstants merchantConstants) {
 		
 	  super(merchantConstants);
@@ -49,11 +70,23 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest imp
    	  
       root.appendChild(shoppingCart);
       root.appendChild(checkoutFlowSupport);	  
-      
-      //this.setExpirationMinutesFromNow(expirationMinutesFromNow);
-   	
 	}
 
+  /**
+   * Constructor which takes an instance of MerchantConstants and the cart expiration.
+   * 
+   * @param merchantConstants The MerchantConstants.
+   * @param expirationMinutesFromNow The number of minutes before the cart should expire.
+   * 
+   * @see MerchantConstants
+   */
+  public CheckoutShoppingCartRequestImpl(MerchantConstants merchantConstants, int expirationMinutesFromNow) {
+    
+    this(merchantConstants);
+    this.setExpirationMinutesFromNow(expirationMinutesFromNow); 
+  }
+  
+  
 	/* (non-Javadoc)
 	 * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#addFlatRateShippingMethod(java.lang.String, float, com.google.checkout.checkout.ShippingRestrictions)
 	 */
@@ -84,13 +117,16 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest imp
 	}
 
 	/* (non-Javadoc)
-	 * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#addItem(java.lang.String, java.lang.String, java.lang.String, float, int)
+	 * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#addItem(java.lang.String, java.lang.String, float, int, java.lang.String)
 	 */
 	public void addItem(String name, String description,
 			float price, int quantity, String merchantItemID) {
 		addItem(name, description, price, quantity, merchantItemID, null, null);
 	}
 
+  /* (non-Javadoc)
+   * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#addItem(java.lang.String, java.lang.String, float, int, org.w3c.dom.Element[])
+   */
 	public void addItem(String name, String description, float price, int quantity, Element[] merchantPrivateItemData) {
 		addItem(name, description, price, quantity, null, merchantPrivateItemData, null);
 	}
@@ -383,12 +419,18 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest imp
 		Utils.findElementAndSetElseCreateAndSet(document, mcfs, "request-buyer-phone-number", b);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#getMerchantPrivateDataNodes()
+	 */
 	public Element[] getMerchantPrivateDataNodes() {
 		Element mpd = Utils.findElementOrContainer(document, shoppingCart, "merchant-private-data");
 		if (mpd == null) {return null;}
 		return Utils.getElements(document, mpd);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#setMerchantPrivateDataNodes(org.w3c.dom.Element[])
+	 */
 	public void setMerchantPrivateDataNodes(Element[] nodes) {
 		Element mpd = Utils.findContainerElseCreate(document, shoppingCart, "merchant-private-data");
 		Utils.importElements(document, mpd, nodes);
@@ -401,6 +443,9 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest imp
 		return Utils.documentToString(document);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#addAlternateTaxRule(java.lang.String, boolean, double, com.google.checkout.checkout.TaxArea)
+	 */
 	public void addAlternateTaxRule(String tableName, boolean standalone, double taxRate, TaxArea taxArea) {
 		Element mcfs = Utils.findContainerElseCreate(document, checkoutFlowSupport, "merchant-checkout-flow-support");	
         Element taxTables = Utils.findContainerElseCreate(document, mcfs, "tax-tables");			
@@ -413,6 +458,9 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest imp
         Utils.importElements(document, newRule, new Element[] {taxArea.getRootElement()});   
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#addDefaultTaxRule(double, boolean, com.google.checkout.checkout.TaxArea)
+	 */
 	public void addDefaultTaxRule(double taxRate, boolean shippingTaxed, TaxArea taxArea) {
 
 		Element mcfs = Utils.findContainerElseCreate(document, checkoutFlowSupport, "merchant-checkout-flow-support");	
@@ -426,21 +474,33 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest imp
         Utils.importElements(document, newRule, new Element[] {taxArea.getRootElement()});   
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#addParameterizedUrl(java.lang.String)
+	 */
 	public void addParameterizedUrl(String url) {
 		
 		addParameterizedUrl(url, false);		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#addParameterizedUrl(java.lang.String, boolean)
+	 */
 	public void addParameterizedUrl(String url, boolean urlEncode) {
 		addParameterizedUrl(url, urlEncode, null);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#addParameterizedUrl(java.lang.String, java.util.Collection)
+	 */
 	public void addParameterizedUrl(String url, Collection parameters) {
 		addParameterizedUrl(url, false, parameters);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#addParameterizedUrl(java.lang.String, boolean, java.util.Collection)
+	 */
 	public void addParameterizedUrl(String url, boolean urlEncode, Collection parameters) {
 		if(urlEncode) {
 			try {
@@ -465,12 +525,18 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest imp
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.checkout.CheckoutRequest#getXmlPretty()
+	 */
 	public String getXmlPretty() {
 		return Utils.documentToStringPretty(document);
 	}
 	
-    /** <summary> Get the post URL to output </summary> */
-    public String getPostUrl() {
+  /* (non-Javadoc)
+   * @see com.google.checkout.CheckoutRequest#getPostUrl()
+   */
+  public String getPostUrl() {
+    //TODO:  fix
       return "https://sandbox.google.com/checkout/cws/v2/Merchant/"+merchantConstants.getMerchantId()+"/merchantCheckout";	
     	
 //      if (merchantConstants.getEnv().equals(EnvironmentType.Sandbox)) {

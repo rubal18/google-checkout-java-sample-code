@@ -1,3 +1,19 @@
+/*******************************************************************************
+ * Copyright (C) 2007 Google Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ ******************************************************************************/
+
 package com.google.checkout.impl;
 
 import org.w3c.dom.Document;
@@ -5,62 +21,69 @@ import org.w3c.dom.Element;
 
 import com.google.checkout.impl.util.Utils;
 
-
 /**
+ * The default implementation of the CheckoutResponse interface.
+ *
  * @author 		ksim
  * @date   		March 6th, 2007
  * @version		1.0 - ksim - March 7th, 2007 - 	Initial Version to separate interface and implementation		
  * @todo		Not unit tested yet, but tested fairly well over all.
  * 				Still missing extra function implementations
- *
  */
-
-public class CheckoutResponseImpl extends AbstractCheckoutResponse{
+public class CheckoutResponseImpl extends AbstractCheckoutResponse {
 	
-	Document document;
+	private Document document;
 	
-	public CheckoutResponseImpl() {
+	/**
+   * The default constructor. 
+	 */
+  public CheckoutResponseImpl() {
 		processResponse("");
 	}
-	
+	/**
+   * A constructor which takes the response String.
+   * 
+   * @param response
+	 */
 	public CheckoutResponseImpl(String response) {
 		processResponse(response);
 	}
 
+  
+	/* (non-Javadoc)
+	 * @see com.google.checkout.impl.AbstractCheckoutResponse#processResponse(java.lang.String)
+	 */
 	protected void processResponse(String response)
 	{
 	    document = Utils.newDocumentFromString(response);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.google.checkout.CheckoutResponse#isValidRequest()
+	 */
 	public boolean isValidRequest()
 	{
 		return true;
 	}
 
-	/**
-	 * Gets the serial number. Google attaches a unique serial number to every
-	 * response. <value> The serial number, for example
-	 * 58ea39d3-025b-4d52-a697-418f0be74bf9. </value>
+	/* (non-Javadoc)
+	 * @see com.google.checkout.CheckoutResponse#getSerialNumber()
 	 */
 	public String getSerialNumber()
 	{
 		return "";
 	}
 
-	/**
-	 * If Google responded with an error (IsGood = false) then this property
-	 * will contain the human-readable error message. <value> The error message
-	 * returned by Google, or an empty string if there was no error. </value>
+	/* (non-Javadoc)
+	 * @see com.google.checkout.CheckoutResponse#getErrorMessage()
 	 */
 	public String getErrorMessage()
 	{
 		return "";
 	}
 
-	/**
-	 * If Google indicated a redirect URL in the response, this property will
-	 * contain the URL string. <value> The redirect URL, or the empty string if
-	 * Google didn't send a redirect URL. </value>
+	/* (non-Javadoc)
+	 * @see com.google.checkout.CheckoutResponse#getRedirectUrl()
 	 */
 	public String getRedirectUrl()
 	{
@@ -69,10 +92,16 @@ public class CheckoutResponseImpl extends AbstractCheckoutResponse{
 		return "<error!>";
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.checkout.CheckoutResponse#getXml()
+	 */
 	public String getXml() {
 		return Utils.documentToString(document);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.checkout.CheckoutResponse#getXmlPretty()
+	 */
 	public String getXmlPretty() {
 		return Utils.documentToStringPretty(document);
 	}
