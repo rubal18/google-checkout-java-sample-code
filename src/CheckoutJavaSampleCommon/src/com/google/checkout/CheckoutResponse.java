@@ -20,10 +20,7 @@ package com.google.checkout;
  * This class represents a checkout response message from Google.
  * 
  * @author simonjsmith, ksim
- * @date March 6th, 2007
- * @version 1.1
- * @todo Not unit tested yet.
- * 
+ * @version 1.1  
  */
 
 public interface CheckoutResponse {

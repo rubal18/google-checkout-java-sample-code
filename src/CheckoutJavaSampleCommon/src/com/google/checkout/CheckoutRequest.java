@@ -49,7 +49,7 @@ public interface CheckoutRequest {
    * 
    * @return The CheckoutResponse object.
    * 
-   * @see CheckoutResponse.
+   * @see CheckoutResponse
    */
-  public CheckoutResponse send();
+  public CheckoutResponse send() throws CheckoutException;;
 }

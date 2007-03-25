@@ -16,6 +16,8 @@
 
 package com.google.checkout.merchantcalculation;
 
+import com.google.checkout.CheckoutException;
+
 /**
  * This class contains methods that parse a
  * &lt;merchant-calculation-callback&gt; request, allowing you to access items
@@ -32,6 +34,6 @@ public interface CallbackProcessor {
    * 
    * @return The merchant calculation response String.
    */
-  public String process(String callbackXML);
+  public String process(String callbackXML) throws CheckoutException;
 
 }

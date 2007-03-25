@@ -16,6 +16,8 @@
 
 package com.google.checkout.notification;
 
+import com.google.checkout.CheckoutException;
+
 /**
  * This class is responsible for processing a
  * &lt;order-state-change-notification&gt; sent as part of the Notification API.
@@ -31,6 +33,6 @@ public interface OrderStateChangeNotificationProcessor {
    *          The notification XML String.
    * @return The return String, typically a &lt;notification-acknowledgment&gt;.
    */
-  public String process(String callbackXML);
+  public String process(String callbackXML) throws CheckoutException;
 
 }

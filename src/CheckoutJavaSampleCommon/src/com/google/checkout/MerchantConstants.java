@@ -37,7 +37,7 @@ public interface MerchantConstants {
   /**
    * Set the Environment Type value.
    * 
-   * @parm env The Environment Type.
+   * @param env The Environment Type.
    * 
    * @see EnvironmentType
    */
@@ -108,4 +108,32 @@ public interface MerchantConstants {
    * @return The HTTP Auth value.
    */
   public String getHttpAuth();
+  
+  /**
+   * Return the Merchant Checkout URL.
+   * 
+   * @return The Checkout URL.
+   */
+  public String getMerchantCheckoutUrl();
+
+  /**
+   * Set the Merchant Checkout URL.
+   * 
+   * @param merchantCheckoutUrl The Merchant Checkout URL.
+   */  
+  public void setMerchantCheckoutUrl(String merchantCheckoutUrl);
+
+  /**
+   * Set the Checkout URL.
+   * 
+   * @param checkoutUrl The Checkout URL.
+   */  
+  public void setCheckoutUrl(String checkoutUrl);
+
+  /**
+   * Set the Request URL.
+   * 
+   * @param requestUrl The Checkout URL.
+   */ 
+  public void setRequestUrl(String requestUrl);
 }

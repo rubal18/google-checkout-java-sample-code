@@ -49,7 +49,7 @@ public interface TaxArea {
    * @param countryArea
    *          The US country area.
    * 
-   * @see USArea.
+   * @see USArea
    */
   public void addCountryArea(USArea countryArea);
 

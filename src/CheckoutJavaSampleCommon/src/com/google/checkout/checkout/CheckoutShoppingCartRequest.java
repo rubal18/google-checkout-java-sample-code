@@ -185,7 +185,7 @@ public interface CheckoutShoppingCartRequest extends CheckoutRequest {
    *          A list of country, state or zip code areas where the shipping
    *          method is either available or unavailable.
    * 
-   * @see ShippingRestrictions.
+   * @see ShippingRestrictions
    */
   public void addFlatRateShippingMethod(String name, float cost,
       ShippingRestrictions restrictions);
@@ -223,7 +223,7 @@ public interface CheckoutShoppingCartRequest extends CheckoutRequest {
    *          A list of country, state or zip code areas where the shipping
    *          method is either available or unavailable.
    * 
-   * @see ShippingRestrictions.
+   * @see ShippingRestrictions
    */
   public void addMerchantCalculatedShippingMethod(String name,
       float defaultCost, ShippingRestrictions restrictions);
@@ -323,7 +323,7 @@ public interface CheckoutShoppingCartRequest extends CheckoutRequest {
    * @param taxArea
    *          The TaxArea for which this rule applies.
    * 
-   * @see TaxArea.
+   * @see TaxArea
    */
   public void addDefaultTaxRule(double taxRate, boolean shippingTaxed,
       TaxArea taxArea);
@@ -346,7 +346,7 @@ public interface CheckoutShoppingCartRequest extends CheckoutRequest {
    * @param taxArea
    *          The TaxArea for which this rule applies.
    * 
-   * @see TaxArea.
+   * @see TaxArea
    */
   // TODO: not sure about this...
   public void addAlternateTaxRule(String tableName, boolean standalone,
@@ -484,10 +484,10 @@ public interface CheckoutShoppingCartRequest extends CheckoutRequest {
   /**
    * Sets the contents of the &lt;merchant-private-data&gt; element.
    * 
-   * @param nodesThe
-   *          &lt;merchant-private-data&gt; element value.
+   * @param nodes
+   *          The &lt;merchant-private-data&gt; element value.
    * 
-   * @see Element.
+   * @see Element
    */
   public void setMerchantPrivateDataNodes(Element[] nodes);
 
@@ -556,7 +556,7 @@ public interface CheckoutShoppingCartRequest extends CheckoutRequest {
    * 
    * @return The cart expiration.
    * 
-   * @see Date.
+   * @see Date
    */
   public Date getCartExpiration();
 
@@ -566,7 +566,7 @@ public interface CheckoutShoppingCartRequest extends CheckoutRequest {
    * @param date
    *          The cart expiration.
    * 
-   * @see Date.
+   * @see Date
    */
   public void setCartExpiration(Date date);
 
