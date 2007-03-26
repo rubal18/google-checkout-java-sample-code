@@ -9,15 +9,15 @@ import com.google.checkout.orderprocessing.impl.AddTrackingDataRequestImpl;
 
 /**
  * @author 		ksim
- * @date   		March 10th, 2007
  * @version		1.0 - ksim - March 10th, 2007 - Initial Version
  *
  */
 
 public final class AddTrackingDataRequestTest {
-	public static final void testGeneralAddTrackingDataRequest()
+	public static final void testGeneralAddTrackingDataRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+//  TODO:  fix this and port to JUnit.
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
@@ -42,7 +42,7 @@ public final class AddTrackingDataRequestTest {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) 
+	public static void main(String[] args) throws Exception
 	{
 		testGeneralAddTrackingDataRequest();
 	}

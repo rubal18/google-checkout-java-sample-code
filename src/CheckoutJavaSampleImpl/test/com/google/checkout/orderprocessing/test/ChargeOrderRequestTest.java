@@ -9,16 +9,15 @@ import com.google.checkout.orderprocessing.impl.ChargeOrderRequestImpl;
 
 /**
  * @author 		ksim
- * @date   		March 10th, 2007
  * @version		1.0 - ksim - March 10th, 2007 - Initial Version
  *
  */
 
 public final class ChargeOrderRequestTest {
 	
-	public static final void testGeneralChargeOrderRequest()
+	public static final void testGeneralChargeOrderRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
@@ -40,9 +39,9 @@ public final class ChargeOrderRequestTest {
 		return;
 	}
 	
-	public static final void testPartialConstructorChargeOrderRequest()
+	public static final void testPartialConstructorChargeOrderRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
@@ -64,16 +63,16 @@ public final class ChargeOrderRequestTest {
 		return;
 	}
 	
-	public static final void testPartialAddChargeOrderRequest()
+	public static final void testPartialAddChargeOrderRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
 		ChargeOrderRequest cor = 
 			new ChargeOrderRequestImpl(myMConstants, "375053533130049");
 		
-		((ChargeOrderRequestImpl)cor).addAmount(new Float(.50).floatValue());
+		((ChargeOrderRequestImpl)cor).setAmount(new Float(.50).floatValue());
 		
 		System.out.println("XML To Send: "+cor.getXml());
 		
@@ -90,18 +89,18 @@ public final class ChargeOrderRequestTest {
 		return;
 	}
 	
-	public static final void testPartialAddMultChargeOrderRequest()
+	public static final void testPartialAddMultChargeOrderRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
 		ChargeOrderRequest cor = 
 			new ChargeOrderRequestImpl(myMConstants, "375053533130049");
 		
-		((ChargeOrderRequestImpl)cor).addAmount(new Float(.50).floatValue());
-		((ChargeOrderRequestImpl)cor).addAmount(new Float(.60).floatValue());
-		((ChargeOrderRequestImpl)cor).addAmount(new Float(.70).floatValue());
+		((ChargeOrderRequestImpl)cor).setAmount(new Float(.50).floatValue());
+		((ChargeOrderRequestImpl)cor).setAmount(new Float(.60).floatValue());
+		((ChargeOrderRequestImpl)cor).setAmount(new Float(.70).floatValue());
 		
 		System.out.println("XML To Send: "+cor.getXml());
 		
@@ -123,7 +122,7 @@ public final class ChargeOrderRequestTest {
 	 */
 	public static void main(String[] args) 
 	{
-		testGeneralChargeOrderRequest();
+		//testGeneralChargeOrderRequest();
 		//testPartialConstructorChargeOrderRequest();
 		//testPartialAddChargeOrderRequest();
 		//testPartialAddMultChargeOrderRequest();

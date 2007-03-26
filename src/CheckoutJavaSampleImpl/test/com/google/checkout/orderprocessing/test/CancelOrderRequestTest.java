@@ -9,15 +9,15 @@ import com.google.checkout.orderprocessing.impl.CancelOrderRequestImpl;
 
 /**
  * @author 		ksim
- * @date   		March 10th, 2007
  * @version		1.0 - ksim - March 10th, 2007 - Initial Version
  *
  */
 
 public final class CancelOrderRequestTest {
-	public static final void testGeneralCancelOrderRequest()
+	public static final void testGeneralCancelOrderRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+//  TODO:  fix this and port to JUnit.
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
@@ -39,9 +39,9 @@ public final class CancelOrderRequestTest {
 		return;
 	}
 	
-	public static final void testAddCancelOrderRequest()
+	public static final void testAddCancelOrderRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
@@ -65,9 +65,9 @@ public final class CancelOrderRequestTest {
 		return;
 	}
 	
-	public static final void testAddExceedStrLimitCancelOrderRequest()
+	public static final void testAddExceedStrLimitCancelOrderRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
@@ -92,9 +92,9 @@ public final class CancelOrderRequestTest {
 	}
 	
 	
-	public static final void testAddMultCancelOrderRequest()
+	public static final void testAddMultCancelOrderRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
@@ -124,7 +124,7 @@ public final class CancelOrderRequestTest {
 	 */
 	public static void main(String[] args) 
 	{
-		testGeneralCancelOrderRequest();
+		//testGeneralCancelOrderRequest();
 		//testAddCancelOrderRequest();
 		//testAddExceedStrLimitCancelOrderRequest();
 		//testAddMultCancelOrderRequest();

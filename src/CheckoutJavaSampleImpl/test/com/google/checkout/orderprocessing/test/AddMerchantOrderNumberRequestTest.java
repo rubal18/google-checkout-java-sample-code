@@ -9,16 +9,17 @@ import com.google.checkout.orderprocessing.impl.AddMerchantOrderNumberRequestImp
 
 /**
  * @author 		ksim
- * @date   		March 10th, 2007
  * @version		1.0 - ksim - March 10th, 2007 - Initial Version
  *
  */
 
 public final class AddMerchantOrderNumberRequestTest {
 
-	public static final void testGeneralAddMerchantOrderNumberRequest()
-	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+	public static final void testGeneralAddMerchantOrderNumberRequest() throws Exception
+	
+  {
+//  TODO:  fix this and port to JUnit.
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
@@ -43,7 +44,7 @@ public final class AddMerchantOrderNumberRequestTest {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) 
+	public static void main(String[] args) throws Exception
 	{
 		testGeneralAddMerchantOrderNumberRequest();
 	}
