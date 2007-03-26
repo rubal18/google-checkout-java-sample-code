@@ -15,6 +15,8 @@
 *************************************************/
 package com.google.checkout.j2eeexample;
 
+import javax.jms.TextMessage;
+
 import com.google.checkout.example.CheckoutRequestFactory;
 import com.google.checkout.notification.AuthorizationNotificationProcessor;
 import com.google.checkout.notification.ChargeNotificationProcessor;
@@ -24,7 +26,6 @@ import com.google.checkout.notification.OrderStateChangeNotificationProcessor;
 import com.google.checkout.notification.RefundNotificationProcessor;
 import com.google.checkout.notification.RiskInformationNotificationProcessor;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class JmsCallBackProcessorMdb.
  */
@@ -42,11 +43,12 @@ public class NotificationEjb implements javax.ejb.MessageDrivenBean,
 		this.messageContext = messageContext;
 	}
 
-	/**
-	 * Ejb create.
-	 */
-	public void ejbCreate() {
-	}
+  /* (non-Javadoc)
+   * @see javax.ejb.MessageDrivenBean#ejbCreate()
+   */
+  public void ejbCreate() {
+    messageContext = null;
+  }
 
 	/* (non-Javadoc)
 	 * @see javax.ejb.MessageDrivenBean#ejbRemove()
@@ -61,15 +63,16 @@ public class NotificationEjb implements javax.ejb.MessageDrivenBean,
 	 */
 	public void onMessage(javax.jms.Message message) {
 		try {
-			String messageType = message.getStringProperty("messageType");
-			dispatch(messageType);
+      String contents = ((TextMessage)message).getText();
+			dispatch(contents);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 	private String dispatch(String notification) throws Exception {
-		if (notification.indexOf("new-order-notification ") > -1) {
+
+		if (notification.indexOf("new-order-notification") > -1) {
 			NewOrderNotificationProcessor processor = CheckoutRequestFactory.newNewOrderNotificationProcessor();
 			return processor.process(notification);
 		}
