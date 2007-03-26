@@ -29,7 +29,6 @@ import com.google.checkout.orderprocessing.AuthorizeOrderRequest;
  * The default implementation of the AuthorizeOrderRequest interface.
  * 
  * @author ksim
- * @date March 10th, 2007
  * @version 1.0 - ksim - March 10th, 2007 - Initial Version
  */
 
@@ -117,8 +116,6 @@ public class AuthorizeOrderRequestImpl extends AbstractCheckoutRequest
    * @see com.google.checkout.CheckoutRequest#getPostUrl()
    */
   public String getPostUrl() {
-    // TODO Auto-generated method stub
-    return "https://sandbox.google.com/checkout/cws/v2/Merchant/"
-        + merchantConstants.getMerchantId() + "/request";
+    return merchantConstants.getRequestUrl();
   }
 }

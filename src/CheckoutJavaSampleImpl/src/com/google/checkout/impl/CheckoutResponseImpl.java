@@ -16,54 +16,63 @@
 
 package com.google.checkout.impl;
 
+import java.io.InputStream;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.google.checkout.CheckoutResponse;
 import com.google.checkout.impl.util.Utils;
 
 /**
  * The default implementation of the CheckoutResponse interface.
  *
  * @author 		ksim
- * @date   		March 6th, 2007
  * @version		1.0 - ksim - March 7th, 2007 - 	Initial Version to separate interface and implementation		
- * @todo		Not unit tested yet, but tested fairly well over all.
- * 				Still missing extra function implementations
  */
-public class CheckoutResponseImpl extends AbstractCheckoutResponse {
+//TODO
+public class CheckoutResponseImpl implements CheckoutResponse {
 	
 	private Document document;
+  private Element root;
 	
 	/**
    * The default constructor. 
 	 */
   public CheckoutResponseImpl() {
-		processResponse("");
-	}
-	/**
-   * A constructor which takes the response String.
-   * 
-   * @param response
-	 */
-	public CheckoutResponseImpl(String response) {
-		processResponse(response);
+		this("");
 	}
 
-  
-	/* (non-Javadoc)
-	 * @see com.google.checkout.impl.AbstractCheckoutResponse#processResponse(java.lang.String)
+  /**
+   * A constructor which takes the response String.
+   * 
+   * @param response The response String.
 	 */
-	protected void processResponse(String response)
-	{
-	    document = Utils.newDocumentFromString(response);
-	}
+	public CheckoutResponseImpl(String response) {
+    document = Utils.newDocumentFromString(response);
+    root = document.getDocumentElement();
+  }
+
+  /**
+   * A constructor which takes the response as an InputStream.
+   * 
+   * @param response The response as an InputStream
+   */
+  public CheckoutResponseImpl(InputStream response) {
+    document = Utils.newDocumentFromInputStream(response);
+    root = document.getDocumentElement();
+  }
 	
 	/* (non-Javadoc)
 	 * @see com.google.checkout.CheckoutResponse#isValidRequest()
 	 */
 	public boolean isValidRequest()
 	{
-		return true;
+    String nodeName = root.getNodeName();
+    if ("checkout-redirect".equals(nodeName) || "request-received".equals(nodeName)) {
+      return true;
+    }
+    return false;
 	}
 
 	/* (non-Javadoc)
@@ -71,7 +80,7 @@ public class CheckoutResponseImpl extends AbstractCheckoutResponse {
 	 */
 	public String getSerialNumber()
 	{
-		return "";
+		return root.getAttribute("serial-number");
 	}
 
 	/* (non-Javadoc)
@@ -79,7 +88,7 @@ public class CheckoutResponseImpl extends AbstractCheckoutResponse {
 	 */
 	public String getErrorMessage()
 	{
-		return "";
+		return Utils.getElementStringValue(document, root, "error-message");
 	}
 
 	/* (non-Javadoc)
@@ -87,9 +96,7 @@ public class CheckoutResponseImpl extends AbstractCheckoutResponse {
 	 */
 	public String getRedirectUrl()
 	{
-		Element redirect = Utils.findElementOrContainer(document, document.getDocumentElement(), "redirect-url");
-		if (redirect != null) {return redirect.getTextContent();}
-		return "<error!>";
+		return Utils.getElementStringValue(document, root, "redirect-url");
 	}
 
 	/* (non-Javadoc)

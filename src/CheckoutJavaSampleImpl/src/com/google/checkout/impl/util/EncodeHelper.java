@@ -22,9 +22,7 @@ import java.util.regex.*;
  * Helper class for escaping XML characters &lt; &gt; and &amp;
  * 
  * @author ksim
- * @date March 6th, 2007
  * @version 1.0
- * @todo Not unit tested yet.
  */
 public final class EncodeHelper {
 

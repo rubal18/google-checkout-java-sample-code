@@ -29,12 +29,11 @@ import com.google.checkout.orderprocessing.RefundOrderRequest;
  * Default implementation of the RefundOrderRequest interface.
  * 
  * @author ksim
- * @date March 10th, 2007
  * @version 1.0 - ksim - March 10th, 2007 - Initial Version
  */
 
-public class RefundOrderRequestImpl extends AbstractCheckoutRequest
-    implements RefundOrderRequest {
+public class RefundOrderRequestImpl extends AbstractCheckoutRequest implements
+    RefundOrderRequest {
   private Document document;
 
   private Element root;
@@ -145,9 +144,7 @@ public class RefundOrderRequestImpl extends AbstractCheckoutRequest
    * @see com.google.checkout.CheckoutRequest#getPostUrl()
    */
   public String getPostUrl() {
-    // TODO Auto-generated method stub
-    return "https://sandbox.google.com/checkout/cws/v2/Merchant/"
-        + merchantConstants.getMerchantId() + "/request";
+    return merchantConstants.getRequestUrl();
   }
 
   /*
@@ -208,7 +205,7 @@ public class RefundOrderRequestImpl extends AbstractCheckoutRequest
       System.err.println(Constants.refundErrorString);
     }
 
-    Utils.createNewElementAndSet(document, root, "comment", comment);
+    Utils.findElementAndSetElseCreateAndSet(document, root, "comment", comment);
   }
 
   /*
@@ -230,10 +227,6 @@ public class RefundOrderRequestImpl extends AbstractCheckoutRequest
       reason = "";
       System.err.println(Constants.refundErrorString);
     }
-
-    Element reasonTag;
-    reasonTag = (Element) document.createElement("reason");
-    root.appendChild(reasonTag);
-    reasonTag.appendChild(document.createTextNode(reason));
+    Utils.findElementAndSetElseCreateAndSet(document, root, "reason", reason);
   }
 }

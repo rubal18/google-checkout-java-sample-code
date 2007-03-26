@@ -29,7 +29,6 @@ import com.google.checkout.orderprocessing.UnarchiveOrderRequest;
  * Default implementation of the UnarchiveOrderRequest interface.
  * 
  * @author ksim
- * @date March 10th, 2007
  * @version 1.0 - ksim - March 10th, 2007 - Initial Version
  */
 
@@ -64,7 +63,7 @@ public class UnarchiveOrderRequestImpl extends AbstractCheckoutRequest
    * 
    * @param merchantConstants
    *          The MerchantConstants.
-   * @param googleOrderNumber
+   * @param googleOrderNo
    *          The Google Order Number.
    * 
    * @see MerchantConstants
@@ -117,8 +116,6 @@ public class UnarchiveOrderRequestImpl extends AbstractCheckoutRequest
    * @see com.google.checkout.CheckoutRequest#getPostUrl()
    */
   public String getPostUrl() {
-    // TODO Auto-generated method stub
-    return "https://sandbox.google.com/checkout/cws/v2/Merchant/"
-        + merchantConstants.getMerchantId() + "/request";
+    return merchantConstants.getRequestUrl();
   }
 }

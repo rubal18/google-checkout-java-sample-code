@@ -29,7 +29,6 @@ import com.google.checkout.orderprocessing.AddTrackingDataRequest;
  * The default implementation of the AddTrackingDataRequest interface.
  * 
  * @author ksim
- * @date March 10th, 2007
  * @version 1.0 - ksim - March 10th, 2007 - Initial Version
  */
 public class AddTrackingDataRequestImpl extends AbstractCheckoutRequest
@@ -149,7 +148,8 @@ public class AddTrackingDataRequestImpl extends AbstractCheckoutRequest
   public void setCarrier(String carrier) {
     Element trackingDataTag = Utils.findContainerElseCreate(document, root,
         "tracking-data");
-    Utils.createNewElementAndSet(document, trackingDataTag, "carrier", carrier);
+    Utils.findElementAndSetElseCreateAndSet(document, trackingDataTag,
+        "carrier", carrier);
   }
 
   /*
@@ -169,7 +169,7 @@ public class AddTrackingDataRequestImpl extends AbstractCheckoutRequest
   public void setTrackingNo(String trackingNo) {
     Element trackingDataTag = Utils.findContainerElseCreate(document, root,
         "tracking-data");
-    Utils.createNewElementAndSet(document, trackingDataTag, "tracking-number",
-        trackingNo);
+    Utils.findElementAndSetElseCreateAndSet(document, trackingDataTag,
+        "tracking-number", trackingNo);
   }
 }

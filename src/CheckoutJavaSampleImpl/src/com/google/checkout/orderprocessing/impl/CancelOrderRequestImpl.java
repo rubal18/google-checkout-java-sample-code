@@ -29,12 +29,11 @@ import com.google.checkout.orderprocessing.CancelOrderRequest;
  * The default implementation of the CancelOrderRequest interface.
  * 
  * @author ksim
- * @date March 10th, 2007
  * @version 1.0 - ksim - March 10th, 2007 - Initial Version
  */
 
-public class CancelOrderRequestImpl extends AbstractCheckoutRequest
-    implements CancelOrderRequest {
+public class CancelOrderRequestImpl extends AbstractCheckoutRequest implements
+    CancelOrderRequest {
   private Document document;
 
   private Element root;
@@ -148,9 +147,7 @@ public class CancelOrderRequestImpl extends AbstractCheckoutRequest
    * @see com.google.checkout.CheckoutRequest#getPostUrl()
    */
   public String getPostUrl() {
-    // TODO Auto-generated method stub
-    return "https://sandbox.google.com/checkout/cws/v2/Merchant/"
-        + merchantConstants.getMerchantId() + "/request";
+    return merchantConstants.getRequestUrl();
   }
 
   /*
@@ -195,7 +192,7 @@ public class CancelOrderRequestImpl extends AbstractCheckoutRequest
       System.err.println(Constants.cancelErrorString);
     }
 
-    Utils.createNewElementAndSet(document, root, "comment", comment);
+    Utils.findElementAndSetElseCreateAndSet(document, root, "comment", comment);
   }
 
   /*
@@ -220,9 +217,6 @@ public class CancelOrderRequestImpl extends AbstractCheckoutRequest
       System.err.println(Constants.cancelErrorString);
     }
 
-    Element reasonTag;
-    reasonTag = (Element) document.createElement("reason");
-    root.appendChild(reasonTag);
-    reasonTag.appendChild(document.createTextNode(reason));
+    Utils.findElementAndSetElseCreateAndSet(document, root, "reason", reason);
   }
 }

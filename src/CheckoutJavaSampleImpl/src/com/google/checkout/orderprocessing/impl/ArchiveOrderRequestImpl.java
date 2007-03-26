@@ -29,12 +29,11 @@ import com.google.checkout.orderprocessing.ArchiveOrderRequest;
  * The default implementation of the ArchiveOrderRequest interface.
  * 
  * @author ksim
- * @date March 10th, 2007
  * @version 1.0 - ksim - March 10th, 2007 - Initial Version
  */
 
-public class ArchiveOrderRequestImpl extends AbstractCheckoutRequest
-    implements ArchiveOrderRequest {
+public class ArchiveOrderRequestImpl extends AbstractCheckoutRequest implements
+    ArchiveOrderRequest {
 
   private Document document;
 
@@ -119,9 +118,7 @@ public class ArchiveOrderRequestImpl extends AbstractCheckoutRequest
    * @see com.google.checkout.CheckoutRequest#getPostUrl()
    */
   public String getPostUrl() {
-    // TODO Auto-generated method stub
-    return "https://sandbox.google.com/checkout/cws/v2/Merchant/"
-        + merchantConstants.getMerchantId() + "/request";
+    return merchantConstants.getRequestUrl();
   }
 
 }

@@ -21,7 +21,6 @@ import java.util.regex.Pattern;
 
 /**
  * @author 		ksim
- * @date   		March 6th, 2007
  * @version		1.0 - ksim - March 6th, 2007 - 	Initial Version
  * @version		1.1 - ksim - March 10th, 2007 - Bug fix to regex function, and also added more functions
  */

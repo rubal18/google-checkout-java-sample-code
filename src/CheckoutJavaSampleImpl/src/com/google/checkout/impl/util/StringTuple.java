@@ -18,10 +18,7 @@ package com.google.checkout.impl.util;
 
 /**
  * @author 		ksim
- * @date   		March 6th, 2007
  * @version		1.0
- * @todo		Not unit tested yet.
- *
  */
 public final class StringTuple extends Tuple
 {

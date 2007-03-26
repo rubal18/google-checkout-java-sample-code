@@ -29,11 +29,10 @@ import com.google.checkout.orderprocessing.ProcessOrderRequest;
  * The default implementation of the ProcessOrderRequest interface.
  * 
  * @author ksim
- * @date March 10th, 2007
  * @version 1.0 - ksim - March 10th, 2007 - Initial Version
  */
-public class ProcessOrderRequestImpl extends AbstractCheckoutRequest
-    implements ProcessOrderRequest {
+public class ProcessOrderRequestImpl extends AbstractCheckoutRequest implements
+    ProcessOrderRequest {
 
   private Document document;
 
@@ -116,8 +115,6 @@ public class ProcessOrderRequestImpl extends AbstractCheckoutRequest
    * @see com.google.checkout.CheckoutRequest#getPostUrl()
    */
   public String getPostUrl() {
-    // TODO Auto-generated method stub
-    return "https://sandbox.google.com/checkout/cws/v2/Merchant/"
-        + merchantConstants.getMerchantId() + "/request";
+    return merchantConstants.getRequestUrl();
   }
 }

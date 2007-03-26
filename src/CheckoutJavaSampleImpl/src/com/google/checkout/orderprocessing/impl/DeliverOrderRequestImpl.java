@@ -29,12 +29,11 @@ import com.google.checkout.orderprocessing.DeliverOrderRequest;
  * Default implementation of the DeliverOrderRequest interface.
  * 
  * @author ksim
- * @date March 10th, 2007
  * @version 1.0 - ksim - March 10th, 2007 - Initial Version
  */
 
-public class DeliverOrderRequestImpl extends AbstractCheckoutRequest
-    implements DeliverOrderRequest {
+public class DeliverOrderRequestImpl extends AbstractCheckoutRequest implements
+    DeliverOrderRequest {
 
   private Document document;
 
@@ -65,7 +64,7 @@ public class DeliverOrderRequestImpl extends AbstractCheckoutRequest
    * 
    * @param merchantConstants
    *          The MerchantConstants.
-   * @param googleOrderNumber
+   * @param googleOrderNo
    *          The Google Order Number.
    * 
    * @see MerchantConstants
@@ -89,7 +88,7 @@ public class DeliverOrderRequestImpl extends AbstractCheckoutRequest
    *          The Carrier.
    * @param trackingNo
    *          The Tracking Number.
-   * @param The
+   * @param sendEmail
    *          Send Email flag.
    * 
    * @see MerchantConstants
@@ -174,7 +173,8 @@ public class DeliverOrderRequestImpl extends AbstractCheckoutRequest
 
     Element trackingDataTag = Utils.findContainerElseCreate(document, root,
         "tracking-data");
-    Utils.createNewElementAndSet(document, trackingDataTag, "carrier", carrier);
+    Utils.findElementAndSetElseCreateAndSet(document, trackingDataTag,
+        "carrier", carrier);
   }
 
   /*
@@ -194,7 +194,8 @@ public class DeliverOrderRequestImpl extends AbstractCheckoutRequest
    */
   public void setSendEmail(boolean sendEmail) {
 
-    Utils.createNewElementAndSet(document, root, "send-email", sendEmail);
+    Utils.findElementAndSetElseCreateAndSet(document, root, "send-email",
+        sendEmail);
   }
 
   /*
@@ -206,8 +207,8 @@ public class DeliverOrderRequestImpl extends AbstractCheckoutRequest
 
     Element trackingDataTag = Utils.findContainerElseCreate(document, root,
         "tracking-data");
-    Utils.createNewElementAndSet(document, trackingDataTag, "tracking-number",
-        trackingNo);
+    Utils.findElementAndSetElseCreateAndSet(document, trackingDataTag,
+        "tracking-number", trackingNo);
   }
 
   /*

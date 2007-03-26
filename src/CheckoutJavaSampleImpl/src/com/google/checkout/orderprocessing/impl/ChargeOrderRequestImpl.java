@@ -29,14 +29,14 @@ import com.google.checkout.orderprocessing.ChargeOrderRequest;
  * The default implementation of the ChargeOrderRequest interface.
  * 
  * @author ksim
- * @date March 10th, 2007
  * @version 1.0 - ksim - March 10th, 2007 - Initial Version
  */
 
-public class ChargeOrderRequestImpl extends AbstractCheckoutRequest
-    implements ChargeOrderRequest {
-  
+public class ChargeOrderRequestImpl extends AbstractCheckoutRequest implements
+    ChargeOrderRequest {
+
   private Document document;
+
   private Element root;
 
   /**
@@ -64,7 +64,7 @@ public class ChargeOrderRequestImpl extends AbstractCheckoutRequest
    * 
    * @param merchantConstants
    *          The MerchantConstants.
-   * @param googleOrderNumber
+   * @param googleOrderNo
    *          The Google Order Number.
    * 
    * @see MerchantConstants
@@ -82,7 +82,7 @@ public class ChargeOrderRequestImpl extends AbstractCheckoutRequest
    * 
    * @param merchantConstants
    *          The MerchantConstants.
-   * @param googleOrderNumber
+   * @param googleOrderNo
    *          The Google Order Number.
    * @param amt
    *          The amount to be charged.
@@ -159,8 +159,6 @@ public class ChargeOrderRequestImpl extends AbstractCheckoutRequest
    * @see com.google.checkout.CheckoutRequest#getPostUrl()
    */
   public String getPostUrl() {
-    // TODO
-    return "https://sandbox.google.com/checkout/cws/v2/Merchant/"
-        + merchantConstants.getMerchantId() + "/request";
+    return merchantConstants.getRequestUrl();
   }
 }

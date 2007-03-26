@@ -29,13 +29,12 @@ import com.google.checkout.orderprocessing.AddMerchantOrderNumberRequest;
  * Default implementation of the AddMerchantOrderNumberRequest interface.
  * 
  * @author ksim
- * @date March 6th, 2007
  * @version 1.0 - ksim - March 6th, 2007 - Initial Version 1.1 - ksim - March
  *          10th, 2007 - Fixed and made changes to reference correct Util
  *          functions.
  */
-public class AddMerchantOrderNumberRequestImpl extends
-    AbstractCheckoutRequest implements AddMerchantOrderNumberRequest {
+public class AddMerchantOrderNumberRequestImpl extends AbstractCheckoutRequest
+    implements AddMerchantOrderNumberRequest {
 
   private Document document;
 
@@ -130,8 +129,8 @@ public class AddMerchantOrderNumberRequestImpl extends
    * @see com.google.checkout.orderprocessing.AddMerchantOrderNumberRequest#setMerchantOrderNo(java.lang.String)
    */
   public void setMerchantOrderNo(String merchantOrderNo) {
-    Utils.createNewElementAndSet(document, root, "merchant-order-number",
-        merchantOrderNo);
+    Utils.findElementAndSetElseCreateAndSet(document, root,
+        "merchant-order-number", merchantOrderNo);
   }
 
   /*
@@ -140,8 +139,6 @@ public class AddMerchantOrderNumberRequestImpl extends
    * @see com.google.checkout.CheckoutRequest#getPostUrl()
    */
   public String getPostUrl() {
-    // TODO Auto-generated method stub
-    return "https://sandbox.google.com/checkout/cws/v2/Merchant/"
-        + merchantConstants.getMerchantId() + "/request";
+    return merchantConstants.getRequestUrl();
   }
 }

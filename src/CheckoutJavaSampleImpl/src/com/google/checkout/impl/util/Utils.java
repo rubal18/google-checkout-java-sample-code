@@ -17,6 +17,7 @@
 package com.google.checkout.impl.util;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.text.ParseException;
@@ -43,7 +44,6 @@ import org.xml.sax.SAXException;
  * Various XML utilities.
  * 
  * @author 		simonjsmith, ksim
- * @date   		March 6th, 2007
  * @version		1.1 - ksim - March 6th, 2007 - 	Added functions regarding streaming
  * @version		1.2 - ksim - March 10th, 2007 - Added functions regarding DOM manipulation
  */
@@ -296,6 +296,28 @@ public class Utils {
 		return ret;
 	}
 
+  public static Document newDocumentFromInputStream(InputStream in) {
+    DocumentBuilderFactory factory = null;
+    DocumentBuilder builder = null;
+    Document ret = null;
+    
+    try {
+      factory = DocumentBuilderFactory.newInstance();
+        builder = factory.newDocumentBuilder();
+    } catch (ParserConfigurationException e) {
+      e.printStackTrace();
+    }
+    
+    try {
+      ret = builder.parse(new InputSource(in));
+    } catch (SAXException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    } 
+    return ret;
+  }
+  
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
     
 	public static Date parseDate(String date) {

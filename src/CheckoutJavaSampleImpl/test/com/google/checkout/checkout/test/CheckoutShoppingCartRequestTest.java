@@ -8,7 +8,6 @@ import com.google.checkout.orderprocessing.impl.AddMerchantOrderNumberRequestImp
 
 /**
  * @author 		ksim
- * @date   		March 10th, 2007
  * @version		1.0 - ksim - March 10th, 2007 - Initial Version - Not completely working yet though.
  *
  */
@@ -20,10 +19,11 @@ public class CheckoutShoppingCartRequestTest {
 	 */
 	public static void main(String[] args) 
 	{
+    //TODO:  fix this and port to JUnit.
 		CheckoutResponse cResponse;
 		
 		CheckoutShoppingCartRequestImpl cscri = 
-			new CheckoutShoppingCartRequestImpl(new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", "0", "US", "", ""));
+			new CheckoutShoppingCartRequestImpl(new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", "0", "US", "", "", ""));
 		
 		cscri.addItem("Biscuit", "Yummy hot biscuit", new Float(9.99).floatValue(), 2);
 		

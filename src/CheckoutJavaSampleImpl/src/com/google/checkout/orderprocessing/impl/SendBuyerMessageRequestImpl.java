@@ -29,14 +29,14 @@ import com.google.checkout.orderprocessing.SendBuyerMessageRequest;
  * Default implementation of the SendBuyerMessageRequest interface.
  * 
  * @author ksim
- * @date March 10th, 2007
  * @version 1.0 - ksim - March 10th, 2007 - Initial Version
  */
 
 public class SendBuyerMessageRequestImpl extends AbstractCheckoutRequest
     implements SendBuyerMessageRequest {
-  
+
   private Document document;
+
   private Element root;
 
   /**
@@ -63,7 +63,7 @@ public class SendBuyerMessageRequestImpl extends AbstractCheckoutRequest
    * 
    * @param merchantConstants
    *          The MerchantConstants.
-   * @param googleOrderNumber
+   * @param googleOrderNo
    *          The Google Order Number.
    * @param message
    *          The Message.
@@ -83,7 +83,7 @@ public class SendBuyerMessageRequestImpl extends AbstractCheckoutRequest
    * 
    * @param merchantConstants
    *          The MerchantConstants.
-   * @param googleOrderNumber
+   * @param googleOrderNo
    *          The Google Order Number.
    * @param message
    *          The Message.
@@ -141,9 +141,7 @@ public class SendBuyerMessageRequestImpl extends AbstractCheckoutRequest
    * @see com.google.checkout.CheckoutRequest#getPostUrl()
    */
   public String getPostUrl() {
-    // TODO Auto-generated method stub
-    return "https://sandbox.google.com/checkout/cws/v2/Merchant/"
-        + merchantConstants.getMerchantId() + "/request";
+    return merchantConstants.getRequestUrl();
   }
 
   /*
@@ -193,10 +191,7 @@ public class SendBuyerMessageRequestImpl extends AbstractCheckoutRequest
       System.err.println(Constants.messageErrorString);
     }
 
-    Element messageTag;
-    messageTag = (Element) document.createElement("message");
-    root.appendChild(messageTag);
-    messageTag.appendChild(document.createTextNode(message));
+    Utils.findElementAndSetElseCreateAndSet(document, root, "message", message);
   }
 
   /*
@@ -205,6 +200,7 @@ public class SendBuyerMessageRequestImpl extends AbstractCheckoutRequest
    * @see com.google.checkout.orderprocessing.SendBuyerMessageRequest#setSendEmail(boolean)
    */
   public void setSendEmail(boolean sendEmail) {
-    Utils.createNewElementAndSet(document, root, "send-email", sendEmail);
+    Utils.findElementAndSetElseCreateAndSet(document, root, "send-email",
+        sendEmail);
   }
 }

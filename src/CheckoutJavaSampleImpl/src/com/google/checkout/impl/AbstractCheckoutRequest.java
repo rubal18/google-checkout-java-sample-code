@@ -16,10 +16,8 @@
 
 package com.google.checkout.impl;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
@@ -34,9 +32,7 @@ import com.google.checkout.MerchantConstants;
  * The default superclass for all the checkout request classes.
  * 
  * @author simonjsmith, ksim
- * @date March 6th, 2007
  * @version 1.1
- * @todo Not unit tested yet.
  */
 public abstract class AbstractCheckoutRequest implements CheckoutRequest {
 
@@ -93,20 +89,7 @@ public abstract class AbstractCheckoutRequest implements CheckoutRequest {
         inputStream = ((HttpURLConnection) connection).getErrorStream();
       }
 
-      // Get the response
-      BufferedReader reader = new BufferedReader(new InputStreamReader(
-          inputStream));
-
-      StringBuffer responseXml = new StringBuffer();
-      String line;
-
-      while ((line = reader.readLine()) != null) {
-        responseXml.append(line + "\n");
-      }
-
-      reader.close();
-
-      return new CheckoutResponseImpl(responseXml.toString());
+        return new CheckoutResponseImpl(inputStream);    
     }
 
     catch (MalformedURLException murle) {
@@ -116,5 +99,4 @@ public abstract class AbstractCheckoutRequest implements CheckoutRequest {
     }
     return null;
   }
-
 }
