@@ -2,37 +2,41 @@
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     version="2.4">
-
-<!--    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"-->
-    
+        
     <display-name>Google Sample Code</display-name>
-    <description>
-      Google Sample Code.
-    </description>
+    <description>Google Sample Code.</description>
     <servlet>
     	<description>
     	</description>
-    	<display-name>
-    	NotificationServlet</display-name>
-    	<servlet-name>NotificationServlet</servlet-name>
-    	<servlet-class>
-    	com.google.checkout.webappexample.NotificationServlet</servlet-class>
+    	<display-name>MerchantCalculationServlet</display-name>
+    	<servlet-name>MerchantCalculationServlet</servlet-name>
+    	<servlet-class>com.google.checkout.webappexample.MerchantCalculationServlet</servlet-class>     
     </servlet>
     <servlet>
     	<description>
     	</description>
-    	<display-name>
-    	MerchantCalculationServlet</display-name>
+    	<display-name>NotificationServlet</display-name>
+    	<servlet-name>NotificationServlet</servlet-name>
+    	<servlet-class>com.google.checkout.webappexample.NotificationServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>JmsNotificationServlet</display-name>
+    	<servlet-name>JmsNotificationServlet</servlet-name>
+    	<servlet-class>com.google.checkout.webappexample.JmsNotificationServlet</servlet-class>
+    </servlet>
+      
+    <servlet-mapping>
     	<servlet-name>MerchantCalculationServlet</servlet-name>
-    	<servlet-class>
-    	com.google.checkout.webappexample.MerchantCalculationServlet</servlet-class>     
-    </servlet>  
+    	<url-pattern>/merchant-calculation</url-pattern>
+    </servlet-mapping>  
     <servlet-mapping>
     	<servlet-name>NotificationServlet</servlet-name>
     	<url-pattern>/notification</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-    	<servlet-name>MerchantCalculationServlet</servlet-name>
-    	<url-pattern>/merchant-calculation</url-pattern>
-    </servlet-mapping>   
+    	<servlet-name>JmsNotificationServlet</servlet-name>
+    	<url-pattern>/notification-async</url-pattern>
+    </servlet-mapping> 
  </web-app>
