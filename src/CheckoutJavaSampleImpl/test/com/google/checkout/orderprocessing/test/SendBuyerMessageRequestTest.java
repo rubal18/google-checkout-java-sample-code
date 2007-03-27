@@ -9,15 +9,14 @@ import com.google.checkout.orderprocessing.impl.SendBuyerMessageRequestImpl;
 
 /**
  * @author 		ksim
- * @date   		March 10th, 2007
  * @version		1.0 - ksim - March 10th, 2007 - Initial Version
  *
  */
-
+//TODO:  fix this and port to JUnit.
 public class SendBuyerMessageRequestTest {
-	public static final void testGeneralSendBuyerMessageRequest()
+	public static final void testGeneralSendBuyerMessageRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
@@ -39,16 +38,16 @@ public class SendBuyerMessageRequestTest {
 		return;
 	}
 	
-	public static final void testAddSendBuyerMessageRequest()
+	public static final void testAddSendBuyerMessageRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
 		SendBuyerMessageRequest sbmr = 
 			new SendBuyerMessageRequestImpl(myMConstants, "375053533130049", "Hi, How are you today?");
 		
-		((SendBuyerMessageRequestImpl)sbmr).addSendEmail(true);
+		((SendBuyerMessageRequestImpl)sbmr).setSendEmail(true);
 		
 		System.out.println("XML To Send: "+sbmr.getXml());
 		
@@ -65,16 +64,16 @@ public class SendBuyerMessageRequestTest {
 		return;
 	}
 	
-	public static final void testAddExceedStrLimitSendBuyerMessageRequest()
+	public static final void testAddExceedStrLimitSendBuyerMessageRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
 		SendBuyerMessageRequest sbmr = 
 			new SendBuyerMessageRequestImpl(myMConstants, "375053533130049", "Hi, How are you today?  Here are extra characters: hfaoehfoahefiahfoiaheoifhaewoihaoiwehfoiawhfeoiahfeoihefoihfoihaefoihaefoihaefoihaoifehfoieahfoahefoiahofhaefhoaehffhaiehfaohfaohfoiehaofiehoiahfoieahfoiheoifhoaehfoiahfeoiahefoihaefoihaeoifhoiafheoiahfeohahfieahofaihefohaeiahfo");
 		
-		((SendBuyerMessageRequestImpl)sbmr).addSendEmail(true);
+		((SendBuyerMessageRequestImpl)sbmr).setSendEmail(true);
 		
 		System.out.println("XML To Send: "+sbmr.getXml());
 		
@@ -92,18 +91,18 @@ public class SendBuyerMessageRequestTest {
 	}
 	
 	
-	public static final void testAddMultSendBuyerMessageRequest()
+	public static final void testAddMultSendBuyerMessageRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
 		SendBuyerMessageRequest sbmr = 
 			new SendBuyerMessageRequestImpl(myMConstants, "375053533130049", "Hi, How are you today?");
 		
-		((SendBuyerMessageRequestImpl)sbmr).addSendEmail(true);
-		((SendBuyerMessageRequestImpl)sbmr).addSendEmail(true);
-		((SendBuyerMessageRequestImpl)sbmr).addSendEmail(true);
+		((SendBuyerMessageRequestImpl)sbmr).setSendEmail(true);
+		((SendBuyerMessageRequestImpl)sbmr).setSendEmail(true);
+		((SendBuyerMessageRequestImpl)sbmr).setSendEmail(true);
 		
 		System.out.println("XML To Send: "+sbmr.getXml());
 		
@@ -125,7 +124,7 @@ public class SendBuyerMessageRequestTest {
 	 */
 	public static void main(String[] args) 
 	{
-		testGeneralSendBuyerMessageRequest();
+		//testGeneralSendBuyerMessageRequest();
 		//testAddSendBuyerMessageRequest();
 		//testAddExceedStrLimitSendBuyerMessageRequest();
 		//testAddMultSendBuyerMessageRequest();

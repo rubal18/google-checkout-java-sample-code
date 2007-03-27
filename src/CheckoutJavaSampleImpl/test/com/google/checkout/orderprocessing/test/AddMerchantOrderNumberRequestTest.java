@@ -12,13 +12,12 @@ import com.google.checkout.orderprocessing.impl.AddMerchantOrderNumberRequestImp
  * @version		1.0 - ksim - March 10th, 2007 - Initial Version
  *
  */
-
+//TODO:  fix this and port to JUnit.
 public final class AddMerchantOrderNumberRequestTest {
 
 	public static final void testGeneralAddMerchantOrderNumberRequest() throws Exception
 	
   {
-//  TODO:  fix this and port to JUnit.
 		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;

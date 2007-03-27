@@ -7,7 +7,7 @@ package com.google.checkout.test.impl;
  * @author ksim
  *
  */
-
+//TODO:  fix this and port to JUnit.
 public class SampleTest {
 
 	/**

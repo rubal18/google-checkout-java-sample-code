@@ -432,16 +432,6 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest
   /*
    * (non-Javadoc)
    * 
-   * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#isValidZipPattern(java.lang.String)
-   */
-  public boolean isValidZipPattern(String zipPattern) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
    * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#setAcceptMerchantCoupons(boolean)
    */
   public void setAcceptMerchantCoupons(boolean b) {
@@ -636,8 +626,11 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest
         "tax-tables");
     Element alternateTaxTables = Utils.findContainerElseCreate(document,
         taxTables, "alternate-tax-tables");
+    
     Element newTaxTable = Utils.findContainerWithAttributeValueElseCreate(
         document, alternateTaxTables, "alternate-tax-table", "name", tableName);
+    newTaxTable.setAttribute("standalone", ""+standalone);
+   
     Element alternateTaxRules = Utils.findContainerElseCreate(document,
         newTaxTable, "alternate-tax-rules");
 
@@ -758,14 +751,19 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest
     return merchantConstants.getMerchantCheckoutUrl();
   }
 
+  /* (non-Javadoc)
+   * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#addFlatRateShippingMethod(java.lang.String, float)
+   */
   public void addFlatRateShippingMethod(String name, float cost) {
-    // TODO Auto-generated method stub
-
+    this.addFlatRateShippingMethod(name, cost, null);
   }
-
+  
+  /* (non-Javadoc)
+   * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#addMerchantPrivateDataNode(org.w3c.dom.Element)
+   */
   public void addMerchantPrivateDataNode(Element node) {
-    // TODO Auto-generated method stub
-
+    Element mpd = Utils.findContainerElseCreate(document, shoppingCart,
+        "merchant-private-data");
+    Utils.importElements(document, mpd, new Element[] {node});
   }
-
 }

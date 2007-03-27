@@ -191,8 +191,12 @@ public class Utils {
 	}
 
 	public static Element[] getElements(Document document, Element parent) {
-		// TODO Auto-generated method stub
-		return null;
+		NodeList nl = parent.getChildNodes();
+    Element[] ret = new Element[nl.getLength()];
+    for (int i = 0; i < nl.getLength(); i++) {
+      ret[i] = (Element) nl.item(i);
+    }
+    return ret;
 	}
 
 	public static Element findContainerWithAttributeValueElseCreate(Document document, Element parent, String element, String attributeName, String attributeValue) {

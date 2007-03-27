@@ -30,7 +30,6 @@ import com.google.checkout.impl.util.Utils;
  * @author 		ksim
  * @version		1.0 - ksim - March 7th, 2007 - 	Initial Version to separate interface and implementation		
  */
-//TODO
 public class CheckoutResponseImpl implements CheckoutResponse {
 	
 	private Document document;

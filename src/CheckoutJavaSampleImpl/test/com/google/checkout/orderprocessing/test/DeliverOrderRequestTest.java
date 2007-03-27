@@ -9,15 +9,14 @@ import com.google.checkout.orderprocessing.impl.DeliverOrderRequestImpl;
 
 /**
  * @author 		ksim
- * @date   		March 10th, 2007
  * @version		1.0 - ksim - March 10th, 2007 - Initial Version
  *
  */
-
+//TODO:  fix this and port to JUnit.
 public final class DeliverOrderRequestTest {
-	public static final void testGeneralDeliverOrderRequest()
+	public static final void testGeneralDeliverOrderRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
@@ -39,17 +38,18 @@ public final class DeliverOrderRequestTest {
 		return;
 	}
 	
-	public static final void testAddDeliverOrderRequest()
+	public static final void testAddDeliverOrderRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
 		DeliverOrderRequest dor = 
 			new DeliverOrderRequestImpl(myMConstants, "375053533130049");
 		
-		((DeliverOrderRequestImpl)dor).addTrackingData("UPS", "1234");
-		((DeliverOrderRequestImpl)dor).addSendEmail(true);
+    ((DeliverOrderRequestImpl)dor).setCarrier("DHL");
+    	((DeliverOrderRequestImpl)dor).setTrackingNo("1234");
+		((DeliverOrderRequestImpl)dor).setSendEmail(true);
 		
 		System.out.println("XML To Send: "+dor.getXml());
 		
@@ -66,21 +66,23 @@ public final class DeliverOrderRequestTest {
 		return;
 	}
 	
-	public static final void testAddMultDeliverOrderRequest()
+	public static final void testAddMultDeliverOrderRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
 		DeliverOrderRequest dor = 
 			new DeliverOrderRequestImpl(myMConstants, "375053533130049");
 		
-		((DeliverOrderRequestImpl)dor).addTrackingData("UPS", "1234");
-		((DeliverOrderRequestImpl)dor).addSendEmail(true);
+		((DeliverOrderRequestImpl)dor).setTrackingNo("1234");
+    ((DeliverOrderRequestImpl)dor).setCarrier("UPS");
+    ((DeliverOrderRequestImpl)dor).setSendEmail(true);
 		
 		// Second time
-		((DeliverOrderRequestImpl)dor).addTrackingData("DHL", "5678");
-		((DeliverOrderRequestImpl)dor).addSendEmail(false);
+    ((DeliverOrderRequestImpl)dor).setTrackingNo("5678");
+    ((DeliverOrderRequestImpl)dor).setCarrier("DHL");
+    ((DeliverOrderRequestImpl)dor).setSendEmail(false);
 		
 		System.out.println("XML To Send: "+dor.getXml());
 		
@@ -102,7 +104,7 @@ public final class DeliverOrderRequestTest {
 	 */
 	public static void main(String[] args) 
 	{
-		testGeneralDeliverOrderRequest();
+		//testGeneralDeliverOrderRequest();
 		//testAddDeliverOrderRequest();
 		//testAddMultDeliverOrderRequest();
 	}

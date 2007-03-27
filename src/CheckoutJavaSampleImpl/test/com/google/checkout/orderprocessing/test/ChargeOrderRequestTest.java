@@ -12,7 +12,7 @@ import com.google.checkout.orderprocessing.impl.ChargeOrderRequestImpl;
  * @version		1.0 - ksim - March 10th, 2007 - Initial Version
  *
  */
-
+//TODO:  fix this and port to JUnit.
 public final class ChargeOrderRequestTest {
 	
 	public static final void testGeneralChargeOrderRequest() throws Exception

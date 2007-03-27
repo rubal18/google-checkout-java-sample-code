@@ -9,16 +9,15 @@ import com.google.checkout.orderprocessing.impl.UnarchiveOrderRequestImpl;
 
 /**
  * @author 		ksim
- * @date   		March 10th, 2007
  * @version		1.0 - ksim - March 10th, 2007 - Initial Version
  *
  */
-
+//TODO:  fix this and port to JUnit.
 public final class UnarchiveOrderRequestTest {
 	
-	public static final void testUnarchiveOrderRequest()
+	public static final void testUnarchiveOrderRequest() throws Exception
 	{
-		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "");
+		MerchantConstants myMConstants = new MerchantConstantsImpl("248088419036992", "Q2x_yWSVUHokvFxw1MqVjg", EnvironmentType.Sandbox, "USD", "", "", "");
 		CheckoutResponse cResponse;
 		String cResponseStr;
 		
@@ -44,6 +43,6 @@ public final class UnarchiveOrderRequestTest {
 	 */
 	public static void main(String[] args) 
 	{
-		testUnarchiveOrderRequest();
+		//testUnarchiveOrderRequest();
 	}
 }

@@ -11,7 +11,7 @@ import com.google.checkout.orderprocessing.impl.AddMerchantOrderNumberRequestImp
  * @version		1.0 - ksim - March 10th, 2007 - Initial Version - Not completely working yet though.
  *
  */
-
+//TODO:  fix this and port to JUnit.
 public class CheckoutShoppingCartRequestTest {
 
 	/**
