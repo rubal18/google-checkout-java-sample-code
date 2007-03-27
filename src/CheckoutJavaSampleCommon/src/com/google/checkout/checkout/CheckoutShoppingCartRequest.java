@@ -298,22 +298,6 @@ public interface CheckoutShoppingCartRequest extends CheckoutRequest {
       Collection parameters);
 
   /**
-   * This method verifies that a given zip code pattern is valid. Zip code
-   * patterns may be five-digit numbers or they may be one- to four-digit
-   * numbers followed by an asterisk.
-   * 
-   * @param zipPattern
-   *          This parameter contains the zip code pattern that is being
-   *          evaluated.
-   * 
-   * @return This method returns <b>true</b> if the provided zip code pattern
-   *         is valid, meaning it is either a series of five digits or it is a
-   *         series of zero to four digits followed by an asterisk. If the zip
-   *         code pattern is not valid, this method returns <b>false</b>.
-   */
-  public boolean isValidZipPattern(String zipPattern);
-
-  /**
    * This method creates a new &lt;default-tax-rule&gt;.
    * 
    * @param taxRate
@@ -348,7 +332,6 @@ public interface CheckoutShoppingCartRequest extends CheckoutRequest {
    * 
    * @see TaxArea
    */
-  // TODO: not sure about this...
   public void addAlternateTaxRule(String tableName, boolean standalone,
       double taxRate, TaxArea taxArea);
 
