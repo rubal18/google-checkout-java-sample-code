@@ -29,8 +29,8 @@ public class CallbackProcessorImpl implements CallbackProcessor {
 	}
 	
 	public String process(String callbackXML) throws CheckoutException {
-		// TODO
-		return null;
+		// TODO:  Provide a realistic example of the Merchant Callback API.
+		return "";
 	}
 
 }
