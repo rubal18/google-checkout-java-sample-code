@@ -1,3 +1,18 @@
+<!-- 
+ * Copyright (C) 2007 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
@@ -25,7 +40,6 @@
 <form>
 <table border="1">
 <tr>
-<td><b>Last Updated</b></td>
 <td><b>Google Order Number</b></td>
 <td><b>Buyer Email Address</b></td>
 <td><b>Financial Status</b></td>
@@ -48,7 +62,6 @@
 	  String amount = orders[i].getOrderAmount();
 %>
 	  <tr>
-	  <td><%=lastUpdated%></td>
 	  <td><a href="order_detail.jsp?orderNumber=<%=orderNumber%>"><%=orderNumber%></a></td>
 	  <td><%=buyer%></td>
 	  <td><%=finStatus%></td>
