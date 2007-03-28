@@ -3,8 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     version="2.4">
         
-    <display-name>Google Sample Code</display-name>
-    <description>Google Sample Code.</description>
+    <display-name>Google Checkout Java Web Example</display-name>
+    <description>Google Checkout Java Web Example</description>
     <servlet>
     	<description>
     	</description>
