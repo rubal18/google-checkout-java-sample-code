@@ -10,4 +10,7 @@
 			<context-root>checkout</context-root>
 		</web>
 	</module>
+	<module id="EjbModule_1175037361036">
+		<ejb>JavaCheckoutJ2eeExampleEjb.jar</ejb>
+	</module>
 </application>
