@@ -138,4 +138,36 @@ public class ShippingRestrictionsImpl implements ShippingRestrictions {
   public Element getRootElement() {
     return root;
   }
+
+  public void addAllowedPostalArea(String countryCode, String postalCodePattern) {
+    Element allowedAreas = Utils.findContainerElseCreate(document, root,
+        "allowed-areas");
+    Element pa = Utils
+        .createNewContainer(document, allowedAreas, "postal-area");
+    Utils.createNewElementAndSet(document, pa, "country-code", countryCode);
+    Utils.createNewElementAndSet(document, pa, "postal-code-pattern",
+        postalCodePattern);
+  }
+
+  public void addAllowedWorldArea() {
+    Element allowedAreas = Utils.findContainerElseCreate(document, root,
+        "allowed-areas");
+    Utils.createNewContainer(document, allowedAreas, "world-area");
+  }
+
+  public void addExcludedPostalArea(String countryCode, String postalCodePattern) {
+    Element excludedAreas = Utils.findContainerElseCreate(document, root,
+        "excluded-areas");
+    Element pa = Utils
+        .createNewContainer(document, excludedAreas, "postal-area");
+    Utils.createNewElementAndSet(document, pa, "country-code", countryCode);
+    Utils.createNewElementAndSet(document, pa, "postal-code-pattern",
+        postalCodePattern);
+  }
+
+  public void addExcludedWorldArea() {
+    Element excludedAreas = Utils.findContainerElseCreate(document, root,
+        "excluded-areas");
+    Utils.createNewContainer(document, excludedAreas, "world-area");
+  }
 }

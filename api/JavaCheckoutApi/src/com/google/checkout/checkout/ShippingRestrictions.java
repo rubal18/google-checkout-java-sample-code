@@ -59,6 +59,25 @@ public interface ShippingRestrictions {
   public void addAllowedCountryArea(USArea countryArea);
 
   /**
+   * This method adds an allowed &lt;postal-area&gt; element. The
+   * &lt;country-code&gt; element and optionally the &lt;postal-code-pattern&gt
+   * are subelements .
+   * 
+   * @param countryCode
+   *          The country code.
+   * @param postalCodePattern
+   *          The Postal Code Pattern.
+   * 
+   */
+  public void addAllowedPostalArea(String countryCode, String postalCodePattern);
+
+  /**
+   * This method adds an allowed &lt;world-area&gt; element.
+   * 
+   */
+  public void addAllowedWorldArea();
+
+  /**
    * This method adds an excluded zip code pattern to a &lt;us-zip-area&gt;
    * element. The &lt;us-zip-area&gt; element, in turn, appears as a subelement
    * of &lt;excluded-areas&gt;.
@@ -90,6 +109,25 @@ public interface ShippingRestrictions {
    */
   public void addExcludedCountryArea(USArea countryArea);
 
+  /**
+   * This method adds an excluded &lt;postal-area&gt; element. The
+   * &lt;country-code&gt; element and optionally the &lt;postal-code-pattern&gt
+   * are subelements .
+   * 
+   * @param countryCode
+   *          The country code.
+   * @param postalCodePattern
+   *          The Postal Code Pattern.
+   * 
+   */
+  public void addExcludedPostalArea(String countryCode, String postalCodePattern);
+
+  /**
+   * This method adds an excluded &lt;world-area&gt; element.
+   * 
+   */
+  public void addExcludedWorldArea();  
+  
   /**
    * Get the root element, &lt;shipping-restrictions&gt;
    * 

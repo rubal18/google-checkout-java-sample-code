@@ -601,4 +601,40 @@ public interface CheckoutShoppingCartRequest extends CheckoutRequest {
    */
   public void setPlatformID(long platformId);
 
+  /**
+   * Retrieves the value of the &lt;request-initial-auth-details&gt; element.
+   * 
+   * The &lt;request-initial-auth-details&gt; tag indicates whether Google
+   * should send an &lt;authorization-amount-notification&gt; when a credit card
+   * is authorized for a new order.
+   * 
+   * @return The &lt;request-initial-auth-details&gt; element value.
+   */
+  public boolean isRequestInitialAuthDetails();
+
+  /**
+   * Sets the value of the &lt;request-initial-auth-details&gt; element.
+   * 
+   * The &lt;request-initial-auth-details&gt; tag indicates whether Google
+   * should send an &lt;authorization-amount-notification&gt; when a credit card
+   * is authorized for a new order.
+   * 
+   * @param b
+   *          The boolean value.
+   */
+  public void setRequestInitialAuthDetails(boolean b);
+
+  /**
+   * Sets the value of the &lt;rounding-policy&gt; element and sub elements.
+   * 
+   * @param rule
+   *          The RoundingRule.
+   * @param mode
+   *          The RoundingPoliy.
+   * 
+   * @see RoundingRule
+   * @see RoundingPoliy
+   */
+  public void setRoundingPolicy(RoundingRule rule, RoundingMode mode);
+
 }

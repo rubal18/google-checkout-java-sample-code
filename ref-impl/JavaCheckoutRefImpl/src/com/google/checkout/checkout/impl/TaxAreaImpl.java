@@ -87,4 +87,15 @@ public class TaxAreaImpl implements TaxArea {
     return root;
   }
 
+  public void addPostalArea(String countryCode, String postalCodePattern) {
+    Element pa = Utils.createNewContainer(document, root, "postal-area");
+    Utils.createNewElementAndSet(document, pa, "country-code", countryCode);
+    Utils.createNewElementAndSet(document, pa, "postal-code-pattern",
+        postalCodePattern);
+  }
+
+  public void addWorldArea() {
+    Utils.createNewContainer(document, root, "world-area");
+  }
+
 }

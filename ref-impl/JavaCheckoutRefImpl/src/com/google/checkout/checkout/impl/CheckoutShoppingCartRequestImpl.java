@@ -32,6 +32,8 @@ import org.w3c.dom.Element;
 import com.google.checkout.CheckoutResponse;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.checkout.CheckoutShoppingCartRequest;
+import com.google.checkout.checkout.RoundingMode;
+import com.google.checkout.checkout.RoundingRule;
 import com.google.checkout.checkout.ShippingRestrictions;
 import com.google.checkout.checkout.TaxArea;
 import com.google.checkout.checkout.UrlParameter;
@@ -626,11 +628,11 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest
         "tax-tables");
     Element alternateTaxTables = Utils.findContainerElseCreate(document,
         taxTables, "alternate-tax-tables");
-    
+
     Element newTaxTable = Utils.findContainerWithAttributeValueElseCreate(
         document, alternateTaxTables, "alternate-tax-table", "name", tableName);
-    newTaxTable.setAttribute("standalone", ""+standalone);
-   
+    newTaxTable.setAttribute("standalone", "" + standalone);
+
     Element alternateTaxRules = Utils.findContainerElseCreate(document,
         newTaxTable, "alternate-tax-rules");
 
@@ -659,7 +661,7 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest
     Element taxRules = Utils.findContainerElseCreate(document, defaultTaxTable,
         "tax-rules");
 
-    Element newRule = Utils.createNewContainer(document, taxRules, "tax-rule");
+    Element newRule = Utils.createNewContainer(document, taxRules, "default-tax-rule");
     Utils.createNewElementAndSet(document, newRule, "shipping-taxed",
         shippingTaxed);
     Utils.createNewElementAndSet(document, newRule, "rate", taxRate);
@@ -717,8 +719,10 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest
 
     Element mcfs = Utils.findContainerElseCreate(document, checkoutFlowSupport,
         "merchant-checkout-flow-support");
-    Element pUrl = Utils
-        .createNewContainer(document, mcfs, "parameterized-url");
+    Element pUrls = Utils.findContainerElseCreate(document, mcfs,
+        "parameterized-urls");
+    Element pUrl = Utils.createNewContainer(document, pUrls,
+        "parameterized-url");
     pUrl.setAttribute("url", url);
 
     Iterator it = parameters.iterator();
@@ -751,19 +755,63 @@ public class CheckoutShoppingCartRequestImpl extends AbstractCheckoutRequest
     return merchantConstants.getMerchantCheckoutUrl();
   }
 
-  /* (non-Javadoc)
-   * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#addFlatRateShippingMethod(java.lang.String, float)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#addFlatRateShippingMethod(java.lang.String,
+   *      float)
    */
   public void addFlatRateShippingMethod(String name, float cost) {
     this.addFlatRateShippingMethod(name, cost, null);
   }
-  
-  /* (non-Javadoc)
+
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#addMerchantPrivateDataNode(org.w3c.dom.Element)
    */
   public void addMerchantPrivateDataNode(Element node) {
     Element mpd = Utils.findContainerElseCreate(document, shoppingCart,
         "merchant-private-data");
-    Utils.importElements(document, mpd, new Element[] {node});
+    Utils.importElements(document, mpd, new Element[] { node });
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#isRequestInitialAuthDetails()
+   */
+  public boolean isRequestInitialAuthDetails() {
+    Element ops = Utils.findElementOrContainer(document, root,
+        "order-processing-support");
+    if (ops == null) {
+      return false;
+    }
+    return Utils.getElementBooleanValue(document, ops,
+        "request-initial-auth-details");
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#setRequestInitialAuthDetails(boolean)
+   */
+  public void setRequestInitialAuthDetails(boolean b) {
+    Element ops = Utils.findContainerElseCreate(document, root,
+        "order-processing-support");
+    Utils.findElementAndSetElseCreateAndSet(document, ops,
+        "request-initial-auth-details", b);
+
+  }
+
+  /* (non-Javadoc)
+   * @see com.google.checkout.checkout.CheckoutShoppingCartRequest#setRoundingPolicy(com.google.checkout.checkout.RoundingRule, com.google.checkout.checkout.RoundingMode)
+   */
+  public void setRoundingPolicy(RoundingRule rule, RoundingMode mode) {
+    Element mcfs = Utils.findContainerElseCreate(document, checkoutFlowSupport,
+    "merchant-checkout-flow-support");
+    Element policy = Utils.findContainerElseCreate(document, mcfs, "rounding-policy");
+    Utils.findElementAndSetElseCreateAndSet(document, policy, "rule", rule.toString());
+    Utils.findElementAndSetElseCreateAndSet(document, policy, "mode", mode.toString());    
   }
 }

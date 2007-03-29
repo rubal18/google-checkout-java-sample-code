@@ -54,6 +54,25 @@ public interface TaxArea {
   public void addCountryArea(USArea countryArea);
 
   /**
+   * This method adds a &lt;postal-area&gt; element. The
+   * &lt;country-code&gt; element and optionally the &lt;postal-code-pattern&gt
+   * are subelements .
+   * 
+   * @param countryCode
+   *          The country code.
+   * @param postalCodePattern
+   *          The Postal Code Pattern.
+   * 
+   */
+  public void addPostalArea(String countryCode, String postalCodePattern);
+
+  /**
+   * This method adds a &lt;world-area&gt; element.
+   * 
+   */
+  public void addWorldArea();   
+  
+  /**
    * Get the root element, &lt;tax-area&gt;
    * 
    * @return The root element, &lt;tax-atea&gt;.
