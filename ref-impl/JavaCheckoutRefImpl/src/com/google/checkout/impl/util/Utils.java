@@ -186,8 +186,8 @@ public class Utils {
 		return Long.parseLong(getElementStringValue(document, parent, string));
 	}
 
-	public static Element findElementAndSetElseCreateAndSet(Document document, Element parent, String string, Date date) {
-		throw new RuntimeException("not implemented");
+	public static Element findElementAndSetElseCreateAndSet(Document document, Element parent, String element, Date date) {
+    return findElementAndSetElseCreateAndSet(document, parent, element, getDateString(date));
 	}
 
 	public static Element[] getElements(Document document, Element parent) {
