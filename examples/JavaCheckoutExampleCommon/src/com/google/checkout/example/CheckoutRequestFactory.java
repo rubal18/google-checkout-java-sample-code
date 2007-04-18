@@ -20,13 +20,13 @@ import java.util.ResourceBundle;
 
 import com.google.checkout.EnvironmentType;
 import com.google.checkout.MerchantConstants;
+import com.google.checkout.MerchantConstants;
 import com.google.checkout.checkout.CheckoutShoppingCartRequest;
+import com.google.checkout.checkout.CheckoutShoppingCartRequestImpl;
+import com.google.checkout.checkout.ShippingRestrictions;
 import com.google.checkout.checkout.ShippingRestrictions;
 import com.google.checkout.checkout.TaxArea;
-import com.google.checkout.checkout.impl.CheckoutShoppingCartRequestImpl;
-import com.google.checkout.checkout.impl.MerchantConstantsImpl;
-import com.google.checkout.checkout.impl.ShippingRestrictionsImpl;
-import com.google.checkout.checkout.impl.TaxAreaImpl;
+import com.google.checkout.checkout.TaxArea;
 import com.google.checkout.example.merchantcalculation.CallbackProcessorImpl;
 import com.google.checkout.example.notification.AuthorizationNotificationProcessorImpl;
 import com.google.checkout.example.notification.ChargeNotificationProcessorImpl;
@@ -44,27 +44,27 @@ import com.google.checkout.notification.OrderStateChangeNotificationProcessor;
 import com.google.checkout.notification.RefundNotificationProcessor;
 import com.google.checkout.notification.RiskInformationNotificationProcessor;
 import com.google.checkout.orderprocessing.AddMerchantOrderNumberRequest;
+import com.google.checkout.orderprocessing.AddMerchantOrderNumberRequest;
+import com.google.checkout.orderprocessing.AddTrackingDataRequest;
 import com.google.checkout.orderprocessing.AddTrackingDataRequest;
 import com.google.checkout.orderprocessing.ArchiveOrderRequest;
+import com.google.checkout.orderprocessing.ArchiveOrderRequest;
+import com.google.checkout.orderprocessing.AuthorizeOrderRequest;
 import com.google.checkout.orderprocessing.AuthorizeOrderRequest;
 import com.google.checkout.orderprocessing.CancelOrderRequest;
+import com.google.checkout.orderprocessing.CancelOrderRequest;
+import com.google.checkout.orderprocessing.ChargeOrderRequest;
 import com.google.checkout.orderprocessing.ChargeOrderRequest;
 import com.google.checkout.orderprocessing.DeliverOrderRequest;
+import com.google.checkout.orderprocessing.DeliverOrderRequest;
+import com.google.checkout.orderprocessing.ProcessOrderRequest;
 import com.google.checkout.orderprocessing.ProcessOrderRequest;
 import com.google.checkout.orderprocessing.RefundOrderRequest;
+import com.google.checkout.orderprocessing.RefundOrderRequest;
+import com.google.checkout.orderprocessing.SendBuyerMessageRequest;
 import com.google.checkout.orderprocessing.SendBuyerMessageRequest;
 import com.google.checkout.orderprocessing.UnarchiveOrderRequest;
-import com.google.checkout.orderprocessing.impl.AddMerchantOrderNumberRequestImpl;
-import com.google.checkout.orderprocessing.impl.AddTrackingDataRequestImpl;
-import com.google.checkout.orderprocessing.impl.ArchiveOrderRequestImpl;
-import com.google.checkout.orderprocessing.impl.AuthorizeOrderRequestImpl;
-import com.google.checkout.orderprocessing.impl.CancelOrderRequestImpl;
-import com.google.checkout.orderprocessing.impl.ChargeOrderRequestImpl;
-import com.google.checkout.orderprocessing.impl.DeliverOrderRequestImpl;
-import com.google.checkout.orderprocessing.impl.ProcessOrderRequestImpl;
-import com.google.checkout.orderprocessing.impl.RefundOrderRequestImpl;
-import com.google.checkout.orderprocessing.impl.SendBuyerMessageRequestImpl;
-import com.google.checkout.orderprocessing.impl.UnarchiveOrderRequestImpl;
+import com.google.checkout.orderprocessing.UnarchiveOrderRequest;
 
 public class CheckoutRequestFactory {
 
@@ -102,7 +102,7 @@ public class CheckoutRequestFactory {
         throw new RuntimeException("Env must be one of "+EnvironmentType.Sandbox+" or "+EnvironmentType.Production+".");
       }
 
-      mc = new MerchantConstantsImpl(merchantId, merchantKey, env, currencyCode, checkoutUrl, merchantCheckoutUrl, requestUrl);    		
+      mc = new MerchantConstants(merchantId, merchantKey, env, currencyCode, checkoutUrl, merchantCheckoutUrl, requestUrl);    		
 		}
 		return mc;
 	}
@@ -113,11 +113,11 @@ public class CheckoutRequestFactory {
     }
 
     public static ShippingRestrictions newShippingRestrictions() {
-    	return new ShippingRestrictionsImpl();
+    	return new ShippingRestrictions();
     }
 
     public static TaxArea newTaxArea() {
-    	return new TaxAreaImpl();
+    	return new TaxArea();
     }
 
     public static CallbackProcessor newCallbackProcessor() {
@@ -149,47 +149,47 @@ public class CheckoutRequestFactory {
     }
 
     public static AddMerchantOrderNumberRequest newAddMerchantOrderNumberRequest() {
-    	return new AddMerchantOrderNumberRequestImpl(getMerchantConstants());
+    	return new AddMerchantOrderNumberRequest(getMerchantConstants());
     }
     
     public static AddTrackingDataRequest newAddTrackingDataRequest() {
-    	return new AddTrackingDataRequestImpl(getMerchantConstants());
+    	return new AddTrackingDataRequest(getMerchantConstants());
     }
     
     public static ArchiveOrderRequest newArchiveOrderRequest() {
-    	return new ArchiveOrderRequestImpl(getMerchantConstants());
+    	return new ArchiveOrderRequest(getMerchantConstants());
     }
     
     public static AuthorizeOrderRequest newAuthorizeOrderRequest() {
-    	return new AuthorizeOrderRequestImpl(getMerchantConstants());
+    	return new AuthorizeOrderRequest(getMerchantConstants());
     }
     
     public static CancelOrderRequest newCancelOrderRequest() {
-    	return new CancelOrderRequestImpl(getMerchantConstants());
+    	return new CancelOrderRequest(getMerchantConstants());
     }
     
     public static ChargeOrderRequest newChargeOrderRequest() {
-    	return new ChargeOrderRequestImpl(getMerchantConstants());
+    	return new ChargeOrderRequest(getMerchantConstants());
     }
     
     public static DeliverOrderRequest newDeliverOrderRequest() {
-    	return new DeliverOrderRequestImpl(getMerchantConstants());
+    	return new DeliverOrderRequest(getMerchantConstants());
     }
     
     public static ProcessOrderRequest newProcessOrderRequest() {
-    	return new ProcessOrderRequestImpl(getMerchantConstants());
+    	return new ProcessOrderRequest(getMerchantConstants());
     }
     
     public static RefundOrderRequest newRefundOrderRequest() {
-    	return new RefundOrderRequestImpl(getMerchantConstants());
+    	return new RefundOrderRequest(getMerchantConstants());
     }
     
     public static SendBuyerMessageRequest newSendBuyerMessageRequest() {
-    	return new SendBuyerMessageRequestImpl(getMerchantConstants());
+    	return new SendBuyerMessageRequest(getMerchantConstants());
     }
     
     public static UnarchiveOrderRequest newUnarchiveOrderRequest() {
-    	return new UnarchiveOrderRequestImpl(getMerchantConstants());
+    	return new UnarchiveOrderRequest(getMerchantConstants());
     }
 
 	public static AuthorizationNotificationProcessor newAuthorizationNotificationProcessor() {

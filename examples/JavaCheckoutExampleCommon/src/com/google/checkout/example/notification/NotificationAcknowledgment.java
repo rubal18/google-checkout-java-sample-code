@@ -19,8 +19,8 @@ package com.google.checkout.example.notification;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.google.checkout.impl.util.Constants;
-import com.google.checkout.impl.util.Utils;
+import com.google.checkout.util.Constants;
+import com.google.checkout.util.Utils;
 
 public class NotificationAcknowledgment {
 

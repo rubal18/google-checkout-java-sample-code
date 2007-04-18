@@ -23,8 +23,8 @@ import org.w3c.dom.Document;
 import com.google.checkout.CheckoutException;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.GoogleOrder;
-import com.google.checkout.impl.util.Utils;
 import com.google.checkout.notification.RefundNotificationProcessor;
+import com.google.checkout.util.Utils;
 
 public class RefundNotificationProcessorImpl extends AbstractNotificationProcessor implements
 		RefundNotificationProcessor {

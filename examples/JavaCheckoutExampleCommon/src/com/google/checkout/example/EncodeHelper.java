@@ -18,8 +18,8 @@ package com.google.checkout.example;
 
 import java.util.regex.*;
 
-import com.google.checkout.impl.util.Constants;
-import com.google.checkout.impl.util.StringTuple;
+import com.google.checkout.util.Constants;
+import com.google.checkout.util.StringTuple;
 
 /**
  * @author 		ksim

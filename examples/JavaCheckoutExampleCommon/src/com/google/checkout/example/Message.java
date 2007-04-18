@@ -19,7 +19,7 @@ package com.google.checkout.example;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.google.checkout.impl.util.Utils;
+import com.google.checkout.util.Utils;
 
 public class Message implements Serializable {
 
