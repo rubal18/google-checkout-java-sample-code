@@ -20,12 +20,9 @@ import java.util.ResourceBundle;
 
 import com.google.checkout.EnvironmentType;
 import com.google.checkout.MerchantConstants;
-import com.google.checkout.MerchantConstants;
 import com.google.checkout.checkout.CheckoutShoppingCartRequest;
-import com.google.checkout.checkout.CheckoutShoppingCartRequestImpl;
+import com.google.checkout.checkout.CheckoutShoppingCartRequest;
 import com.google.checkout.checkout.ShippingRestrictions;
-import com.google.checkout.checkout.ShippingRestrictions;
-import com.google.checkout.checkout.TaxArea;
 import com.google.checkout.checkout.TaxArea;
 import com.google.checkout.example.merchantcalculation.CallbackProcessorImpl;
 import com.google.checkout.example.notification.AuthorizationNotificationProcessorImpl;
@@ -44,26 +41,15 @@ import com.google.checkout.notification.OrderStateChangeNotificationProcessor;
 import com.google.checkout.notification.RefundNotificationProcessor;
 import com.google.checkout.notification.RiskInformationNotificationProcessor;
 import com.google.checkout.orderprocessing.AddMerchantOrderNumberRequest;
-import com.google.checkout.orderprocessing.AddMerchantOrderNumberRequest;
-import com.google.checkout.orderprocessing.AddTrackingDataRequest;
 import com.google.checkout.orderprocessing.AddTrackingDataRequest;
 import com.google.checkout.orderprocessing.ArchiveOrderRequest;
-import com.google.checkout.orderprocessing.ArchiveOrderRequest;
-import com.google.checkout.orderprocessing.AuthorizeOrderRequest;
 import com.google.checkout.orderprocessing.AuthorizeOrderRequest;
 import com.google.checkout.orderprocessing.CancelOrderRequest;
-import com.google.checkout.orderprocessing.CancelOrderRequest;
-import com.google.checkout.orderprocessing.ChargeOrderRequest;
 import com.google.checkout.orderprocessing.ChargeOrderRequest;
 import com.google.checkout.orderprocessing.DeliverOrderRequest;
-import com.google.checkout.orderprocessing.DeliverOrderRequest;
-import com.google.checkout.orderprocessing.ProcessOrderRequest;
 import com.google.checkout.orderprocessing.ProcessOrderRequest;
 import com.google.checkout.orderprocessing.RefundOrderRequest;
-import com.google.checkout.orderprocessing.RefundOrderRequest;
 import com.google.checkout.orderprocessing.SendBuyerMessageRequest;
-import com.google.checkout.orderprocessing.SendBuyerMessageRequest;
-import com.google.checkout.orderprocessing.UnarchiveOrderRequest;
 import com.google.checkout.orderprocessing.UnarchiveOrderRequest;
 
 public class CheckoutRequestFactory {
@@ -109,7 +95,7 @@ public class CheckoutRequestFactory {
 	
 	
     public static CheckoutShoppingCartRequest newCheckoutShoppingCartRequest() {
-    	return new CheckoutShoppingCartRequestImpl(getMerchantConstants());
+    	return new CheckoutShoppingCartRequest(getMerchantConstants());
     }
 
     public static ShippingRestrictions newShippingRestrictions() {
