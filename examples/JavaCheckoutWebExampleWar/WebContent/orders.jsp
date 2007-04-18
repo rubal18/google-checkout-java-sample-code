@@ -19,7 +19,7 @@
 <%@ page import="com.google.checkout.example.GoogleOrder" %>
 <%@ page import="com.google.checkout.MerchantConstants" %>
 <%@ page import="com.google.checkout.example.CheckoutRequestFactory" %>
-<%@ page import="com.google.checkout.impl.util.Utils" %>
+<%@ page import="com.google.checkout.util.Utils" %>
 
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

@@ -21,7 +21,7 @@
 
 <%@ page import="com.google.checkout.example.GoogleOrder"%>
 <%@ page import="com.google.checkout.example.Message"%>
-<%@ page import="com.google.checkout.impl.util.EncodeHelper"%>
+<%@ page import="com.google.checkout.util.EncodeHelper"%>
 <%@ page import="com.google.checkout.MerchantConstants"%>
 <%@ page import="com.google.checkout.example.CheckoutRequestFactory"%>
 
