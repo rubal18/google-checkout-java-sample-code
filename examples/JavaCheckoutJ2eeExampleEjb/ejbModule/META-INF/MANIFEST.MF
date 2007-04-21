@@ -1,5 +1,4 @@
 Manifest-Version: 1.0
-Class-Path: JavaCheckoutApi.jar 
- JavaCheckoutExampleCommon.jar 
+Class-Path: JavaCheckoutExampleCommon.jar 
  JavaCheckoutRefImpl.jar
 
