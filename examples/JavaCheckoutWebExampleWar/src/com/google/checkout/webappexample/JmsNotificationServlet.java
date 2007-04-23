@@ -45,11 +45,9 @@ import com.google.checkout.example.notification.NotificationAcknowledgment;
  */
 public class JmsNotificationServlet extends javax.servlet.http.HttpServlet {
 
-  private static String queueName = "queue/GoogleCheckoutInbox";
+  private static final String queueName = "queue/GoogleCheckoutInbox";
 
-  private static Context jndiContext = null;
-
-  private static String qcfName = "QueueConnectionFactory";
+  private static final String qcfName = "QueueConnectionFactory";
 
   private static QueueConnectionFactory queueConnectionFactory = null;
 
@@ -69,9 +67,8 @@ public class JmsNotificationServlet extends javax.servlet.http.HttpServlet {
    * @see javax.servlet.http.HttpServlet#HttpServlet()
    */
   public JmsNotificationServlet() {
-    super();
     try {
-      jndiContext = new InitialContext();
+      Context jndiContext = new InitialContext();
       queueConnectionFactory = (QueueConnectionFactory) jndiContext
           .lookup(qcfName);
       queue = (Queue) jndiContext.lookup(queueName);

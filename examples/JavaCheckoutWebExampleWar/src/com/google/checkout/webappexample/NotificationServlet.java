@@ -43,15 +43,6 @@ public class NotificationServlet extends javax.servlet.http.HttpServlet {
   /*
    * (non-Java-doc)
    * 
-   * @see javax.servlet.http.HttpServlet#HttpServlet()
-   */
-  public NotificationServlet() {
-    super();
-  }
-
-  /*
-   * (non-Java-doc)
-   * 
    * @see javax.servlet.http.HttpServlet#doGet(HttpServletRequest request,
    *      HttpServletResponse response)
    */
