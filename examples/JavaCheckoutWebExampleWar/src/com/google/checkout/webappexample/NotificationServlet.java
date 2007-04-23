@@ -38,8 +38,7 @@ import com.google.checkout.notification.RiskInformationNotificationProcessor;
 /**
  * 
  */
-public class NotificationServlet extends javax.servlet.http.HttpServlet
-    implements javax.servlet.Servlet {
+public class NotificationServlet extends javax.servlet.http.HttpServlet {
 
   /*
    * (non-Java-doc)

@@ -43,8 +43,7 @@ import com.google.checkout.example.notification.NotificationAcknowledgment;
 /**
  * 
  */
-public class JmsNotificationServlet extends javax.servlet.http.HttpServlet
-    implements javax.servlet.Servlet {
+public class JmsNotificationServlet extends javax.servlet.http.HttpServlet {
 
   private static String queueName = "queue/GoogleCheckoutInbox";
 
