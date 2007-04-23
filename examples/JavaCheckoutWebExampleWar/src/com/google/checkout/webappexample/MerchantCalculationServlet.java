@@ -32,8 +32,7 @@ import com.google.checkout.merchantcalculation.CallbackProcessor;
 /**
  * 
  */
-public class MerchantCalculationServlet extends javax.servlet.http.HttpServlet
-    implements javax.servlet.Servlet {
+public class MerchantCalculationServlet extends javax.servlet.http.HttpServlet {
 
   /*
    * (non-Java-doc)
