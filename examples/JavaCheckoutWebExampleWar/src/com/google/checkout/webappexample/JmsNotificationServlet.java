@@ -53,8 +53,6 @@ public class JmsNotificationServlet extends javax.servlet.http.HttpServlet {
 
   private Queue queue = null;
 
-  private QueueSession queueSession;
-
   private QueueSender queueSender;
 
   private TextMessage message;
@@ -144,7 +142,7 @@ public class JmsNotificationServlet extends javax.servlet.http.HttpServlet {
     QueueConnection queueConnection = null;
     try {
       queueConnection = queueConnectionFactory.createQueueConnection();
-      queueSession = queueConnection.createQueueSession(false,
+      QueueSession queueSession = queueConnection.createQueueSession(false,
           Session.AUTO_ACKNOWLEDGE);
       queueSender = queueSession.createSender(queue);
       message = queueSession.createTextMessage();
