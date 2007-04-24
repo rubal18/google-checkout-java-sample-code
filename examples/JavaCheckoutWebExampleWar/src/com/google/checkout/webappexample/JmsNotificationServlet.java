@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (C) 2006 Google Inc.
+ * Copyright (C) 2007 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -77,7 +77,7 @@ public class JmsNotificationServlet extends javax.servlet.http.HttpServlet {
    */
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    doPost(request, response);
+    response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
   }
 
   /*
