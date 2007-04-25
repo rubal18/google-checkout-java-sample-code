@@ -94,7 +94,8 @@ public class JmsNotificationServlet extends javax.servlet.http.HttpServlet {
     try {
       String auth = request.getHeader("Authorization");
       if (auth == null || !auth.equals("Basic " + mc.getHttpAuth())) {
-        throw new Exception("Authentication Failed.");
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed.");
+        return;
       }
 
       String notification = getNotificationBody(request.getInputStream());
