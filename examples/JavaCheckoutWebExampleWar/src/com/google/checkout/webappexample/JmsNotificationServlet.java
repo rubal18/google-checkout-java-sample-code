@@ -111,7 +111,7 @@ public class JmsNotificationServlet extends javax.servlet.http.HttpServlet {
   }
 
   private String dispatch(String notification) throws Exception {
-    if (notification.indexOf("new-order-notification ") > -1) {
+    if (notification.indexOf("new-order-notification") > -1) {
       return storeMessage("new-order-notification", notification);
     }
     if (notification.indexOf("risk-information-notification") > -1) {

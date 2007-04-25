@@ -82,7 +82,7 @@ public class NotificationServlet extends javax.servlet.http.HttpServlet {
   }
 
   private String dispatch(String notification) throws Exception {
-    if (notification.indexOf("new-order-notification ") > -1) {
+    if (notification.indexOf("new-order-notification") > -1) {
       NewOrderNotificationProcessor processor = CheckoutRequestFactory
           .newNewOrderNotificationProcessor();
       return processor.process(notification);
