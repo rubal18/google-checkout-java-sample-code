@@ -77,7 +77,7 @@ public class NotificationServlet extends javax.servlet.http.HttpServlet {
 
     } catch (Exception ex) {
       ex.printStackTrace();
-      response.sendError(HttpServletResponse.SC_FORBIDDEN, ex.getMessage());
+      response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex.getMessage());
     }
   }
 
