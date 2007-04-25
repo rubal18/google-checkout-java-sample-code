@@ -30,25 +30,15 @@ import java.util.Date;
 import java.io.Serializable;
 
 public class GoogleOrder implements Serializable {
-
   private String merchantId;
-
   private String orderNumber;
-
   private String lastFinStatus;
-
   private String lastFulStatus;
-
   private Date lastUpdateTime;
-
   private String buyerEmail;
-
   private String orderAmount;
-
   private Collection events = new ArrayList();
-
   static String dir = System.getProperty("java.io.tmpdir");
-
   static File fDir = new File(dir);
 
   public static GoogleOrder findOrCreate(String merchantId, String orderNumber)
@@ -181,7 +171,6 @@ public class GoogleOrder implements Serializable {
       }
       return false;
     }
-
   }
 
   public String getOrderAmount() {
@@ -191,5 +180,4 @@ public class GoogleOrder implements Serializable {
   public void setOrderAmount(String orderAmount) {
     this.orderAmount = orderAmount;
   }
-
 }
