@@ -18,7 +18,7 @@ public class GiftCertificateResult extends MerchantCodeResult {
 	 * @param code The gift certificate code.
 	 * @param message The message to display to the user.
 	 */
-	private GiftCertificateResult(boolean valid, float calculatedAmount, float currency, String code, String message) {
+	public GiftCertificateResult(boolean valid, float calculatedAmount, String currency, String code, String message) {
 		this.setType("gift-certificate-result");
 		this.setValid(valid);
 		this.setCalculatedAmount(calculatedAmount);

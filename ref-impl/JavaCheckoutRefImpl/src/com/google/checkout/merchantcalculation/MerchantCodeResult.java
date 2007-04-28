@@ -11,7 +11,7 @@ public abstract class MerchantCodeResult {
 	private String type;
 	private boolean valid;
 	private float calculatedAmount;
-	private float currency;
+	private String currency;
 	private String code;
 	private String message;
 	
@@ -56,7 +56,7 @@ public abstract class MerchantCodeResult {
 	 * 
 	 * @return The currency code.
 	 */
-	public float getCurrency() {
+	public String getCurrency() {
 		return currency;
 	}
 	
@@ -65,7 +65,7 @@ public abstract class MerchantCodeResult {
 	 * 
 	 * @param currency The currency code.
 	 */
-	public void setCurrency(float currency) {
+	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
 	

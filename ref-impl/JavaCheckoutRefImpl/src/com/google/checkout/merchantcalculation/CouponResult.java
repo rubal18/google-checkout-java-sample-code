@@ -18,7 +18,7 @@ public class CouponResult extends MerchantCodeResult {
 	 * @param code The coupon code.
 	 * @param message The message to display to the user.
 	 */
-	private CouponResult(boolean valid, float calculatedAmount, float currency, String code, String message) {
+	public CouponResult(boolean valid, float calculatedAmount, String currency, String code, String message) {
 		this.setType("coupon-result");
 		this.setValid(valid);
 		this.setCalculatedAmount(calculatedAmount);
