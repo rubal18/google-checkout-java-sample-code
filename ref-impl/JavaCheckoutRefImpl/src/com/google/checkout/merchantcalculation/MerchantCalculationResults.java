@@ -17,14 +17,113 @@
 package com.google.checkout.merchantcalculation;
 
 import java.util.Collection;
+import java.util.Iterator;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import com.google.checkout.util.Utils;
+
+/**
+ * This class encapsulates the &lt;merchant-calculation-callback&gt; message
+ * which is part of the Merchant Calculation API.
+ * 
+ * @author simonjsmith
+ * 
+ */
 public class MerchantCalculationResults {
 
-	public void addResult(String shippingName, String addressId,
-			boolean shippable, double totalTax, double shippingRate,
-			Collection merchantCodeResults) {
-		// TODO
-		throw new RuntimeException("not impl");
+	private Document document;
+
+	private Element root;
+
+	private Element results;
+
+	public MerchantCalculationResults() {
+
+		document = Utils.newEmptyDocument();
+		root = (Element) document.createElementNS(
+				"http://checkout.google.com/schema/2",
+				"merchant-calculation-results");
+		document.appendChild(root);
+		results = (Element) document.createElement("results");
 	}
 
+	/**
+	 * Add a result.
+	 * 
+	 * @param shippingName
+	 *            The shipping name.
+	 * @param addressId
+	 *            The address id.
+	 * @param shippable
+	 *            The shippable flag.
+	 * @param totalTaxAmount
+	 *            The total tax amount.
+	 * @param shippingRate
+	 *            The shipping rate.
+	 * @param currency
+	 *            The currency code.
+	 * @param merchantCodeResults
+	 *            A collection of MerchantCodeResult objects.
+	 * 
+	 * @see MerchantCodeResult
+	 */
+	public void addResult(String shippingName, String addressId,
+			boolean shippable, double totalTaxAmount, double shippingRate,
+			String currency, Collection merchantCodeResults) {
+
+		Element result = Utils.createNewContainer(document, results, "result");
+		result.setAttribute("shipping-name", shippingName);
+		result.setAttribute("address-id", addressId);
+
+		Utils.createNewElementAndSet(document, result, "shippable", shippable);
+
+		Element tax = Utils.createNewElementAndSet(document, result,
+				"total-tax", totalTaxAmount);
+		tax.setAttribute("currency", currency);
+
+		Element shipping = Utils.createNewElementAndSet(document, result,
+				"shipping-rate", shippingRate);
+		shipping.setAttribute("currency", currency);
+
+		Element codes = Utils.createNewContainer(document, results,
+				"merchant-code-results");
+
+		Iterator it = merchantCodeResults.iterator();
+		MerchantCodeResult mcResult;
+		Element eResult;
+
+		while (it.hasNext()) {
+			mcResult = (MerchantCodeResult) it.next();
+			eResult = Utils.createNewContainer(document, codes, mcResult
+					.getType());
+			Utils.createNewElementAndSet(document, eResult, "valid", mcResult
+					.isValid());
+			Utils.createNewElementAndSet(document, eResult,
+					"calculated-amount", mcResult.getCalculatedAmount());
+			Utils.createNewElementAndSet(document, eResult, "code", mcResult
+					.getCode());
+			Utils.createNewElementAndSet(document, eResult, "message", mcResult
+					.getMessage());
+		}
+	}
+
+	/**
+	 * Return the XML String.
+	 * 
+	 * @return The XML String.
+	 */
+	public String getXml() {
+		return Utils.documentToString(document);
+	}
+
+	/**
+	 * Return the nicely formatted XML String.
+	 * 
+	 * @return The nicely formatted XML String.
+	 */
+	public String getXmlPretty() {
+		return Utils.documentToStringPretty(document);
+	}
 }
