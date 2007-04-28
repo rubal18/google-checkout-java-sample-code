@@ -21,7 +21,7 @@ import com.google.checkout.CheckoutException;
 /**
  * This class contains methods that parse a
  * &lt;merchant-calculation-callback&gt; request, allowing you to access items
- * in the request, shipping methods, shipping addresses, tax information, and
+ * in the request, shipping methods, shipping addresses, Fiax information, and
  * coupon and gift certificate codes entered by the customer.
  * 
  * @author simonjsmith@google.com
