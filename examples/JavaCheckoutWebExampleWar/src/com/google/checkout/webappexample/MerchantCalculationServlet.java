@@ -15,10 +15,8 @@
  ******************************************************************************/
 package com.google.checkout.webappexample;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -27,7 +25,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.CheckoutRequestFactory;
-import com.google.checkout.merchantcalculation.CallbackProcessor;
+import com.google.checkout.example.merchantcalculation.MerchantCalculationCallbackProcessorImpl;
+import com.google.checkout.merchantcalculation.MerchantCalculationCallback;
+import com.google.checkout.merchantcalculation.MerchantCalculationCallbackProcessor;
+import com.google.checkout.merchantcalculation.MerchantCalculationResults;
 
 /**
  * 
@@ -62,21 +63,15 @@ public class MerchantCalculationServlet extends javax.servlet.http.HttpServlet {
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed.");
         return;
       }
-      CallbackProcessor cp = CheckoutRequestFactory.newCallbackProcessor();
+      
+      MerchantCalculationCallbackProcessor cp = new MerchantCalculationCallbackProcessorImpl(mc);
 
       InputStream in = request.getInputStream();
-      InputStreamReader sReader = null;
-      sReader = new InputStreamReader(in);
-      BufferedReader reader = new BufferedReader(sReader);
-      StringBuffer buffer = new StringBuffer();
-      String line = null;
-      while (null != (line = reader.readLine())) {
-        buffer.append(line);
-      }
+      MerchantCalculationCallback callback = new MerchantCalculationCallback(in);
+      MerchantCalculationResults results = cp.process(callback);
 
-      String ret = cp.process(buffer.toString());
       PrintWriter out = response.getWriter();
-      out.print(ret);
+      out.print(results.getXml());
 
     } catch (Exception ex) {
       ex.printStackTrace();
