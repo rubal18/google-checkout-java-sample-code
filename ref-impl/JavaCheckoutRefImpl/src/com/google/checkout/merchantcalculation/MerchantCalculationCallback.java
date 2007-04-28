@@ -170,7 +170,7 @@ public class MerchantCalculationCallback {
 		Collection ret = new ArrayList();
 
 		for (int i = 0; i < elements.length; i++) {
-			ret.add(elements[i].getNodeValue());
+			ret.add(elements[i].getAttribute("name"));
 		}
 
 		return ret;
@@ -186,12 +186,12 @@ public class MerchantCalculationCallback {
 		Element calculate = Utils.findContainerElseCreate(document, root,
 				"calculate");
 		Element merchantCodes = Utils.findContainerElseCreate(document,
-				calculate, "merchant-codes");
+				calculate, "merchant-code-strings");
 		Element[] elements = Utils.getElements(document, merchantCodes);
 		Collection ret = new ArrayList();
 
 		for (int i = 0; i < elements.length; i++) {
-			ret.add(elements[i].getNodeValue());
+			ret.add(new MerchantCodeString(elements[i].getAttribute("code"), elements[i].getAttribute("pin")));
 		}
 
 		return ret;

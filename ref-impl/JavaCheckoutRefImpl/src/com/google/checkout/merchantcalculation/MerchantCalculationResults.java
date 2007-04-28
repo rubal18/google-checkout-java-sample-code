@@ -47,6 +47,7 @@ public class MerchantCalculationResults {
 				"merchant-calculation-results");
 		document.appendChild(root);
 		results = (Element) document.createElement("results");
+		root.appendChild(results);
 	}
 
 	/**
