@@ -27,13 +27,13 @@ import com.google.checkout.CheckoutException;
  * @author simonjsmith@google.com
  * 
  */
-public interface CallbackProcessor {
+public interface MerchantCalculationCallbackProcessor {
 
   /**
    * Process the request and send the response back as a String.
    * 
    * @return The merchant calculation response String.
    */
-  public String process(String callbackXML) throws CheckoutException;
+  public MerchantCalculationResults process(MerchantCalculationCallback callback) throws CheckoutException;
 
 }
