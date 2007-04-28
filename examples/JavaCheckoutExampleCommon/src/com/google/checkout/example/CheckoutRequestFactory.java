@@ -23,7 +23,7 @@ import com.google.checkout.MerchantConstants;
 import com.google.checkout.checkout.CheckoutShoppingCartRequest;
 import com.google.checkout.checkout.ShippingRestrictions;
 import com.google.checkout.checkout.TaxArea;
-import com.google.checkout.example.merchantcalculation.CallbackProcessorImpl;
+import com.google.checkout.example.merchantcalculation.MerchantCalculationCallbackProcessorImpl;
 import com.google.checkout.example.notification.AuthorizationNotificationProcessorImpl;
 import com.google.checkout.example.notification.ChargeNotificationProcessorImpl;
 import com.google.checkout.example.notification.ChargebackNotificationProcessorImpl;
@@ -31,7 +31,6 @@ import com.google.checkout.example.notification.NewOrderNotificationProcessorImp
 import com.google.checkout.example.notification.OrderStateChangeNotificationProcessorImpl;
 import com.google.checkout.example.notification.RefundNotificationProcessorImpl;
 import com.google.checkout.example.notification.RiskInformationNotificationProcessorImpl;
-import com.google.checkout.merchantcalculation.CallbackProcessor;
 import com.google.checkout.notification.AuthorizationNotificationProcessor;
 import com.google.checkout.notification.ChargeNotificationProcessor;
 import com.google.checkout.notification.ChargebackNotificationProcessor;
@@ -101,10 +100,6 @@ public class CheckoutRequestFactory {
   
   public static TaxArea newTaxArea() {
     return new TaxArea();
-  }
-  
-  public static CallbackProcessor newCallbackProcessor() {
-    return new CallbackProcessorImpl(getMerchantConstants());
   }
   
   public static ChargebackNotificationProcessor newChargeBackNotificationProcessor() {
