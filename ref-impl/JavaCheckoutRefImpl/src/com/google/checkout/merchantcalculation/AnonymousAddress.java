@@ -1,41 +1,77 @@
 package com.google.checkout.merchantcalculation;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import com.google.checkout.util.Utils;
+
+/**
+ * This class encapsulates the &lt;anonymous-address&gt; element, used as part
+ * of the Merchant Calculations API.
+ * 
+ * @author simonjsmith
+ * 
+ */
 public class AnonymousAddress {
 
-	private String id;
-	private String countryCode;
-	private String region;
-	private String city;
-	private String postalCode;
-	
+	private Document document;
+
+	private Element element;
+
+	/**
+	 * A constructor which takes the document and element pointing to the
+	 * &lt;anonymous-address&gt; tag.
+	 * 
+	 * @param document
+	 *            The document.
+	 * @param element
+	 *            The element.
+	 */
+	public AnonymousAddress(Document document, Element element) {
+		this.element = element;
+	}
+
+	/**
+	 * Retrive the contents of the &lt;city&gt; tag.
+	 * 
+	 * @return The city.
+	 */
 	public String getCity() {
-		return city;
+		return Utils.getElementStringValue(document, element, "city");
 	}
-	public void setCity(String city) {
-		this.city = city;
-	}
+
+	/**
+	 * Retrive the contents of the &lt;country-code&gt; tag.
+	 * 
+	 * @return The Country Code.
+	 */
 	public String getCountryCode() {
-		return countryCode;
+		return Utils.getElementStringValue(document, element, "country-code");
 	}
-	public void setCountryCode(String countryCode) {
-		this.countryCode = countryCode;
-	}
+
+	/**
+	 * Retrive the contents of the &lt;id&gt; tag.
+	 * 
+	 * @return The id.
+	 */
 	public String getId() {
-		return id;
+		return element.getAttribute("id");
 	}
-	public void setId(String id) {
-		this.id = id;
-	}
+
+	/**
+	 * Retrive the contents of the &lt;postal-code&gt; tag.
+	 * 
+	 * @return The Postal Code.
+	 */
 	public String getPostalCode() {
-		return postalCode;
+		return Utils.getElementStringValue(document, element, "postal-code");
 	}
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
-	}
+
+	/**
+	 * Retrive the contents of the &lt;region&gt; tag.
+	 * 
+	 * @return The Region.
+	 */
 	public String getRegion() {
-		return region;
-	}
-	public void setRegion(String region) {
-		this.region = region;
+		return Utils.getElementStringValue(document, element, "region");
 	}
 }
