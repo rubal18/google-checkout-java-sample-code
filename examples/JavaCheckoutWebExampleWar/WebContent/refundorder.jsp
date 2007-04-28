@@ -20,7 +20,7 @@
 <%@ page import="com.google.checkout.MerchantConstants" %>
 <%@ page import="com.google.checkout.orderprocessing.RefundOrderRequest" %>
 <%@ page import="com.google.checkout.CheckoutResponse" %>
-<%@ page import="com.google.checkout.example.CheckoutRequestFactory" %>
+<%@ page import="com.google.checkout.example.MerchantConstantsFactory" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -37,7 +37,7 @@
 <%
     String button = request.getParameter("button");
 
-    MerchantConstants mc = com.google.checkout.example.CheckoutRequestFactory.getMerchantConstants();
+    MerchantConstants mc = MerchantConstantsFactory.getMerchantConstants();
 
     RefundOrderRequest refundRequest;
 	String orderNumber = request.getParameter("orderNumber") == null ? "" : request.getParameter("orderNumber");
@@ -49,13 +49,13 @@
 	String responseXml = null;
 	
   if (button == null || button.equals("")) {
-	  refundRequest = com.google.checkout.example.CheckoutRequestFactory.newRefundOrderRequest();
+	  refundRequest = new RefundOrderRequest(mc);
 	  session.setAttribute("refundRequest", refundRequest);
 	  prettyXml = refundRequest.getXmlPretty();
 	  responseXml = "";
   }
   else if (button.equals("NewRequest")) {
-	  refundRequest = com.google.checkout.example.CheckoutRequestFactory.newRefundOrderRequest();
+	  refundRequest = new RefundOrderRequest(mc);
 	  session.setAttribute("refundRequest", refundRequest);
 	  prettyXml = refundRequest.getXmlPretty();
 	  responseXml = "";

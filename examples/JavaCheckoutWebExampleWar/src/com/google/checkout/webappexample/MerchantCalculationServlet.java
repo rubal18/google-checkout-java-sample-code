@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.checkout.MerchantConstants;
-import com.google.checkout.example.CheckoutRequestFactory;
+import com.google.checkout.example.MerchantConstantsFactory;
 import com.google.checkout.example.merchantcalculation.MerchantCalculationCallbackProcessorImpl;
 import com.google.checkout.merchantcalculation.MerchantCalculationCallback;
 import com.google.checkout.merchantcalculation.MerchantCalculationCallbackProcessor;
@@ -55,7 +55,7 @@ public class MerchantCalculationServlet extends javax.servlet.http.HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    MerchantConstants mc = CheckoutRequestFactory.getMerchantConstants();
+    MerchantConstants mc = MerchantConstantsFactory.getMerchantConstants();
 
     try {
       String auth = request.getHeader("Authorization");

@@ -17,7 +17,7 @@
 
 <%@ page import="com.google.checkout.example.GoogleOrder" %>
 <%@ page import="com.google.checkout.MerchantConstants" %>
-<%@ page import="com.google.checkout.example.CheckoutRequestFactory" %>
+<%@ page import="com.google.checkout.example.MerchantConstantsFactory" %>
 <%@ page import="com.google.checkout.util.Utils" %>
 
     
@@ -47,7 +47,7 @@
 
 </tr>
 <%
-  MerchantConstants mc = com.google.checkout.example.CheckoutRequestFactory.getMerchantConstants();
+  MerchantConstants mc = MerchantConstantsFactory.getMerchantConstants();
 
   GoogleOrder[] orders = GoogleOrder.findAll(mc.getMerchantId());
   for (int i = 0; i < orders.length; i++)

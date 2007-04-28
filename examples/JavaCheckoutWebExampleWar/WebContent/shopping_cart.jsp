@@ -20,7 +20,7 @@
 <%@ page import="com.google.checkout.CheckoutResponse" %>
 <%@ page import="com.google.checkout.checkout.ShippingRestrictions" %>
 <%@ page import="com.google.checkout.checkout.TaxArea" %>
-<%@ page import="com.google.checkout.example.CheckoutRequestFactory" %>
+<%@ page import="com.google.checkout.example.MerchantConstantsFactory" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -37,7 +37,7 @@
 <%
     String button = request.getParameter("button");
 
-    MerchantConstants mc = com.google.checkout.example.CheckoutRequestFactory.getMerchantConstants();
+    MerchantConstants mc = MerchantConstantsFactory.getMerchantConstants();
 
 	CheckoutShoppingCartRequest cart;
 	String prettyXml = null;
@@ -45,14 +45,14 @@
 	String redirectUrl = null;
 	
   if (button == null || button.equals("")) {
-	  cart = com.google.checkout.example.CheckoutRequestFactory.newCheckoutShoppingCartRequest();
+	  cart = new CheckoutShoppingCartRequest(mc);
 	  session.setAttribute("cart", cart);
 	  prettyXml = cart.getXmlPretty();
 	  responseXml = "";
 	  redirectUrl = "";  
   }
   else if (button.equals("NewCart")) {
-	  cart = com.google.checkout.example.CheckoutRequestFactory.newCheckoutShoppingCartRequest();
+	  cart = new CheckoutShoppingCartRequest(mc);
 	  session.setAttribute("cart", cart);
 	  
 	  prettyXml = cart.getXmlPretty();
@@ -80,7 +80,7 @@
 	  String taxAmount = request.getParameter("taxAmount");
 	  String shippingTaxed = request.getParameter("shippingTaxed");
 	  	  
-	  TaxArea ta = com.google.checkout.example.CheckoutRequestFactory.newTaxArea();
+	  TaxArea ta = new TaxArea();
 	  ta.addStateCode(taxState);
 	  cart.addDefaultTaxRule(Double.parseDouble(taxAmount), Boolean.parseBoolean(shippingTaxed), ta);	
 	  
@@ -95,7 +95,7 @@
 	  String shipState = request.getParameter("shipState");    
 	  String shipAmount = request.getParameter("shipAmount");
 	  
-	  ShippingRestrictions sr = com.google.checkout.example.CheckoutRequestFactory.newShippingRestrictions();
+	  ShippingRestrictions sr = new ShippingRestrictions();
 	  sr.addAllowedStateCode(shipState);
 	  cart.addFlatRateShippingMethod(shipName, Float.parseFloat(shipAmount), sr);
   

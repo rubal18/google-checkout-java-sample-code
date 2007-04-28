@@ -26,7 +26,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.checkout.MerchantConstants;
-import com.google.checkout.example.CheckoutRequestFactory;
+import com.google.checkout.example.MerchantConstantsFactory;
+import com.google.checkout.example.notification.AuthorizationNotificationProcessorImpl;
+import com.google.checkout.example.notification.ChargeNotificationProcessorImpl;
+import com.google.checkout.example.notification.ChargebackNotificationProcessorImpl;
+import com.google.checkout.example.notification.NewOrderNotificationProcessorImpl;
+import com.google.checkout.example.notification.OrderStateChangeNotificationProcessorImpl;
+import com.google.checkout.example.notification.RefundNotificationProcessorImpl;
+import com.google.checkout.example.notification.RiskInformationNotificationProcessorImpl;
 import com.google.checkout.notification.AuthorizationNotificationProcessor;
 import com.google.checkout.notification.ChargeNotificationProcessor;
 import com.google.checkout.notification.ChargebackNotificationProcessor;
@@ -40,99 +47,104 @@ import com.google.checkout.notification.RiskInformationNotificationProcessor;
  */
 public class NotificationServlet extends javax.servlet.http.HttpServlet {
 
-  /*
-   * (non-Java-doc)
-   * 
-   * @see javax.servlet.http.HttpServlet#doGet(HttpServletRequest request,
-   *      HttpServletResponse response)
-   */
-  public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-  }
+	/*
+	 * (non-Java-doc)
+	 * 
+	 * @see javax.servlet.http.HttpServlet#doGet(HttpServletRequest request,
+	 *      HttpServletResponse response)
+	 */
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+	}
 
-  /*
-   * (non-Java-doc)
-   * 
-   * @see javax.servlet.http.HttpServlet#doPost(HttpServletRequest request,
-   *      HttpServletResponse response)
-   */
-  public void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+	/*
+	 * (non-Java-doc)
+	 * 
+	 * @see javax.servlet.http.HttpServlet#doPost(HttpServletRequest request,
+	 *      HttpServletResponse response)
+	 */
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-    MerchantConstants mc = CheckoutRequestFactory.getMerchantConstants();
+		MerchantConstants mc = MerchantConstantsFactory.getMerchantConstants();
 
-    try {
-      String auth = request.getHeader("Authorization");
-      if (auth == null || !auth.equals("Basic " + mc.getHttpAuth())) {
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed.");
-        return;
-      } 
+		try {
+			String auth = request.getHeader("Authorization");
+			if (auth == null || !auth.equals("Basic " + mc.getHttpAuth())) {
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+						"Authentication Failed.");
+				return;
+			}
 
-      String notification = getNotificationBody(request.getInputStream());
-      String ret = dispatch(notification);
+			String notification = getNotificationBody(request.getInputStream());
+			String ret = dispatch(notification);
 
-      PrintWriter out = response.getWriter();
-      out.print(ret);
+			PrintWriter out = response.getWriter();
+			out.print(ret);
 
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex.getMessage());
-    }
-  }
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex
+					.getMessage());
+		}
+	}
 
-  private String dispatch(String notification) throws Exception {
-    if (notification.indexOf("new-order-notification") > -1) {
-      NewOrderNotificationProcessor processor = CheckoutRequestFactory
-          .newNewOrderNotificationProcessor();
-      return processor.process(notification);
-    }
-    if (notification.indexOf("risk-information-notification") > -1) {
-      RiskInformationNotificationProcessor processor = CheckoutRequestFactory
-          .newRiskInformationNotificationProcessor();
-      return processor.process(notification);
-    }
-    if (notification.indexOf("order-state-change-notification") > -1) {
-      OrderStateChangeNotificationProcessor processor = CheckoutRequestFactory
-          .newOrderStateChangeNotificationProcessor();
-      return processor.process(notification);
-    }
-    if (notification.indexOf("charge-amount-notification") > -1) {
-      ChargeNotificationProcessor processor = CheckoutRequestFactory
-          .newChargeNotificationProcessor();
-      return processor.process(notification);
-    }
-    if (notification.indexOf("refund-amount-notification") > -1) {
-      RefundNotificationProcessor processor = CheckoutRequestFactory
-          .newRefundNotificationProcessor();
-      return processor.process(notification);
-    }
-    if (notification.indexOf("chargeback-amount-notification") > -1) {
-      ChargebackNotificationProcessor processor = CheckoutRequestFactory
-          .newChargeBackNotificationProcessor();
-      return processor.process(notification);
-    }
-    if (notification.indexOf("authorization-amount-notification") > -1) {
-      AuthorizationNotificationProcessor processor = CheckoutRequestFactory
-          .newAuthorizationNotificationProcessor();
-      return processor.process(notification);
-    }
-    throw new Exception("Notification not recoginsed.");
-  }
+	private String dispatch(String notification) throws Exception {
 
-  private String getNotificationBody(InputStream inputStream)
-      throws IOException {
+		MerchantConstants mc = MerchantConstantsFactory.getMerchantConstants();
 
-    BufferedReader reader = new BufferedReader(new InputStreamReader(
-        inputStream));
-    StringBuffer xml = new StringBuffer();
-    String line;
+		if (notification.indexOf("new-order-notification") > -1) {
+			NewOrderNotificationProcessor processor = new NewOrderNotificationProcessorImpl(
+					mc);
+			return processor.process(notification);
+		}
+		if (notification.indexOf("risk-information-notification") > -1) {
+			RiskInformationNotificationProcessor processor = new RiskInformationNotificationProcessorImpl(
+					mc);
+			return processor.process(notification);
+		}
+		if (notification.indexOf("order-state-change-notification") > -1) {
+			OrderStateChangeNotificationProcessor processor = new OrderStateChangeNotificationProcessorImpl(
+					mc);
+			return processor.process(notification);
+		}
+		if (notification.indexOf("charge-amount-notification") > -1) {
+			ChargeNotificationProcessor processor = new ChargeNotificationProcessorImpl(
+					mc);
+			return processor.process(notification);
+		}
+		if (notification.indexOf("refund-amount-notification") > -1) {
+			RefundNotificationProcessor processor = new RefundNotificationProcessorImpl(
+					mc);
+			return processor.process(notification);
+		}
+		if (notification.indexOf("chargeback-amount-notification") > -1) {
+			ChargebackNotificationProcessor processor = new ChargebackNotificationProcessorImpl(
+					mc);
+			return processor.process(notification);
+		}
+		if (notification.indexOf("authorization-amount-notification") > -1) {
+			AuthorizationNotificationProcessor processor = new AuthorizationNotificationProcessorImpl(
+					mc);
+			return processor.process(notification);
+		}
+		throw new Exception("Notification not recoginsed.");
+	}
 
-    while ((line = reader.readLine()) != null) {
-      xml.append(line + "\n");
-    }
-    reader.close();
+	private String getNotificationBody(InputStream inputStream)
+			throws IOException {
 
-    return xml.toString();
-  }
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				inputStream));
+		StringBuffer xml = new StringBuffer();
+		String line;
+
+		while ((line = reader.readLine()) != null) {
+			xml.append(line + "\n");
+		}
+		reader.close();
+
+		return xml.toString();
+	}
 }

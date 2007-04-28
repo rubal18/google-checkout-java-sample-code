@@ -22,7 +22,7 @@
 <%@ page import="com.google.checkout.example.Message"%>
 <%@ page import="com.google.checkout.util.EncodeHelper"%>
 <%@ page import="com.google.checkout.MerchantConstants"%>
-<%@ page import="com.google.checkout.example.CheckoutRequestFactory"%>
+<%@ page import="com.google.checkout.example.MerchantConstantsFactory"%>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -46,7 +46,7 @@
 </script>
 <h1>Order Detail</h1>
 <%
-  MerchantConstants mc = com.google.checkout.example.CheckoutRequestFactory.getMerchantConstants();
+  MerchantConstants mc = MerchantConstantsFactory.getMerchantConstants();
   String orderNumber = request.getParameter("orderNumber");
   
   GoogleOrder order = GoogleOrder.findOrCreate(mc.getMerchantId(), orderNumber);

@@ -20,7 +20,7 @@
 <%@ page import="com.google.checkout.MerchantConstants" %>
 <%@ page import="com.google.checkout.orderprocessing.AuthorizeOrderRequest" %>
 <%@ page import="com.google.checkout.CheckoutResponse" %>
-<%@ page import="com.google.checkout.example.CheckoutRequestFactory" %>
+<%@ page import="com.google.checkout.example.MerchantConstantsFactory" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -37,7 +37,7 @@
 <%
     String button = request.getParameter("button");
 
-    MerchantConstants mc = com.google.checkout.example.CheckoutRequestFactory.getMerchantConstants();
+    MerchantConstants mc = MerchantConstantsFactory.getMerchantConstants();
 
     AuthorizeOrderRequest authorizeRequest;
 	String orderNumber = request.getParameter("orderNumber") == null ? "" : request.getParameter("orderNumber");
@@ -46,13 +46,13 @@
 	String responseXml = null;
 	
   if (button == null || button.equals("")) {
-	  authorizeRequest = com.google.checkout.example.CheckoutRequestFactory.newAuthorizeOrderRequest();
+	  authorizeRequest = new AuthorizeOrderRequest(mc);
 	  session.setAttribute("authorizeRequest", authorizeRequest);
 	  prettyXml = authorizeRequest.getXmlPretty();
 	  responseXml = "";
   }
   else if (button.equals("NewRequest")) {
-	  authorizeRequest = com.google.checkout.example.CheckoutRequestFactory.newAuthorizeOrderRequest();
+	  authorizeRequest = new AuthorizeOrderRequest(mc);
 	  session.setAttribute("authorizeRequest", authorizeRequest);
 	  prettyXml = authorizeRequest.getXmlPretty();
 	  responseXml = "";

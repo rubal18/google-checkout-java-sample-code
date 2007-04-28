@@ -20,7 +20,7 @@
 <%@ page import="com.google.checkout.MerchantConstants" %>
 <%@ page import="com.google.checkout.orderprocessing.AddMerchantOrderNumberRequest" %>
 <%@ page import="com.google.checkout.CheckoutResponse" %>
-<%@ page import="com.google.checkout.example.CheckoutRequestFactory" %>
+<%@ page import="com.google.checkout.example.MerchantConstantsFactory" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -37,7 +37,7 @@
 <%
 	String button = request.getParameter("button");
 
-	MerchantConstants mc = com.google.checkout.example.CheckoutRequestFactory.getMerchantConstants();
+	MerchantConstants mc = MerchantConstantsFactory.getMerchantConstants();
     AddMerchantOrderNumberRequest amonRequest;
 	String orderNumber = request.getParameter("orderNumber") == null ? "" : request.getParameter("orderNumber");
     String merchantOrderNumber = "";
@@ -46,13 +46,13 @@
 	String responseXml = null;
 	
   if (button == null || button.equals("")) {
-	  amonRequest = com.google.checkout.example.CheckoutRequestFactory.newAddMerchantOrderNumberRequest();
+	  amonRequest = new AddMerchantOrderNumberRequest(mc);
 	  session.setAttribute("amonRequest", amonRequest);
 	  prettyXml = amonRequest.getXmlPretty();
 	  responseXml = "";
   }
   else if (button.equals("NewRequest")) {
-	  amonRequest = com.google.checkout.example.CheckoutRequestFactory.newAddMerchantOrderNumberRequest();		
+	  amonRequest = new AddMerchantOrderNumberRequest(mc);	
 	  session.setAttribute("amonRequest", amonRequest);
 	  prettyXml = amonRequest.getXmlPretty();
 	  responseXml = "";

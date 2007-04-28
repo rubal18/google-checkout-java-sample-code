@@ -20,7 +20,7 @@
 <%@ page import="com.google.checkout.MerchantConstants" %>
 <%@ page import="com.google.checkout.orderprocessing.UnarchiveOrderRequest" %>
 <%@ page import="com.google.checkout.CheckoutResponse" %>
-<%@ page import="com.google.checkout.example.CheckoutRequestFactory" %>
+<%@ page import="com.google.checkout.example.MerchantConstantsFactory" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -37,7 +37,7 @@
 <%
     String button = request.getParameter("button");
 
-    MerchantConstants mc = com.google.checkout.example.CheckoutRequestFactory.getMerchantConstants();
+    MerchantConstants mc = MerchantConstantsFactory.getMerchantConstants();
 
     UnarchiveOrderRequest unarchiveRequest;
 	String orderNumber = request.getParameter("orderNumber") == null ? "" : request.getParameter("orderNumber");
@@ -46,13 +46,13 @@
 	String responseXml = null;
 	
   if (button == null || button.equals("")) {
-	  unarchiveRequest = com.google.checkout.example.CheckoutRequestFactory.newUnarchiveOrderRequest();
+	  unarchiveRequest = new UnarchiveOrderRequest(mc);
 	  session.setAttribute("unarchiveRequest", unarchiveRequest);
 	  prettyXml = unarchiveRequest.getXmlPretty();
 	  responseXml = "";
   }
   else if (button.equals("NewRequest")) {
-	  unarchiveRequest = com.google.checkout.example.CheckoutRequestFactory.newUnarchiveOrderRequest();
+	  unarchiveRequest = new UnarchiveOrderRequest(mc);
 	  session.setAttribute("unarchiveRequest", unarchiveRequest);
 	  prettyXml = unarchiveRequest.getXmlPretty();
 	  responseXml = "";
