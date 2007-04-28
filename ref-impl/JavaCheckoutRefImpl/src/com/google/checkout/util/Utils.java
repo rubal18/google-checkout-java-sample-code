@@ -186,6 +186,10 @@ public class Utils {
 		return Long.parseLong(getElementStringValue(document, parent, string));
 	}
 
+	public static int getElementIntValue(Document document, Element parent, String string) {
+		return Integer.parseInt(getElementStringValue(document, parent, string));
+	}
+	
 	public static Element findElementAndSetElseCreateAndSet(Document document, Element parent, String element, Date date) {
     return findElementAndSetElseCreateAndSet(document, parent, element, getDateString(date));
 	}
