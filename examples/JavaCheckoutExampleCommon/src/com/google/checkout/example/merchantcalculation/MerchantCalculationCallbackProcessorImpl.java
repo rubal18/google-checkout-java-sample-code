@@ -27,16 +27,39 @@ import com.google.checkout.merchantcalculation.CouponResult;
 import com.google.checkout.merchantcalculation.MerchantCalculationCallback;
 import com.google.checkout.merchantcalculation.MerchantCalculationCallbackProcessor;
 import com.google.checkout.merchantcalculation.MerchantCalculationResults;
+import com.google.checkout.merchantcalculation.MerchantCodeString;
 
+/**
+ * A simple, example implementation of the MerchantCalculationCallbackProcessor
+ * interface.
+ * 
+ * @author simonjsmith
+ * 
+ * @see MerchantCalculationCallbackProcessor
+ */
 public class MerchantCalculationCallbackProcessorImpl implements
 		MerchantCalculationCallbackProcessor {
 
 	MerchantConstants merchantConstants;
 
-	public MerchantCalculationCallbackProcessorImpl(MerchantConstants merchantConstants) {
+	/**
+	 * Constructor which takes an instance of MerchantConstants.
+	 * 
+	 * @param merchantConstants
+	 *            The MerchantConstants.
+	 * 
+	 * @see MerchantConstants
+	 */
+	public MerchantCalculationCallbackProcessorImpl(
+			MerchantConstants merchantConstants) {
 		this.merchantConstants = merchantConstants;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.checkout.merchantcalculation.MerchantCalculationCallbackProcessor#process(com.google.checkout.merchantcalculation.MerchantCalculationCallback)
+	 */
 	public MerchantCalculationResults process(
 			MerchantCalculationCallback callback) throws CheckoutException {
 
@@ -47,7 +70,7 @@ public class MerchantCalculationCallbackProcessorImpl implements
 		MerchantCalculationResults results = new MerchantCalculationResults();
 		AnonymousAddress address;
 		String shipping;
-		String code;
+		MerchantCodeString code;
 
 		while (addresses.hasNext()) {
 			address = (AnonymousAddress) addresses.next();
@@ -59,10 +82,10 @@ public class MerchantCalculationCallbackProcessorImpl implements
 				merchantCodes = callback.getMerchantCodes().iterator();
 				Collection codeResults = new ArrayList();
 				while (merchantCodes.hasNext()) {
-					code = (String) merchantCodes.next();
+					code = (MerchantCodeString) merchantCodes.next();
 					CouponResult coupon = new CouponResult(false, 0.0f,
-							merchantConstants.getCurrencyCode(), code,
-							"Not supported in this example.");
+							merchantConstants.getCurrencyCode(),
+							code.getCode(), "Not supported in this example.");
 					codeResults.add(coupon);
 				}
 
