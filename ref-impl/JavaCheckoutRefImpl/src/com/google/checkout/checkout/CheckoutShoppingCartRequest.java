@@ -16,10 +16,7 @@
 
 package com.google.checkout.checkout;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.Collection;
@@ -30,9 +27,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.google.checkout.AbstractCheckoutRequest;
-import com.google.checkout.CheckoutResponse;
 import com.google.checkout.MerchantConstants;
-import com.google.checkout.util.Base64Coder;
 import com.google.checkout.util.Utils;
 
 /**
@@ -72,8 +67,13 @@ public class CheckoutShoppingCartRequest extends AbstractCheckoutRequest {
     checkoutFlowSupport = (Element) document
         .createElement("checkout-flow-support");
 
+    Element merchantCheckoutFlowSupport = (Element) document
+    .createElement("merchant-checkout-flow-support");
+    
+
     root.appendChild(shoppingCart);
     root.appendChild(checkoutFlowSupport);
+    checkoutFlowSupport.appendChild(merchantCheckoutFlowSupport);
   }
 
   /**

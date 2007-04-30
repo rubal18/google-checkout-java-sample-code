@@ -225,4 +225,23 @@ public class ShippingRestrictions {
 				"excluded-areas");
 		Utils.createNewContainer(document, excludedAreas, "world-area");
 	}
+	
+	/**
+	 * Retrieve the value of the &lt;allow-us-po-box&gt; tag.
+	 * 
+	 * @return Whether the shipping allows a US PO Box.
+	 */
+	public boolean isAllowUsPoBox() {
+		return Utils.getElementBooleanValue(document, root, "allow-us-po-box");
+	}
+	
+	/**
+	 * Set the value of the &lt;allow-us-po-box&gt; tag.
+	 * 
+	 * @param b Whether the shipping allows a US PO Box.
+	 */
+	public void setAllowUsPoBox(boolean b) {
+		Utils.findElementAndSetElseCreateAndSet(document, root, "allow-us-po-box", b);
+	}
+	
 }
