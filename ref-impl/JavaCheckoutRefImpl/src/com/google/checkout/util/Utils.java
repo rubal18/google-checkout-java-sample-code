@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -159,26 +160,22 @@ public class Utils {
 
 	public static Element createNewElementAndSet(Document document,
 			Element parent, String childElement, float childValue) {
-		return createNewElementAndSet(document, parent, childElement, ""
-				+ childValue);
+		return createNewElementAndSet(document, parent, childElement, ""+childValue);
 	}
 
 	public static Element createNewElementAndSet(Document document,
 			Element parent, String childElement, int childValue) {
-		return createNewElementAndSet(document, parent, childElement, ""
-				+ childValue);
+		return createNewElementAndSet(document, parent, childElement, ""+childValue);
 	}
 
 	public static Element createNewElementAndSet(Document document,
 			Element parent, String childElement, boolean childValue) {
-		return createNewElementAndSet(document, parent, childElement, ""
-				+ childValue);
+		return createNewElementAndSet(document, parent, childElement, ""+childValue);
 	}
 
 	public static Element createNewElementAndSet(Document document,
 			Element parent, String childElement, double childValue) {
-		return createNewElementAndSet(document, parent, childElement, ""
-				+ childValue);
+		return createNewElementAndSet(document, parent, childElement, ""+childValue);
 	}
 
 	public static String getElementStringValue(Document document,
