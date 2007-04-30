@@ -132,7 +132,7 @@ public class MerchantCalculationCallback {
 	 * @return The buyer language.
 	 */
 	public String getBuyerLanguage() {
-		return Utils.getElementStringValue(document, root, "buyer-id");
+		return Utils.getElementStringValue(document, root, "buyer-language");
 	}
 
 	/**

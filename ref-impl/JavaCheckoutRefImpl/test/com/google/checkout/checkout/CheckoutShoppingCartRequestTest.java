@@ -40,17 +40,17 @@ public class CheckoutShoppingCartRequestTest extends XMLTestCase {
 		shoppingCartSimple = inputStreamAsString(this
 				.getClass()
 				.getResourceAsStream(
-						"/com/google/checkout/checkout/test/checkout-shopping-cart-SIMPLE.xml"));
+						"/com/google/checkout/checkout/checkout-shopping-cart-SIMPLE.xml"));
 
 		shoppingCartTypical = inputStreamAsString(this
 				.getClass()
 				.getResourceAsStream(
-						"/com/google/checkout/checkout/test/checkout-shopping-cart-TYPICAL.xml"));
+						"/com/google/checkout/checkout/checkout-shopping-cart-TYPICAL.xml"));
 
 		shoppingCartComplex = inputStreamAsString(this
 				.getClass()
 				.getResourceAsStream(
-						"/com/google/checkout/checkout/test/checkout-shopping-cart-COMPLEX.xml"));
+						"/com/google/checkout/checkout/checkout-shopping-cart-COMPLEX.xml"));
 
 		dummyMerchantConstants = new MerchantConstants("", "", "", "USD", "",
 				"", "");

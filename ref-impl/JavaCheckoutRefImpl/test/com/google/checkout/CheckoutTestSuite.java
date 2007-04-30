@@ -4,6 +4,7 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import com.google.checkout.checkout.CheckoutShoppingCartRequestTest;
+import com.google.checkout.merchantcalculation.MerchantCalculationCallbackTest;
 import com.google.checkout.orderprocessing.AddMerchantOrderNumberRequestTest;
 import com.google.checkout.orderprocessing.ArchiveOrderRequestTest;
 import com.google.checkout.orderprocessing.CancelOrderRequestTest;
@@ -29,6 +30,7 @@ public class CheckoutTestSuite {
 		suite.addTestSuite(RefundOrderRequestTest.class);
 		suite.addTestSuite(SendBuyerMessageRequestTest	.class);					
 		suite.addTestSuite(UnarchiveOrderRequestTest.class);
+		suite.addTestSuite(MerchantCalculationCallbackTest.class);
 		return suite;
 	}
 
