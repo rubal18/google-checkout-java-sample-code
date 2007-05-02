@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<order-state-change-notification xmlns="http://checkout.google.com/schema/2" serial-number="c821326e-7caa-4d51-9b2e-48ef7ecd6423">
+  <timestamp>2006-03-18T17:32:11.592Z</timestamp>
+  <google-order-number>841171949013218</google-order-number>
+  <new-fulfillment-order-state>DELIVERED</new-fulfillment-order-state>
+  <new-financial-order-state>CHARGEABLE</new-financial-order-state>
+  <previous-fulfillment-order-state>PROCESSING</previous-fulfillment-order-state>
+  <previous-financial-order-state>CHARGEABLE</previous-financial-order-state>
+</order-state-change-notification>

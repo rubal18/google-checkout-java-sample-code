@@ -68,7 +68,7 @@ public class Item {
 	 * @see Element
 	 */
 	public Element[] getMerchantPrivateItemData() {
-		Element privateData = Utils.findContainerElseCreate(document, element,
+		Element privateData = Utils.findElementOrContainer(document, element,
 				"merchant-private-item-data");
 		return Utils.getElements(document, privateData);
 	}

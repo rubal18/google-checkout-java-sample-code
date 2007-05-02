@@ -43,7 +43,7 @@ public class AnonymousAddress {
 	 *            The element.
 	 */
 	public AnonymousAddress(Document document, Element element) {
-		this.element = element;
+		this.document = document;
 		this.element = element;
 	}
 

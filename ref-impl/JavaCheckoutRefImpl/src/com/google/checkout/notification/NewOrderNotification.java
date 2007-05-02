@@ -25,13 +25,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.google.checkout.checkout.Item;
+import com.google.checkout.merchantcalculation.AnonymousAddress;
 import com.google.checkout.util.Utils;
 
 public class NewOrderNotification extends CheckoutNotification {
-
-	private Document document;
-
-	private Element root;
 
 	/**
 	 * A constructor which takes the request as a String.
@@ -72,7 +69,6 @@ public class NewOrderNotification extends CheckoutNotification {
 		for (int i = 0; i < elements.length; i++) {
 			ret.add(new Item(document, elements[i]));
 		}
-
 		return ret;
 	}
 
@@ -147,18 +143,36 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	public Collection getMerchantCodes() {
-		// TODO
-		throw new RuntimeException("not impl");
+		Element oa = Utils.findElementOrContainer(document, root,
+		"order-adjustment");
+		Element mc = Utils.findElementOrContainer(document, oa,
+		"merchant-codes");		
+		
+		Element[] elements = Utils.getElements(document, mc);
+		Collection ret = new ArrayList();
+
+		Element e;
+		String name;
+		for (int i = 0; i < elements.length; i++) {
+			e = elements[i];
+			name = e.getNodeName();	
+			if ("gift-certificate-adjustment".equals(name)) {
+				ret.add(new GiftCertificateAdjustment(document, e));
+			} else if("coupon-adjustment".equals(name)) {
+				ret.add(new CouponAdjustment(document, e));
+			}
+		}
+		return ret;	
 	}
 
-	public double getTotalTax() {
+	public float getTotalTax() {
 		Element orderAdjustment = Utils.findElementOrContainer(document, root,
 				"order-adjustment");
 		return Utils.getElementFloatValue(document, orderAdjustment,
 				"total-tax");
 	}
 
-	public double getAdjustmentTotal() {
+	public float getAdjustmentTotal() {
 		Element orderAdjustment = Utils.findElementOrContainer(document, root,
 				"order-adjustment");
 		return Utils.getElementFloatValue(document, orderAdjustment,
@@ -166,11 +180,30 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	public Shipping getShipping() {
-		// TODO
-		throw new RuntimeException("not impl");
+		Element oa = Utils.findElementOrContainer(document, root,
+		"order-adjustment");
+		Element shipping = Utils.findElementOrContainer(document, oa,
+		"shipping");	
+		
+		Element e = Utils.findElementOrContainer(document, shipping, "merchant-calculated-shipping-adjustment");
+		if (e != null) {
+			return new MerchantCalculatedShippingAdjustment(document, e);
+		}
+
+		e = Utils.findElementOrContainer(document, shipping, "flat-rate-shipping-adjustment");
+		if (e != null) {
+			return new FlatRateShippingAdjustment(document, e);
+		}
+
+		e = Utils.findElementOrContainer(document, shipping, "pickup-shipping-adjustment");
+		if (e != null) {
+			return new PickupShippingAdjustment(document, e);
+		}		
+
+		return null;	
 	}
 
-	public double getOrderTotal() {
+	public float getOrderTotal() {
 		return Utils.getElementFloatValue(document, root, "order-total");
 	}
 

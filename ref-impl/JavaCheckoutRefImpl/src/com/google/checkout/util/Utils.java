@@ -184,7 +184,13 @@ public class Utils {
 		if (nl.getLength() == 0) {
 			return "";
 		}
-		return nl.item(0).getFirstChild().getNodeValue();
+		
+		Node n = nl.item(0).getFirstChild();
+		if (n ==  null) {
+			return "";
+		}
+		
+		return n.getNodeValue();
 	}
 
 	public static boolean getElementBooleanValue(Document document,
@@ -230,7 +236,12 @@ public class Utils {
 	}
 
 	public static Element[] getElements(Document document, Element parent) {
-      NodeList nl = parent.getChildNodes();
+      if (parent == null)
+      {
+    	  return new Element[] {};
+      }
+		
+	  NodeList nl = parent.getChildNodes();
       ArrayList al = new ArrayList();
       
 

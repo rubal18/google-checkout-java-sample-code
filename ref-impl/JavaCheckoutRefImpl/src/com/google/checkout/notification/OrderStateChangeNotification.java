@@ -16,16 +16,54 @@
 
 package com.google.checkout.notification;
 
-public class OrderStateChangeNotification {
+import java.io.InputStream;
+
+import com.google.checkout.util.Utils;
+
+public class OrderStateChangeNotification extends CheckoutNotification {
 
 	/**
-	 * Return the Google Order Number for this notification.
+	 * A constructor which takes the request as a String.
 	 * 
-	 * @return The Google Order Number.
+	 * @param requestString
 	 */
-	public String getGoogleOrderNo() {
-		// TODO
-		throw new RuntimeException("not impl");
+	public OrderStateChangeNotification(String requestString) {
+		document = Utils.newDocumentFromString(requestString);
+		root = document.getDocumentElement();
+	}
+
+	/**
+	 * A constructor which takes the request as an InputStream.
+	 * 
+	 * @param inputStream
+	 */
+	public OrderStateChangeNotification(InputStream inputStream) {
+		document = Utils.newDocumentFromInputStream(inputStream);
+		root = document.getDocumentElement();
+	}
+
+	public FulfillmentOrderState getNewFulfillmentOrderState() {
+		String state = Utils.getElementStringValue(document, root,
+				"new-fulfillment-order-state");
+		return FulfillmentOrderState.getState(state);
+	}
+
+	public FinancialOrderState getNewFinancialOrderState() {
+		String state = Utils.getElementStringValue(document, root,
+				"new-financial-order-state");
+		return FinancialOrderState.getState(state);
+	}
+
+	public FulfillmentOrderState getPreviousFulfillmentOrderState() {
+		String state = Utils.getElementStringValue(document, root,
+				"previous-fulfillment-order-state");
+		return FulfillmentOrderState.getState(state);
+	}
+
+	public FinancialOrderState getPreviousFinancialOrderState() {
+		String state = Utils.getElementStringValue(document, root,
+				"previous-financial-order-state");
+		return FinancialOrderState.getState(state);
 	}
 
 }

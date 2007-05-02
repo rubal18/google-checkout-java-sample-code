@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chargeback-amount-notification xmlns="http://checkout.google.com/schema/2" serial-number="bea6bc1b-e1e2-44fe-80ff-0180e33a2614">
+  <timestamp>2006-03-18T19:10:04.423Z</timestamp>
+  <google-order-number>841171949013218</google-order-number>
+  <latest-chargeback-amount currency="USD">226.06</latest-chargeback-amount>
+  <total-chargeback-amount currency="USD">226.06</total-chargeback-amount>
+</chargeback-amount-notification>

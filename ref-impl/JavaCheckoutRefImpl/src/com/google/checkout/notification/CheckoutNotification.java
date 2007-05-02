@@ -1,27 +1,34 @@
 package com.google.checkout.notification;
 
+import java.io.InputStream;
 import java.util.Date;
 
-public class CheckoutNotification {
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
+import com.google.checkout.util.Utils;
+
+public abstract class CheckoutNotification {
+
+	protected Document document;
+
+	protected Element root;
+	
 	/**
 	   * Return the Google Order Number for this notification.
 	   *  
 	   * @return The Google Order Number.
 	   */
 	  public String getGoogleOrderNo() {
-	    //TODO
-		throw new RuntimeException("not impl");
+		  return Utils.getElementStringValue(document, root, "google-order-number");
 	  }
 	  
 	  
 	  public Date getTimestamp() {
-		    //TODO
-			throw new RuntimeException("not impl");
+		  return Utils.getElementDateValue(document, root, "timestamp");
 		  }
 	  
 	  public String getSerialNumber() {
-		    //TODO
-			throw new RuntimeException("not impl");
+		  return root.getAttribute("serial-number");
 		  }
 }

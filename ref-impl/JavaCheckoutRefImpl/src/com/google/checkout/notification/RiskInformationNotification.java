@@ -1,40 +1,63 @@
 package com.google.checkout.notification;
 
+import java.io.InputStream;
+
+import org.w3c.dom.Element;
+
+import com.google.checkout.util.Utils;
+
 public class RiskInformationNotification extends CheckoutNotification {
 
+	Element riskInfo;
+	
+	/**
+	 * A constructor which takes the request as a String.
+	 * 
+	 * @param requestString
+	 */
+	public RiskInformationNotification(String requestString) {
+		document = Utils.newDocumentFromString(requestString);
+		root = document.getDocumentElement();
+		riskInfo = Utils.findElementOrContainer(document, root, "risk-information");
+	}
+
+	/**
+	 * A constructor which takes the request as an InputStream.
+	 * 
+	 * @param inputStream
+	 */
+	public RiskInformationNotification(InputStream inputStream) {
+		document = Utils.newDocumentFromInputStream(inputStream);
+		root = document.getDocumentElement();
+		riskInfo = Utils.findElementOrContainer(document, root, "risk-information");
+	}
+	
 	public boolean isEligibleForProtection() {
-		// TODO
-		throw new RuntimeException("not impl");
+		return Utils.getElementBooleanValue(document, riskInfo, "eligible-for-protection");
 	}
 
 	public Address getBillingAddress() {
-		// TODO
-		throw new RuntimeException("not impl");
+		Element address = Utils.findElementOrContainer(document, riskInfo, "billing-address");
+		return new Address(document, address);
 	}
 
 	public String getAvsResponse() {
-		// TODO
-		throw new RuntimeException("not impl");
+		return Utils.getElementStringValue(document, riskInfo, "avs-response");
 	}
 
 	public String getCvnResponse() {
-		// TODO
-		throw new RuntimeException("not impl");
+		return Utils.getElementStringValue(document, riskInfo, "cvn-response");
 	}
 
 	public String getPartialCcNumber() {
-		// TODO
-		throw new RuntimeException("not impl");
+		return Utils.getElementStringValue(document, riskInfo, "partial-cc-number");
 	}
 
 	public int getBuyerAccountAge() {
-		// TODO
-		throw new RuntimeException("not impl");
+		return Utils.getElementIntValue(document, riskInfo, "buyer-account-age");
 	}
 
 	public String getIpAddress() {
-		// TODO
-		throw new RuntimeException("not impl");
+		return Utils.getElementStringValue(document, riskInfo, "ip-address");
 	}
-
 }

@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Collection;
+import java.util.Iterator;
 
+import com.google.checkout.checkout.Item;
 import com.google.checkout.util.Utils;
 
 import junit.framework.TestCase;
@@ -30,9 +33,30 @@ public class MerchantCalculationCallbackTest extends TestCase {
 		
 		assertEquals(c.getBuyerId(), 419797746651146l);
 		assertEquals(c.getAnonymousAddresses().size(), 1);
+		Collection addresses = c.getAnonymousAddresses();
+		AnonymousAddress a = (AnonymousAddress) addresses.iterator().next();
+		assertEquals(a.getCity(), "Mountain View");
+		assertEquals(a.getCountryCode(), "USA");		
+		assertEquals(a.getId(), "425353566534775");
+		assertEquals(a.getPostalCode(), "94043");
+		assertEquals(a.getRegion(), "CA");
+		
 		assertEquals(c.getBuyerLanguage(), "en_US");
 		assertEquals(c.getCartExpiration(), Utils.parseDate("2006-12-31T23:59:59.000Z"));
 		assertEquals(c.getItems().size(), 2);
+		Collection items = c.getItems();
+		Iterator it = items.iterator();
+		Item i1 = (Item) it.next();
+		assertEquals(i1.getItemDescription(), "A pack of highly nutritious dried food for emergency - store in your garage for up to one year!!");
+		assertEquals(i1.getItemName(), "Dry Food Pack AA1453");
+		assertEquals(i1.getMerchantItemId(), "");	
+		assertEquals(i1.getMerchantPrivateItemData().length, 0);
+		assertEquals(i1.getQuantity(), 1);
+		assertEquals(i1.getUnitPriceAmount(), 35.00f);
+		assertEquals(i1.getUnitPriceCurrency(), "USD");
+		assertEquals(i1.getTaxTableSelector(), "food");
+								
+								
 		assertEquals(c.getMerchantCodes().size(), 2);
 		assertEquals(c.getMerchantPrivateDataNodes(), null);
 		assertEquals(c.getSerialNumber(), "6412b6a8-d366-32ab-a42b-1c4a673d3523");

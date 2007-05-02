@@ -5,6 +5,13 @@ import junit.framework.TestSuite;
 
 import com.google.checkout.checkout.CheckoutShoppingCartRequestTest;
 import com.google.checkout.merchantcalculation.MerchantCalculationCallbackTest;
+import com.google.checkout.notification.AuthorizationAmountNotificationTest;
+import com.google.checkout.notification.ChargeAmountNotificationTest;
+import com.google.checkout.notification.ChargebackAmountNotificationTest;
+import com.google.checkout.notification.NewOrderNotificationTest;
+import com.google.checkout.notification.OrderStateChangeNotificationTest;
+import com.google.checkout.notification.RefundAmountNotificationTest;
+import com.google.checkout.notification.RiskInformationNotificationTest;
 import com.google.checkout.orderprocessing.AddMerchantOrderNumberRequestTest;
 import com.google.checkout.orderprocessing.ArchiveOrderRequestTest;
 import com.google.checkout.orderprocessing.CancelOrderRequestTest;
@@ -30,7 +37,19 @@ public class CheckoutTestSuite {
 		suite.addTestSuite(RefundOrderRequestTest.class);
 		suite.addTestSuite(SendBuyerMessageRequestTest	.class);					
 		suite.addTestSuite(UnarchiveOrderRequestTest.class);
+		
 		suite.addTestSuite(MerchantCalculationCallbackTest.class);
+		
+		suite.addTestSuite(AuthorizationAmountNotificationTest.class);
+		suite.addTestSuite(ChargeAmountNotificationTest.class);
+		suite.addTestSuite(ChargebackAmountNotificationTest.class);
+		suite.addTestSuite(NewOrderNotificationTest.class);
+		suite.addTestSuite(OrderStateChangeNotificationTest.class);
+		suite.addTestSuite(RefundAmountNotificationTest.class);
+		suite.addTestSuite(RiskInformationNotificationTest.class);
+		
+		
+		
 		return suite;
 	}
 

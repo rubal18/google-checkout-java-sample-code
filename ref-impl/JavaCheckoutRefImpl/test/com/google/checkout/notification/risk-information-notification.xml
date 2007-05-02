@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<risk-information-notification xmlns="http://checkout.google.com/schema/2" serial-number="0b95f758-0332-45d5-aced-5da64c8fc5b9">
+  <timestamp>2006-03-18T20:10:04.312Z</timestamp>
+  <google-order-number>841171949013218</google-order-number>
+  <risk-information>
+    <billing-address>
+      <email>knbw@gmail.com</email>
+      <company-name />
+      <contact-name>Knikki Beckwell</contact-name>
+      <phone />
+      <fax />
+      <address1>1250 Shoreline Blvd</address1>
+      <address2 />
+      <country-code>US</country-code>
+      <city>Mountain View</city>
+      <region>CA</region>
+      <postal-code>94043</postal-code>
+    </billing-address>
+    <ip-address>123.45.167.189</ip-address>
+    <eligible-for-protection>true</eligible-for-protection>
+    <avs-response>N</avs-response>
+    <cvn-response>M</cvn-response>
+    <partial-cc-number>4530</partial-cc-number>
+    <buyer-account-age>130</buyer-account-age>
+  </risk-information>
+</risk-information-notification>
