@@ -17,8 +17,8 @@
 package com.google.checkout.example.notification;
 
 public class AbstractNotificationProcessor {
-  
-  protected String getAckString() {
-    return NotificationAcknowledgment.getAckString();
-  }
+
+	protected String getAckString() {
+		return NotificationAcknowledgment.getAckString();
+	}
 }

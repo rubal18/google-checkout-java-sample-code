@@ -23,161 +23,172 @@ import java.io.FilenameFilter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import java.io.Serializable;
-
 public class GoogleOrder implements Serializable {
-  private String merchantId;
-  private String orderNumber;
-  private String lastFinStatus;
-  private String lastFulStatus;
-  private Date lastUpdateTime;
-  private String buyerEmail;
-  private String orderAmount;
-  private Collection events = new ArrayList();
-  static String dir = System.getProperty("java.io.tmpdir");
-  static File fDir = new File(dir);
+	private String merchantId;
 
-  public static GoogleOrder findOrCreate(String merchantId, String orderNumber)
-      throws Exception {
+	private String orderNumber;
 
-    GoogleOrder ret;
-    File file = new File(fDir, "GCO_" + merchantId + "_" + orderNumber + ".ser");
-    if (file.exists()) {
-      ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
-      ret = (GoogleOrder) in.readObject();
-      in.close();
-      return ret;
-    }
-    ret = new GoogleOrder(merchantId, orderNumber);
-    return ret;
-  }
+	private String lastFinStatus;
 
-  public static GoogleOrder readFromFile(File file) throws Exception {
+	private String lastFulStatus;
 
-    GoogleOrder ret;
-    ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
-    ret = (GoogleOrder) in.readObject();
-    in.close();
-    return ret;
-  }
+	private Date lastUpdateTime;
 
-  public static GoogleOrder[] findAll(String merchantId) throws Exception {
+	private String buyerEmail;
 
-    File[] files = fDir.listFiles(new OrderFilter(merchantId));
-    GoogleOrder[] ret = new GoogleOrder[files.length];
+	private String orderAmount;
 
-    for (int i = 0; i < files.length; i++) {
-      ret[i] = readFromFile(files[i]);
-    }
-    return ret;
-  }
+	private Collection events = new ArrayList();
 
-  public String getBuyerEmail() {
-    return buyerEmail;
-  }
+	static String dir = System.getProperty("java.io.tmpdir");
 
-  public void setBuyerEmail(String buyerEmail) {
-    this.buyerEmail = buyerEmail;
-  }
+	static File fDir = new File(dir);
 
-  public String getLastFinStatus() {
-    return lastFinStatus;
-  }
+	public static GoogleOrder findOrCreate(String merchantId, String orderNumber)
+			throws Exception {
 
-  public void setLastFinStatus(String lastFinStatus) {
-    this.lastFinStatus = lastFinStatus;
-  }
+		GoogleOrder ret;
+		File file = new File(fDir, "GCO_" + merchantId + "_" + orderNumber
+				+ ".ser");
+		if (file.exists()) {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(
+					file));
+			ret = (GoogleOrder) in.readObject();
+			in.close();
+			return ret;
+		}
+		ret = new GoogleOrder(merchantId, orderNumber);
+		return ret;
+	}
 
-  public String getLastFulStatus() {
-    return lastFulStatus;
-  }
+	public static GoogleOrder readFromFile(File file) throws Exception {
 
-  public void setLastFulStatus(String lastFulStatus) {
-    this.lastFulStatus = lastFulStatus;
-  }
+		GoogleOrder ret;
+		ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
+		ret = (GoogleOrder) in.readObject();
+		in.close();
+		return ret;
+	}
 
-  public Date getLastUpdateTime() {
-    return lastUpdateTime;
-  }
+	public static GoogleOrder[] findAll(String merchantId) throws Exception {
 
-  public void setLastUpdateTime(Date lastUpdateTime) {
-    this.lastUpdateTime = lastUpdateTime;
-  }
+		File[] files = fDir.listFiles(new OrderFilter(merchantId));
+		GoogleOrder[] ret = new GoogleOrder[files.length];
 
-  public String getMerchantId() {
-    return merchantId;
-  }
+		for (int i = 0; i < files.length; i++) {
+			ret[i] = readFromFile(files[i]);
+		}
+		return ret;
+	}
 
-  public void setMerchantId(String merchantId) {
-    this.merchantId = merchantId;
-  }
+	public String getBuyerEmail() {
+		return buyerEmail;
+	}
 
-  public Collection getEvents() {
-    return events;
-  }
+	public void setBuyerEmail(String buyerEmail) {
+		this.buyerEmail = buyerEmail;
+	}
 
-  public void setNotifications(Collection events) {
-    this.events = events;
-  }
+	public String getLastFinStatus() {
+		return lastFinStatus;
+	}
 
-  public void setOrderNumber(String orderNumber) {
-    this.orderNumber = orderNumber;
-  }
+	public void setLastFinStatus(String lastFinStatus) {
+		this.lastFinStatus = lastFinStatus;
+	}
 
-  public GoogleOrder(String merchantId, String orderNumber) {
-    this.merchantId = merchantId;
-    this.orderNumber = orderNumber;
-  }
+	public String getLastFulStatus() {
+		return lastFulStatus;
+	}
 
-  public synchronized void addIncomingMessage(Date timestamp, String type,
-      String request, String response) throws Exception {
+	public void setLastFulStatus(String lastFulStatus) {
+		this.lastFulStatus = lastFulStatus;
+	}
 
-    this.lastUpdateTime = timestamp;
-    events.add(new Message(true, timestamp, type, request, response));
-    save();
-  }
+	public Date getLastUpdateTime() {
+		return lastUpdateTime;
+	}
 
-  public synchronized void addOutgoingMessage(Date timestamp, String type,
-      String request, String response) throws Exception {
-    events.add(new Message(false, timestamp, type, request, response));
-    save();
-  }
+	public void setLastUpdateTime(Date lastUpdateTime) {
+		this.lastUpdateTime = lastUpdateTime;
+	}
 
-  private void save() throws Exception {
-    ObjectOutput out = new ObjectOutputStream(new FileOutputStream(new File(
-        dir, "GCO_" + merchantId + "_" + orderNumber + ".ser")));
-    out.writeObject(this);
-    out.close();
-  }
+	public String getMerchantId() {
+		return merchantId;
+	}
 
-  public String getOrderNumber() {
-    return orderNumber;
-  }
+	public void setMerchantId(String merchantId) {
+		this.merchantId = merchantId;
+	}
 
-  public static class OrderFilter implements FilenameFilter {
-    String mid;
+	public Collection getEvents() {
+		return events;
+	}
 
-    public OrderFilter(String mid) {
-      this.mid = mid;
-    }
+	public void setNotifications(Collection events) {
+		this.events = events;
+	}
 
-    public boolean accept(File file, String name) {
-      if (name.startsWith("GCO_" + mid)) {
-        return true;
-      }
-      return false;
-    }
-  }
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
 
-  public String getOrderAmount() {
-    return orderAmount;
-  }
+	public GoogleOrder(String merchantId, String orderNumber) {
+		this.merchantId = merchantId;
+		this.orderNumber = orderNumber;
+	}
 
-  public void setOrderAmount(String orderAmount) {
-    this.orderAmount = orderAmount;
-  }
+	public synchronized void addIncomingMessage(Date timestamp, String type,
+			String request, String response) throws Exception {
+
+		this.lastUpdateTime = timestamp;
+		events.add(new Message(true, timestamp, type, request, response));
+		save();
+	}
+
+	public synchronized void addOutgoingMessage(Date timestamp, String type,
+			String request, String response) throws Exception {
+		events.add(new Message(false, timestamp, type, request, response));
+		save();
+	}
+
+	private void save() throws Exception {
+		ObjectOutput out = new ObjectOutputStream(
+				new FileOutputStream(new File(dir, "GCO_" + merchantId + "_"
+						+ orderNumber + ".ser")));
+		out.writeObject(this);
+		out.close();
+	}
+
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public static class OrderFilter implements FilenameFilter {
+		String mid;
+
+		public OrderFilter(String mid) {
+			this.mid = mid;
+		}
+
+		public boolean accept(File file, String name) {
+			if (name.startsWith("GCO_" + mid)) {
+				return true;
+			}
+			return false;
+		}
+	}
+
+	public String getOrderAmount() {
+		return orderAmount;
+	}
+
+	public void setOrderAmount(String orderAmount) {
+		this.orderAmount = orderAmount;
+	}
 }

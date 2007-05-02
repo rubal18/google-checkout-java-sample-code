@@ -16,16 +16,11 @@
 
 package com.google.checkout.example.notification;
 
-import java.util.Date;
-
-import org.w3c.dom.Document;
-
 import com.google.checkout.CheckoutException;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.GoogleOrder;
 import com.google.checkout.notification.ChargebackAmountNotification;
 import com.google.checkout.notification.ChargebackAmountNotificationProcessor;
-import com.google.checkout.util.Utils;
 
 /**
  * TODO

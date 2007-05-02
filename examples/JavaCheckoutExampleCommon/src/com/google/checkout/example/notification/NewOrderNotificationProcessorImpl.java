@@ -16,35 +16,35 @@
 
 package com.google.checkout.example.notification;
 
-import java.util.Date;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.google.checkout.CheckoutException;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.GoogleOrder;
 import com.google.checkout.notification.NewOrderNotification;
 import com.google.checkout.notification.NewOrderNotificationProcessor;
-import com.google.checkout.util.Utils;
 
-/**TODO
+/**
+ * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public class NewOrderNotificationProcessorImpl extends
 		AbstractNotificationProcessor implements NewOrderNotificationProcessor {
 
 	private MerchantConstants merchantConstants;
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @param merchantConstants
 	 */
 	public NewOrderNotificationProcessorImpl(MerchantConstants merchantConstants) {
 		this.merchantConstants = merchantConstants;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.checkout.notification.NewOrderNotificationProcessor#process(com.google.checkout.notification.NewOrderNotification)
 	 */
 	public String process(NewOrderNotification notification)

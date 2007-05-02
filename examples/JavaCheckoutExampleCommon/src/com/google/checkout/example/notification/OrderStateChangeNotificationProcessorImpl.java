@@ -16,16 +16,11 @@
 
 package com.google.checkout.example.notification;
 
-import java.util.Date;
-
-import org.w3c.dom.Document;
-
 import com.google.checkout.CheckoutException;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.GoogleOrder;
 import com.google.checkout.notification.OrderStateChangeNotification;
 import com.google.checkout.notification.OrderStateChangeNotificationProcessor;
-import com.google.checkout.util.Utils;
 
 /**
  * TODO
@@ -33,13 +28,17 @@ import com.google.checkout.util.Utils;
  * @author simonjsmith
  * 
  */
-/**TODO
+/**
+ * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
-/**TODO
+/**
+ * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public class OrderStateChangeNotificationProcessorImpl extends
 		AbstractNotificationProcessor implements
@@ -57,7 +56,9 @@ public class OrderStateChangeNotificationProcessorImpl extends
 		this.merchantConstants = merchantConstants;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.checkout.notification.OrderStateChangeNotificationProcessor#process(com.google.checkout.notification.OrderStateChangeNotification)
 	 */
 	public String process(OrderStateChangeNotification notification)

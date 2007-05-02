@@ -40,7 +40,7 @@ public class MerchantConstantsFactory {
 	 * @see MerchantConstants
 	 */
 	public static MerchantConstants getMerchantConstants() {
-		
+
 		if (mc == null) {
 			ResourceBundle bundle = ResourceBundle
 					.getBundle("com_google_checkout_example_settings");

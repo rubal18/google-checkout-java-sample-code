@@ -24,11 +24,13 @@ import com.google.checkout.util.Utils;
 
 public class NotificationAcknowledgment {
 
-  public static String getAckString() {
-    Document document = Utils.newEmptyDocument();
-    Element root = (Element) document.createElementNS(Constants.checkoutNamespace, "notification-acknowledgment"); 
-    root.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns", Constants.checkoutNamespace);
-    document.appendChild(root);
-    return Utils.documentToStringPretty(document);
-  }
+	public static String getAckString() {
+		Document document = Utils.newEmptyDocument();
+		Element root = (Element) document.createElementNS(
+				Constants.checkoutNamespace, "notification-acknowledgment");
+		root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns",
+				Constants.checkoutNamespace);
+		document.appendChild(root);
+		return Utils.documentToStringPretty(document);
+	}
 }

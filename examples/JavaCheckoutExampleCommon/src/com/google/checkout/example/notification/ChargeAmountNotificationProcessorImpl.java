@@ -16,16 +16,11 @@
 
 package com.google.checkout.example.notification;
 
-import java.util.Date;
-
-import org.w3c.dom.Document;
-
 import com.google.checkout.CheckoutException;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.GoogleOrder;
 import com.google.checkout.notification.ChargeAmountNotification;
 import com.google.checkout.notification.ChargeAmountNotificationProcessor;
-import com.google.checkout.util.Utils;
 
 /**
  * TODO
@@ -49,7 +44,9 @@ public class ChargeAmountNotificationProcessorImpl extends
 		this.merchantConstants = merchantConstants;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.checkout.notification.ChargeAmountNotificationProcessor#process(com.google.checkout.notification.ChargeAmountNotification)
 	 */
 	public String process(ChargeAmountNotification notification)

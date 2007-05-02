@@ -16,48 +16,50 @@
 
 package com.google.checkout.example.notification;
 
-import java.util.Date;
-
-import org.w3c.dom.Document;
-
 import com.google.checkout.CheckoutException;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.GoogleOrder;
 import com.google.checkout.notification.RefundAmountNotification;
 import com.google.checkout.notification.RefundAmountNotificationProcessor;
-import com.google.checkout.util.Utils;
 
-/**TODO
+/**
+ * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
-public class RefundNotificationProcessorImpl extends AbstractNotificationProcessor
-    implements RefundAmountNotificationProcessor {
-  
-  private MerchantConstants merchantConstants;
-  
-  /**TODO
- * @param merchantConstants
- */
-public RefundNotificationProcessorImpl(MerchantConstants merchantConstants) {
-    this.merchantConstants = merchantConstants;
-  }
-  
+public class RefundNotificationProcessorImpl extends
+		AbstractNotificationProcessor implements
+		RefundAmountNotificationProcessor {
 
-/* (non-Javadoc)
- * @see com.google.checkout.notification.RefundAmountNotificationProcessor#process(com.google.checkout.notification.RefundAmountNotification)
- */
-public String process(RefundAmountNotification notification) throws CheckoutException {
-	try {
-		String ack = getAckString();
-		GoogleOrder order = GoogleOrder.findOrCreate(merchantConstants
-				.getMerchantId(), notification.getGoogleOrderNo());
-		order.addIncomingMessage(notification.getTimestamp(), notification
-				.getRootNodeName(), notification.getXmlPretty(), ack);
-		return ack;
-	} catch (Exception e) {
-		throw new CheckoutException(e);
+	private MerchantConstants merchantConstants;
+
+	/**
+	 * TODO
+	 * 
+	 * @param merchantConstants
+	 */
+	public RefundNotificationProcessorImpl(MerchantConstants merchantConstants) {
+		this.merchantConstants = merchantConstants;
 	}
-}
-  
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.checkout.notification.RefundAmountNotificationProcessor#process(com.google.checkout.notification.RefundAmountNotification)
+	 */
+	public String process(RefundAmountNotification notification)
+			throws CheckoutException {
+		try {
+			String ack = getAckString();
+			GoogleOrder order = GoogleOrder.findOrCreate(merchantConstants
+					.getMerchantId(), notification.getGoogleOrderNo());
+			order.addIncomingMessage(notification.getTimestamp(), notification
+					.getRootNodeName(), notification.getXmlPretty(), ack);
+			return ack;
+		} catch (Exception e) {
+			throw new CheckoutException(e);
+		}
+	}
+
 }
