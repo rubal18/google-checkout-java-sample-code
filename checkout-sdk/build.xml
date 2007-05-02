@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="sdk" default="default" basedir=".">
+    <description>Builds, tests, and runs the project sdk.</description>
+    <import file="nbproject/build-impl.xml"/>
+
+    <property name="ref-impl.home" value="../ref-impl/JavaCheckoutRefImpl"/>
+    <property name="common-example.home" value="../examples/JavaCheckoutExampleCommon"/>
+    <property name="war-example.home" value="../examples/JavaCheckoutWebExampleWar"/>
+
+    <target name="-post-compile" depends="init">
+      <copy todir="${build.classes.dir}">
+        <fileset dir="${ref-impl.home}/build/classes">
+          <include name="**/*.class"/>
+        </fileset>
+        <fileset dir="${common-example.home}/build/classes">
+          <include name="**/*.class"/>
+        </fileset>
+        <fileset dir="${war-example.home}/build/web/WEB-INF/classes">
+          <include name="**/*.class"/>
+        </fileset>
+      </copy>      
+    </target>
+</project>

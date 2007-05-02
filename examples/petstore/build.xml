@@ -26,5 +26,6 @@
           <include name="**/*.class"/>
         </fileset>
       </copy>
+        <copy todir="${build.classes.dir}" file="com_google_checkout_example_settings.properties"/>
     </target>
 </project>
