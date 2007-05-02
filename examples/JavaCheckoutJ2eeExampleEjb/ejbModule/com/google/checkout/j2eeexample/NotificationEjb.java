@@ -19,19 +19,26 @@ import javax.jms.TextMessage;
 
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.MerchantConstantsFactory;
-import com.google.checkout.example.notification.AuthorizationNotificationProcessorImpl;
-import com.google.checkout.example.notification.ChargeNotificationProcessorImpl;
-import com.google.checkout.example.notification.ChargebackNotificationProcessorImpl;
+import com.google.checkout.example.notification.AuthorizationAmountNotificationProcessorImpl;
+import com.google.checkout.example.notification.ChargeAmountNotificationProcessorImpl;
+import com.google.checkout.example.notification.ChargebackAmountNotificationProcessorImpl;
 import com.google.checkout.example.notification.NewOrderNotificationProcessorImpl;
 import com.google.checkout.example.notification.OrderStateChangeNotificationProcessorImpl;
 import com.google.checkout.example.notification.RefundNotificationProcessorImpl;
 import com.google.checkout.example.notification.RiskInformationNotificationProcessorImpl;
-import com.google.checkout.notification.AuthorizationNotificationProcessor;
-import com.google.checkout.notification.ChargeNotificationProcessor;
-import com.google.checkout.notification.ChargebackNotificationProcessor;
+import com.google.checkout.notification.AuthorizationAmountNotification;
+import com.google.checkout.notification.AuthorizationAmountNotificationProcessor;
+import com.google.checkout.notification.ChargeAmountNotification;
+import com.google.checkout.notification.ChargeAmountNotificationProcessor;
+import com.google.checkout.notification.ChargebackAmountNotification;
+import com.google.checkout.notification.ChargebackAmountNotificationProcessor;
+import com.google.checkout.notification.NewOrderNotification;
 import com.google.checkout.notification.NewOrderNotificationProcessor;
+import com.google.checkout.notification.OrderStateChangeNotification;
 import com.google.checkout.notification.OrderStateChangeNotificationProcessor;
-import com.google.checkout.notification.RefundNotificationProcessor;
+import com.google.checkout.notification.RefundAmountNotification;
+import com.google.checkout.notification.RefundAmountNotificationProcessor;
+import com.google.checkout.notification.RiskInformationNotification;
 import com.google.checkout.notification.RiskInformationNotificationProcessor;
 
 /**
@@ -85,43 +92,50 @@ public class NotificationEjb implements javax.ejb.MessageDrivenBean,
 		}
 	}
 
-	private String dispatch(String notification) throws Exception {
+	private String dispatch(String notificationString) throws Exception {
 
 		MerchantConstants mc = MerchantConstantsFactory.getMerchantConstants();
 
-		if (notification.indexOf("new-order-notification") > -1) {
+		if (notificationString.indexOf("new-order-notification") > -1) {
 			NewOrderNotificationProcessor processor = new NewOrderNotificationProcessorImpl(
 					mc);
+			NewOrderNotification notification = new NewOrderNotification(notificationString);		
 			return processor.process(notification);
 		}
-		if (notification.indexOf("risk-information-notification") > -1) {
+		if (notificationString.indexOf("risk-information-notification") > -1) {
 			RiskInformationNotificationProcessor processor = new RiskInformationNotificationProcessorImpl(
 					mc);
+			RiskInformationNotification notification = new RiskInformationNotification(notificationString);
 			return processor.process(notification);
 		}
-		if (notification.indexOf("order-state-change-notification") > -1) {
+		if (notificationString.indexOf("order-state-change-notification") > -1) {
 			OrderStateChangeNotificationProcessor processor = new OrderStateChangeNotificationProcessorImpl(
 					mc);
+			OrderStateChangeNotification notification = new OrderStateChangeNotification(notificationString);
 			return processor.process(notification);
 		}
-		if (notification.indexOf("charge-amount-notification") > -1) {
-			ChargeNotificationProcessor processor = new ChargeNotificationProcessorImpl(
+		if (notificationString.indexOf("charge-amount-notification") > -1) {
+			ChargeAmountNotificationProcessor processor = new ChargeAmountNotificationProcessorImpl(
 					mc);
+			ChargeAmountNotification notification = new ChargeAmountNotification(notificationString);
 			return processor.process(notification);
 		}
-		if (notification.indexOf("refund-amount-notification") > -1) {
-			RefundNotificationProcessor processor = new RefundNotificationProcessorImpl(
+		if (notificationString.indexOf("refund-amount-notification") > -1) {
+			RefundAmountNotificationProcessor processor = new RefundNotificationProcessorImpl(
 					mc);
+			RefundAmountNotification notification = new RefundAmountNotification(notificationString);
 			return processor.process(notification);
 		}
-		if (notification.indexOf("chargeback-amount-notification") > -1) {
-			ChargebackNotificationProcessor processor = new ChargebackNotificationProcessorImpl(
+		if (notificationString.indexOf("chargeback-amount-notification") > -1) {
+			ChargebackAmountNotificationProcessor processor = new ChargebackAmountNotificationProcessorImpl(
 					mc);
+			ChargebackAmountNotification notification = new ChargebackAmountNotification(notificationString);
 			return processor.process(notification);
 		}
-		if (notification.indexOf("authorization-amount-notification") > -1) {
-			AuthorizationNotificationProcessor processor = new AuthorizationNotificationProcessorImpl(
+		if (notificationString.indexOf("authorization-amount-notification") > -1) {
+			AuthorizationAmountNotificationProcessor processor = new AuthorizationAmountNotificationProcessorImpl(
 					mc);
+			AuthorizationAmountNotification notification = new AuthorizationAmountNotification(notificationString);
 			return processor.process(notification);
 		}
 		throw new Exception("Notification not recoginsed.");
