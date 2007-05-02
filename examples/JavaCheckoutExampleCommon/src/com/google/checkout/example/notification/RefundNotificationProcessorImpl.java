@@ -23,35 +23,41 @@ import org.w3c.dom.Document;
 import com.google.checkout.CheckoutException;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.GoogleOrder;
-import com.google.checkout.notification.RefundNotificationProcessor;
+import com.google.checkout.notification.RefundAmountNotification;
+import com.google.checkout.notification.RefundAmountNotificationProcessor;
 import com.google.checkout.util.Utils;
 
+/**TODO
+ * @author simonjsmith
+ *
+ */
 public class RefundNotificationProcessorImpl extends AbstractNotificationProcessor
-    implements RefundNotificationProcessor {
+    implements RefundAmountNotificationProcessor {
   
   private MerchantConstants merchantConstants;
   
-  public RefundNotificationProcessorImpl(MerchantConstants merchantConstants) {
+  /**TODO
+ * @param merchantConstants
+ */
+public RefundNotificationProcessorImpl(MerchantConstants merchantConstants) {
     this.merchantConstants = merchantConstants;
   }
   
-  public String process(String callbackXML) throws CheckoutException {
-    
-    String ack = "";
-    try {
-      Document document = Utils.newDocumentFromString(callbackXML);
-      
-      String orderNumber = Utils.getElementStringValue(document, document.getDocumentElement(), "google-order-number");
-      Date timestamp = Utils.getElementDateValue(document, document.getDocumentElement(), "timestamp");
-      
-      GoogleOrder order = GoogleOrder.findOrCreate(merchantConstants.getMerchantId(), orderNumber);
-      ack = getAckString();
-      
-      order.addIncomingMessage(timestamp, document.getDocumentElement().getNodeName(), Utils.documentToStringPretty(document), ack);
-    } catch (Exception e) {
-      throw new CheckoutException(e);
-    }
-    return ack;
-  }
+
+/* (non-Javadoc)
+ * @see com.google.checkout.notification.RefundAmountNotificationProcessor#process(com.google.checkout.notification.RefundAmountNotification)
+ */
+public String process(RefundAmountNotification notification) throws CheckoutException {
+	try {
+		String ack = getAckString();
+		GoogleOrder order = GoogleOrder.findOrCreate(merchantConstants
+				.getMerchantId(), notification.getGoogleOrderNo());
+		order.addIncomingMessage(notification.getTimestamp(), notification
+				.getRootNodeName(), notification.getXmlPretty(), ack);
+		return ack;
+	} catch (Exception e) {
+		throw new CheckoutException(e);
+	}
+}
   
 }

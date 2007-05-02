@@ -23,8 +23,8 @@ import org.w3c.dom.Document;
 import com.google.checkout.CheckoutException;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.GoogleOrder;
-import com.google.checkout.notification.OrderStateChangeNotification;
-import com.google.checkout.notification.OrderStateChangeNotificationProcessor;
+import com.google.checkout.notification.ChargeAmountNotification;
+import com.google.checkout.notification.ChargeAmountNotificationProcessor;
 import com.google.checkout.util.Utils;
 
 /**
@@ -33,17 +33,9 @@ import com.google.checkout.util.Utils;
  * @author simonjsmith
  * 
  */
-/**TODO
- * @author simonjsmith
- *
- */
-/**TODO
- * @author simonjsmith
- *
- */
-public class OrderStateChangeNotificationProcessorImpl extends
+public class ChargeAmountNotificationProcessorImpl extends
 		AbstractNotificationProcessor implements
-		OrderStateChangeNotificationProcessor {
+		ChargeAmountNotificationProcessor {
 
 	private MerchantConstants merchantConstants;
 
@@ -52,15 +44,15 @@ public class OrderStateChangeNotificationProcessorImpl extends
 	 * 
 	 * @param merchantConstants
 	 */
-	public OrderStateChangeNotificationProcessorImpl(
+	public ChargeAmountNotificationProcessorImpl(
 			MerchantConstants merchantConstants) {
 		this.merchantConstants = merchantConstants;
 	}
 
 	/* (non-Javadoc)
-	 * @see com.google.checkout.notification.OrderStateChangeNotificationProcessor#process(com.google.checkout.notification.OrderStateChangeNotification)
+	 * @see com.google.checkout.notification.ChargeAmountNotificationProcessor#process(com.google.checkout.notification.ChargeAmountNotification)
 	 */
-	public String process(OrderStateChangeNotification notification)
+	public String process(ChargeAmountNotification notification)
 			throws CheckoutException {
 		try {
 			String ack = getAckString();
@@ -68,10 +60,6 @@ public class OrderStateChangeNotificationProcessorImpl extends
 					.getMerchantId(), notification.getGoogleOrderNo());
 			order.addIncomingMessage(notification.getTimestamp(), notification
 					.getRootNodeName(), notification.getXmlPretty(), ack);
-			order.setLastFulStatus(notification.getNewFulfillmentOrderState()
-					.toString());
-			order.setLastFinStatus(notification.getNewFinancialOrderState()
-					.toString());
 			return ack;
 		} catch (Exception e) {
 			throw new CheckoutException(e);

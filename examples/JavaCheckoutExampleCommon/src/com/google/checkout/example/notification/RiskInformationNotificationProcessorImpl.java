@@ -23,35 +23,49 @@ import org.w3c.dom.Document;
 import com.google.checkout.CheckoutException;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.GoogleOrder;
+import com.google.checkout.notification.RiskInformationNotification;
 import com.google.checkout.notification.RiskInformationNotificationProcessor;
 import com.google.checkout.util.Utils;
 
-public class RiskInformationNotificationProcessorImpl extends AbstractNotificationProcessor
-    implements RiskInformationNotificationProcessor {
-  
-  private MerchantConstants merchantConstants;
-  
-  public RiskInformationNotificationProcessorImpl(MerchantConstants merchantConstants) {
-    this.merchantConstants = merchantConstants;
-  }
-  
-  public String process(String callbackXML) throws CheckoutException {
-    
-    String ack = "";
-    try {
-      Document document = Utils.newDocumentFromString(callbackXML);
-      
-      String orderNumber = Utils.getElementStringValue(document, document.getDocumentElement(), "google-order-number");
-      Date timestamp = Utils.getElementDateValue(document, document.getDocumentElement(), "timestamp");
-      
-      GoogleOrder order = GoogleOrder.findOrCreate(merchantConstants.getMerchantId(), orderNumber);
-      ack = getAckString();
-      
-      order.addIncomingMessage(timestamp, document.getDocumentElement().getNodeName(), Utils.documentToStringPretty(document), ack);
-    } catch (Exception e) {
-      throw new CheckoutException(e);
-    }
-    return ack;
-  }
-  
+/**
+ * TODO
+ * 
+ * @author simonjsmith
+ * 
+ */
+public class RiskInformationNotificationProcessorImpl extends
+		AbstractNotificationProcessor implements
+		RiskInformationNotificationProcessor {
+
+	private MerchantConstants merchantConstants;
+
+	/**
+	 * TODO
+	 * 
+	 * @param merchantConstants
+	 */
+	public RiskInformationNotificationProcessorImpl(
+			MerchantConstants merchantConstants) {
+		this.merchantConstants = merchantConstants;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.checkout.notification.RiskInformationNotificationProcessor#process(com.google.checkout.notification.RiskInformationNotification)
+	 */
+	public String process(RiskInformationNotification notification)
+			throws CheckoutException {
+		try {
+			String ack = getAckString();
+			GoogleOrder order = GoogleOrder.findOrCreate(merchantConstants
+					.getMerchantId(), notification.getGoogleOrderNo());
+			order.addIncomingMessage(notification.getTimestamp(), notification
+					.getRootNodeName(), notification.getXmlPretty(), ack);
+			return ack;
+		} catch (Exception e) {
+			throw new CheckoutException(e);
+		}
+	}
+
 }

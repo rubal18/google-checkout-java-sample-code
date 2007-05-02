@@ -24,43 +24,47 @@ import org.w3c.dom.Element;
 import com.google.checkout.CheckoutException;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.GoogleOrder;
+import com.google.checkout.notification.NewOrderNotification;
 import com.google.checkout.notification.NewOrderNotificationProcessor;
 import com.google.checkout.util.Utils;
 
-public class NewOrderNotificationProcessorImpl extends AbstractNotificationProcessor
-    implements NewOrderNotificationProcessor {
-  
-  private MerchantConstants merchantConstants;
-  
-  public NewOrderNotificationProcessorImpl(MerchantConstants merchantConstants) {
-    this.merchantConstants = merchantConstants;
-  }
-  
-  public String process(String callbackXML) throws CheckoutException {
-    
-    String ack = "";
-    try {
-      Document document = Utils.newDocumentFromString(callbackXML);
-      
-      String orderNumber = Utils.getElementStringValue(document, document.getDocumentElement(), "google-order-number");
-      Date timestamp = Utils.getElementDateValue(document, document.getDocumentElement(), "timestamp");
-      String lastFulStatus = Utils.getElementStringValue(document, document.getDocumentElement(), "fulfillment-order-state");
-      String lastFinStatus = Utils.getElementStringValue(document, document.getDocumentElement(), "financial-order-state");
-      Element billing = Utils.findElementOrContainer(document, document.getDocumentElement(), "buyer-billing-address");
-      String buyerEmail = Utils.getElementStringValue(document, billing, "email");
-      String orderAmount = Utils.getElementStringValue(document, document.getDocumentElement(), "order-total");
-      
-      GoogleOrder order = GoogleOrder.findOrCreate(merchantConstants.getMerchantId(), orderNumber);
-      order.setLastFulStatus(lastFulStatus);
-      order.setLastFinStatus(lastFinStatus);
-      order.setBuyerEmail(buyerEmail);
-      order.setOrderAmount(orderAmount);
-      ack = getAckString();
-      
-      order.addIncomingMessage(timestamp, document.getDocumentElement().getNodeName(), Utils.documentToStringPretty(document), ack);
-    } catch (Exception e) {
-      throw new CheckoutException(e);
-    }
-    return ack;
-  }  
+/**TODO
+ * @author simonjsmith
+ *
+ */
+public class NewOrderNotificationProcessorImpl extends
+		AbstractNotificationProcessor implements NewOrderNotificationProcessor {
+
+	private MerchantConstants merchantConstants;
+
+	/**TODO
+	 * @param merchantConstants
+	 */
+	public NewOrderNotificationProcessorImpl(MerchantConstants merchantConstants) {
+		this.merchantConstants = merchantConstants;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.google.checkout.notification.NewOrderNotificationProcessor#process(com.google.checkout.notification.NewOrderNotification)
+	 */
+	public String process(NewOrderNotification notification)
+			throws CheckoutException {
+		try {
+			String ack = getAckString();
+			GoogleOrder order = GoogleOrder.findOrCreate(merchantConstants
+					.getMerchantId(), notification.getGoogleOrderNo());
+			order.addIncomingMessage(notification.getTimestamp(), notification
+					.getRootNodeName(), notification.getXmlPretty(), ack);
+			order.setLastFulStatus(notification.getFulfillmentOrderState()
+					.toString());
+			order.setLastFinStatus(notification.getFinancialOrderState()
+					.toString());
+			order.setBuyerEmail(notification.getBuyerBillingAddress()
+					.getEmail());
+			order.setOrderAmount("" + notification.getOrderTotal());
+			return ack;
+		} catch (Exception e) {
+			throw new CheckoutException(e);
+		}
+	}
 }
