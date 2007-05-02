@@ -22,8 +22,9 @@ import com.google.checkout.util.Utils;
 
 /**
  * TODO:
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public class ChargeAmountNotification extends CheckoutNotification {
 
@@ -46,29 +47,35 @@ public class ChargeAmountNotification extends CheckoutNotification {
 		document = Utils.newDocumentFromInputStream(inputStream);
 		root = document.getDocumentElement();
 	}
-	
+
 	/**
 	 * TODO
+	 * 
 	 * @return
 	 */
 	public float getLatestChargeAmount() {
-		return Utils.getElementFloatValue(document, root, "latest-charge-amount");
+		return Utils.getElementFloatValue(document, root,
+				"latest-charge-amount");
 	}
 
 	/**
 	 * TODO
+	 * 
 	 * @return
 	 */
 	public float getTotalChargeAmount() {
-		return Utils.getElementFloatValue(document, root, "total-charge-amount");
+		return Utils
+				.getElementFloatValue(document, root, "total-charge-amount");
 	}
 
 	/**
 	 * TODO
+	 * 
 	 * @return
 	 */
 	public String getCurrencyCode() {
-		return Utils.findElementOrContainer(document, root, "latest-charge-amount").getAttribute("currency");
+		return Utils.findElementOrContainer(document, root,
+				"latest-charge-amount").getAttribute("currency");
 	}
 
 }

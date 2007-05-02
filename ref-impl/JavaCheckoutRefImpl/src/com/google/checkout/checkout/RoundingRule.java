@@ -17,29 +17,30 @@
 package com.google.checkout.checkout;
 
 /**
- * This class represents the &lt;rounding-policy&gt; &lt;rule&gt; in the Checkout API.
+ * This class represents the &lt;rounding-policy&gt; &lt;rule&gt; in the
+ * Checkout API.
  * 
  * @author simonjsmith
  */
 public class RoundingRule {
 
-  /**
-   * An instance of the RoundingMode class with rule: PER_LINE.
-   */
-  public static final RoundingRule PER_LINE  = new RoundingRule("PER_LINE");
+	/**
+	 * An instance of the RoundingMode class with rule: PER_LINE.
+	 */
+	public static final RoundingRule PER_LINE = new RoundingRule("PER_LINE");
 
-  /**
-   * An instance of the RoundingMode class with rule: TOTAL.
-   */
-  public static final RoundingRule TOTAL  = new RoundingRule("TOTAL");
-  
-  private String value;
+	/**
+	 * An instance of the RoundingMode class with rule: TOTAL.
+	 */
+	public static final RoundingRule TOTAL = new RoundingRule("TOTAL");
 
-  private RoundingRule(String value) {
-    this.value = value;
-  }
+	private String value;
 
-  public String toString() {
-    return value;
-  }
+	private RoundingRule(String value) {
+		this.value = value;
+	}
+
+	public String toString() {
+		return value;
+	}
 }

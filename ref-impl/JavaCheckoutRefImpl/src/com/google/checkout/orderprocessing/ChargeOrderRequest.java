@@ -29,134 +29,134 @@ import com.google.checkout.util.Utils;
  */
 public class ChargeOrderRequest extends AbstractCheckoutRequest {
 
-  private Document document;
+	private Document document;
 
-  private Element root;
+	private Element root;
 
-  /**
-   * Constructor which takes an instance of MerchantConstants.
-   * 
-   * @param merchantConstants
-   *          The MerchantConstants.
-   * 
-   * @see MerchantConstants
-   */
-  public ChargeOrderRequest(MerchantConstants merchantConstants) {
-    super(merchantConstants);
+	/**
+	 * Constructor which takes an instance of MerchantConstants.
+	 * 
+	 * @param merchantConstants
+	 *            The MerchantConstants.
+	 * 
+	 * @see MerchantConstants
+	 */
+	public ChargeOrderRequest(MerchantConstants merchantConstants) {
+		super(merchantConstants);
 
-    document = Utils.newEmptyDocument();
-    root = (Element) document.createElementNS(Constants.checkoutNamespace,
-        "charge-order");
-    root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns",
-        Constants.checkoutNamespace);
-    document.appendChild(root);
-  }
+		document = Utils.newEmptyDocument();
+		root = (Element) document.createElementNS(Constants.checkoutNamespace,
+				"charge-order");
+		root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns",
+				Constants.checkoutNamespace);
+		document.appendChild(root);
+	}
 
-  /**
-   * Constructor which takes an instance of MerchantConstants and the Google
-   * Order Number.
-   * 
-   * @param merchantConstants
-   *          The MerchantConstants.
-   * @param googleOrderNo
-   *          The Google Order Number.
-   * 
-   * @see MerchantConstants
-   */
-  public ChargeOrderRequest(MerchantConstants merchantConstants,
-      String googleOrderNo) {
+	/**
+	 * Constructor which takes an instance of MerchantConstants and the Google
+	 * Order Number.
+	 * 
+	 * @param merchantConstants
+	 *            The MerchantConstants.
+	 * @param googleOrderNo
+	 *            The Google Order Number.
+	 * 
+	 * @see MerchantConstants
+	 */
+	public ChargeOrderRequest(MerchantConstants merchantConstants,
+			String googleOrderNo) {
 
-    this(merchantConstants);
-    this.setGoogleOrderNo(googleOrderNo);
-  }
+		this(merchantConstants);
+		this.setGoogleOrderNo(googleOrderNo);
+	}
 
-  /**
-   * Constructor which takes an instance of MerchantConstants, the Google Order
-   * Number and the ammount to be charged.
-   * 
-   * @param merchantConstants
-   *          The MerchantConstants.
-   * @param googleOrderNo
-   *          The Google Order Number.
-   * @param amt
-   *          The amount to be charged.
-   * 
-   * @see MerchantConstants
-   */
-  public ChargeOrderRequest(MerchantConstants merchantConstants,
-      String googleOrderNo, float amt) {
+	/**
+	 * Constructor which takes an instance of MerchantConstants, the Google
+	 * Order Number and the ammount to be charged.
+	 * 
+	 * @param merchantConstants
+	 *            The MerchantConstants.
+	 * @param googleOrderNo
+	 *            The Google Order Number.
+	 * @param amt
+	 *            The amount to be charged.
+	 * 
+	 * @see MerchantConstants
+	 */
+	public ChargeOrderRequest(MerchantConstants merchantConstants,
+			String googleOrderNo, float amt) {
 
-    this(merchantConstants);
-    this.setGoogleOrderNo(googleOrderNo);
-    this.setAmount(amt);
-  }
+		this(merchantConstants);
+		this.setGoogleOrderNo(googleOrderNo);
+		this.setAmount(amt);
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.checkout.CheckoutRequest#getXml()
-   */
-  public String getXml() {
-    return Utils.documentToString(document);
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.checkout.CheckoutRequest#getXml()
+	 */
+	public String getXml() {
+		return Utils.documentToString(document);
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.checkout.CheckoutRequest#getXmlPretty()
-   */
-  public String getXmlPretty() {
-    return Utils.documentToStringPretty(document);
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.checkout.CheckoutRequest#getXmlPretty()
+	 */
+	public String getXmlPretty() {
+		return Utils.documentToStringPretty(document);
+	}
 
-  /**
-   * Return the charge amount, which is the value of the &lt;amount&gt; tag.
-   * 
-   * @return The charge amount.
-   */
-  public float getAmount() {
-    return Utils.getElementFloatValue(document, root, "amount");
-  }
+	/**
+	 * Return the charge amount, which is the value of the &lt;amount&gt; tag.
+	 * 
+	 * @return The charge amount.
+	 */
+	public float getAmount() {
+		return Utils.getElementFloatValue(document, root, "amount");
+	}
 
-  /**
-   * Return the Google Order Number, which is the value of the
-   * google-order-number attribute on the root tag.
-   * 
-   * @return The Google Order Number.
-   */
-  public String getGoogleOrderNo() {
-    return root.getAttribute("google-order-number");
-  }
+	/**
+	 * Return the Google Order Number, which is the value of the
+	 * google-order-number attribute on the root tag.
+	 * 
+	 * @return The Google Order Number.
+	 */
+	public String getGoogleOrderNo() {
+		return root.getAttribute("google-order-number");
+	}
 
-  /**
-   * Set the charge amount, which is the value of the &lt;amount&gt; tag.
-   * 
-   * @param amount
-   *          The charge amount.
-   */
-  public void setAmount(float amount) {
-    Element e = Utils.findElementAndSetElseCreateAndSet(document, root,
-        "amount", amount);
-    e.setAttribute("currency", merchantConstants.getCurrencyCode());
-  }
+	/**
+	 * Set the charge amount, which is the value of the &lt;amount&gt; tag.
+	 * 
+	 * @param amount
+	 *            The charge amount.
+	 */
+	public void setAmount(float amount) {
+		Element e = Utils.findElementAndSetElseCreateAndSet(document, root,
+				"amount", amount);
+		e.setAttribute("currency", merchantConstants.getCurrencyCode());
+	}
 
-  /**
-   * Set the Google Order Number, which is the value of the google-order-number
-   * attribute on the root tag.
-   * 
-   * @param googleOrderNo
-   *          The Google Order Number.
-   */
-  public void setGoogleOrderNo(String googleOrderNo) {
-    root.setAttribute("google-order-number", googleOrderNo);
-  }
+	/**
+	 * Set the Google Order Number, which is the value of the
+	 * google-order-number attribute on the root tag.
+	 * 
+	 * @param googleOrderNo
+	 *            The Google Order Number.
+	 */
+	public void setGoogleOrderNo(String googleOrderNo) {
+		root.setAttribute("google-order-number", googleOrderNo);
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.checkout.CheckoutRequest#getPostUrl()
-   */
-  public String getPostUrl() {
-    return merchantConstants.getRequestUrl();
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.checkout.CheckoutRequest#getPostUrl()
+	 */
+	public String getPostUrl() {
+		return merchantConstants.getRequestUrl();
+	}
 }

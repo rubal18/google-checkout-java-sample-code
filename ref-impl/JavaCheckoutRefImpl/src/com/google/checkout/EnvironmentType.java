@@ -23,9 +23,9 @@ package com.google.checkout;
  */
 public class EnvironmentType {
 
-  /** Use the Sandbox account to post the messages</summary> */
-  public static final String Sandbox = "Sandbox";
+	/** Use the Sandbox account to post the messages</summary> */
+	public static final String Sandbox = "Sandbox";
 
-  /** Use the Production account to post the messages</summary> */
-  public static final String Production = "Production";
+	/** Use the Production account to post the messages</summary> */
+	public static final String Production = "Production";
 }

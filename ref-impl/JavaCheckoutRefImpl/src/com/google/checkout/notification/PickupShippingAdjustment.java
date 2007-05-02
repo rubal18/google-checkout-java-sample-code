@@ -19,12 +19,14 @@ package com.google.checkout.notification;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-/**TODO
+/**
+ * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public class PickupShippingAdjustment extends Shipping {
-	
+
 	/**
 	 * A constructor which takes the document and element pointing to the
 	 * &lt;pickup-shipping-adjustment&gt; tag.

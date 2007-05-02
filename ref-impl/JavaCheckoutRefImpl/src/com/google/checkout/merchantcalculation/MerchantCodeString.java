@@ -17,8 +17,8 @@
 package com.google.checkout.merchantcalculation;
 
 /**
- * This class encapsulates the &lt;merchant-code-string&gt; element, used as part
- * of the Merchant Calculations API.
+ * This class encapsulates the &lt;merchant-code-string&gt; element, used as
+ * part of the Merchant Calculations API.
  * 
  * @author simonjsmith
  * 
@@ -32,14 +32,16 @@ public class MerchantCodeString {
 	/**
 	 * A constructor which takes the code and pin.
 	 * 
-	 * @param code The code.
-	 * @param pin The pin.
+	 * @param code
+	 *            The code.
+	 * @param pin
+	 *            The pin.
 	 */
 	public MerchantCodeString(String code, String pin) {
 		this.code = code;
 		this.pin = pin;
 	}
-	
+
 	/**
 	 * Retrive the contents of the code attribute.
 	 * 
@@ -52,7 +54,8 @@ public class MerchantCodeString {
 	/**
 	 * Set the contents of the code attribute.
 	 * 
-	 * @param code The code.
+	 * @param code
+	 *            The code.
 	 */
 	public void setCode(String code) {
 		this.code = code;
@@ -70,7 +73,8 @@ public class MerchantCodeString {
 	/**
 	 * Set the contents of the pin attribute.
 	 * 
-	 * @param pin The pin.
+	 * @param pin
+	 *            The pin.
 	 */
 	public void setPin(String pin) {
 		this.pin = pin;

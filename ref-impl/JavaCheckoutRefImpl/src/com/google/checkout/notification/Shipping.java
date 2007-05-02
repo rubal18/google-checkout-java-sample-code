@@ -18,25 +18,33 @@ package com.google.checkout.notification;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
 import com.google.checkout.util.Utils;
 
-/**TODO
+/**
+ * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public class Shipping {
 
 	protected Document document;
+
 	protected Element element;
- 	
-	/**TODO
+
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public float getShippingCost() {
 		return Utils.getElementFloatValue(document, element, "shipping-cost");
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public String getShippingName() {

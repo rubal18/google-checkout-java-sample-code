@@ -21,8 +21,9 @@ import org.w3c.dom.Element;
 
 /**
  * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public class MerchantCalculatedShippingAdjustment extends Shipping {
 
@@ -35,7 +36,8 @@ public class MerchantCalculatedShippingAdjustment extends Shipping {
 	 * @param element
 	 *            The element.
 	 */
-	public MerchantCalculatedShippingAdjustment(Document document, Element element) {
+	public MerchantCalculatedShippingAdjustment(Document document,
+			Element element) {
 		this.document = document;
 		this.element = element;
 	}

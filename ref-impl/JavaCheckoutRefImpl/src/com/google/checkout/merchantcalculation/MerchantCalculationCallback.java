@@ -191,7 +191,8 @@ public class MerchantCalculationCallback {
 		Collection ret = new ArrayList();
 
 		for (int i = 0; i < elements.length; i++) {
-			ret.add(new MerchantCodeString(elements[i].getAttribute("code"), elements[i].getAttribute("pin")));
+			ret.add(new MerchantCodeString(elements[i].getAttribute("code"),
+					elements[i].getAttribute("pin")));
 		}
 
 		return ret;

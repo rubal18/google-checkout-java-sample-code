@@ -18,8 +18,9 @@ package com.google.checkout.notification;
 
 /**
  * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public class FinancialOrderState {
 

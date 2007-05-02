@@ -18,40 +18,52 @@ package com.google.checkout.notification;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
 import com.google.checkout.util.Utils;
 
 /**
  * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public abstract class MerchantCodes {
-	
+
 	protected Document document;
+
 	protected Element element;
- 	
-	/**TODO
+
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public float getAppliedAmount() {
 		return Utils.getElementFloatValue(document, element, "applied-amount");
 	}
-	
-	/**TODO
+
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public float getCalculatedAmount() {
-		return Utils.getElementFloatValue(document, element, "calculated-amount");
+		return Utils.getElementFloatValue(document, element,
+				"calculated-amount");
 	}
-	
-	/**TODO
+
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public String getCode() {
 		return Utils.getElementStringValue(document, element, "code");
 	}
-	
-	/**TODO
+
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public String getMessage() {

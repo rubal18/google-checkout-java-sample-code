@@ -16,7 +16,6 @@
 
 package com.google.checkout.notification;
 
-import java.io.InputStream;
 import java.util.Date;
 
 import org.w3c.dom.Document;
@@ -26,56 +25,65 @@ import com.google.checkout.util.Utils;
 
 /**
  * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public abstract class CheckoutNotification {
 
 	protected Document document;
 
 	protected Element root;
-	
+
 	/**
-	   * Return the Google Order Number for this notification.
-	   *  
-	   * @return The Google Order Number.
-	   */
-	  public String getGoogleOrderNo() {
-		  return Utils.getElementStringValue(document, root, "google-order-number");
-	  }
-	  
-	  
-	  /**
-	   * TODO
+	 * Return the Google Order Number for this notification.
+	 * 
+	 * @return The Google Order Number.
+	 */
+	public String getGoogleOrderNo() {
+		return Utils.getElementStringValue(document, root,
+				"google-order-number");
+	}
+
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public Date getTimestamp() {
-		  return Utils.getElementDateValue(document, root, "timestamp");
-		  }
-	  
-	  /**
-	   * TODO
+		return Utils.getElementDateValue(document, root, "timestamp");
+	}
+
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public String getSerialNumber() {
-		  return root.getAttribute("serial-number");
-		  }
-	
-	/**TODO
+		return root.getAttribute("serial-number");
+	}
+
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public String getXml() {
 		return Utils.documentToString(document);
 	}
-	
-	/**TODO
+
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public String getXmlPretty() {
 		return Utils.documentToStringPretty(document);
 	}
-	
-	/**TODO
+
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public String getRootNodeName() {

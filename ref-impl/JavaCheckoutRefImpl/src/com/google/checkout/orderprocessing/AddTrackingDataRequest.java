@@ -21,7 +21,6 @@ import org.w3c.dom.Element;
 
 import com.google.checkout.AbstractCheckoutRequest;
 import com.google.checkout.MerchantConstants;
-import com.google.checkout.orderprocessing.AddTrackingDataRequest;
 import com.google.checkout.util.Constants;
 import com.google.checkout.util.Utils;
 
@@ -31,145 +30,151 @@ import com.google.checkout.util.Utils;
  */
 public class AddTrackingDataRequest extends AbstractCheckoutRequest {
 
-  private Document document;
+	private Document document;
 
-  private Element root;
+	private Element root;
 
-  /**
-   * Constructor which takes an instance of MerchantConstants.
-   * 
-   * @param merchantConstants
-   *          The MerchantConstants.
-   * 
-   * @see MerchantConstants
-   */
-  public AddTrackingDataRequest(MerchantConstants merchantConstants) {
-    super(merchantConstants);
+	/**
+	 * Constructor which takes an instance of MerchantConstants.
+	 * 
+	 * @param merchantConstants
+	 *            The MerchantConstants.
+	 * 
+	 * @see MerchantConstants
+	 */
+	public AddTrackingDataRequest(MerchantConstants merchantConstants) {
+		super(merchantConstants);
 
-    document = Utils.newEmptyDocument();
-    root = (Element) document.createElementNS(Constants.checkoutNamespace,
-        "add-tracking-data");
-    root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns",
-        Constants.checkoutNamespace);
-    document.appendChild(root);
-  }
+		document = Utils.newEmptyDocument();
+		root = (Element) document.createElementNS(Constants.checkoutNamespace,
+				"add-tracking-data");
+		root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns",
+				Constants.checkoutNamespace);
+		document.appendChild(root);
+	}
 
-  /**
-   * Constructor which takes an instance of MerchantConstants, the Google Order
-   * Number, the Carrier and the Tracking Number
-   * 
-   * @param merchantConstants
-   *          The MerchantConstants.
-   * @param googleOrderNo
-   *          The Google Order Number.
-   * @param carrier
-   *          The Carrier.
-   * @param trackingNo
-   *          The Tracking Number.
-   * 
-   * @see MerchantConstants
-   */
-  public AddTrackingDataRequest(MerchantConstants merchantConstants,
-      String googleOrderNo, String carrier, String trackingNo) {
-    this(merchantConstants);
-    this.setGoogleOrderNo(googleOrderNo);
-    this.setCarrier(carrier);
-    this.setTrackingNo(trackingNo);
-  }
+	/**
+	 * Constructor which takes an instance of MerchantConstants, the Google
+	 * Order Number, the Carrier and the Tracking Number
+	 * 
+	 * @param merchantConstants
+	 *            The MerchantConstants.
+	 * @param googleOrderNo
+	 *            The Google Order Number.
+	 * @param carrier
+	 *            The Carrier.
+	 * @param trackingNo
+	 *            The Tracking Number.
+	 * 
+	 * @see MerchantConstants
+	 */
+	public AddTrackingDataRequest(MerchantConstants merchantConstants,
+			String googleOrderNo, String carrier, String trackingNo) {
+		this(merchantConstants);
+		this.setGoogleOrderNo(googleOrderNo);
+		this.setCarrier(carrier);
+		this.setTrackingNo(trackingNo);
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.checkout.CheckoutRequest#getXml()
-   */
-  public String getXml() {
-    return Utils.documentToString(document);
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.checkout.CheckoutRequest#getXml()
+	 */
+	public String getXml() {
+		return Utils.documentToString(document);
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.checkout.CheckoutRequest#getXmlPretty()
-   */
-  public String getXmlPretty() {
-    return Utils.documentToStringPretty(document);
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.checkout.CheckoutRequest#getXmlPretty()
+	 */
+	public String getXmlPretty() {
+		return Utils.documentToStringPretty(document);
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.checkout.CheckoutRequest#getPostUrl()
-   */
-  public String getPostUrl() {
-    return "https://sandbox.google.com/checkout/cws/v2/Merchant/"
-        + merchantConstants.getMerchantId() + "/request";
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.checkout.CheckoutRequest#getPostUrl()
+	 */
+	public String getPostUrl() {
+		return "https://sandbox.google.com/checkout/cws/v2/Merchant/"
+				+ merchantConstants.getMerchantId() + "/request";
+	}
 
-  /**
-   * Return the carrier String, which is the value of the &lt;carrier&gt; tag.
-   * 
-   * @return The carrier String.
-   */
-  public String getCarrier() {
-    Element trackingDataTag = Utils.findContainerElseCreate(document, root,
-        "tracking-data");
-    return Utils.getElementStringValue(document, trackingDataTag, "carrier");
-  }
+	/**
+	 * Return the carrier String, which is the value of the &lt;carrier&gt; tag.
+	 * 
+	 * @return The carrier String.
+	 */
+	public String getCarrier() {
+		Element trackingDataTag = Utils.findContainerElseCreate(document, root,
+				"tracking-data");
+		return Utils
+				.getElementStringValue(document, trackingDataTag, "carrier");
+	}
 
-  /**
-   * Return the Google Order Number, which is the value of the
-   * google-order-number attribute on the root tag.
-   * 
-   * @return The Google Order Number.
-   */
-  public String getGoogleOrderNo() {
-    return Utils.getElementStringValue(document, root, "google-order-number");
-  }
+	/**
+	 * Return the Google Order Number, which is the value of the
+	 * google-order-number attribute on the root tag.
+	 * 
+	 * @return The Google Order Number.
+	 */
+	public String getGoogleOrderNo() {
+		return Utils.getElementStringValue(document, root,
+				"google-order-number");
+	}
 
-  /**
-   * Return the tracking number, which is the value of the &lt;tracking-number&gt; tag.
-   * 
-   * @return The tracking number.
-   */
-  public String getTrackingNo() {
-    Element trackingDataTag = Utils.findContainerElseCreate(document, root,
-        "tracking-data");
-    return Utils.getElementStringValue(document, trackingDataTag,
-        "tracking-number");
-  }
+	/**
+	 * Return the tracking number, which is the value of the
+	 * &lt;tracking-number&gt; tag.
+	 * 
+	 * @return The tracking number.
+	 */
+	public String getTrackingNo() {
+		Element trackingDataTag = Utils.findContainerElseCreate(document, root,
+				"tracking-data");
+		return Utils.getElementStringValue(document, trackingDataTag,
+				"tracking-number");
+	}
 
-  /**
-   * Set the carrier String, which is the value of the &lt;carrier&gt; tag.
-   * 
-   * @param carrier The carrier String.
-   */
-  public void setCarrier(String carrier) {
-    Element trackingDataTag = Utils.findContainerElseCreate(document, root,
-        "tracking-data");
-    Utils.findElementAndSetElseCreateAndSet(document, trackingDataTag,
-        "carrier", carrier);
-  }
+	/**
+	 * Set the carrier String, which is the value of the &lt;carrier&gt; tag.
+	 * 
+	 * @param carrier
+	 *            The carrier String.
+	 */
+	public void setCarrier(String carrier) {
+		Element trackingDataTag = Utils.findContainerElseCreate(document, root,
+				"tracking-data");
+		Utils.findElementAndSetElseCreateAndSet(document, trackingDataTag,
+				"carrier", carrier);
+	}
 
-  /**
-   * Set the Google Order Number, which is the value of the google-order-number
-   * attribute on the root tag.
-   * 
-   * @param googleOrderNo
-   *          The Google Order Number.
-   */
-  public void setGoogleOrderNo(String googleOrderNo) {
-    root.setAttribute("google-order-number", googleOrderNo);
-  }
+	/**
+	 * Set the Google Order Number, which is the value of the
+	 * google-order-number attribute on the root tag.
+	 * 
+	 * @param googleOrderNo
+	 *            The Google Order Number.
+	 */
+	public void setGoogleOrderNo(String googleOrderNo) {
+		root.setAttribute("google-order-number", googleOrderNo);
+	}
 
-  /**
-   * Set the tracking number, which is the value of the &lt;tracking-number&gt; tag.
-   * 
-   * @param trackingNo The tracking number.
-   */
-  public void setTrackingNo(String trackingNo) {
-    Element trackingDataTag = Utils.findContainerElseCreate(document, root,
-        "tracking-data");
-    Utils.findElementAndSetElseCreateAndSet(document, trackingDataTag,
-        "tracking-number", trackingNo);
-  }
+	/**
+	 * Set the tracking number, which is the value of the
+	 * &lt;tracking-number&gt; tag.
+	 * 
+	 * @param trackingNo
+	 *            The tracking number.
+	 */
+	public void setTrackingNo(String trackingNo) {
+		Element trackingDataTag = Utils.findContainerElseCreate(document, root,
+				"tracking-data");
+		Utils.findElementAndSetElseCreateAndSet(document, trackingDataTag,
+				"tracking-number", trackingNo);
+	}
 }

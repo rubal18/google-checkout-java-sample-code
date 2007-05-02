@@ -21,11 +21,12 @@ import org.w3c.dom.Element;
 
 /**
  * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public class FlatRateShippingAdjustment extends Shipping {
-	
+
 	/**
 	 * A constructor which takes the document and element pointing to the
 	 * &lt;flat-rate-shipping-adjustment&gt; tag.

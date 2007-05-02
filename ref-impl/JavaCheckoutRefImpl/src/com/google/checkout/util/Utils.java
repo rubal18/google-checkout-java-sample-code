@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -160,22 +159,26 @@ public class Utils {
 
 	public static Element createNewElementAndSet(Document document,
 			Element parent, String childElement, float childValue) {
-		return createNewElementAndSet(document, parent, childElement, ""+childValue);
+		return createNewElementAndSet(document, parent, childElement, ""
+				+ childValue);
 	}
 
 	public static Element createNewElementAndSet(Document document,
 			Element parent, String childElement, int childValue) {
-		return createNewElementAndSet(document, parent, childElement, ""+childValue);
+		return createNewElementAndSet(document, parent, childElement, ""
+				+ childValue);
 	}
 
 	public static Element createNewElementAndSet(Document document,
 			Element parent, String childElement, boolean childValue) {
-		return createNewElementAndSet(document, parent, childElement, ""+childValue);
+		return createNewElementAndSet(document, parent, childElement, ""
+				+ childValue);
 	}
 
 	public static Element createNewElementAndSet(Document document,
 			Element parent, String childElement, double childValue) {
-		return createNewElementAndSet(document, parent, childElement, ""+childValue);
+		return createNewElementAndSet(document, parent, childElement, ""
+				+ childValue);
 	}
 
 	public static String getElementStringValue(Document document,
@@ -184,12 +187,12 @@ public class Utils {
 		if (nl.getLength() == 0) {
 			return "";
 		}
-		
+
 		Node n = nl.item(0).getFirstChild();
-		if (n ==  null) {
+		if (n == null) {
 			return "";
 		}
-		
+
 		return n.getNodeValue();
 	}
 
@@ -236,32 +239,30 @@ public class Utils {
 	}
 
 	public static Element[] getElements(Document document, Element parent) {
-      if (parent == null)
-      {
-    	  return new Element[] {};
-      }
-		
-	  NodeList nl = parent.getChildNodes();
-      ArrayList al = new ArrayList();
-      
+		if (parent == null) {
+			return new Element[] {};
+		}
 
-      for (int i = 0; i < nl.getLength(); i++) {
-        Node n = nl.item(i);
+		NodeList nl = parent.getChildNodes();
+		ArrayList al = new ArrayList();
 
-        if (n instanceof Element) {
-        	al.add((Element) nl.item(i));
-        }
-      }
-      
-      Element[] ret = new Element[al.size()];
-      Iterator it = al.iterator();
-      int i = 0;
-      while(it.hasNext()) {
-    	  ret[i] = (Element) it.next();
-    	  i++;
-      }
-     
-      return ret;
+		for (int i = 0; i < nl.getLength(); i++) {
+			Node n = nl.item(i);
+
+			if (n instanceof Element) {
+				al.add((Element) nl.item(i));
+			}
+		}
+
+		Element[] ret = new Element[al.size()];
+		Iterator it = al.iterator();
+		int i = 0;
+		while (it.hasNext()) {
+			ret[i] = (Element) it.next();
+			i++;
+		}
+
+		return ret;
 	}
 
 	public static Element findContainerWithAttributeValueElseCreate(

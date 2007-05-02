@@ -104,43 +104,50 @@ public class NotificationServlet extends javax.servlet.http.HttpServlet {
 		if (notificationString.indexOf("new-order-notification") > -1) {
 			NewOrderNotificationProcessor processor = new NewOrderNotificationProcessorImpl(
 					mc);
-			NewOrderNotification notification = new NewOrderNotification(notificationString);		
+			NewOrderNotification notification = new NewOrderNotification(
+					notificationString);
 			return processor.process(notification);
 		}
 		if (notificationString.indexOf("risk-information-notification") > -1) {
 			RiskInformationNotificationProcessor processor = new RiskInformationNotificationProcessorImpl(
 					mc);
-			RiskInformationNotification notification = new RiskInformationNotification(notificationString);
+			RiskInformationNotification notification = new RiskInformationNotification(
+					notificationString);
 			return processor.process(notification);
 		}
 		if (notificationString.indexOf("order-state-change-notification") > -1) {
 			OrderStateChangeNotificationProcessor processor = new OrderStateChangeNotificationProcessorImpl(
 					mc);
-			OrderStateChangeNotification notification = new OrderStateChangeNotification(notificationString);
+			OrderStateChangeNotification notification = new OrderStateChangeNotification(
+					notificationString);
 			return processor.process(notification);
 		}
 		if (notificationString.indexOf("charge-amount-notification") > -1) {
 			ChargeAmountNotificationProcessor processor = new ChargeAmountNotificationProcessorImpl(
 					mc);
-			ChargeAmountNotification notification = new ChargeAmountNotification(notificationString);
+			ChargeAmountNotification notification = new ChargeAmountNotification(
+					notificationString);
 			return processor.process(notification);
 		}
 		if (notificationString.indexOf("refund-amount-notification") > -1) {
 			RefundAmountNotificationProcessor processor = new RefundNotificationProcessorImpl(
 					mc);
-			RefundAmountNotification notification = new RefundAmountNotification(notificationString);
+			RefundAmountNotification notification = new RefundAmountNotification(
+					notificationString);
 			return processor.process(notification);
 		}
 		if (notificationString.indexOf("chargeback-amount-notification") > -1) {
 			ChargebackAmountNotificationProcessor processor = new ChargebackAmountNotificationProcessorImpl(
 					mc);
-			ChargebackAmountNotification notification = new ChargebackAmountNotification(notificationString);
+			ChargebackAmountNotification notification = new ChargebackAmountNotification(
+					notificationString);
 			return processor.process(notification);
 		}
 		if (notificationString.indexOf("authorization-amount-notification") > -1) {
 			AuthorizationAmountNotificationProcessor processor = new AuthorizationAmountNotificationProcessorImpl(
 					mc);
-			AuthorizationAmountNotification notification = new AuthorizationAmountNotification(notificationString);
+			AuthorizationAmountNotification notification = new AuthorizationAmountNotification(
+					notificationString);
 			return processor.process(notification);
 		}
 		throw new Exception("Notification not recoginsed.");

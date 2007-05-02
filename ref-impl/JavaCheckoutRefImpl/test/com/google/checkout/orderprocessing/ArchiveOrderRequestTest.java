@@ -21,7 +21,6 @@ import org.custommonkey.xmlunit.XMLTestCase;
 import org.custommonkey.xmlunit.XMLUnit;
 
 import com.google.checkout.MerchantConstants;
-import com.google.checkout.orderprocessing.ArchiveOrderRequest;
 
 public final class ArchiveOrderRequestTest extends XMLTestCase {
 

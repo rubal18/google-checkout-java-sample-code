@@ -59,8 +59,8 @@ public class MerchantConstants {
 	 * @param requestUrl
 	 *            The Request Url
 	 */
-	public MerchantConstants(String merchantId, String merchantKey,
-			String env, String currencyCode, String checkoutUrl,
+	public MerchantConstants(String merchantId, String merchantKey, String env,
+			String currencyCode, String checkoutUrl,
 			String merchantCheckoutUrl, String requestUrl) {
 		this.merchantId = merchantId;
 		this.merchantKey = merchantKey;

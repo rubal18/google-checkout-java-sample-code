@@ -21,7 +21,6 @@ import org.custommonkey.xmlunit.XMLTestCase;
 import org.custommonkey.xmlunit.XMLUnit;
 
 import com.google.checkout.MerchantConstants;
-import com.google.checkout.orderprocessing.ChargeOrderRequest;
 
 public final class ChargeOrderRequestTest extends XMLTestCase {
 

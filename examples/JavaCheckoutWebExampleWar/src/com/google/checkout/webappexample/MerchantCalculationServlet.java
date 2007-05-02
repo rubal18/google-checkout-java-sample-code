@@ -35,47 +35,51 @@ import com.google.checkout.merchantcalculation.MerchantCalculationResults;
  */
 public class MerchantCalculationServlet extends javax.servlet.http.HttpServlet {
 
-  /*
-   * (non-Java-doc)
-   * 
-   * @see javax.servlet.http.HttpServlet#doGet(HttpServletRequest request,
-   *      HttpServletResponse response)
-   */
-  public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-  }
+	/*
+	 * (non-Java-doc)
+	 * 
+	 * @see javax.servlet.http.HttpServlet#doGet(HttpServletRequest request,
+	 *      HttpServletResponse response)
+	 */
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+	}
 
-  /*
-   * (non-Java-doc)
-   * 
-   * @see javax.servlet.http.HttpServlet#doPost(HttpServletRequest request,
-   *      HttpServletResponse response)
-   */
-  public void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+	/*
+	 * (non-Java-doc)
+	 * 
+	 * @see javax.servlet.http.HttpServlet#doPost(HttpServletRequest request,
+	 *      HttpServletResponse response)
+	 */
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-    MerchantConstants mc = MerchantConstantsFactory.getMerchantConstants();
+		MerchantConstants mc = MerchantConstantsFactory.getMerchantConstants();
 
-    try {
-      String auth = request.getHeader("Authorization");
-      if (auth == null || !auth.equals("Basic " + mc.getHttpAuth())) {
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed.");
-        return;
-      }
-      
-      MerchantCalculationCallbackProcessor cp = new MerchantCalculationCallbackProcessorImpl(mc);
+		try {
+			String auth = request.getHeader("Authorization");
+			if (auth == null || !auth.equals("Basic " + mc.getHttpAuth())) {
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+						"Authentication Failed.");
+				return;
+			}
 
-      InputStream in = request.getInputStream();
-      MerchantCalculationCallback callback = new MerchantCalculationCallback(in);
-      MerchantCalculationResults results = cp.process(callback);
+			MerchantCalculationCallbackProcessor cp = new MerchantCalculationCallbackProcessorImpl(
+					mc);
 
-      PrintWriter out = response.getWriter();
-      out.print(results.getXml());
+			InputStream in = request.getInputStream();
+			MerchantCalculationCallback callback = new MerchantCalculationCallback(
+					in);
+			MerchantCalculationResults results = cp.process(callback);
 
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex.getMessage());
-    }
-  }
+			PrintWriter out = response.getWriter();
+			out.print(results.getXml());
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex
+					.getMessage());
+		}
+	}
 }

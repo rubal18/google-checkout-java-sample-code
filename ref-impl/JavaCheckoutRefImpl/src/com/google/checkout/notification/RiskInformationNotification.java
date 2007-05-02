@@ -22,14 +22,16 @@ import org.w3c.dom.Element;
 
 import com.google.checkout.util.Utils;
 
-/**TODO
+/**
+ * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public class RiskInformationNotification extends CheckoutNotification {
 
 	Element riskInfo;
-	
+
 	/**
 	 * A constructor which takes the request as a String.
 	 * 
@@ -38,7 +40,8 @@ public class RiskInformationNotification extends CheckoutNotification {
 	public RiskInformationNotification(String requestString) {
 		document = Utils.newDocumentFromString(requestString);
 		root = document.getDocumentElement();
-		riskInfo = Utils.findElementOrContainer(document, root, "risk-information");
+		riskInfo = Utils.findElementOrContainer(document, root,
+				"risk-information");
 	}
 
 	/**
@@ -49,53 +52,72 @@ public class RiskInformationNotification extends CheckoutNotification {
 	public RiskInformationNotification(InputStream inputStream) {
 		document = Utils.newDocumentFromInputStream(inputStream);
 		root = document.getDocumentElement();
-		riskInfo = Utils.findElementOrContainer(document, root, "risk-information");
+		riskInfo = Utils.findElementOrContainer(document, root,
+				"risk-information");
 	}
-	
-	/**TODO
+
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public boolean isEligibleForProtection() {
-		return Utils.getElementBooleanValue(document, riskInfo, "eligible-for-protection");
+		return Utils.getElementBooleanValue(document, riskInfo,
+				"eligible-for-protection");
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public Address getBillingAddress() {
-		Element address = Utils.findElementOrContainer(document, riskInfo, "billing-address");
+		Element address = Utils.findElementOrContainer(document, riskInfo,
+				"billing-address");
 		return new Address(document, address);
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public String getAvsResponse() {
 		return Utils.getElementStringValue(document, riskInfo, "avs-response");
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public String getCvnResponse() {
 		return Utils.getElementStringValue(document, riskInfo, "cvn-response");
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public String getPartialCcNumber() {
-		return Utils.getElementStringValue(document, riskInfo, "partial-cc-number");
+		return Utils.getElementStringValue(document, riskInfo,
+				"partial-cc-number");
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public int getBuyerAccountAge() {
-		return Utils.getElementIntValue(document, riskInfo, "buyer-account-age");
+		return Utils
+				.getElementIntValue(document, riskInfo, "buyer-account-age");
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public String getIpAddress() {

@@ -26,15 +26,17 @@ import com.google.checkout.CheckoutException;
  */
 public interface OrderStateChangeNotificationProcessor {
 
-  /**
-   * Process the notification.
-   * 
-   * @param notification
-   *          The OrderStateChangeNotification.
-   * @return The return String, typically a &lt;notification-acknowledgment&gt;.
-   * 
-   * @see OrderStateChangeNotification
-   */
-  public String process(OrderStateChangeNotification notification) throws CheckoutException;
+	/**
+	 * Process the notification.
+	 * 
+	 * @param notification
+	 *            The OrderStateChangeNotification.
+	 * @return The return String, typically a
+	 *         &lt;notification-acknowledgment&gt;.
+	 * 
+	 * @see OrderStateChangeNotification
+	 */
+	public String process(OrderStateChangeNotification notification)
+			throws CheckoutException;
 
 }

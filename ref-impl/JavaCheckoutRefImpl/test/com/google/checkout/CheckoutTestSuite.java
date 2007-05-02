@@ -51,11 +51,11 @@ public class CheckoutTestSuite {
 		suite.addTestSuite(DeliverOrderRequestTest.class);
 		suite.addTestSuite(ProcessOrderRequestTest.class);
 		suite.addTestSuite(RefundOrderRequestTest.class);
-		suite.addTestSuite(SendBuyerMessageRequestTest	.class);					
+		suite.addTestSuite(SendBuyerMessageRequestTest.class);
 		suite.addTestSuite(UnarchiveOrderRequestTest.class);
-		
+
 		suite.addTestSuite(MerchantCalculationCallbackTest.class);
-		
+
 		suite.addTestSuite(AuthorizationAmountNotificationTest.class);
 		suite.addTestSuite(ChargeAmountNotificationTest.class);
 		suite.addTestSuite(ChargebackAmountNotificationTest.class);
@@ -63,9 +63,7 @@ public class CheckoutTestSuite {
 		suite.addTestSuite(OrderStateChangeNotificationTest.class);
 		suite.addTestSuite(RefundAmountNotificationTest.class);
 		suite.addTestSuite(RiskInformationNotificationTest.class);
-		
-		
-		
+
 		return suite;
 	}
 

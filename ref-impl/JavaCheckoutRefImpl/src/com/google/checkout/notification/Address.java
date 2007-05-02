@@ -55,7 +55,7 @@ public class Address {
 	 * @return the city
 	 */
 	public String getCity() {
-		return Utils.getElementStringValue(document, element, "city");	
+		return Utils.getElementStringValue(document, element, "city");
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class Address {
 	 * @return the contactName
 	 */
 	public String getContactName() {
-		return Utils.getElementStringValue(document, element, "contact-name");	
+		return Utils.getElementStringValue(document, element, "contact-name");
 	}
 
 	/**

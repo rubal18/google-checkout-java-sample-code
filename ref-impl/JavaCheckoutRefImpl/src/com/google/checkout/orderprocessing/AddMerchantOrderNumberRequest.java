@@ -21,7 +21,6 @@ import org.w3c.dom.Element;
 
 import com.google.checkout.AbstractCheckoutRequest;
 import com.google.checkout.MerchantConstants;
-import com.google.checkout.orderprocessing.AddMerchantOrderNumberRequest;
 import com.google.checkout.util.Constants;
 import com.google.checkout.util.Utils;
 
@@ -31,115 +30,116 @@ import com.google.checkout.util.Utils;
  */
 public class AddMerchantOrderNumberRequest extends AbstractCheckoutRequest {
 
-  private Document document;
+	private Document document;
 
-  private Element root;
+	private Element root;
 
-  /**
-   * Constructor which takes an instance of MerchantConstants.
-   * 
-   * @param merchantConstants
-   *          The MerchantConstants.
-   * 
-   * @see MerchantConstants
-   */
-  public AddMerchantOrderNumberRequest(MerchantConstants merchantConstants) {
-    super(merchantConstants);
+	/**
+	 * Constructor which takes an instance of MerchantConstants.
+	 * 
+	 * @param merchantConstants
+	 *            The MerchantConstants.
+	 * 
+	 * @see MerchantConstants
+	 */
+	public AddMerchantOrderNumberRequest(MerchantConstants merchantConstants) {
+		super(merchantConstants);
 
-    document = Utils.newEmptyDocument();
-    root = (Element) document.createElementNS(Constants.checkoutNamespace,
-        "add-merchant-order-number");
-    root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns",
-        Constants.checkoutNamespace);
-    document.appendChild(root);
-  }
+		document = Utils.newEmptyDocument();
+		root = (Element) document.createElementNS(Constants.checkoutNamespace,
+				"add-merchant-order-number");
+		root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns",
+				Constants.checkoutNamespace);
+		document.appendChild(root);
+	}
 
-  /**
-   * Constructor which takes an instance of MerchantConstants, a Google Order
-   * Number and a Merchant Order Number.
-   * 
-   * @param merchantConstants
-   *          The MerchantConstants.
-   * @param googleOrderNo
-   *          The Google Order Number.
-   * @param merchantOrderNo
-   *          The Merchant Order Number.
-   */
-  public AddMerchantOrderNumberRequest(MerchantConstants merchantConstants,
-      String googleOrderNo, String merchantOrderNo) {
-    this(merchantConstants);
-    this.setGoogleOrderNo(googleOrderNo);
-    this.setMerchantOrderNo(merchantOrderNo);
-  }
+	/**
+	 * Constructor which takes an instance of MerchantConstants, a Google Order
+	 * Number and a Merchant Order Number.
+	 * 
+	 * @param merchantConstants
+	 *            The MerchantConstants.
+	 * @param googleOrderNo
+	 *            The Google Order Number.
+	 * @param merchantOrderNo
+	 *            The Merchant Order Number.
+	 */
+	public AddMerchantOrderNumberRequest(MerchantConstants merchantConstants,
+			String googleOrderNo, String merchantOrderNo) {
+		this(merchantConstants);
+		this.setGoogleOrderNo(googleOrderNo);
+		this.setMerchantOrderNo(merchantOrderNo);
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.checkout.CheckoutRequest#getXml()
-   */
-  public String getXml() {
-    return Utils.documentToString(document);
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.checkout.CheckoutRequest#getXml()
+	 */
+	public String getXml() {
+		return Utils.documentToString(document);
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.checkout.CheckoutRequest#getXmlPretty()
-   */
-  public String getXmlPretty() {
-    return Utils.documentToStringPretty(document);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.checkout.CheckoutRequest#getXmlPretty()
+	 */
+	public String getXmlPretty() {
+		return Utils.documentToStringPretty(document);
 
-  }
+	}
 
-  /**
-   * Return the Google Order Number, which is the value of the
-   * google-order-number attribute on the root tag.
-   * 
-   * @return The Google Order Number.
-   */
-  public String getGoogleOrderNo() {
-    return root.getAttribute("google-order-number");
-  }
+	/**
+	 * Return the Google Order Number, which is the value of the
+	 * google-order-number attribute on the root tag.
+	 * 
+	 * @return The Google Order Number.
+	 */
+	public String getGoogleOrderNo() {
+		return root.getAttribute("google-order-number");
+	}
 
-  /**
-   * Return the Merchant Order Number, which is the value of the
-   * &lt;merchant-order-number&gt; tag.
-   * 
-   * @return The Merchant Order Number.
-   */
-  public String getMerchantOrderNo() {
-    return Utils.getElementStringValue(document, root, "merchant-order-number");
-  }
+	/**
+	 * Return the Merchant Order Number, which is the value of the
+	 * &lt;merchant-order-number&gt; tag.
+	 * 
+	 * @return The Merchant Order Number.
+	 */
+	public String getMerchantOrderNo() {
+		return Utils.getElementStringValue(document, root,
+				"merchant-order-number");
+	}
 
-  /**
-   * Set the Google Order Number, which is the value of the google-order-number
-   * attribute on the root tag.
-   * 
-   * @param googleOrderNo
-   *          The Google Order Number.
-   */
-  public void setGoogleOrderNo(String googleOrderNo) {
-    root.setAttribute("google-order-number", googleOrderNo);
-  }
+	/**
+	 * Set the Google Order Number, which is the value of the
+	 * google-order-number attribute on the root tag.
+	 * 
+	 * @param googleOrderNo
+	 *            The Google Order Number.
+	 */
+	public void setGoogleOrderNo(String googleOrderNo) {
+		root.setAttribute("google-order-number", googleOrderNo);
+	}
 
-  /**
-   * Set the Merchant Order Number, which is the value of the
-   * &lt;merchant-order-number&gt; tag.
-   * 
-   * @param merchantOrderNo
-   *          The Merchant Order Number.
-   */
-  public void setMerchantOrderNo(String merchantOrderNo) {
-    Utils.findElementAndSetElseCreateAndSet(document, root,
-        "merchant-order-number", merchantOrderNo);
-  }
+	/**
+	 * Set the Merchant Order Number, which is the value of the
+	 * &lt;merchant-order-number&gt; tag.
+	 * 
+	 * @param merchantOrderNo
+	 *            The Merchant Order Number.
+	 */
+	public void setMerchantOrderNo(String merchantOrderNo) {
+		Utils.findElementAndSetElseCreateAndSet(document, root,
+				"merchant-order-number", merchantOrderNo);
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.checkout.CheckoutRequest#getPostUrl()
-   */
-  public String getPostUrl() {
-    return merchantConstants.getRequestUrl();
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.checkout.CheckoutRequest#getPostUrl()
+	 */
+	public String getPostUrl() {
+		return merchantConstants.getRequestUrl();
+	}
 }

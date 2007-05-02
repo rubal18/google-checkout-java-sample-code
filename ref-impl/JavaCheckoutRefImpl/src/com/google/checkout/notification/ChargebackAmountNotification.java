@@ -22,8 +22,9 @@ import com.google.checkout.util.Utils;
 
 /**
  * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public class ChargebackAmountNotification extends CheckoutNotification {
 
@@ -46,27 +47,34 @@ public class ChargebackAmountNotification extends CheckoutNotification {
 		document = Utils.newDocumentFromInputStream(inputStream);
 		root = document.getDocumentElement();
 	}
-	
+
 	/**
 	 * TODO
+	 * 
 	 * @return
 	 */
 	public float getLatestChargebackAmount() {
-		return Utils.getElementFloatValue(document, root, "latest-chargeback-amount");
+		return Utils.getElementFloatValue(document, root,
+				"latest-chargeback-amount");
 	}
 
 	/**
 	 * TODO
+	 * 
 	 * @return
 	 */
 	public float getTotalChargebackAmount() {
-		return Utils.getElementFloatValue(document, root, "total-chargeback-amount");	}
+		return Utils.getElementFloatValue(document, root,
+				"total-chargeback-amount");
+	}
 
 	/**
 	 * TODO
+	 * 
 	 * @return
 	 */
 	public String getCurrencyCode() {
-		return Utils.findElementOrContainer(document, root, "latest-chargeback-amount").getAttribute("currency");
+		return Utils.findElementOrContainer(document, root,
+				"latest-chargeback-amount").getAttribute("currency");
 	}
 }

@@ -46,137 +46,140 @@ import com.google.checkout.example.notification.NotificationAcknowledgment;
  */
 public class JmsNotificationServlet extends javax.servlet.http.HttpServlet {
 
-  private static final String queueName = "queue/GoogleCheckoutInbox";
+	private static final String queueName = "queue/GoogleCheckoutInbox";
 
-  private static final String qcfName = "QueueConnectionFactory";
+	private static final String qcfName = "QueueConnectionFactory";
 
-  private static QueueConnectionFactory queueConnectionFactory = null;
+	private static QueueConnectionFactory queueConnectionFactory = null;
 
-  private Queue queue = null;
+	private Queue queue = null;
 
-  /*
-   * (non-Java-doc)
-   * 
-   * @see javax.servlet.http.HttpServlet#HttpServlet()
-   */
-  public JmsNotificationServlet() {
-    try {
-      Context jndiContext = new InitialContext();
-      queueConnectionFactory = (QueueConnectionFactory) jndiContext
-          .lookup(qcfName);
-      queue = (Queue) jndiContext.lookup(queueName);
-    } catch (NamingException e) {
-      e.printStackTrace();
-    }
-  }
+	/*
+	 * (non-Java-doc)
+	 * 
+	 * @see javax.servlet.http.HttpServlet#HttpServlet()
+	 */
+	public JmsNotificationServlet() {
+		try {
+			Context jndiContext = new InitialContext();
+			queueConnectionFactory = (QueueConnectionFactory) jndiContext
+					.lookup(qcfName);
+			queue = (Queue) jndiContext.lookup(queueName);
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
-  /*
-   * (non-Java-doc)
-   * 
-   * @see javax.servlet.http.HttpServlet#doGet(HttpServletRequest request,
-   *      HttpServletResponse response)
-   */
-  public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-  }
+	/*
+	 * (non-Java-doc)
+	 * 
+	 * @see javax.servlet.http.HttpServlet#doGet(HttpServletRequest request,
+	 *      HttpServletResponse response)
+	 */
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+	}
 
-  /*
-   * (non-Java-doc)
-   * 
-   * @see javax.servlet.http.HttpServlet#doPost(HttpServletRequest request,
-   *      HttpServletResponse response)
-   */
-  public void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+	/*
+	 * (non-Java-doc)
+	 * 
+	 * @see javax.servlet.http.HttpServlet#doPost(HttpServletRequest request,
+	 *      HttpServletResponse response)
+	 */
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-    MerchantConstants mc = MerchantConstantsFactory.getMerchantConstants();
+		MerchantConstants mc = MerchantConstantsFactory.getMerchantConstants();
 
-    try {
-      String auth = request.getHeader("Authorization");
-      if (auth == null || !auth.equals("Basic " + mc.getHttpAuth())) {
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed.");
-        return;
-      }
+		try {
+			String auth = request.getHeader("Authorization");
+			if (auth == null || !auth.equals("Basic " + mc.getHttpAuth())) {
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+						"Authentication Failed.");
+				return;
+			}
 
-      String notification = getNotificationBody(request.getInputStream());
-      String ret = dispatch(notification);
+			String notification = getNotificationBody(request.getInputStream());
+			String ret = dispatch(notification);
 
-      PrintWriter out = response.getWriter();
-      out.print(ret);
+			PrintWriter out = response.getWriter();
+			out.print(ret);
 
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex.getMessage());
-    }
-  }
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex
+					.getMessage());
+		}
+	}
 
-  private String dispatch(String notification) throws Exception {
-    if (notification.indexOf("new-order-notification") > -1) {
-      return storeMessage("new-order-notification", notification);
-    }
-    if (notification.indexOf("risk-information-notification") > -1) {
-      return storeMessage("risk-information-notification", notification);
-    }
-    if (notification.indexOf("order-state-change-notification") > -1) {
-      return storeMessage("order-state-change-notification", notification);
-    }
-    if (notification.indexOf("charge-amount-notification") > -1) {
-      return storeMessage("charge-amount-notification", notification);
-    }
-    if (notification.indexOf("refund-amount-notification") > -1) {
-      return storeMessage("refund-amount-notification", notification);
-    }
-    if (notification.indexOf("chargeback-amount-notification") > -1) {
-      return storeMessage("chargeback-amount-notification", notification);
-    }
-    if (notification.indexOf("authorization-amount-notification") > -1) {
-      return storeMessage("authorization-amount-notification", notification);
-    }
-    throw new Exception("Notification not recoginsed.");
-  }
+	private String dispatch(String notification) throws Exception {
+		if (notification.indexOf("new-order-notification") > -1) {
+			return storeMessage("new-order-notification", notification);
+		}
+		if (notification.indexOf("risk-information-notification") > -1) {
+			return storeMessage("risk-information-notification", notification);
+		}
+		if (notification.indexOf("order-state-change-notification") > -1) {
+			return storeMessage("order-state-change-notification", notification);
+		}
+		if (notification.indexOf("charge-amount-notification") > -1) {
+			return storeMessage("charge-amount-notification", notification);
+		}
+		if (notification.indexOf("refund-amount-notification") > -1) {
+			return storeMessage("refund-amount-notification", notification);
+		}
+		if (notification.indexOf("chargeback-amount-notification") > -1) {
+			return storeMessage("chargeback-amount-notification", notification);
+		}
+		if (notification.indexOf("authorization-amount-notification") > -1) {
+			return storeMessage("authorization-amount-notification",
+					notification);
+		}
+		throw new Exception("Notification not recoginsed.");
+	}
 
-  private String storeMessage(String messageType, String contents) {
-    QueueConnection queueConnection = null;
-    try {
-      queueConnection = queueConnectionFactory.createQueueConnection();
-      QueueSession queueSession = queueConnection.createQueueSession(false,
-          Session.AUTO_ACKNOWLEDGE);
-      QueueSender queueSender = queueSession.createSender(queue);
-      TextMessage message = queueSession.createTextMessage();
-      message.setStringProperty("messageType", messageType);
-      message.setText(contents);
-      queueSender.send(message);
-      
-      return NotificationAcknowledgment.getAckString(); 
-      
-    } catch (JMSException e) {
-      e.printStackTrace();
-    } finally {
-      if (queueConnection != null) {
-        try {
-          queueConnection.close();
-        } catch (JMSException e) {
-          e.printStackTrace();
-        }
-      }
-    }
-    return "Error!";
-  }
+	private String storeMessage(String messageType, String contents) {
+		QueueConnection queueConnection = null;
+		try {
+			queueConnection = queueConnectionFactory.createQueueConnection();
+			QueueSession queueSession = queueConnection.createQueueSession(
+					false, Session.AUTO_ACKNOWLEDGE);
+			QueueSender queueSender = queueSession.createSender(queue);
+			TextMessage message = queueSession.createTextMessage();
+			message.setStringProperty("messageType", messageType);
+			message.setText(contents);
+			queueSender.send(message);
 
-  private String getNotificationBody(InputStream inputStream)
-      throws IOException {
+			return NotificationAcknowledgment.getAckString();
 
-    BufferedReader reader = new BufferedReader(new InputStreamReader(
-        inputStream));
-    StringBuffer xml = new StringBuffer();
-    String line;
+		} catch (JMSException e) {
+			e.printStackTrace();
+		} finally {
+			if (queueConnection != null) {
+				try {
+					queueConnection.close();
+				} catch (JMSException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return "Error!";
+	}
 
-    while ((line = reader.readLine()) != null) {
-      xml.append(line + "\n");
-    }
-    reader.close();
+	private String getNotificationBody(InputStream inputStream)
+			throws IOException {
 
-    return xml.toString();
-  }
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				inputStream));
+		StringBuffer xml = new StringBuffer();
+		String line;
+
+		while ((line = reader.readLine()) != null) {
+			xml.append(line + "\n");
+		}
+		reader.close();
+
+		return xml.toString();
+	}
 }

@@ -20,9 +20,11 @@ import java.io.InputStream;
 
 import com.google.checkout.util.Utils;
 
-/**TODO
+/**
+ * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public class RefundAmountNotification extends CheckoutNotification {
 
@@ -45,25 +47,34 @@ public class RefundAmountNotification extends CheckoutNotification {
 		document = Utils.newDocumentFromInputStream(inputStream);
 		root = document.getDocumentElement();
 	}
-	
-	/**TODO
+
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public float getLatestRefundAmount() {
-		return Utils.getElementFloatValue(document, root, "latest-refund-amount");	
+		return Utils.getElementFloatValue(document, root,
+				"latest-refund-amount");
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public float getTotalRefundAmount() {
-		return Utils.getElementFloatValue(document, root, "total-refund-amount");	
+		return Utils
+				.getElementFloatValue(document, root, "total-refund-amount");
 	}
-	
-	/**TODO
+
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public String getCurrencyCode() {
-		return Utils.findElementOrContainer(document, root, "latest-refund-amount").getAttribute("currency");
+		return Utils.findElementOrContainer(document, root,
+				"latest-refund-amount").getAttribute("currency");
 	}
 }

@@ -18,8 +18,9 @@ package com.google.checkout.notification;
 
 /**
  * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public class FulfillmentOrderState {
 
@@ -54,15 +55,18 @@ public class FulfillmentOrderState {
 		this.value = value;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
 		return value;
 	}
-	
+
 	/**
 	 * TODO
+	 * 
 	 * @param state
 	 * @return
 	 */
@@ -76,7 +80,7 @@ public class FulfillmentOrderState {
 		} else if ("WILL_NOT_DELIVER".equals(state)) {
 			return WILL_NOT_DELIVER;
 		} else {
-			throw new RuntimeException("Invalid Fulfillment State: "+state);
+			throw new RuntimeException("Invalid Fulfillment State: " + state);
 		}
 	}
 }

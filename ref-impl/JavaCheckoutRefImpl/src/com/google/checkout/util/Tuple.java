@@ -17,38 +17,33 @@
 package com.google.checkout.util;
 
 /**
- * @author 		ksim
- * @version		1.0
+ * @author ksim
+ * @version 1.0
  */
-public abstract class Tuple 
-{
+public abstract class Tuple {
 	private Object firstElement;
+
 	private Object secondElement;
-	
-	Tuple(Object fElement, Object sElement)
-	{
+
+	Tuple(Object fElement, Object sElement) {
 		firstElement = fElement;
 		secondElement = sElement;
 	}
-	
-	public Object getFirstElement()
-	{
+
+	public Object getFirstElement() {
 		return firstElement;
 	}
-	
-	public Object getSecondElement()
-	{
+
+	public Object getSecondElement() {
 		return secondElement;
 	}
-	
-	public void setFirstElement(Object fElement)
-	{
+
+	public void setFirstElement(Object fElement) {
 		firstElement = fElement;
 		return;
 	}
-	
-	public void setSecondElement(Object sElement)
-	{
+
+	public void setSecondElement(Object sElement) {
 		secondElement = sElement;
 		return;
 	}

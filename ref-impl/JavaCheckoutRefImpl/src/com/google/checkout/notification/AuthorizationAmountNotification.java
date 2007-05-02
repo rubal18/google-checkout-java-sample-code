@@ -23,8 +23,9 @@ import com.google.checkout.util.Utils;
 
 /**
  * TODO:
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public class AuthorizationAmountNotification extends CheckoutNotification {
 
@@ -50,43 +51,51 @@ public class AuthorizationAmountNotification extends CheckoutNotification {
 
 	/**
 	 * TODO:
+	 * 
 	 * @return
 	 */
 	public String getAvsResponse() {
 		return Utils.getElementStringValue(document, root, "avs-response");
-	  }
-	
+	}
+
 	/**
 	 * TODO:
+	 * 
 	 * @return
 	 */
 	public String getCvnResponse() {
 		return Utils.getElementStringValue(document, root, "cvn-response");
-	  }
-	
+	}
+
 	/**
 	 * TODO:
+	 * 
 	 * @return
 	 */
 	public float getAuthorizationAmount() {
-		return Utils.getElementFloatValue(document, root, "authorization-amount");
-	  }
-	
+		return Utils.getElementFloatValue(document, root,
+				"authorization-amount");
+	}
+
 	/**
 	 * TODO:
+	 * 
 	 * @return
 	 */
 	public String getCurrentyCode() {
-		return Utils.findElementOrContainer(document, root, "authorization-amount").getAttribute("currency");
-	  }
-	
+		return Utils.findElementOrContainer(document, root,
+				"authorization-amount").getAttribute("currency");
+	}
+
 	/**
 	 * TODO:
+	 * 
 	 * @return
 	 */
 	public Date getAuthorizationExpirationDate() {
-		
-	    return Utils.getElementDateValue(document, root, "authorization-expiration-date");
-	  }
-	
+
+		return Utils.getElementDateValue(document, root,
+				"authorization-expiration-date");
+	}
+
 }

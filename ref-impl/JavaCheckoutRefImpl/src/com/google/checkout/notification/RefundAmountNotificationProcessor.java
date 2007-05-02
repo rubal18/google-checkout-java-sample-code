@@ -26,15 +26,17 @@ import com.google.checkout.CheckoutException;
  */
 public interface RefundAmountNotificationProcessor {
 
-  /**
-   * Process the notification.
-   * 
-   * @param notification
-   *          The RefundAmountNotification.
-   * @return The return String, typically a &lt;notification-acknowledgment&gt;.
-   * 
-   * @see RefundAmountNotification
-   */
-  public String process(RefundAmountNotification notification) throws CheckoutException;
+	/**
+	 * Process the notification.
+	 * 
+	 * @param notification
+	 *            The RefundAmountNotification.
+	 * @return The return String, typically a
+	 *         &lt;notification-acknowledgment&gt;.
+	 * 
+	 * @see RefundAmountNotification
+	 */
+	public String process(RefundAmountNotification notification)
+			throws CheckoutException;
 
 }

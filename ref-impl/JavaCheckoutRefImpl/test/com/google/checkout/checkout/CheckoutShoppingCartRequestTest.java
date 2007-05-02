@@ -29,10 +29,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.google.checkout.MerchantConstants;
-import com.google.checkout.checkout.CheckoutShoppingCartRequest;
-import com.google.checkout.checkout.ShippingRestrictions;
-import com.google.checkout.checkout.TaxArea;
-import com.google.checkout.checkout.USArea;
 import com.google.checkout.util.Utils;
 
 public class CheckoutShoppingCartRequestTest extends XMLTestCase {

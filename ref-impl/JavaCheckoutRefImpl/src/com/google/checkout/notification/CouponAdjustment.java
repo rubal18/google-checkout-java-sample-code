@@ -21,8 +21,9 @@ import org.w3c.dom.Element;
 
 /**
  * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public class CouponAdjustment extends MerchantCodes {
 	/**

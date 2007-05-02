@@ -27,15 +27,17 @@ import com.google.checkout.CheckoutException;
  */
 public interface AuthorizationAmountNotificationProcessor {
 
-  /**
-   * Process the notification.
-   * 
-   * @param notification
-   *          The AuthorizationAmountNotification.
-   * @return The return String, typically a &lt;notification-acknowledgment&gt;.
-   * 
-   * @see AuthorizationAmountNotification
-   */
-  public String process(AuthorizationAmountNotification notification) throws CheckoutException;
+	/**
+	 * Process the notification.
+	 * 
+	 * @param notification
+	 *            The AuthorizationAmountNotification.
+	 * @return The return String, typically a
+	 *         &lt;notification-acknowledgment&gt;.
+	 * 
+	 * @see AuthorizationAmountNotification
+	 */
+	public String process(AuthorizationAmountNotification notification)
+			throws CheckoutException;
 
 }

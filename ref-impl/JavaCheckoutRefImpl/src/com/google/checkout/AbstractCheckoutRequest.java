@@ -31,90 +31,93 @@ import java.net.URL;
  */
 public abstract class AbstractCheckoutRequest {
 
-  protected MerchantConstants merchantConstants;
+	protected MerchantConstants merchantConstants;
 
-  /**
-   * Constructor which takes an instance of MerchantConstants.
-   * 
-   * @param merchantConstants
-   *          The MerchantConstants.
-   * 
-   * @see MerchantConstants
-   */
-  public AbstractCheckoutRequest(MerchantConstants merchantConstants) {
-    this.merchantConstants = merchantConstants;
-  }
-  
-  /**
-   * Return the URL to POST the request to.
-   * 
-   * @return The POST URL.
-   */
-  public abstract String getPostUrl();
+	/**
+	 * Constructor which takes an instance of MerchantConstants.
+	 * 
+	 * @param merchantConstants
+	 *            The MerchantConstants.
+	 * 
+	 * @see MerchantConstants
+	 */
+	public AbstractCheckoutRequest(MerchantConstants merchantConstants) {
+		this.merchantConstants = merchantConstants;
+	}
 
-  /**
-   * Return the XML request String.
-   * 
-   * @return The XML request String.
-   */
-  public abstract String getXml();
+	/**
+	 * Return the URL to POST the request to.
+	 * 
+	 * @return The POST URL.
+	 */
+	public abstract String getPostUrl();
 
-  /**
-   * Return the nicely formatted XML request String.
-   * 
-   * @return The nicely formatted XML request String.
-   */
-  public abstract String getXmlPretty();
+	/**
+	 * Return the XML request String.
+	 * 
+	 * @return The XML request String.
+	 */
+	public abstract String getXml();
 
-  /**
-   * Submit the request to the POST URL and return a CheckoutResonse.
-   * 
-   * @return The CheckoutResponse object.
-   * 
-   * @see CheckoutResponse
-   */
-  public CheckoutResponse send() {
-    try {
-      URL url = new URL(getPostUrl());
-      HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+	/**
+	 * Return the nicely formatted XML request String.
+	 * 
+	 * @return The nicely formatted XML request String.
+	 */
+	public abstract String getXmlPretty();
 
-      connection.setDoInput(true);
-      connection.setDoOutput(true);
-      connection.setUseCaches(false);
-      connection.setInstanceFollowRedirects(true);
-      connection.setRequestMethod("POST");
-      connection.setRequestProperty("Authorization", "Basic "
-          + merchantConstants.getHttpAuth());
-      connection.setRequestProperty("Host", connection.getURL().getHost());
+	/**
+	 * Submit the request to the POST URL and return a CheckoutResonse.
+	 * 
+	 * @return The CheckoutResponse object.
+	 * 
+	 * @see CheckoutResponse
+	 */
+	public CheckoutResponse send() {
+		try {
+			URL url = new URL(getPostUrl());
+			HttpURLConnection connection = (HttpURLConnection) url
+					.openConnection();
 
-      // Changed to allow i18n character sets to be processed properly
-      connection.setRequestProperty("content-type",
-          "application/xml; charset=UTF-8");
-      connection.setRequestProperty("accept", "application/xml");
+			connection.setDoInput(true);
+			connection.setDoOutput(true);
+			connection.setUseCaches(false);
+			connection.setInstanceFollowRedirects(true);
+			connection.setRequestMethod("POST");
+			connection.setRequestProperty("Authorization", "Basic "
+					+ merchantConstants.getHttpAuth());
+			connection
+					.setRequestProperty("Host", connection.getURL().getHost());
 
-      PrintWriter output = new PrintWriter(new OutputStreamWriter(connection
-          .getOutputStream()));
-      output.print(getXml());
-      output.flush();
-      output.close();
+			// Changed to allow i18n character sets to be processed properly
+			connection.setRequestProperty("content-type",
+					"application/xml; charset=UTF-8");
+			connection.setRequestProperty("accept", "application/xml");
 
-      int responseCode = ((HttpURLConnection) connection).getResponseCode();
-      InputStream inputStream;
+			PrintWriter output = new PrintWriter(new OutputStreamWriter(
+					connection.getOutputStream()));
+			output.print(getXml());
+			output.flush();
+			output.close();
 
-      if (responseCode == HttpURLConnection.HTTP_OK) {
-        inputStream = ((HttpURLConnection) connection).getInputStream();
-      } else {
-        inputStream = ((HttpURLConnection) connection).getErrorStream();
-      }
+			int responseCode = ((HttpURLConnection) connection)
+					.getResponseCode();
+			InputStream inputStream;
 
-        return new CheckoutResponse(inputStream);    
-    }
+			if (responseCode == HttpURLConnection.HTTP_OK) {
+				inputStream = ((HttpURLConnection) connection).getInputStream();
+			} else {
+				inputStream = ((HttpURLConnection) connection).getErrorStream();
+			}
 
-    catch (MalformedURLException murle) {
-      System.err.println("MalformedURLException encountered.");
-    } catch (IOException ioe) {
-      System.err.println("IOException encountered.");
-    }
-    return null;
-  }
+			return new CheckoutResponse(inputStream);
+		}
+
+		catch (MalformedURLException murle) {
+			System.err.println("MalformedURLException encountered.");
+		} catch (IOException ioe) {
+			System.err.println("IOException encountered.");
+		}
+		return null;
+	}
 }

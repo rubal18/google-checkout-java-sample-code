@@ -18,6 +18,7 @@ package com.google.checkout.merchantcalculation;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
 import com.google.checkout.util.Utils;
 
 /**

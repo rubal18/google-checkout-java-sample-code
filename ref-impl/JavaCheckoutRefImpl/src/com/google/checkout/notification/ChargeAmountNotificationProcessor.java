@@ -26,15 +26,17 @@ import com.google.checkout.CheckoutException;
  */
 public interface ChargeAmountNotificationProcessor {
 
-  /**
-   * Process the notification.
-   * 
-   * @param notification
-   *          The ChargeAmountNotification.
-   * @return The return String, typically a &lt;notification-acknowledgment&gt;.
-   * 
-   * @see ChargeAmountNotification
-   */
-  public String process(ChargeAmountNotification notification) throws CheckoutException;
+	/**
+	 * Process the notification.
+	 * 
+	 * @param notification
+	 *            The ChargeAmountNotification.
+	 * @return The return String, typically a
+	 *         &lt;notification-acknowledgment&gt;.
+	 * 
+	 * @see ChargeAmountNotification
+	 */
+	public String process(ChargeAmountNotification notification)
+			throws CheckoutException;
 
 }

@@ -21,16 +21,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.google.checkout.checkout.Item;
-import com.google.checkout.merchantcalculation.AnonymousAddress;
 import com.google.checkout.util.Utils;
 
-/**TODO
+/**
+ * TODO
+ * 
  * @author simonjsmith
- *
+ * 
  */
 public class NewOrderNotification extends CheckoutNotification {
 
@@ -122,23 +122,31 @@ public class NewOrderNotification extends CheckoutNotification {
 				"google-order-number");
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public Address getBuyerShippingAddress() {
-		Element address = Utils.findElementOrContainer(document, root, "buyer-shipping-address");
+		Element address = Utils.findElementOrContainer(document, root,
+				"buyer-shipping-address");
 		return new Address(document, address);
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public Address getBuyerBillingAddress() {
-		Element address = Utils.findElementOrContainer(document, root, "buyer-billing-address");
+		Element address = Utils.findElementOrContainer(document, root,
+				"buyer-billing-address");
 		return new Address(document, address);
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public boolean isMarketingEmailAllowed() {
@@ -148,7 +156,9 @@ public class NewOrderNotification extends CheckoutNotification {
 				buyerMarketingPreferences, "email-allowed");
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public boolean isMerchantCalculationSuccessful() {
@@ -158,15 +168,17 @@ public class NewOrderNotification extends CheckoutNotification {
 				"merchant-calculation-successful");
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public Collection getMerchantCodes() {
 		Element oa = Utils.findElementOrContainer(document, root,
-		"order-adjustment");
+				"order-adjustment");
 		Element mc = Utils.findElementOrContainer(document, oa,
-		"merchant-codes");		
-		
+				"merchant-codes");
+
 		Element[] elements = Utils.getElements(document, mc);
 		Collection ret = new ArrayList();
 
@@ -174,17 +186,19 @@ public class NewOrderNotification extends CheckoutNotification {
 		String name;
 		for (int i = 0; i < elements.length; i++) {
 			e = elements[i];
-			name = e.getNodeName();	
+			name = e.getNodeName();
 			if ("gift-certificate-adjustment".equals(name)) {
 				ret.add(new GiftCertificateAdjustment(document, e));
-			} else if("coupon-adjustment".equals(name)) {
+			} else if ("coupon-adjustment".equals(name)) {
 				ret.add(new CouponAdjustment(document, e));
 			}
 		}
-		return ret;	
+		return ret;
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public float getTotalTax() {
@@ -194,7 +208,9 @@ public class NewOrderNotification extends CheckoutNotification {
 				"total-tax");
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public float getAdjustmentTotal() {
@@ -204,41 +220,50 @@ public class NewOrderNotification extends CheckoutNotification {
 				"adjustment-total");
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public Shipping getShipping() {
 		Element oa = Utils.findElementOrContainer(document, root,
-		"order-adjustment");
+				"order-adjustment");
 		Element shipping = Utils.findElementOrContainer(document, oa,
-		"shipping");	
-		
-		Element e = Utils.findElementOrContainer(document, shipping, "merchant-calculated-shipping-adjustment");
+				"shipping");
+
+		Element e = Utils.findElementOrContainer(document, shipping,
+				"merchant-calculated-shipping-adjustment");
 		if (e != null) {
 			return new MerchantCalculatedShippingAdjustment(document, e);
 		}
 
-		e = Utils.findElementOrContainer(document, shipping, "flat-rate-shipping-adjustment");
+		e = Utils.findElementOrContainer(document, shipping,
+				"flat-rate-shipping-adjustment");
 		if (e != null) {
 			return new FlatRateShippingAdjustment(document, e);
 		}
 
-		e = Utils.findElementOrContainer(document, shipping, "pickup-shipping-adjustment");
+		e = Utils.findElementOrContainer(document, shipping,
+				"pickup-shipping-adjustment");
 		if (e != null) {
 			return new PickupShippingAdjustment(document, e);
-		}		
+		}
 
-		return null;	
+		return null;
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public float getOrderTotal() {
 		return Utils.getElementFloatValue(document, root, "order-total");
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public String getOrderCurrencyCode() {
@@ -246,7 +271,9 @@ public class NewOrderNotification extends CheckoutNotification {
 				.getAttribute("currency");
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public FulfillmentOrderState getFulfillmentOrderState() {
@@ -255,7 +282,9 @@ public class NewOrderNotification extends CheckoutNotification {
 		return FulfillmentOrderState.getState(state);
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public FinancialOrderState getFinancialOrderState() {
@@ -264,7 +293,9 @@ public class NewOrderNotification extends CheckoutNotification {
 		return FinancialOrderState.getState(state);
 	}
 
-	/**TODO
+	/**
+	 * TODO
+	 * 
 	 * @return
 	 */
 	public long getBuyerId() {
