@@ -29,10 +29,12 @@ public interface OrderStateChangeNotificationProcessor {
   /**
    * Process the notification.
    * 
-   * @param callbackXML
-   *          The notification XML String.
+   * @param notification
+   *          The OrderStateChangeNotification.
    * @return The return String, typically a &lt;notification-acknowledgment&gt;.
+   * 
+   * @see OrderStateChangeNotification
    */
-  public String process(String callbackXML) throws CheckoutException;
+  public String process(OrderStateChangeNotification notification) throws CheckoutException;
 
 }

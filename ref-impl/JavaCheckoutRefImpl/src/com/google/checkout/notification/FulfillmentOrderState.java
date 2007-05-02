@@ -16,6 +16,11 @@
 
 package com.google.checkout.notification;
 
+/**
+ * TODO
+ * @author simonjsmith
+ *
+ */
 public class FulfillmentOrderState {
 
 	/**
@@ -49,10 +54,18 @@ public class FulfillmentOrderState {
 		this.value = value;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return value;
 	}
 	
+	/**
+	 * TODO
+	 * @param state
+	 * @return
+	 */
 	public static FulfillmentOrderState getState(String state) {
 		if ("NEW".equals(state)) {
 			return NEW;

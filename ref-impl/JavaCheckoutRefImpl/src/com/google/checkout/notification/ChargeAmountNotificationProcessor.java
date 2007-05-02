@@ -19,20 +19,22 @@ package com.google.checkout.notification;
 import com.google.checkout.CheckoutException;
 
 /**
- * This class is responsible for processing a
- * &lt;chargeback-amount-notification&gt; sent as part of the Notification API.
+ * This class is responsible for processing a &lt;charge-amount-notification&gt;
+ * sent as part of the Notification API.
  * 
  * @author simonjsmith@google.com
  */
-public interface ChargebackNotificationProcessor {
+public interface ChargeAmountNotificationProcessor {
 
   /**
    * Process the notification.
    * 
-   * @param callbackXML
-   *          The notification XML String.
+   * @param notification
+   *          The ChargeAmountNotification.
    * @return The return String, typically a &lt;notification-acknowledgment&gt;.
+   * 
+   * @see ChargeAmountNotification
    */
-  public String process(String callbackXML) throws CheckoutException;
+  public String process(ChargeAmountNotification notification) throws CheckoutException;
 
 }

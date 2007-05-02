@@ -29,10 +29,12 @@ public interface RiskInformationNotificationProcessor {
   /**
    * Process the notification.
    * 
-   * @param callbackXML
-   *          The notification XML String.
+   * @param notification
+   *          The RiskInformationNotification.
    * @return The return String, typically a &lt;notification-acknowledgment&gt;.
+   * 
+   * @see RiskInformationNotification
    */
-  public String process(String callbackXML) throws CheckoutException;
+  public String process(RiskInformationNotification notification) throws CheckoutException;
 
 }

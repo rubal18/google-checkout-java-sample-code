@@ -28,6 +28,10 @@ import com.google.checkout.checkout.Item;
 import com.google.checkout.merchantcalculation.AnonymousAddress;
 import com.google.checkout.util.Utils;
 
+/**TODO
+ * @author simonjsmith
+ *
+ */
 public class NewOrderNotification extends CheckoutNotification {
 
 	/**
@@ -118,16 +122,25 @@ public class NewOrderNotification extends CheckoutNotification {
 				"google-order-number");
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public Address getBuyerShippingAddress() {
 		Element address = Utils.findElementOrContainer(document, root, "buyer-shipping-address");
 		return new Address(document, address);
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public Address getBuyerBillingAddress() {
 		Element address = Utils.findElementOrContainer(document, root, "buyer-billing-address");
 		return new Address(document, address);
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public boolean isMarketingEmailAllowed() {
 		Element buyerMarketingPreferences = Utils.findElementOrContainer(
 				document, root, "buyer-marketing-preferences");
@@ -135,6 +148,9 @@ public class NewOrderNotification extends CheckoutNotification {
 				buyerMarketingPreferences, "email-allowed");
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public boolean isMerchantCalculationSuccessful() {
 		Element orderAdjustment = Utils.findElementOrContainer(document, root,
 				"order-adjustment");
@@ -142,6 +158,9 @@ public class NewOrderNotification extends CheckoutNotification {
 				"merchant-calculation-successful");
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public Collection getMerchantCodes() {
 		Element oa = Utils.findElementOrContainer(document, root,
 		"order-adjustment");
@@ -165,6 +184,9 @@ public class NewOrderNotification extends CheckoutNotification {
 		return ret;	
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public float getTotalTax() {
 		Element orderAdjustment = Utils.findElementOrContainer(document, root,
 				"order-adjustment");
@@ -172,6 +194,9 @@ public class NewOrderNotification extends CheckoutNotification {
 				"total-tax");
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public float getAdjustmentTotal() {
 		Element orderAdjustment = Utils.findElementOrContainer(document, root,
 				"order-adjustment");
@@ -179,6 +204,9 @@ public class NewOrderNotification extends CheckoutNotification {
 				"adjustment-total");
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public Shipping getShipping() {
 		Element oa = Utils.findElementOrContainer(document, root,
 		"order-adjustment");
@@ -203,27 +231,42 @@ public class NewOrderNotification extends CheckoutNotification {
 		return null;	
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public float getOrderTotal() {
 		return Utils.getElementFloatValue(document, root, "order-total");
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public String getOrderCurrencyCode() {
 		return Utils.findElementOrContainer(document, root, "order-total")
 				.getAttribute("currency");
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public FulfillmentOrderState getFulfillmentOrderState() {
 		String state = Utils.getElementStringValue(document, root,
 				"fulfillment-order-state");
 		return FulfillmentOrderState.getState(state);
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public FinancialOrderState getFinancialOrderState() {
 		String state = Utils.getElementStringValue(document, root,
 				"financial-order-state");
 		return FinancialOrderState.getState(state);
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public long getBuyerId() {
 		return Utils.getElementLongValue(document, root, "buyer-id");
 	}

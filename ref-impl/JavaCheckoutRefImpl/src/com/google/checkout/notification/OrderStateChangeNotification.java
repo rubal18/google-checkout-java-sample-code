@@ -20,6 +20,10 @@ import java.io.InputStream;
 
 import com.google.checkout.util.Utils;
 
+/**TODO
+ * @author simonjsmith
+ *
+ */
 public class OrderStateChangeNotification extends CheckoutNotification {
 
 	/**
@@ -42,24 +46,36 @@ public class OrderStateChangeNotification extends CheckoutNotification {
 		root = document.getDocumentElement();
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public FulfillmentOrderState getNewFulfillmentOrderState() {
 		String state = Utils.getElementStringValue(document, root,
 				"new-fulfillment-order-state");
 		return FulfillmentOrderState.getState(state);
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public FinancialOrderState getNewFinancialOrderState() {
 		String state = Utils.getElementStringValue(document, root,
 				"new-financial-order-state");
 		return FinancialOrderState.getState(state);
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public FulfillmentOrderState getPreviousFulfillmentOrderState() {
 		String state = Utils.getElementStringValue(document, root,
 				"previous-fulfillment-order-state");
 		return FulfillmentOrderState.getState(state);
 	}
 
+	/**TODO
+	 * @return
+	 */
 	public FinancialOrderState getPreviousFinancialOrderState() {
 		String state = Utils.getElementStringValue(document, root,
 				"previous-financial-order-state");

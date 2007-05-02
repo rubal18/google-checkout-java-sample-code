@@ -29,10 +29,12 @@ public interface NewOrderNotificationProcessor {
   /**
    * Process the notification.
    * 
-   * @param callbackXML
-   *          The notification XML String.
+   * @param notification
+   *          The NewOrderNotification.
    * @return The return String, typically a &lt;notification-acknowledgment&gt;.
+   *
+   * @see NewOrderNotification
    */
-  public String process(String callbackXML) throws CheckoutException;
+  public String process(NewOrderNotification notification) throws CheckoutException;
 
 }

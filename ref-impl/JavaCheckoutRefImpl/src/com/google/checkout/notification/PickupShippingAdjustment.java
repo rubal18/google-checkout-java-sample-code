@@ -16,23 +16,26 @@
 
 package com.google.checkout.notification;
 
-import com.google.checkout.CheckoutException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
-/**
- * This class is responsible for processing a &lt;refund-amount-notification&gt;
- * sent as part of the Notification API.
- * 
- * @author simonjsmith@google.com
+/**TODO
+ * @author simonjsmith
+ *
  */
-public interface RefundNotificationProcessor {
-
-  /**
-   * Process the notification.
-   * 
-   * @param callbackXML
-   *          The notification XML String.
-   * @return The return String, typically a &lt;notification-acknowledgment&gt;.
-   */
-  public String process(String callbackXML) throws CheckoutException;
-
+public class PickupShippingAdjustment extends Shipping {
+	
+	/**
+	 * A constructor which takes the document and element pointing to the
+	 * &lt;pickup-shipping-adjustment&gt; tag.
+	 * 
+	 * @param document
+	 *            The document.
+	 * @param element
+	 *            The element.
+	 */
+	public PickupShippingAdjustment(Document document, Element element) {
+		this.document = document;
+		this.element = element;
+	}
 }
