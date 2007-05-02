@@ -129,16 +129,40 @@
     </resource-ref>   
     
   <!-- Begin: Configuration for Google checkout message processing -->
-  <servlet>
-    <display-name>NotificationServlet</display-name>
-    <servlet-name>NotificationServlet</servlet-name>
-    <servlet-class>com.google.petstore.NotificationServlet</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>NotificationServlet</servlet-name>
-    <url-pattern>/notification</url-pattern>
-  </servlet-mapping>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>MerchantCalculationServlet</display-name>
+    	<servlet-name>MerchantCalculationServlet</servlet-name>
+    	<servlet-class>com.google.checkout.webappexample.MerchantCalculationServlet</servlet-class>     
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>NotificationServlet</display-name>
+    	<servlet-name>NotificationServlet</servlet-name>
+    	<servlet-class>com.google.checkout.webappexample.NotificationServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>JmsNotificationServlet</display-name>
+    	<servlet-name>JmsNotificationServlet</servlet-name>
+    	<servlet-class>com.google.checkout.webappexample.JmsNotificationServlet</servlet-class>
+    </servlet>
+      
+    <servlet-mapping>
+    	<servlet-name>MerchantCalculationServlet</servlet-name>
+    	<url-pattern>/merchant-calculation</url-pattern>
+    </servlet-mapping>  
+    <servlet-mapping>
+    	<servlet-name>NotificationServlet</servlet-name>
+    	<url-pattern>/notification</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>JmsNotificationServlet</servlet-name>
+    	<url-pattern>/notification-async</url-pattern>
+    </servlet-mapping> 
   <!-- End: Configuration for Google checkout message processing -->
   
 </web-app>

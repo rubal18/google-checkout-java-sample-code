@@ -43,17 +43,14 @@ function CatalogController() {
   var infoBuyNow = document.getElementById("infopaneBuyNow");
   var infoShortDescription =  document.getElementById("infopaneShortDescription");
   var infoDescription =  document.getElementById("infopaneDescription"); 
-  // for paypal or Google checkout
+  // for paypal 
   var buyNowAmount = document.getElementById("buyNow1_amount");
-  if (buyNowAmount == null) { // try Google checkout
-    buyNowAmount = document.getElementsByName("item_price_1")[0];
-  }
   var buyNowItemName = document.getElementById("buyNow1_item_name");
-  if (buyNowItemName == null) { // try Google checkout
-    buyNowItemName = document.getElementsByName("item_name_1")[0];
-  }
+  // for Google checkout
+  var gcheckoutAmount = document.getElementsByName("item_price_1")[0];  
+  var gcheckoutItemName = buyNowItemName = document.getElementsByName("item_name_1")[0];
+  var gcheckoutDescription = document.getElementsByName("item_description_1")[0];
 
-  var buyNowItemDescription = document.getElementsByName("item_description_1")[0];
   function handleEvent(args) {
       if (args.type == "showingItem") {
         // update the id on the ratring component
@@ -94,10 +91,13 @@ function CatalogController() {
       setNodeText(infoShortDescription, i.shortDescription);
       setNodeText(infoDescription, i.description);
       // update the paypal
-          buyNowAmount.value = i.price.substring(1, i.price.length); // TBD: trim $ value at source
+      buyNowAmount.value = i.price;
       buyNowItemName.value = i.name;
-      if(buyNowItemDescription != null) {
-          buyNowItemDescription.value = i.description;
+      // update the checkout form variables
+      gcheckoutAmount.value = i.price.substring(1, i.price.length); // TBD: trim $ value at source
+      gcheckoutItemName.value = i.name;
+      if(gcheckoutDescription != null) {
+          gcheckoutDescription.value = i.description;
       }
   }
   

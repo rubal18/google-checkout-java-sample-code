@@ -73,9 +73,9 @@ $Id: catalog.jsp,v 1.22 2007/03/16 21:42:03 basler Exp $ --%>
                    src="https://checkout.google.com/buttons/checkout.gif?merchant_id=156531684379308&w=160&h=43&style=trans&variant=text&loc=en_US"  height="46" width="180"/>
           </FORM>
         </f:verbatim>
-        <%-- ui:buyNow business="donate@animalfoundation.com" id="buyNow1" 
+        <ui:buyNow business="donate@animalfoundation.com" id="buyNow1" 
             itemName="Buy Item One" amount="100.00" quantity="1" 
-            type="BuyNow" postData="#{PayPalBean.postData}" target="paypal"/--%>    
+            type="BuyNow" postData="#{PayPalBean.postData}" target="paypal"/>    
       </td>
         </f:view>
       <td id="infopaneIndicator" class="infopaneIndicator">
