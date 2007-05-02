@@ -4,6 +4,7 @@
     <import file="nbproject/build-impl.xml"/>
 
     <property name="orig-petstore.home" value="../../../petstore"/>
+    <property name="checkout-webexample.home" value="../JavaCheckoutWebExampleWar"/>
     
     <target name="-pre-compile" depends="init">
       <echo message="copying over all the original petstore. Make sure that the application is pre-built"/>
@@ -12,5 +13,12 @@
       <delete file="${build.web.dir}/catalog.js"/>
       <delete file="${build.web.dir}/WEB-INF/web.xml"/>
       <copy todir="${build.web.dir}/WEB-INF" file="web/WEB-INF/web.xml"/>
+
+      <copy todir="${build.web.dir}/opc">
+        <fileset dir="${checkout-webexample.home}/WebContent">
+          <exclude name="META-INF/**"/>
+          <exclude name="WEB-INF/**"/>
+        </fileset>
+      </copy>
     </target>
 </project>
