@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+
+"http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>Google Checkout Integration with Web 2.0 Pet Store Application</title>
+
+</head>
+
+
+<body>
+<h1>Google Checkout Integration with Web 2.0 Pet Store Application</h1>
+
+<p>This project integrates Google Checkout APIs with the Web 2.0 Pet Store application from 
+Sun Microsystem's <a href="http://blueprints.dev.java.net/">Java BluePrints</a> Program. </p>
+
+<p>Instructions for building and running this application. 
+
+<ol>
+<li><a href="https://glassfish.dev.java.net/downloads/v1_ur1-p01-b02.html">Download glassfish</a> 
+and install it at a convenient location. We will refer to this location in the rest of the document as glassfish.home.
+<ul>The installation steps are: 
+<li>java -Xmx256m -jar glassfish-installer-v1_ur1-p01-b02.jar</li>
+<li>ant -f setup.xml</li>
+</ul>
+<li>Start glassfish and the derby database 
+<ul><code>
+<li>cd glassfish</li>
+<li>bin/asadmin start-database</li>
+<li>bin/asadmin start-domain</li>
+</code></ul>
+</li>
+</li>
+<li><a href="http://www.netbeans.info/downloads/index.php">Download NetBeans 5.5</a> or later and install 
+it at a convenient location. We will refer to this location as netbeans.home. 
+<li>Configure NetBeans to use glassfish. Here are the steps for this: 
+<ul>
+<li>Start NetBeans, click on the Runtime tab, right-click on the Servers, and select "Add Server"</li>
+<li>Use the default settings for most things, but change the Platform location to where you installed glassfish (glassfish.home). </li>
+<li>For the admin username, use adminadmin as the password and select Finish. </li>
+</ul>
+</li>
+<li>Checkout Java Petstore project by following these steps: 
+<ul>
+<li>from a terminal, run cvs -d :pserver:guest@dev.java.net:/cvs co login<br>
+Press enter when prompted for the password (blank password). </li>
+<li>cd to the parent directory of google-checkout-java-sample-code/ and run cvs -d :pserver:gues@dev.java.net:/cvs co petstore</li>
+<li>cd petstore/ws/bp-project/</li>
+<li>Create a new file called javaeepasswords.txt and add the following contents to it<br>
+AS_ADMIN_PASSWORD=adminadmin</li>
+<li>cp build.properties.sample build.properties</li>
+<li>Edit build.properties and change javaee.home to point to glassfish.home. Change javaee.server.passwordfile property to point to javaeepasswords.txt file.</li>
+<li><ul><code>
+<li>cd petstore/ws/apps/petstore</li>
+<li>ant setup</li>
+<li>ant</li>
+</code></ul></li>
+<li>From NetBeans, select File|Open Project and navigate to google-checkout-java-sample-code/examples/petstore and open that project</li>
+<li>Right click on the project node and select run</li>
+<li>If the compilation and deployment succeeds, the application will be launched in a browser. If not, 
+go to <a href="http://localhost:8080/petstore">http://localhost:8080/petstore</a> to try the application.
+</li>
+</ol>
+</body>
+
+</html>
+
