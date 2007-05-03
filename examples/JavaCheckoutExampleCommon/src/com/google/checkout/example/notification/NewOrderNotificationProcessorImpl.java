@@ -53,8 +53,7 @@ public class NewOrderNotificationProcessorImpl extends
 			String ack = getAckString();
 			GoogleOrder order = GoogleOrder.findOrCreate(merchantConstants
 					.getMerchantId(), notification.getGoogleOrderNo());
-			order.addIncomingMessage(notification.getTimestamp(), notification
-					.getRootNodeName(), notification.getXmlPretty(), ack);
+			
 			order.setLastFulStatus(notification.getFulfillmentOrderState()
 					.toString());
 			order.setLastFinStatus(notification.getFinancialOrderState()
@@ -62,6 +61,8 @@ public class NewOrderNotificationProcessorImpl extends
 			order.setBuyerEmail(notification.getBuyerBillingAddress()
 					.getEmail());
 			order.setOrderAmount("" + notification.getOrderTotal());
+			order.addIncomingMessage(notification.getTimestamp(), notification
+					.getRootNodeName(), notification.getXmlPretty(), ack);
 			return ack;
 		} catch (Exception e) {
 			throw new CheckoutException(e);

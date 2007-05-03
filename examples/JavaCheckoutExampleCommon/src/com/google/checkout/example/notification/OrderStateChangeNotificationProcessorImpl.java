@@ -67,12 +67,12 @@ public class OrderStateChangeNotificationProcessorImpl extends
 			String ack = getAckString();
 			GoogleOrder order = GoogleOrder.findOrCreate(merchantConstants
 					.getMerchantId(), notification.getGoogleOrderNo());
-			order.addIncomingMessage(notification.getTimestamp(), notification
-					.getRootNodeName(), notification.getXmlPretty(), ack);
 			order.setLastFulStatus(notification.getNewFulfillmentOrderState()
 					.toString());
 			order.setLastFinStatus(notification.getNewFinancialOrderState()
 					.toString());
+			order.addIncomingMessage(notification.getTimestamp(), notification
+					.getRootNodeName(), notification.getXmlPretty(), ack);
 			return ack;
 		} catch (Exception e) {
 			throw new CheckoutException(e);
