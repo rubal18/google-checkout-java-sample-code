@@ -1115,10 +1115,10 @@ public class CheckoutShoppingCartRequest extends AbstractCheckoutRequest {
 	 * @param rule
 	 *            The RoundingRule.
 	 * @param mode
-	 *            The RoundingPoliy.
+	 *            The RoundingMode.
 	 * 
 	 * @see RoundingRule
-	 * @see RoundingPolicy
+	 * @see RoundingMode
 	 */
 	public void setRoundingPolicy(RoundingRule rule, RoundingMode mode) {
 		Element mcfs = Utils.findContainerElseCreate(document,
