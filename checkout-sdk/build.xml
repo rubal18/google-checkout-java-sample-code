@@ -6,6 +6,7 @@
   <property name="ref-impl.home" value="../ref-impl/JavaCheckoutRefImpl"/>
   <property name="common-example.home" value="../examples/JavaCheckoutExampleCommon"/>
   <property name="war-example.home" value="../examples/JavaCheckoutWebExampleWar"/>
+  <property name="release.version" value="0.5"/>
   
   <target name="-pre-compile" depends="init">
     <copy todir="${build.classes.dir}">
@@ -36,7 +37,7 @@
   </target>
   
   <target name="dist" depends="default">
-    <property name="sdkdist.dir" value="${build.dir}/checkout-sdk"/>
+    <property name="sdkdist.dir" value="${build.dir}/checkout-sdk-${release.version}"/>
     <mkdir dir="${sdkdist.dir}"/>
     <copy file="${dist.dir}/checkout-sdk.jar" todir="${sdkdist.dir}"/>
     <copy todir="${sdkdist.dir}/lib">
@@ -49,6 +50,6 @@
       <fileset dir="${build.dir}/apidocs"/>
     </copy>
     <deltree dir="${dist.dir}/javadoc"/>
-    <zip zipfile="${dist.dir}/checkout-sdk.zip" basedir="${sdkdist.dir}"/>
+    <zip zipfile="${dist.dir}/checkout-sdk-${release.version}.zip" basedir="${sdkdist.dir}"/>
   </target>
 </project>
