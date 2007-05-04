@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : gcheckout-config.xml.xml
+    Created on : May 3, 2007, 11:41 AM
+    Author     : Inderjeet Singh (inder@google.com)
+    Description:
+        Purpose of the document follows.
+-->
+
+<checkout-config>
+<notification-processors>
+  <notification-processor>
+    <class>
+      com.google.checkout.sdk.NewOrderNotificationProcessor
+    </class>    
+    <target>
+      new-order-notification
+    </target>
+  </notification-processor>
+  <notification-processor>
+    <class>
+      com.google.checkout.sdk.RiskInformationNotificationProcessor
+    </class>    
+    <target>
+      risk-information-notification
+    </target>
+  </notification-processor>
+  <notification-processor>
+    <class>
+      com.google.checkout.sdk.OrderStateChangeNotificationProcessor
+    </class>    
+    <target>
+      order-state-change-notification
+    </target>
+  </notification-processor>
+  <notification-processor>
+    <class>
+      com.google.checkout.sdk.ChargeAmountNotificationProcessor
+    </class>    
+    <target>
+      charge-amount-notification
+    </target>
+  </notification-processor>
+  <notification-processor>
+    <class>
+      com.google.checkout.sdk.RefundAmountNotificationProcessor
+    </class>    
+    <target>
+      refund-amount-notification
+    </target>
+  </notification-processor>
+  <notification-processor>
+    <class>
+      com.google.checkout.sdk.ChargebackAmountNotificationProcessor
+    </class>    
+    <target>
+      chargeback-amount-notification
+    </target>
+  </notification-processor>
+  <notification-processor>
+    <class>
+      com.google.checkout.sdk.AuthorizationAmountNotificationProcessor
+    </class>    
+    <target>
+      authorization-amount-notification
+    </target>
+  </notification-processor>
+</notification-processors>
+</checkout-config>
