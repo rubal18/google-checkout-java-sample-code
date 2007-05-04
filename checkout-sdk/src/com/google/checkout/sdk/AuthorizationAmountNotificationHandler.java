@@ -20,33 +20,25 @@ import com.google.checkout.CheckoutException;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.GoogleOrder;
 import com.google.checkout.example.notification.AbstractNotificationProcessor;
-import com.google.checkout.notification.NewOrderNotification;
+import com.google.checkout.notification.AuthorizationAmountNotification;
 
 /**
  * TODO
  *
  * @author simonjsmith
- * @author Inderjeet Singh (inder@google.com)
+ * @author Inderjeet Singh (inde@google.com)
  */
-public class NewOrderNotificationProcessor extends
-    AbstractNotificationProcessor implements NotificationProcessor {
+public class AuthorizationAmountNotificationHandler extends
+    AbstractNotificationProcessor implements NotificationHandler {
   
   public String process(MerchantConstants mc, String notificationMsg)
   throws CheckoutException {
     try {
-      NewOrderNotification notification =
-          new NewOrderNotification(notificationMsg);
+      AuthorizationAmountNotification notification = 
+          new AuthorizationAmountNotification(notificationMsg);
       String ack = getAckString();
       GoogleOrder order = GoogleOrder.findOrCreate(mc.getMerchantId(),
           notification.getGoogleOrderNo());
-      
-      order.setLastFulStatus(notification.getFulfillmentOrderState()
-      .toString());
-      order.setLastFinStatus(notification.getFinancialOrderState()
-      .toString());
-      order.setBuyerEmail(notification.getBuyerBillingAddress()
-      .getEmail());
-      order.setOrderAmount("" + notification.getOrderTotal());
       order.addIncomingMessage(notification.getTimestamp(), notification
           .getRootNodeName(), notification.getXmlPretty(), ack);
       return ack;

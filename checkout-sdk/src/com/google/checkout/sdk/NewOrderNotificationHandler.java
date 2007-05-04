@@ -20,7 +20,7 @@ import com.google.checkout.CheckoutException;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.GoogleOrder;
 import com.google.checkout.example.notification.AbstractNotificationProcessor;
-import com.google.checkout.notification.ChargebackAmountNotification;
+import com.google.checkout.notification.NewOrderNotification;
 
 /**
  * TODO
@@ -28,18 +28,25 @@ import com.google.checkout.notification.ChargebackAmountNotification;
  * @author simonjsmith
  * @author Inderjeet Singh (inder@google.com)
  */
-public class ChargebackAmountNotificationProcessor extends
-    AbstractNotificationProcessor implements
-    NotificationProcessor {
+public class NewOrderNotificationHandler extends
+    AbstractNotificationProcessor implements NotificationHandler {
   
   public String process(MerchantConstants mc, String notificationMsg)
   throws CheckoutException {
     try {
-      ChargebackAmountNotification notification =
-          new ChargebackAmountNotification(notificationMsg);
+      NewOrderNotification notification =
+          new NewOrderNotification(notificationMsg);
       String ack = getAckString();
       GoogleOrder order = GoogleOrder.findOrCreate(mc.getMerchantId(),
           notification.getGoogleOrderNo());
+      
+      order.setLastFulStatus(notification.getFulfillmentOrderState()
+      .toString());
+      order.setLastFinStatus(notification.getFinancialOrderState()
+      .toString());
+      order.setBuyerEmail(notification.getBuyerBillingAddress()
+      .getEmail());
+      order.setOrderAmount("" + notification.getOrderTotal());
       order.addIncomingMessage(notification.getTimestamp(), notification
           .getRootNodeName(), notification.getXmlPretty(), ack);
       return ack;

@@ -26,8 +26,8 @@ import com.google.checkout.notification.ChargeAmountNotification;
  * @author simonjsmith
  * @author Inderjeet Singh (inder@google.com)
  */
-public class ChargeAmountNotificationProcessor extends
-    AbstractNotificationProcessor implements NotificationProcessor {
+public class ChargeAmountNotificationHandler extends
+    AbstractNotificationProcessor implements NotificationHandler {
   
   
   public String process(MerchantConstants mc, String notificationMsg)

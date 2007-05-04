@@ -1,70 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
-    Document   : gcheckout-config.xml.xml
-    Created on : May 3, 2007, 11:41 AM
-    Author     : Inderjeet Singh (inder@google.com)
-    Description:
-        Purpose of the document follows.
+ Copyright (C) 2007 Google Inc.
+ 
+ Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ use this file except in compliance with the License. You may obtain a copy of
+ the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ License for the specific language governing permissions and limitations under
+ the License.
+
+ Author     : Inderjeet Singh (inder@google.com)
+  Description:
+      This document describes the mapping of notification message types to the 
+      handlers that process them. If you would like to change the default 
+      behavior on receiving a message, change the target-class for the message.
 -->
 
 <checkout-config>
-<notification-processors>
-  <notification-processor>
-    <class>
-      com.google.checkout.sdk.NewOrderNotificationProcessor
-    </class>    
-    <target>
+<notification-handlers>
+  <notification-handler>
+    <message-type>
       new-order-notification
-    </target>
-  </notification-processor>
-  <notification-processor>
-    <class>
-      com.google.checkout.sdk.RiskInformationNotificationProcessor
-    </class>    
-    <target>
+    </message-type>
+    <handler-class>
+      com.google.checkout.sdk.NewOrderNotificationHandler
+    </handler-class>    
+  </notification-handler>
+  <notification-handler>
+    <message-type>
       risk-information-notification
-    </target>
-  </notification-processor>
-  <notification-processor>
-    <class>
-      com.google.checkout.sdk.OrderStateChangeNotificationProcessor
-    </class>    
-    <target>
+    </message-type>
+    <handler-class>
+      com.google.checkout.sdk.RiskInformationNotificationHandler
+    </handler-class>    
+  </notification-handler>
+  <notification-handler>
+    <message-type>
       order-state-change-notification
-    </target>
-  </notification-processor>
-  <notification-processor>
-    <class>
-      com.google.checkout.sdk.ChargeAmountNotificationProcessor
-    </class>    
-    <target>
+    </message-type>
+    <handler-class>
+      com.google.checkout.sdk.OrderStateChangeNotificationHandler
+    </handler-class>    
+  </notification-handler>
+  <notification-handler>
+    <message-type>
       charge-amount-notification
-    </target>
-  </notification-processor>
-  <notification-processor>
-    <class>
-      com.google.checkout.sdk.RefundAmountNotificationProcessor
-    </class>    
-    <target>
+    </message-type>
+    <handler-class>
+      com.google.checkout.sdk.ChargeAmountNotificationHandler
+    </handler-class>    
+  </notification-handler>
+  <notification-handler>
+    <message-type>
       refund-amount-notification
-    </target>
-  </notification-processor>
-  <notification-processor>
-    <class>
-      com.google.checkout.sdk.ChargebackAmountNotificationProcessor
-    </class>    
-    <target>
+    </message-type>
+    <handler-class>
+      com.google.checkout.sdk.RefundAmountNotificationHandler
+    </handler-class>    
+  </notification-handler>
+  <notification-handler>
+    <message-type>
       chargeback-amount-notification
-    </target>
-  </notification-processor>
-  <notification-processor>
-    <class>
-      com.google.checkout.sdk.AuthorizationAmountNotificationProcessor
-    </class>    
-    <target>
+    </message-type>
+    <handler-class>
+      com.google.checkout.sdk.ChargebackAmountNotificationHandler
+    </handler-class>    
+  </notification-handler>
+  <notification-handler>
+    <message-type>
       authorization-amount-notification
-    </target>
-  </notification-processor>
-</notification-processors>
+    </message-type>
+    <handler-class>
+      com.google.checkout.sdk.AuthorizationAmountNotificationHandler
+    </handler-class>    
+  </notification-handler>
+</notification-handlers>
 </checkout-config>

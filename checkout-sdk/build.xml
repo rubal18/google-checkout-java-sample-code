@@ -39,8 +39,11 @@
     <property name="sdkdist.dir" value="${build.dir}/checkout-sdk"/>
     <mkdir dir="${sdkdist.dir}"/>
     <copy file="${dist.dir}/checkout-sdk.jar" todir="${sdkdist.dir}"/>
-    <copy file="lib/checkout-config.xml" todir="${sdkdist.dir}/lib"/>
-    <copy file="lib/web.xml" todir="${sdkdist.dir}/lib"/>
+    <copy todir="${sdkdist.dir}/lib">
+      <fileset dir="lib">
+        <exclude name="index.html"/>
+      </fileset>
+    </copy>
     <copy file="lib/index.html" todir="${sdkdist.dir}"/>
     <copy todir="${sdkdist.dir}/docs">
       <fileset dir="${build.dir}/apidocs"/>

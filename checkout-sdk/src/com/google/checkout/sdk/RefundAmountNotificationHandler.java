@@ -20,7 +20,7 @@ import com.google.checkout.CheckoutException;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.GoogleOrder;
 import com.google.checkout.example.notification.AbstractNotificationProcessor;
-import com.google.checkout.notification.OrderStateChangeNotification;
+import com.google.checkout.notification.RefundAmountNotification;
 
 /**
  * TODO
@@ -28,21 +28,18 @@ import com.google.checkout.notification.OrderStateChangeNotification;
  * @author simonjsmith
  * @author Inderjeet Singh (inder@google.com)
  */
-public class OrderStateChangeNotificationProcessor extends
-    AbstractNotificationProcessor implements NotificationProcessor {
+public class RefundAmountNotificationHandler extends
+    AbstractNotificationProcessor implements
+    NotificationHandler {
   
   public String process(MerchantConstants mc, String notificationMsg)
   throws CheckoutException {
     try {
-      OrderStateChangeNotification notification =
-          new OrderStateChangeNotification(notificationMsg);
+      RefundAmountNotification notification =
+          new RefundAmountNotification(notificationMsg);
       String ack = getAckString();
       GoogleOrder order = GoogleOrder.findOrCreate(mc.getMerchantId(),
           notification.getGoogleOrderNo());
-      order.setLastFulStatus(notification.getNewFulfillmentOrderState()
-      .toString());
-      order.setLastFinStatus(notification.getNewFinancialOrderState()
-      .toString());
       order.addIncomingMessage(notification.getTimestamp(), notification
           .getRootNodeName(), notification.getXmlPretty(), ack);
       return ack;
@@ -50,4 +47,5 @@ public class OrderStateChangeNotificationProcessor extends
       throw new CheckoutException(e);
     }
   }
+  
 }

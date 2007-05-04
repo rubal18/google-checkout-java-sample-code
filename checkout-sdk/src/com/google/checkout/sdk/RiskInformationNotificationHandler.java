@@ -28,9 +28,9 @@ import com.google.checkout.notification.RiskInformationNotification;
  * @author simonjsmith
  * @author Inderjeet Singh (inder@google.com)
  */
-public class RiskInformationNotificationProcessor extends
+public class RiskInformationNotificationHandler extends
     AbstractNotificationProcessor implements
-    NotificationProcessor {
+    NotificationHandler {
   
   public String process(MerchantConstants mc, String notificationMsg)
   throws CheckoutException {

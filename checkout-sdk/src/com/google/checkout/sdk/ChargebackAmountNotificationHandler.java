@@ -20,7 +20,7 @@ import com.google.checkout.CheckoutException;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.GoogleOrder;
 import com.google.checkout.example.notification.AbstractNotificationProcessor;
-import com.google.checkout.notification.RefundAmountNotification;
+import com.google.checkout.notification.ChargebackAmountNotification;
 
 /**
  * TODO
@@ -28,15 +28,15 @@ import com.google.checkout.notification.RefundAmountNotification;
  * @author simonjsmith
  * @author Inderjeet Singh (inder@google.com)
  */
-public class RefundAmountNotificationProcessor extends
+public class ChargebackAmountNotificationHandler extends
     AbstractNotificationProcessor implements
-    NotificationProcessor {
+    NotificationHandler {
   
   public String process(MerchantConstants mc, String notificationMsg)
   throws CheckoutException {
     try {
-      RefundAmountNotification notification =
-          new RefundAmountNotification(notificationMsg);
+      ChargebackAmountNotification notification =
+          new ChargebackAmountNotification(notificationMsg);
       String ack = getAckString();
       GoogleOrder order = GoogleOrder.findOrCreate(mc.getMerchantId(),
           notification.getGoogleOrderNo());
@@ -47,5 +47,4 @@ public class RefundAmountNotificationProcessor extends
       throw new CheckoutException(e);
     }
   }
-  
 }

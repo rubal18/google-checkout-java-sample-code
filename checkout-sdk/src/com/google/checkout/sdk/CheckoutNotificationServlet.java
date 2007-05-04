@@ -90,7 +90,7 @@ public class CheckoutNotificationServlet extends javax.servlet.http.HttpServlet 
   
   /** Overrides base class method to load the configuration from web.xml deployment descriptor */
   protected String dispatch(String notificationString) throws Exception {
-    NotificationProcessor np = getNotificationProcessor(notificationString);
+    NotificationHandler np = getNotificationProcessor(notificationString);
     if (np != null) {
       return np.process(MerchantConstantsFactory.getMerchantConstants(),
           notificationString);
@@ -98,23 +98,23 @@ public class CheckoutNotificationServlet extends javax.servlet.http.HttpServlet 
     return null;
   }
   
-  private NotificationProcessor getNotificationProcessor(String notificationString) {
+  private NotificationHandler getNotificationProcessor(String notificationString) {
     for (Iterator it=npTable.keySet().iterator(); it.hasNext(); ) {
       String key = (String) it.next();
       if (notificationString.indexOf(key) > -1) {
-        return (NotificationProcessor) npTable.get(key);
+        return (NotificationHandler) npTable.get(key);
       }
     }
     return null;
   }
   private void readAndConfigure(InputStream is) {
     Document doc = Utils.newDocumentFromInputStream(is);
-    NodeList elements = doc.getElementsByTagName("notification-processor");
+    NodeList elements = doc.getElementsByTagName("notification-handler");
     for (int i = 0; i < elements.getLength(); ++i) {
       try {
         Element element = (Element) elements.item(i);
-        String className = Utils.getElementStringValue(doc, element, "class").trim();
-        String target = Utils.getElementStringValue(doc, element, "target").trim();
+        String className = Utils.getElementStringValue(doc, element, "handler-class").trim();
+        String target = Utils.getElementStringValue(doc, element, "message-type").trim();
         Class c = Class.forName(className);
         Object obj = c.newInstance();
         npTable.put(target, obj);

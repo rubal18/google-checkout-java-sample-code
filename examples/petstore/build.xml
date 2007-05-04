@@ -12,8 +12,8 @@
       <delete file="${build.web.dir}/catalog.jsp"/>
       <delete file="${build.web.dir}/catalog.js"/>
       <delete file="${build.web.dir}/WEB-INF/web.xml"/>
-      <copy todir="${build.web.dir}/WEB-INF" file="web/WEB-INF/web.xml"/>
-      <copy todir="${build.web.dir}/WEB-INF" file="${checkout-sdk.home}/lib/checkout-config.xml"/>
+      <copy file="web/WEB-INF/web.xml" todir="${build.web.dir}/WEB-INF"/>
+      <copy file="${checkout-sdk.home}/lib/checkout-config.xml" todir="${build.web.dir}/WEB-INF"/>
     </target>
     <target name="-post-compile" depends="init">
       <copy todir="${build.web.dir}/opc">
@@ -22,7 +22,7 @@
           <exclude name="WEB-INF/**"/>
         </fileset>
       </copy>
-      <copy todir="${build.web.dir}/WEB-INF/lib" file="${checkout-sdk.home}/dist/checkout-sdk.jar"/>
-      <copy todir="${build.classes.dir}" file="com_google_checkout_example_settings.properties"/>
+      <copy file="${checkout-sdk.home}/dist/checkout-sdk.jar" todir="${build.web.dir}/WEB-INF/lib"/>
+      <copy file="${checkout-sdk.home}/lib/com_google_checkout_example_settings.properties" todir="${build.classes.dir}"/>
     </target>
 </project>
