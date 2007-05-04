@@ -19,7 +19,7 @@
     </copy>      
   </target>
   
-  <target name="javadoc" depends="compile">
+  <target name="javadoc" depends="init,compile">
     <copy todir="${build.dir}/src">
       <fileset dir="${ref-impl.home}/src"/>
       <fileset dir="${common-example.home}/src"/>
@@ -27,10 +27,11 @@
     </copy>
     <javadoc destdir="${build.dir}/javadocs" 
              classpath="${build.classes.dir}" 
-             sourcepath="${build.dir}/src"/>
+             sourcepath="${build.dir}/src"
+             packagenames="com.google.*"/>
   </target>
   
-  <target name="dist" depends="default">
+  <target name="-post-jar" depends="init,javadoc">
     <property name="sdkdist.dir" value="${build.dir}/checkout-sdk-${release.version}"/>
     <mkdir dir="${sdkdist.dir}"/>
     <copy file="${dist.dir}/checkout-sdk.jar" todir="${sdkdist.dir}"/>
