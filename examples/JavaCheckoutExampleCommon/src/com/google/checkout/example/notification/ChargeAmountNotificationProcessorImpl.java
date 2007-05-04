@@ -23,8 +23,7 @@ import com.google.checkout.notification.ChargeAmountNotification;
 import com.google.checkout.notification.ChargeAmountNotificationProcessor;
 
 /**
- * An example implementation of the ChargeAmountNotificationProcessor
- * interface.
+ * An example implementation of the ChargeAmountNotificationProcessor interface.
  * 
  * @author simonjsmith
  * 

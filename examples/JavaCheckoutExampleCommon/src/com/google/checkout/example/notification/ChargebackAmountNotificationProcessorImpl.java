@@ -24,7 +24,7 @@ import com.google.checkout.notification.ChargebackAmountNotification;
 import com.google.checkout.notification.ChargebackAmountNotificationProcessor;
 
 /**
-  * An example implementation of the ChargebackAmountNotificationProcessor
+ * An example implementation of the ChargebackAmountNotificationProcessor
  * interface.
  * 
  * @author simonjsmith

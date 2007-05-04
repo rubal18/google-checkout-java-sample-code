@@ -24,7 +24,7 @@ import com.google.checkout.notification.AuthorizationAmountNotificationProcessor
 
 /**
  * An example implementation of the AuthorizationAmountNotificationProcessor
- * interface. 
+ * interface.
  * 
  * @author simonjsmith
  * 

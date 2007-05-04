@@ -24,8 +24,7 @@ import com.google.checkout.notification.RefundAmountNotification;
 import com.google.checkout.notification.RefundAmountNotificationProcessor;
 
 /**
- * An example implementation of the RefundAmountNotificationProcessor
- * interface.
+ * An example implementation of the RefundAmountNotificationProcessor interface.
  * 
  * @author simonjsmith
  * 

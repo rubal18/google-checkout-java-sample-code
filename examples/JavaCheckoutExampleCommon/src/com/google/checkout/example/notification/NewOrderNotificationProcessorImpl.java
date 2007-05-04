@@ -24,8 +24,7 @@ import com.google.checkout.notification.NewOrderNotification;
 import com.google.checkout.notification.NewOrderNotificationProcessor;
 
 /**
- * An example implementation of the NewOrderNotificationProcessor
- * interface.
+ * An example implementation of the NewOrderNotificationProcessor interface.
  * 
  * @author simonjsmith
  * 
@@ -59,7 +58,7 @@ public class NewOrderNotificationProcessorImpl extends
 			String ack = getAckString();
 			GoogleOrder order = GoogleOrder.findOrCreate(merchantConstants
 					.getMerchantId(), notification.getGoogleOrderNo());
-			
+
 			order.setLastFulStatus(notification.getFulfillmentOrderState()
 					.toString());
 			order.setLastFinStatus(notification.getFinancialOrderState()
