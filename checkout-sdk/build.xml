@@ -23,4 +23,9 @@
         </fileset>
       </copy>
     </target>
+    
+    <target name="-post-jar" depends="init">
+      <copy file="lib/checkout-config.xml" todir="${dist.dir}"/>
+      <copy file="lib/web.xml" todir="${dist.dir}"/>
+    </target>
 </project>
