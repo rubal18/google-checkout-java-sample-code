@@ -161,7 +161,8 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * Retrieves the value of the &lt;merchant-calculation-successful&gt; element.
+	 * Retrieves the value of the &lt;merchant-calculation-successful&gt;
+	 * element.
 	 * 
 	 * @return The merchant calculation successful flag.
 	 */
@@ -173,7 +174,8 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * Retrieves the contents of the &lt;merchant-codes&gt; element as a collection of MerchantCodes objects.
+	 * Retrieves the contents of the &lt;merchant-codes&gt; element as a
+	 * collection of MerchantCodes objects.
 	 * 
 	 * @return The merchant codes.
 	 * 
@@ -269,7 +271,7 @@ public class NewOrderNotification extends CheckoutNotification {
 	 */
 	public float getOrderTotal() {
 		return Utils.getElementFloatValue(document, root, "order-total");
-	} 
+	}
 
 	/**
 	 * Retrieves the currency code.

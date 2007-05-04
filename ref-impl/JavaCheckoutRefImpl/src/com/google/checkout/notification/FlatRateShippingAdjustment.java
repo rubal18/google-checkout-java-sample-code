@@ -20,7 +20,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * This class encapsulates the data in the &lt;flat-rate-shipping-adjustment&gt; tag.
+ * This class encapsulates the data in the &lt;flat-rate-shipping-adjustment&gt;
+ * tag.
  * 
  * @author simonjsmith
  * 

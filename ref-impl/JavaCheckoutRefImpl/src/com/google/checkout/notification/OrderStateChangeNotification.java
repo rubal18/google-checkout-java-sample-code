@@ -21,7 +21,8 @@ import java.io.InputStream;
 import com.google.checkout.util.Utils;
 
 /**
- * This class encapsulates the &lt;order-state-change-notification&gt; notification.
+ * This class encapsulates the &lt;order-state-change-notification&gt;
+ * notification.
  * 
  * @author simonjsmith
  * 
@@ -75,7 +76,8 @@ public class OrderStateChangeNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * Retrieves the value of the &lt;previous-fulfillment-order-state&gt; element.
+	 * Retrieves the value of the &lt;previous-fulfillment-order-state&gt;
+	 * element.
 	 * 
 	 * @return The previous fulfillment order state.
 	 * 
@@ -88,7 +90,8 @@ public class OrderStateChangeNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * Retrieves the value of the &lt;previous-financial-order-state&gt; element.
+	 * Retrieves the value of the &lt;previous-financial-order-state&gt;
+	 * element.
 	 * 
 	 * @return The previous financial order state.
 	 * 

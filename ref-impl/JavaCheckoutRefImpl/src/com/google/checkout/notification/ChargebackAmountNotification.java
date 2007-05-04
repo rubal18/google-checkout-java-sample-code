@@ -21,7 +21,8 @@ import java.io.InputStream;
 import com.google.checkout.util.Utils;
 
 /**
- * This class encapsulates the &lt;chargeback-amount-notification&gt; notification.
+ * This class encapsulates the &lt;chargeback-amount-notification&gt;
+ * notification.
  * 
  * @author simonjsmith
  * 

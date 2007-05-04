@@ -17,14 +17,15 @@
 package com.google.checkout.notification;
 
 /**
- * This class represents the financial status of an order.  The valid states are:
+ * This class represents the financial status of an order. The valid states are:
  * 
- * REVIEWING - Google Checkout is reviewing the order.
- * CHARGEABLE - The order is ready to be charged.
- * CHARGING - The order is being charged; you may not refund or cancel an order until is the charge is completed.
- * CHARGED - The order has been successfully charged; if the order was only partially charged, the buyer's account page will reflect the partial charge.
- * PAYMENT_DECLINED - The charge attempt failed.
- * CANCELLED - The seller canceled the order; an order's financial state cannot be changed after the order is canceled.
+ * REVIEWING - Google Checkout is reviewing the order. CHARGEABLE - The order is
+ * ready to be charged. CHARGING - The order is being charged; you may not
+ * refund or cancel an order until is the charge is completed. CHARGED - The
+ * order has been successfully charged; if the order was only partially charged,
+ * the buyer's account page will reflect the partial charge. PAYMENT_DECLINED -
+ * The charge attempt failed. CANCELLED - The seller canceled the order; an
+ * order's financial state cannot be changed after the order is canceled.
  * CANCELLED_BY_GOOGLE - Google canceled the order.
  * 
  * @author simonjsmith
@@ -82,7 +83,9 @@ public class FinancialOrderState {
 		this.value = value;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
@@ -90,9 +93,11 @@ public class FinancialOrderState {
 	}
 
 	/**
-	 * Get an instance of the FinancialOrderState based on the string value passed in.
+	 * Get an instance of the FinancialOrderState based on the string value
+	 * passed in.
 	 * 
-	 * @param state The string value of the state.
+	 * @param state
+	 *            The string value of the state.
 	 * @return The FinancialOrderState instance.
 	 */
 	public static FinancialOrderState getState(String state) {

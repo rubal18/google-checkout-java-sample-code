@@ -22,7 +22,8 @@ import java.util.Date;
 import com.google.checkout.util.Utils;
 
 /**
- * This class encapsulates the &lt;authorization-amount-notification&gt; notification.
+ * This class encapsulates the &lt;authorization-amount-notification&gt;
+ * notification.
  * 
  * @author simonjsmith
  * 

@@ -22,7 +22,7 @@ import org.w3c.dom.Element;
 import com.google.checkout.util.Utils;
 
 /**
- * This class is the parent class of the shipping classes. 
+ * This class is the parent class of the shipping classes.
  * 
  * @author simonjsmith
  * 

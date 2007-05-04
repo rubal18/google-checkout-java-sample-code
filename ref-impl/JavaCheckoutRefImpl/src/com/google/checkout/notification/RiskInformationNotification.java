@@ -23,7 +23,8 @@ import org.w3c.dom.Element;
 import com.google.checkout.util.Utils;
 
 /**
- * This class encapsulates the &lt;risk-information-notification&gt; notification.
+ * This class encapsulates the &lt;risk-information-notification&gt;
+ * notification.
  * 
  * @author simonjsmith
  * 
@@ -67,7 +68,8 @@ public class RiskInformationNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * Retrieves the contents of the &lt;billing-address&gt; tag as an Address object.
+	 * Retrieves the contents of the &lt;billing-address&gt; tag as an Address
+	 * object.
 	 * 
 	 * @return The billing address.
 	 * 
