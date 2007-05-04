@@ -139,6 +139,13 @@
     <servlet>
     	<description>
     	</description>
+    	<display-name>CheckoutNotificationServlet</display-name>
+    	<servlet-name>CheckoutNotificationServlet</servlet-name>
+    	<servlet-class>com.google.checkout.sdk.CheckoutNotificationServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
     	<display-name>NotificationServlet</display-name>
     	<servlet-name>NotificationServlet</servlet-name>
     	<servlet-class>com.google.checkout.webappexample.NotificationServlet</servlet-class>
@@ -156,13 +163,24 @@
     	<url-pattern>/merchant-calculation</url-pattern>
     </servlet-mapping>  
     <servlet-mapping>
-    	<servlet-name>NotificationServlet</servlet-name>
+    	<servlet-name>CheckoutNotificationServlet</servlet-name>
     	<url-pattern>/notification</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>NotificationServlet</servlet-name>
+    	<url-pattern>/notification1</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
     	<servlet-name>JmsNotificationServlet</servlet-name>
     	<url-pattern>/notification-async</url-pattern>
     </servlet-mapping> 
+    
+       <!-- location of configuration file for checkout with respect to context root. Using the default path here. -->
+    <context-param>
+        <param-name>checkout-config-file</param-name>
+        <param-value>/WEB-INF/checkout-config.xml</param-value>
+    </context-param>
+
   <!-- End: Configuration for Google checkout message processing -->
   
 </web-app>
