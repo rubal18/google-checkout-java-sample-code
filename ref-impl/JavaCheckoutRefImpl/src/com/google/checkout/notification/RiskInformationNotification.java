@@ -23,7 +23,7 @@ import org.w3c.dom.Element;
 import com.google.checkout.util.Utils;
 
 /**
- * TODO
+ * This class encapsulates the &lt;risk-information-notification&gt; notification.
  * 
  * @author simonjsmith
  * 
@@ -57,9 +57,9 @@ public class RiskInformationNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;eligible-for-protection&gt; tag.
 	 * 
-	 * @return
+	 * @return The eligible for protection flag.
 	 */
 	public boolean isEligibleForProtection() {
 		return Utils.getElementBooleanValue(document, riskInfo,
@@ -67,9 +67,11 @@ public class RiskInformationNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the contents of the &lt;billing-address&gt; tag as an Address object.
 	 * 
-	 * @return
+	 * @return The billing address.
+	 * 
+	 * @see Address
 	 */
 	public Address getBillingAddress() {
 		Element address = Utils.findElementOrContainer(document, riskInfo,
@@ -78,27 +80,27 @@ public class RiskInformationNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;avs-response&gt; tag.
 	 * 
-	 * @return
+	 * @return The AVS response.
 	 */
 	public String getAvsResponse() {
 		return Utils.getElementStringValue(document, riskInfo, "avs-response");
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;cvn-response&gt; tag.
 	 * 
-	 * @return
+	 * @return The CVN response.
 	 */
 	public String getCvnResponse() {
 		return Utils.getElementStringValue(document, riskInfo, "cvn-response");
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;partial-cc-number&gt; tag.
 	 * 
-	 * @return
+	 * @return The partial credit card number.
 	 */
 	public String getPartialCcNumber() {
 		return Utils.getElementStringValue(document, riskInfo,
@@ -106,9 +108,9 @@ public class RiskInformationNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;buyer-account-age&gt; tag.
 	 * 
-	 * @return
+	 * @return The buyer account age.
 	 */
 	public int getBuyerAccountAge() {
 		return Utils
@@ -116,9 +118,9 @@ public class RiskInformationNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;ip-address&gt; tag.
 	 * 
-	 * @return
+	 * @return The IP address.
 	 */
 	public String getIpAddress() {
 		return Utils.getElementStringValue(document, riskInfo, "ip-address");

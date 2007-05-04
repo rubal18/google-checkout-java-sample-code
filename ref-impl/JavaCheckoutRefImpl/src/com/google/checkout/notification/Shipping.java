@@ -22,7 +22,7 @@ import org.w3c.dom.Element;
 import com.google.checkout.util.Utils;
 
 /**
- * TODO
+ * This class is the parent class of the shipping classes. 
  * 
  * @author simonjsmith
  * 
@@ -34,18 +34,18 @@ public class Shipping {
 	protected Element element;
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;shipping-cost&gt; element.
 	 * 
-	 * @return
+	 * @return The shipping cost.
 	 */
 	public float getShippingCost() {
 		return Utils.getElementFloatValue(document, element, "shipping-cost");
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;shipping-name&gt; element.
 	 * 
-	 * @return
+	 * @return The shipping name.
 	 */
 	public String getShippingName() {
 		return Utils.getElementStringValue(document, element, "shipping-name");

@@ -19,14 +19,17 @@ package com.google.checkout.example.notification;
 import com.google.checkout.CheckoutException;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.GoogleOrder;
+import com.google.checkout.notification.ChargeAmountNotificationProcessor;
 import com.google.checkout.notification.NewOrderNotification;
 import com.google.checkout.notification.NewOrderNotificationProcessor;
 
 /**
- * TODO
+ * An example implementation of the NewOrderNotificationProcessor
+ * interface.
  * 
  * @author simonjsmith
  * 
+ * @see NewOrderNotificationProcessor
  */
 public class NewOrderNotificationProcessorImpl extends
 		AbstractNotificationProcessor implements NewOrderNotificationProcessor {
@@ -34,9 +37,12 @@ public class NewOrderNotificationProcessorImpl extends
 	private MerchantConstants merchantConstants;
 
 	/**
-	 * TODO
+	 * Constructor which takes an instance of MerchantConstants.
 	 * 
 	 * @param merchantConstants
+	 *            The MerchantConstants.
+	 * 
+	 * @see MerchantConstants
 	 */
 	public NewOrderNotificationProcessorImpl(MerchantConstants merchantConstants) {
 		this.merchantConstants = merchantConstants;

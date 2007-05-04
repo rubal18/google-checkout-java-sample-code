@@ -28,7 +28,7 @@ import com.google.checkout.checkout.Item;
 import com.google.checkout.util.Utils;
 
 /**
- * This class encapsulates the &lt;merchant-calculation-callback&gt; request.
+ * This class encapsulates the &lt;merchant-calculation-callback&gt; callback.
  * 
  * @author simonjsmith@google.com
  */

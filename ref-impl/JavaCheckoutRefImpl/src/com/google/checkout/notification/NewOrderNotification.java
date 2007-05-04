@@ -27,7 +27,7 @@ import com.google.checkout.checkout.Item;
 import com.google.checkout.util.Utils;
 
 /**
- * TODO
+ * This class encapsulates the &lt;new-order-notification&gt; notification.
  * 
  * @author simonjsmith
  * 
@@ -113,7 +113,7 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * Return the Google Order Number for this notification.
+	 * Retrieves the Google Order Number for this notification.
 	 * 
 	 * @return The Google Order Number.
 	 */
@@ -123,9 +123,11 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;buyer-shipping-address&gt; element.
 	 * 
-	 * @return
+	 * @return The buyer shipping address
+	 * 
+	 * @see Address
 	 */
 	public Address getBuyerShippingAddress() {
 		Element address = Utils.findElementOrContainer(document, root,
@@ -134,9 +136,11 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;buyer-billing-address&gt; element.
 	 * 
-	 * @return
+	 * @return The buyer billing address
+	 * 
+	 * @see Address
 	 */
 	public Address getBuyerBillingAddress() {
 		Element address = Utils.findElementOrContainer(document, root,
@@ -145,9 +149,9 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;email-allowed&gt; element.
 	 * 
-	 * @return
+	 * @return The marketing preferences flag.
 	 */
 	public boolean isMarketingEmailAllowed() {
 		Element buyerMarketingPreferences = Utils.findElementOrContainer(
@@ -157,9 +161,9 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;merchant-calculation-successful&gt; element.
 	 * 
-	 * @return
+	 * @return The merchant calculation successful flag.
 	 */
 	public boolean isMerchantCalculationSuccessful() {
 		Element orderAdjustment = Utils.findElementOrContainer(document, root,
@@ -169,9 +173,13 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the contents of the &lt;merchant-codes&gt; element as a collection of MerchantCodes objects.
 	 * 
-	 * @return
+	 * @return The merchant codes.
+	 * 
+	 * @see MerchantCodes
+	 * @see GiftCertificateAdjustment
+	 * @see CouponAdjustment
 	 */
 	public Collection getMerchantCodes() {
 		Element oa = Utils.findElementOrContainer(document, root,
@@ -197,9 +205,9 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;total-tax&gt; element.
 	 * 
-	 * @return
+	 * @return The total tax.
 	 */
 	public float getTotalTax() {
 		Element orderAdjustment = Utils.findElementOrContainer(document, root,
@@ -209,9 +217,9 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;adjustment-total&gt; element.
 	 * 
-	 * @return
+	 * @return The adjustment total amount.
 	 */
 	public float getAdjustmentTotal() {
 		Element orderAdjustment = Utils.findElementOrContainer(document, root,
@@ -221,9 +229,11 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;shipping&gt; element as a Shipping object.
 	 * 
-	 * @return
+	 * @return The shipping.
+	 * 
+	 * @see Shipping
 	 */
 	public Shipping getShipping() {
 		Element oa = Utils.findElementOrContainer(document, root,
@@ -253,18 +263,18 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;order-total&gt; element.
 	 * 
-	 * @return
+	 * @return The order total.
 	 */
 	public float getOrderTotal() {
 		return Utils.getElementFloatValue(document, root, "order-total");
-	}
+	} 
 
 	/**
-	 * TODO
+	 * Retrieves the currency code.
 	 * 
-	 * @return
+	 * @return The currency code.
 	 */
 	public String getOrderCurrencyCode() {
 		return Utils.findElementOrContainer(document, root, "order-total")
@@ -272,9 +282,11 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;fulfillment-order-state&gt; element.
 	 * 
-	 * @return
+	 * @return The fulfillment order state.
+	 * 
+	 * @see FulfillmentOrderState
 	 */
 	public FulfillmentOrderState getFulfillmentOrderState() {
 		String state = Utils.getElementStringValue(document, root,
@@ -283,9 +295,11 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;financial-order-state&gt; element.
 	 * 
-	 * @return
+	 * @return The financial order state.
+	 * 
+	 * @see FinancialOrderState
 	 */
 	public FinancialOrderState getFinancialOrderState() {
 		String state = Utils.getElementStringValue(document, root,
@@ -294,9 +308,9 @@ public class NewOrderNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;buyer-id&gt; element.
 	 * 
-	 * @return
+	 * @return The buyer id.
 	 */
 	public long getBuyerId() {
 		return Utils.getElementLongValue(document, root, "buyer-id");

@@ -23,10 +23,12 @@ import com.google.checkout.notification.AuthorizationAmountNotification;
 import com.google.checkout.notification.AuthorizationAmountNotificationProcessor;
 
 /**
- * TODO
+ * An example implementation of the AuthorizationAmountNotificationProcessor
+ * interface.
  * 
  * @author simonjsmith
  * 
+ * @see AuthorizationAmountNotificationProcessor
  */
 public class AuthorizationAmountNotificationProcessorImpl extends
 		AbstractNotificationProcessor implements
@@ -35,9 +37,12 @@ public class AuthorizationAmountNotificationProcessorImpl extends
 	private MerchantConstants merchantConstants;
 
 	/**
-	 * TODO
+	 * Constructor which takes an instance of MerchantConstants.
 	 * 
 	 * @param merchantConstants
+	 *            The MerchantConstants.
+	 * 
+	 * @see MerchantConstants
 	 */
 	public AuthorizationAmountNotificationProcessorImpl(
 			MerchantConstants merchantConstants) {

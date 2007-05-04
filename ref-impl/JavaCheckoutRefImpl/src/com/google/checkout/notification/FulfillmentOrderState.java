@@ -17,7 +17,12 @@
 package com.google.checkout.notification;
 
 /**
- * TODO
+ * This class represents the fulfillment status of an order.  The valid states are:
+ * 
+ * NEW - The order has been received but not prepared for shipping.
+ * PROCESSING - The order is being prepared for shipping.
+ * DELIVERED - The seller has shipped the order.
+ * WILL_NOT_DELIVER - The seller will not ship the order; this status is used for canceled orders.
  * 
  * @author simonjsmith
  * 
@@ -65,10 +70,10 @@ public class FulfillmentOrderState {
 	}
 
 	/**
-	 * TODO
+	 * Get an instance of the FulfillmentOrderState based on the string value passed in.
 	 * 
-	 * @param state
-	 * @return
+	 * @param state The string value of the state.
+	 * @return The FulfillmentOrderState instance.
 	 */
 	public static FulfillmentOrderState getState(String state) {
 		if ("NEW".equals(state)) {

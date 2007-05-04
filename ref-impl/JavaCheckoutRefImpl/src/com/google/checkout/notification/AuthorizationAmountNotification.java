@@ -22,7 +22,7 @@ import java.util.Date;
 import com.google.checkout.util.Utils;
 
 /**
- * TODO:
+ * This class encapsulates the &lt;authorization-amount-notification&gt; notification.
  * 
  * @author simonjsmith
  * 
@@ -50,27 +50,27 @@ public class AuthorizationAmountNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO:
+	 * Retrieves the value of the &lt;avs-response&gt; tag.
 	 * 
-	 * @return
+	 * @return The AVS response code.
 	 */
 	public String getAvsResponse() {
 		return Utils.getElementStringValue(document, root, "avs-response");
 	}
 
 	/**
-	 * TODO:
+	 * Retrieves the value of the &lt;cvn-response&gt; tag.
 	 * 
-	 * @return
+	 * @return The CVN response code.
 	 */
 	public String getCvnResponse() {
 		return Utils.getElementStringValue(document, root, "cvn-response");
 	}
 
 	/**
-	 * TODO:
+	 * Retrieves the value of the &lt;authorization-amount&gt; tag.
 	 * 
-	 * @return
+	 * @return The authorization amount.
 	 */
 	public float getAuthorizationAmount() {
 		return Utils.getElementFloatValue(document, root,
@@ -78,9 +78,9 @@ public class AuthorizationAmountNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO:
+	 * Retrieves the currency code.
 	 * 
-	 * @return
+	 * @return The currency code.
 	 */
 	public String getCurrentyCode() {
 		return Utils.findElementOrContainer(document, root,
@@ -88,9 +88,9 @@ public class AuthorizationAmountNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO:
+	 * Retrieves the value of the &lt;authorization-expiration-date&gt; tag.
 	 * 
-	 * @return
+	 * @return The authorization expiration date.
 	 */
 	public Date getAuthorizationExpirationDate() {
 

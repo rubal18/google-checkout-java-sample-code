@@ -21,7 +21,7 @@ import java.io.InputStream;
 import com.google.checkout.util.Utils;
 
 /**
- * TODO
+ * This class encapsulates the &lt;refund-amount-notification&gt; notification.
  * 
  * @author simonjsmith
  * 
@@ -49,9 +49,9 @@ public class RefundAmountNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;latest-refund-amount&gt; tag.
 	 * 
-	 * @return
+	 * @return The lates refund amount.
 	 */
 	public float getLatestRefundAmount() {
 		return Utils.getElementFloatValue(document, root,
@@ -59,9 +59,9 @@ public class RefundAmountNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;total-refund-amount&gt; tag.
 	 * 
-	 * @return
+	 * @return The total refund amount.
 	 */
 	public float getTotalRefundAmount() {
 		return Utils
@@ -69,9 +69,9 @@ public class RefundAmountNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the currency code.
 	 * 
-	 * @return
+	 * @return The currency code.
 	 */
 	public String getCurrencyCode() {
 		return Utils.findElementOrContainer(document, root,

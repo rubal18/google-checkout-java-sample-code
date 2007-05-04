@@ -19,14 +19,17 @@ package com.google.checkout.example.notification;
 import com.google.checkout.CheckoutException;
 import com.google.checkout.MerchantConstants;
 import com.google.checkout.example.GoogleOrder;
+import com.google.checkout.notification.ChargeAmountNotificationProcessor;
 import com.google.checkout.notification.ChargebackAmountNotification;
 import com.google.checkout.notification.ChargebackAmountNotificationProcessor;
 
 /**
- * TODO
+  * An example implementation of the ChargebackAmountNotificationProcessor
+ * interface.
  * 
  * @author simonjsmith
  * 
+ * @see ChargebackAmountNotificationProcessor
  */
 public class ChargebackAmountNotificationProcessorImpl extends
 		AbstractNotificationProcessor implements
@@ -35,9 +38,12 @@ public class ChargebackAmountNotificationProcessorImpl extends
 	private MerchantConstants merchantConstants;
 
 	/**
-	 * TODO
+	 * Constructor which takes an instance of MerchantConstants.
 	 * 
 	 * @param merchantConstants
+	 *            The MerchantConstants.
+	 * 
+	 * @see MerchantConstants
 	 */
 	public ChargebackAmountNotificationProcessorImpl(
 			MerchantConstants merchantConstants) {

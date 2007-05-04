@@ -42,7 +42,7 @@ import com.google.checkout.example.MerchantConstantsFactory;
 import com.google.checkout.example.notification.NotificationAcknowledgment;
 
 /**
- * 
+ * This servlet is the end point for asynchronous notifications.
  */
 public class JmsNotificationServlet extends javax.servlet.http.HttpServlet {
 

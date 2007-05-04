@@ -21,7 +21,7 @@ import java.io.InputStream;
 import com.google.checkout.util.Utils;
 
 /**
- * TODO
+ * This class encapsulates the &lt;order-state-change-notification&gt; notification.
  * 
  * @author simonjsmith
  * 
@@ -49,9 +49,11 @@ public class OrderStateChangeNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;new-fulfillment-order-state&gt; element.
 	 * 
-	 * @return
+	 * @return The new fulfillment order state.
+	 * 
+	 * @see FulfillmentOrderState
 	 */
 	public FulfillmentOrderState getNewFulfillmentOrderState() {
 		String state = Utils.getElementStringValue(document, root,
@@ -60,9 +62,11 @@ public class OrderStateChangeNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;new-financial-order-state&gt; element.
 	 * 
-	 * @return
+	 * @return The new financial order state.
+	 * 
+	 * @see FinancialOrderState
 	 */
 	public FinancialOrderState getNewFinancialOrderState() {
 		String state = Utils.getElementStringValue(document, root,
@@ -71,9 +75,11 @@ public class OrderStateChangeNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;previous-fulfillment-order-state&gt; element.
 	 * 
-	 * @return
+	 * @return The previous fulfillment order state.
+	 * 
+	 * @see FulfillmentOrderState
 	 */
 	public FulfillmentOrderState getPreviousFulfillmentOrderState() {
 		String state = Utils.getElementStringValue(document, root,
@@ -82,9 +88,11 @@ public class OrderStateChangeNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;previous-financial-order-state&gt; element.
 	 * 
-	 * @return
+	 * @return The previous financial order state.
+	 * 
+	 * @see FinancialOrderState
 	 */
 	public FinancialOrderState getPreviousFinancialOrderState() {
 		String state = Utils.getElementStringValue(document, root,

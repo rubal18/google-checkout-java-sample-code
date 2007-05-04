@@ -20,12 +20,13 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * TODO
+ * This class encapsulates the data in the &lt;coupon-adjustment&gt; tag.
  * 
  * @author simonjsmith
  * 
  */
 public class CouponAdjustment extends MerchantCodes {
+
 	/**
 	 * A constructor which takes the document and element pointing to the
 	 * &lt;coupon-adjustment&gt; tag.

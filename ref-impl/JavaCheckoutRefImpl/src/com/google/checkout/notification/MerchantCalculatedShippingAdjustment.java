@@ -20,7 +20,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * TODO
+ * This class encapsulates the data in the &lt;merchant-calculated-shipping-adjustment&gt; tag.
  * 
  * @author simonjsmith
  * 

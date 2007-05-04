@@ -21,7 +21,7 @@ import java.io.InputStream;
 import com.google.checkout.util.Utils;
 
 /**
- * TODO
+ * This class encapsulates the &lt;chargeback-amount-notification&gt; notification.
  * 
  * @author simonjsmith
  * 
@@ -49,9 +49,9 @@ public class ChargebackAmountNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;latest-chargeback-amount&gt; tag.
 	 * 
-	 * @return
+	 * @return The latest chargeback amount.
 	 */
 	public float getLatestChargebackAmount() {
 		return Utils.getElementFloatValue(document, root,
@@ -59,9 +59,9 @@ public class ChargebackAmountNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;total-charge-amount&gt; tag.
 	 * 
-	 * @return
+	 * @return The total chargeback amount.
 	 */
 	public float getTotalChargebackAmount() {
 		return Utils.getElementFloatValue(document, root,
@@ -69,9 +69,9 @@ public class ChargebackAmountNotification extends CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the currency code.
 	 * 
-	 * @return
+	 * @return The currency code.
 	 */
 	public String getCurrencyCode() {
 		return Utils.findElementOrContainer(document, root,

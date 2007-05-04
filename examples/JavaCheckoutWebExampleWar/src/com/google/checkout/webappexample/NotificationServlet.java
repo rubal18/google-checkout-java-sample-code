@@ -50,7 +50,7 @@ import com.google.checkout.notification.RiskInformationNotification;
 import com.google.checkout.notification.RiskInformationNotificationProcessor;
 
 /**
- * TODO
+ * This servlet is the end point for notifications.
  */
 public class NotificationServlet extends javax.servlet.http.HttpServlet {
 

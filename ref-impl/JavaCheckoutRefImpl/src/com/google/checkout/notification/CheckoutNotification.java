@@ -24,7 +24,7 @@ import org.w3c.dom.Element;
 import com.google.checkout.util.Utils;
 
 /**
- * TODO
+ * This class is the parent for all the notification classes.
  * 
  * @author simonjsmith
  * 
@@ -46,45 +46,45 @@ public abstract class CheckoutNotification {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;timestamp&gt; tag.
 	 * 
-	 * @return
+	 * @return The timestamp.
 	 */
 	public Date getTimestamp() {
 		return Utils.getElementDateValue(document, root, "timestamp");
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the serial-number attribute.
 	 * 
-	 * @return
+	 * @return The serial number.
 	 */
 	public String getSerialNumber() {
 		return root.getAttribute("serial-number");
 	}
 
 	/**
-	 * TODO
+	 * Return the XML request String.
 	 * 
-	 * @return
+	 * @return The XML request String.
 	 */
 	public String getXml() {
 		return Utils.documentToString(document);
 	}
 
 	/**
-	 * TODO
+	 * Return the nicely formatted XML request String.
 	 * 
-	 * @return
+	 * @return The nicely formatted XML request String.
 	 */
 	public String getXmlPretty() {
 		return Utils.documentToStringPretty(document);
 	}
 
 	/**
-	 * TODO
+	 * Return the name of the root node of the notification.
 	 * 
-	 * @return
+	 * @return The root node name.
 	 */
 	public String getRootNodeName() {
 		return document.getDocumentElement().getNodeName();

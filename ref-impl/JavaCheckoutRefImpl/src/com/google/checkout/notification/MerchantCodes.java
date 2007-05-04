@@ -22,7 +22,7 @@ import org.w3c.dom.Element;
 import com.google.checkout.util.Utils;
 
 /**
- * TODO
+ * This class is the parent class of the merchant code classes. 
  * 
  * @author simonjsmith
  * 
@@ -34,18 +34,18 @@ public abstract class MerchantCodes {
 	protected Element element;
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;applied-amount&gt; element.
 	 * 
-	 * @return
+	 * @return The applied amount.
 	 */
 	public float getAppliedAmount() {
 		return Utils.getElementFloatValue(document, element, "applied-amount");
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;calculated-amount&gt; element.
 	 * 
-	 * @return
+	 * @return The calculated amount.
 	 */
 	public float getCalculatedAmount() {
 		return Utils.getElementFloatValue(document, element,
@@ -53,18 +53,18 @@ public abstract class MerchantCodes {
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;code&gt; element.
 	 * 
-	 * @return
+	 * @return The code.
 	 */
 	public String getCode() {
 		return Utils.getElementStringValue(document, element, "code");
 	}
 
 	/**
-	 * TODO
+	 * Retrieves the value of the &lt;message&gt; element.
 	 * 
-	 * @return
+	 * @return The message.
 	 */
 	public String getMessage() {
 		return Utils.getElementStringValue(document, element, "message");

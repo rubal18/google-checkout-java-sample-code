@@ -31,7 +31,7 @@ import com.google.checkout.merchantcalculation.MerchantCalculationCallbackProces
 import com.google.checkout.merchantcalculation.MerchantCalculationResults;
 
 /**
- * 
+ * This servlet is the end point for merchant calculation callbacks.
  */
 public class MerchantCalculationServlet extends javax.servlet.http.HttpServlet {
 
