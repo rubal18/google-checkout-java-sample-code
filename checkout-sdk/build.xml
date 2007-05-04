@@ -1,31 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="checkout-sdk" default="default" basedir=".">
-    <description>Builds, tests, and runs the project sdk.</description>
-    <import file="nbproject/build-impl.xml"/>
-
-    <property name="ref-impl.home" value="../ref-impl/JavaCheckoutRefImpl"/>
-    <property name="common-example.home" value="../examples/JavaCheckoutExampleCommon"/>
-    <property name="war-example.home" value="../examples/JavaCheckoutWebExampleWar"/>
-
-    <target name="-pre-compile" depends="init">
-      <copy todir="${build.classes.dir}">
-        <fileset dir="${ref-impl.home}/build/classes">
-          <include name="**/*.class"/>
-        </fileset>
-        <fileset dir="${common-example.home}/build/classes">
-          <include name="**/*.class"/>
-        </fileset>
-      </copy>      
-      <copy todir="${build.dir}/web">
-        <fileset dir="${war-example.home}/build/web">
-          <exclude name="META-INF/**"/>
-          <exclude name="WEB-INF/**"/>
-        </fileset>
-      </copy>
-    </target>
-    
-    <target name="-post-jar" depends="init">
-      <copy file="lib/checkout-config.xml" todir="${dist.dir}"/>
-      <copy file="lib/web.xml" todir="${dist.dir}"/>
-    </target>
+  <description>Builds, tests, and runs the project sdk.</description>
+  <import file="nbproject/build-impl.xml"/>
+  
+  <property name="ref-impl.home" value="../ref-impl/JavaCheckoutRefImpl"/>
+  <property name="common-example.home" value="../examples/JavaCheckoutExampleCommon"/>
+  <property name="war-example.home" value="../examples/JavaCheckoutWebExampleWar"/>
+  
+  <target name="-pre-compile" depends="init">
+    <copy todir="${build.classes.dir}">
+      <fileset dir="${ref-impl.home}/build/classes">
+        <include name="**/*.class"/>
+      </fileset>
+      <fileset dir="${common-example.home}/build/classes">
+        <include name="**/*.class"/>
+      </fileset>
+    </copy>      
+    <copy todir="${build.dir}/web">
+      <fileset dir="${war-example.home}/build/web">
+        <exclude name="META-INF/**"/>
+        <exclude name="WEB-INF/**"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="javadoc" depends="compile">
+    <copy todir="${build.dir}/src">
+      <fileset dir="${ref-impl.home}/src"/>
+      <fileset dir="${common-example.home}/src"/>
+      <fileset dir="src"/>
+    </copy>
+    <javadoc destdir="${build.dir}/apidocs" 
+             classpath="${build.classes.dir}" 
+             sourcepath="${build.dir}/src"/>
+  </target>
+  
+  <target name="dist" depends="default">
+    <property name="sdkdist.dir" value="${dist.dir}/checkout-sdk"/>
+    <mkdir dir="${sdkdist.dir}"/>
+    <copy file="${dist.dir}/checkout-sdk.jar" todir="${sdkdist.dir}"/>
+    <copy file="lib/checkout-config.xml" todir="${sdkdist.dir}"/>
+    <copy file="lib/web.xml" todir="${sdkdist.dir}"/>
+    <copy file="lib/index.html" todir="${sdkdist.dir}"/>
+    <copy todir="${sdkdist.dir}/docs">
+      <fileset dir="${build.dir}/apidocs"/>
+    </copy>
+    <deltree dir="${dist.dir}/javadoc"/>
+    <zip zipfile="${dist.dir}/checkout-sdk.zip" basedir="${sdkdist.dir}"/>
+  </target>
 </project>
