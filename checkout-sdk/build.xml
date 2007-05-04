@@ -17,12 +17,6 @@
         <include name="**/*.class"/>
       </fileset>
     </copy>      
-    <copy todir="${build.dir}/web">
-      <fileset dir="${war-example.home}/build/web">
-        <exclude name="META-INF/**"/>
-        <exclude name="WEB-INF/**"/>
-      </fileset>
-    </copy>
   </target>
   
   <target name="javadoc" depends="compile">
@@ -31,7 +25,7 @@
       <fileset dir="${common-example.home}/src"/>
       <fileset dir="src"/>
     </copy>
-    <javadoc destdir="${build.dir}/apidocs" 
+    <javadoc destdir="${build.dir}/javadocs" 
              classpath="${build.classes.dir}" 
              sourcepath="${build.dir}/src"/>
   </target>
@@ -40,14 +34,20 @@
     <property name="sdkdist.dir" value="${build.dir}/checkout-sdk-${release.version}"/>
     <mkdir dir="${sdkdist.dir}"/>
     <copy file="${dist.dir}/checkout-sdk.jar" todir="${sdkdist.dir}"/>
-    <copy todir="${sdkdist.dir}/lib">
-      <fileset dir="lib">
-        <exclude name="index.html"/>
+    <copy todir="${sdkdist.dir}/web/checkout">
+      <fileset dir="${war-example.home}/build/web">
+        <exclude name="META-INF/**"/>
+        <exclude name="WEB-INF/**"/>
       </fileset>
     </copy>
+    <mkdir dir="${sdkdist.dir}/web/WEB-INF"/>
+    <copy file="lib/checkout-config.xml" todir="${sdkdist.dir}/web/WEB-INF"/>
+    <copy file="lib/checkout-fragment-for-web.xml" todir="${sdkdist.dir}/web/WEB-INF"/>
+    <mkdir dir="${sdkdist.dir}/lib"/>
+    <copy file="lib/com_google_checkout_example_settings.properties" todir="${sdkdist.dir}/lib"/>
     <copy file="lib/index.html" todir="${sdkdist.dir}"/>
-    <copy todir="${sdkdist.dir}/docs">
-      <fileset dir="${build.dir}/apidocs"/>
+    <copy todir="${sdkdist.dir}/docs/javadocs">
+      <fileset dir="${build.dir}/javadocs"/>
     </copy>
     <deltree dir="${dist.dir}/javadoc"/>
     <zip zipfile="${dist.dir}/checkout-sdk-${release.version}.zip" basedir="${sdkdist.dir}"/>

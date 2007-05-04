@@ -4,7 +4,7 @@
     <import file="nbproject/build-impl.xml"/>
 
     <property name="orig-petstore.home" value="../../../petstore"/>
-    <property name="checkout-sdk.home" value="../../checkout-sdk"/>
+    <property name="checkout-sdk.bundle" value="../../checkout-sdk/dist/checkout-sdk-0.5.zip"/>
     
     <target name="-pre-compile" depends="init">
       <echo message="copying over all the original petstore. Make sure that the application is pre-built"/>
@@ -12,17 +12,17 @@
       <delete file="${build.web.dir}/catalog.jsp"/>
       <delete file="${build.web.dir}/catalog.js"/>
       <delete file="${build.web.dir}/WEB-INF/web.xml"/>
-      <copy file="web/WEB-INF/web.xml" todir="${build.web.dir}/WEB-INF"/>
-      <copy file="${checkout-sdk.home}/lib/checkout-config.xml" todir="${build.web.dir}/WEB-INF"/>
+      <property name="checkout-sdk.home" value="${build.dir}/checkout-sdk"/>
+      <unzip src="${checkout-sdk.bundle}" dest="${checkout-sdk.home}"/>
+      <copy file="${checkout-sdk.home}/checkout-sdk.jar" todir="${build.web.dir}/WEB-INF/lib"/>
     </target>
     <target name="-post-compile" depends="init">
-      <copy todir="${build.web.dir}/opc">
-        <fileset dir="${checkout-sdk.home}/build/web">
-          <exclude name="META-INF/**"/>
-          <exclude name="WEB-INF/**"/>
+      <copy todir="${build.web.dir}">
+        <fileset dir="${checkout-sdk.home}/web">
+          <exclude name="web/WEB-INF/checkout-fragment-for-web.xml"/>
         </fileset>
       </copy>
-      <copy file="${checkout-sdk.home}/dist/checkout-sdk.jar" todir="${build.web.dir}/WEB-INF/lib"/>
+      <copy file="web/WEB-INF/web.xml" todir="${build.web.dir}/WEB-INF"/>
       <copy file="${checkout-sdk.home}/lib/com_google_checkout_example_settings.properties" todir="${build.classes.dir}"/>
     </target>
 </project>
