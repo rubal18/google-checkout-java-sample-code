@@ -36,7 +36,7 @@
   </target>
   
   <target name="dist" depends="default">
-    <property name="sdkdist.dir" value="${dist.dir}/checkout-sdk"/>
+    <property name="sdkdist.dir" value="${build.dir}/checkout-sdk"/>
     <mkdir dir="${sdkdist.dir}"/>
     <copy file="${dist.dir}/checkout-sdk.jar" todir="${sdkdist.dir}"/>
     <copy file="lib/checkout-config.xml" todir="${sdkdist.dir}"/>
