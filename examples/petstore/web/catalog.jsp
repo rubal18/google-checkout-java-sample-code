@@ -12,6 +12,9 @@ $Id: catalog.jsp,v 1.22 2007/03/16 21:42:03 basler Exp $ --%>
 <%@taglib prefix="ui" uri="http://java.sun.com/blueprints/ui" %>
 <body>
 <jsp:include page="banner.jsp" />
+
+<jsp:useBean id="merchantInfo" class="com.google.checkout.sdk.MerchantInfo" scope="request"/>
+
 <script type="text/javascript">
     dojo.event.connect(window, "onload", function(){initCatalog();});
 </script>
@@ -56,7 +59,7 @@ $Id: catalog.jsp,v 1.22 2007/03/16 21:42:03 basler Exp $ --%>
           <td id="infopanePayPal" class="infopanePayPal">
         <f:verbatim>          
           <%-- code for Google checkout --%>
-          <FORM method="POST" action="https://sandbox.google.com/checkout/cws/v2/Merchant/156531684379308/checkoutForm" accept-charset="utf-8">
+          <FORM method="POST" action="https://sandbox.google.com/checkout/cws/v2/Merchant/${merchantInfo.merchantId}/checkoutForm" accept-charset="utf-8">
             <input type="hidden" name="item_name_1" value="pet"/>
             <input type="hidden" name="item_description_1" value="Pet from Java Pet Store."/>
             <input type="hidden" name="item_quantity_1" value="1"/>
@@ -70,7 +73,7 @@ $Id: catalog.jsp,v 1.22 2007/03/16 21:42:03 basler Exp $ --%>
             
             <input type="hidden" name="_charset_"/>
             <input type="image" name="Google Checkout" alt="Fast checkout through Google"
-                   src="https://checkout.google.com/buttons/checkout.gif?merchant_id=156531684379308&w=160&h=43&style=trans&variant=text&loc=en_US"  height="46" width="180"/>
+                   src="https://checkout.google.com/buttons/checkout.gif?merchant_id=${merchantInfo.merchantId}&w=160&h=43&style=trans&variant=text&loc=en_US"  height="46" width="180"/>
           </FORM>
         </f:verbatim>
         <ui:buyNow business="donate@animalfoundation.com" id="buyNow1" 
