@@ -36,7 +36,7 @@
     <mkdir dir="${sdkdist.dir}"/>
     <copy file="${dist.dir}/checkout-sdk.jar" todir="${sdkdist.dir}"/>
     <copy todir="${sdkdist.dir}/web/checkout">
-      <fileset dir="${war-example.home}/build/web">
+      <fileset dir="${war-example.home}/WebContent">
         <exclude name="META-INF/**"/>
         <exclude name="WEB-INF/**"/>
       </fileset>
@@ -50,7 +50,7 @@
     <copy todir="${sdkdist.dir}/docs/javadocs">
       <fileset dir="${build.dir}/javadocs"/>
     </copy>
-    <deltree dir="${dist.dir}/javadoc"/>
+    <delete dir="${dist.dir}/javadoc"/>
     <zip zipfile="${dist.dir}/checkout-sdk-${release.version}.zip" basedir="${sdkdist.dir}"/>
   </target>
 </project>
