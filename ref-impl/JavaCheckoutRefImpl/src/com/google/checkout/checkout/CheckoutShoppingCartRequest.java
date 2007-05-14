@@ -28,6 +28,7 @@ import org.w3c.dom.Element;
 
 import com.google.checkout.AbstractCheckoutRequest;
 import com.google.checkout.MerchantConstants;
+import com.google.checkout.util.Constants;
 import com.google.checkout.util.Utils;
 
 /**
@@ -59,9 +60,10 @@ public class CheckoutShoppingCartRequest extends AbstractCheckoutRequest {
 
 		super(merchantConstants);
 		document = Utils.newEmptyDocument();
-		root = (Element) document
-				.createElementNS("http://checkout.google.com/schema/2",
-						"checkout-shopping-cart");
+		root = (Element) document.createElementNS(Constants.checkoutNamespace,
+				"checkout-shopping-cart");
+		root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns",
+				Constants.checkoutNamespace);
 		document.appendChild(root);
 
 		shoppingCart = (Element) document.createElement("shopping-cart");

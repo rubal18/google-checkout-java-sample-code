@@ -22,6 +22,7 @@ import java.util.Iterator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.google.checkout.util.Constants;
 import com.google.checkout.util.Utils;
 
 /**
@@ -42,9 +43,10 @@ public class MerchantCalculationResults {
 	public MerchantCalculationResults() {
 
 		document = Utils.newEmptyDocument();
-		root = (Element) document.createElementNS(
-				"http://checkout.google.com/schema/2",
+		root = (Element) document.createElementNS(Constants.checkoutNamespace,
 				"merchant-calculation-results");
+		root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns",
+				Constants.checkoutNamespace);
 		document.appendChild(root);
 		results = (Element) document.createElement("results");
 		root.appendChild(results);
