@@ -339,13 +339,13 @@ public class Utils {
 	public static String documentToStringPretty(Document document) {
 		try {
 			TransformerFactory tf = TransformerFactory.newInstance();
+			tf.setAttribute("indent-number", new Integer(2));
 			Transformer trans = tf.newTransformer();
 			trans.setOutputProperty(OutputKeys.INDENT, "yes");
-			trans.setOutputProperty(
-					"{http://xml.apache.org/xslt}indent-amount", "2");
 
 			StringWriter sw = new StringWriter();
 			trans.transform(new DOMSource(document), new StreamResult(sw));
+			System.out.println(sw.toString());
 			return sw.toString();
 		} catch (TransformerException tEx) {
 			tEx.printStackTrace();
