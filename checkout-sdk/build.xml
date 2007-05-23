@@ -6,7 +6,7 @@
   <property name="ref-impl.home" value="../ref-impl/JavaCheckoutRefImpl"/>
   <property name="common-example.home" value="../examples/JavaCheckoutExampleCommon"/>
   <property name="war-example.home" value="../examples/JavaCheckoutWebExampleWar"/>
-  <property name="release.version" value="0.5"/>
+  <property name="release.version" value="0.6"/>
   
   <target name="-pre-compile" depends="init">
     <copy todir="${build.classes.dir}">
@@ -50,6 +50,20 @@
     <copy todir="${sdkdist.dir}/docs/javadocs">
       <fileset dir="${build.dir}/javadocs"/>
     </copy>
+    <copy todir="${sdkdist.dir}/src">
+      <fileset dir="..">
+        <include name="examples/**"/>
+        <include name="ref-impl/**"/>
+        <exclude name="examples/JavaCheckoutJ2eeExampleEjb/**"/>
+        <exclude name="examples/JavaCheckoutJ2eeExampleEar/**"/>
+        <exclude name="examples/JavaCheckoutWebExampleWar/**"/>
+        <exclude name="examples/petstore/**"/>
+        <exclude name="**/build/**"/>
+        <exclude name="**/dist/**"/>
+        <exclude name="**/nbproject/private/**"/>
+        <exclude name="**/nbproject/genfiles.properties"/>
+      </fileset>
+    </copy>    
     <delete dir="${dist.dir}/javadoc"/>
     <zip zipfile="${dist.dir}/checkout-sdk-${release.version}.zip" basedir="${sdkdist.dir}"/>
   </target>
