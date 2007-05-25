@@ -1000,7 +1000,7 @@ public class CheckoutShoppingCartRequest extends AbstractCheckoutRequest {
 			Collection parameters) {
 		if (urlEncode) {
 			try {
-				url = URLEncoder.encode(url, "UFT-8");
+				url = URLEncoder.encode(url, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
