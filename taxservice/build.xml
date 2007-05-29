@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ============================================================= -->
+<!-- View the readme.txt file for build instructions               -->
+<!-- ============================================================= -->
+
+<project basedir="." default="all" name="taxservice">
+
+    <property name="version" value="0.1"/>
+    <property name="src.java" value="${basedir}/src/java"/>
+    <property name="src.examples" value="${basedir}/examples"/>
+    <property name="build.dir" value="${basedir}/build"/>
+    <property name="dist.dir" value="${basedir}/dist"/>
+    <property name="dist.build.dir" value="${dist.dir}/${ant.project.name}"/>
+    <property name="javadoc.dir" value="${basedir}/docs/javadoc"/>
+    <property name="javadoc.dir" value="${basedir}/docs/javadoc"/>
+    <property name="jar.name" value="${ant.project.name}-${version}.jar"/>
+    <property name="dist.name" value="${ant.project.name}-${version}.zip"/>
+	
+    <property name="main.class" value="TaxesTest"/>
+
+    <!-- Classpath -->
+    <path id="project.class.path">
+        <fileset dir="lib">
+          <include name="*.jar"/>
+        </fileset>
+        <fileset dir="includelib">
+          <include name="*.jar"/>
+        </fileset>
+    </path>
+	
+    <taskdef resource="axis-tasks.properties"
+             classpathref="project.class.path" />
+	
+   <!-- ======================================================= -->
+   <!-- Initialization target                                   -->
+   <!-- ======================================================= -->
+
+   <target name="init">
+       <tstamp/>
+   </target>
+
+   <!-- ======================================================= -->
+   <!-- Target clean                                            -->
+
+   <!-- ======================================================= -->
+
+   <target name="clean">
+    <delete dir="${build.dir}"/>
+    <delete dir="${javadoc.dir}"/>
+    <delete dir="${dist.dir}"/>
+   </target>
+
+   <!-- ======================================================= -->
+   <!-- Compile utility classes                                 -->
+   <!-- ======================================================= -->
+
+	<target name="compile" depends="init">
+       <delete dir="${build.dir}/classes"/>
+       <mkdir dir="${build.dir}/classes"/>
+	        <axis-wsdl2java url="http://ws.strikeiron.com/taxdatabasic?WSDL"
+	 verbose="true" output="${src.java}">
+	             <mapping namespace="http://www.strikeiron.com"
+	 package="com.strikeiron.ws.taxdatabasic" />
+	        </axis-wsdl2java>
+   </target>
+
+	   <target name="compile_java" depends="init">
+	       <javac debug="true"
+	              deprecation="true"
+	              srcdir="${src.java}"
+	              destdir="${build.dir}/classes">
+
+	           <!-- <compilerarg line="-Xlint:unchecked"/> -->
+	           <classpath refid="project.class.path"/>
+	           <include name="**/*.java"/>
+	       </javac>
+	    </target>
+
+	   <target name="compile_src" depends="init">
+	       <iajc  debug="true"
+	              deprecation="true"
+	              srcdir="${src.java}"
+	              destDir="${build.dir}/classes">
+	           <classpath refid="project.class.path"/>
+	       </iajc>
+	    </target>
+
+	<target name="compile_examples" depends="init">
+		   <mkdir dir="${build.dir}/examples"/>
+	       <javac debug="true"
+	              deprecation="true"
+	              srcdir="${src.examples}"
+	              destdir="${build.dir}/examples">
+
+	           <!-- <compilerarg line="-Xlint:unchecked"/> -->
+			<classpath>
+			<pathelement location="${build.dir}/classes"/>
+			</classpath>
+	           <include name="**/*.java"/>
+	       </javac>
+	    </target>
+   <!-- ======================================================= -->
+   <!-- Target build                                            -->
+   <!-- ======================================================= -->
+
+	   <target name="build">
+		   	<unzip dest="${build.dir}/classes">
+		   	    <fileset dir="includelib">
+		   	        <include name="*.jar"/>
+		   	    </fileset>
+		   	</unzip>  		
+	        <jar jarfile="${build.dir}/${jar.name}"
+	             whenempty="skip"
+	             basedir="${build.dir}/classes"
+	             includes="**"
+	        />
+	   </target>
+		
+   <!-- ======================================================= -->
+   <!-- Target run                                              -->
+   <!-- ======================================================= -->
+   <target name="run" depends="compile_examples">
+       <java classname="${main.class}"
+             fork="true"
+             failonerror="true">
+
+           <classpath refid="project.class.path"/>
+       </java>
+   </target>
+   <target name="javadoc">
+    <mkdir dir="${javadoc.dir}"/>
+    <javadoc packagenames="com.google.api.adwords.*"
+             sourcepath="src/java"
+             defaultexcludes="yes"
+             destdir="${javadoc.dir}"
+             author="true"
+             version="true"
+             use="true"
+             windowtitle="AdWords Java Client API"
+    		 Overview="src/java/com/google/api/adwords/lib/lib_overview.html">
+      <doctitle><![CDATA[<h1>AdWords Java Client API</h1>]]></doctitle>
+      <bottom><![CDATA[<i>Copyright &#169; 2005 Google Corp. All Rights Reserved.</i>]]></bottom>
+      <classpath refid="project.class.path"/>
+    </javadoc>
+   </target>
+		
+   <target name="dist">
+	  <delete dir="${dist.dir}"/>
+	  <mkdir dir="${dist.dir}"/>
+      <mkdir dir="${dist.build.dir}"/>
+	  <mkdir dir="${dist.build.dir}/lib"/>
+	  <copy todir="${dist.build.dir}/lib" file="${build.dir}/${jar.name}"/>
+	  <copy todir="${dist.build.dir}">
+	  	<fileset dir="${basedir}">
+	  		<include name="**"/>
+	  		<include name="*.properties"/>
+	  		<exclude name="lib/**"/>
+	  		<exclude name="includelib/**"/>
+	  		<exclude name="dist/**"/>
+	  		<exclude name="build/**"/>
+	  	</fileset>
+	  </copy>	
+   	<zip destfile="${dist.dir}/${dist.name}"
+   	       basedir="${dist.dir}"
+   	       update="true"
+   	  >
+   		<include name="${ant.project.name}/**"/>
+   	</zip>
+   </target>
+
+   <target name="all" depends="build" />
+</project>
