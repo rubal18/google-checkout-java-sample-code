@@ -180,6 +180,7 @@
           </table>
  		</td>
 	  </tr>
+	  <tr>
 	    <td colspan='1'><strong>Response XML</strong></td>
 	  <tr>
 	    <td colspan='1'><textarea name="response" readonly="true" cols="145" rows="8"><%=responseXml%></textarea></td>

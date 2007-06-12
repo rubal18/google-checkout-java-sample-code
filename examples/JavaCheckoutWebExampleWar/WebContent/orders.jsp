@@ -53,7 +53,6 @@
   for (int i = 0; i < orders.length; i++)
   {
 	  String orderNumber = orders[i].getOrderNumber();
-	  String lastUpdated = Utils.getDateString(orders[i].getLastUpdateTime()).replace('T', ' ');
 	  String finStatus = orders[i].getLastFinStatus();
 	  String fulStatus = orders[i].getLastFulStatus();
 	  String buyer = orders[i].getBuyerEmail();
