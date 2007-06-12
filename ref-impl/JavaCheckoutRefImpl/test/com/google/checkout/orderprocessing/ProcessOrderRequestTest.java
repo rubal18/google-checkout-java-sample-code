@@ -48,14 +48,14 @@ public final class ProcessOrderRequestTest extends XMLTestCase {
 				dummyMerchantConstants);
 		request.setGoogleOrderNo("1234567890");
 
-		Validator v = new Validator(request.getXml());
-		v.useXMLSchema(true);
-		v.setJAXP12SchemaSource(xsd);
+		try {
+			Validator v = new Validator(request.getXml());
+			v.useXMLSchema(true);
+			v.setJAXP12SchemaSource(xsd);
 
-		assertTrue("XML valid ", v.isValid());
-	}
-	catch (SAXNotRecognizedException e) {
-		System.out.println("Parser does not support validation.");
-	}
+			assertTrue("XML valid ", v.isValid());
+		} catch (SAXNotRecognizedException e) {
+			System.out.println("Parser does not support validation.");
+		}
 	}
 }

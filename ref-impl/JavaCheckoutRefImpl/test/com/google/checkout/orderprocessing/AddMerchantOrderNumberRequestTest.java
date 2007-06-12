@@ -55,8 +55,7 @@ public final class AddMerchantOrderNumberRequestTest extends XMLTestCase {
 			v.useXMLSchema(true);
 			v.setJAXP12SchemaSource(xsd);
 			assertTrue("XML valid ", v.isValid());
-		}
-		catch (SAXNotRecognizedException e) {
+		} catch (SAXNotRecognizedException e) {
 			System.out.println("Parser does not support validation.");
 		}
 	}

@@ -16,6 +16,7 @@
 
 package com.google.checkout.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -35,6 +36,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -337,20 +339,23 @@ public class Utils {
 	}
 
 	public static String documentToStringPretty(Document document) {
-		try {
-			TransformerFactory tf = TransformerFactory.newInstance();
-			tf.setAttribute("indent-number", new Integer(2));
-			Transformer trans = tf.newTransformer();
-			trans.setOutputProperty(OutputKeys.INDENT, "yes");
-
-			StringWriter sw = new StringWriter();
-			trans.transform(new DOMSource(document), new StreamResult(sw));
-			return sw.toString();
-		} catch (TransformerException tEx) {
-			tEx.printStackTrace();
-		}
-		return null;
-	}
+		  
+	  try {
+		StreamSource stylesource = new StreamSource(Utils.class.getResourceAsStream("indent.xsl"));
+	    
+	    TransformerFactory tf = TransformerFactory.newInstance();
+	    Transformer trans = tf.newTransformer(stylesource);
+	                       
+		StringWriter sw = new StringWriter();
+		trans.transform (new DOMSource(document), new StreamResult(sw));
+		
+		return sw.toString();		
+		
+      } catch (TransformerException tEx) {
+  	    tEx.printStackTrace();
+  	  }
+  	  return null;
+    }
 
 	public static Document newDocumentFromString(String xmlString) {
 		DocumentBuilderFactory factory = null;

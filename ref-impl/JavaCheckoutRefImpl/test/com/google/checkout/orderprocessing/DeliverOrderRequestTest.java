@@ -52,14 +52,14 @@ public final class DeliverOrderRequestTest extends XMLTestCase {
 		request.setSendEmail(true);
 		request.setTrackingNo("12345");
 
-		Validator v = new Validator(request.getXml());
-		v.useXMLSchema(true);
-		v.setJAXP12SchemaSource(xsd);
+		try {
+			Validator v = new Validator(request.getXml());
+			v.useXMLSchema(true);
+			v.setJAXP12SchemaSource(xsd);
 
-		assertTrue("XML valid ", v.isValid());
-	}
-	catch (SAXNotRecognizedException e) {
-		System.out.println("Parser does not support validation.");
-	}
+			assertTrue("XML valid ", v.isValid());
+		} catch (SAXNotRecognizedException e) {
+			System.out.println("Parser does not support validation.");
+		}
 	}
 }

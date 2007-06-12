@@ -62,7 +62,7 @@ public class OrderStateChangeNotificationTest extends TestCase {
 
 	private String inputStreamAsString(InputStream stream) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(stream));
-		StringBuilder sb = new StringBuilder();
+		StringBuffer sb = new StringBuffer();
 		String line = null;
 
 		while ((line = br.readLine()) != null) {

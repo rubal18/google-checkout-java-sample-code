@@ -50,14 +50,14 @@ public final class UnarchiveOrderRequestTest extends XMLTestCase {
 		request.setGoogleOrderNo("1234567890");
 		request.setMerchantOrderNo("0987654321");
 
-		Validator v = new Validator(request.getXml());
-		v.useXMLSchema(true);
-		v.setJAXP12SchemaSource(xsd);
+		try {
+			Validator v = new Validator(request.getXml());
+			v.useXMLSchema(true);
+			v.setJAXP12SchemaSource(xsd);
 
-		assertTrue("XML valid ", v.isValid());
-	}
-	catch (SAXNotRecognizedException e) {
-		System.out.println("Parser does not support validation.");
-	}
+			assertTrue("XML valid ", v.isValid());
+		} catch (SAXNotRecognizedException e) {
+			System.out.println("Parser does not support validation.");
+		}
 	}
 }

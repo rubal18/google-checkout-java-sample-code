@@ -50,15 +50,14 @@ public final class CancelOrderRequestTest extends XMLTestCase {
 		request.setGoogleOrderNo("1234567890");
 		request.setComment("comment");
 		request.setReason("reason");
+		try {
+			Validator v = new Validator(request.getXml());
+			v.useXMLSchema(true);
+			v.setJAXP12SchemaSource(xsd);
 
-		Validator v = new Validator(request.getXml());
-		v.useXMLSchema(true);
-		v.setJAXP12SchemaSource(xsd);
-
-		assertTrue("XML valid ", v.isValid());
-	}
-	catch (SAXNotRecognizedException e) {
-		System.out.println("Parser does not support validation.");
-	}
+			assertTrue("XML valid ", v.isValid());
+		} catch (SAXNotRecognizedException e) {
+			System.out.println("Parser does not support validation.");
+		}
 	}
 }

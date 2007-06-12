@@ -90,7 +90,62 @@ public class MerchantCalculationResults {
 				"shipping-rate", shippingRate);
 		shipping.setAttribute("currency", currency);
 
-		Element codes = Utils.createNewContainer(document, results,
+		Element codes = Utils.createNewContainer(document, result,
+				"merchant-code-results");
+
+		Iterator it = merchantCodeResults.iterator();
+		MerchantCodeResult mcResult;
+		Element eResult;
+
+		while (it.hasNext()) {
+			mcResult = (MerchantCodeResult) it.next();
+			eResult = Utils.createNewContainer(document, codes, mcResult
+					.getType());
+			Utils.createNewElementAndSet(document, eResult, "valid", mcResult
+					.isValid());
+			Utils.createNewElementAndSet(document, eResult,
+					"calculated-amount", mcResult.getCalculatedAmount());
+			Utils.createNewElementAndSet(document, eResult, "code", mcResult
+					.getCode());
+			Utils.createNewElementAndSet(document, eResult, "message", mcResult
+					.getMessage());
+		}
+	}
+
+	/**
+	 * Add a result without including a total-tax amount. It is important not to
+	 * send back data which is not required.
+	 * 
+	 * @param shippingName
+	 *            The shipping name.
+	 * @param addressId
+	 *            The address id.
+	 * @param shippable
+	 *            The shippable flag.
+	 * @param shippingRate
+	 *            The shipping rate.
+	 * @param currency
+	 *            The currency code.
+	 * @param merchantCodeResults
+	 *            A collection of MerchantCodeResult objects.
+	 * 
+	 * @see MerchantCodeResult
+	 */
+	public void addResult(String shippingName, String addressId,
+			boolean shippable, double shippingRate, String currency,
+			Collection merchantCodeResults) {
+
+		Element result = Utils.createNewContainer(document, results, "result");
+		result.setAttribute("shipping-name", shippingName);
+		result.setAttribute("address-id", addressId);
+
+		Utils.createNewElementAndSet(document, result, "shippable", shippable);
+
+		Element shipping = Utils.createNewElementAndSet(document, result,
+				"shipping-rate", shippingRate);
+		shipping.setAttribute("currency", currency);
+
+		Element codes = Utils.createNewContainer(document, result,
 				"merchant-code-results");
 
 		Iterator it = merchantCodeResults.iterator();
