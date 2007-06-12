@@ -55,10 +55,10 @@ public class NewOrderNotificationTest extends TestCase {
 		assertEquals(n.getTimestamp(), Utils
 				.parseDate("2006-03-17T12:20:46.137Z"));
 
-		assertEquals(n.getAdjustmentTotal(), 13.06f);
+		assertEquals(n.getAdjustmentTotal(), 13.06f, 0f);
 		assertEquals(n.getBuyerId(), 419797746651146l);
-		assertEquals(n.getOrderTotal(), 226.06f);
-		assertEquals(n.getTotalTax(), 15.06f);
+		assertEquals(n.getOrderTotal(), 226.06f, 0f);
+		assertEquals(n.getTotalTax(), 15.06f, 0f);
 
 		Address bill = n.getBuyerBillingAddress();
 		assertEquals(bill.getAddress1(), "1250 Shoreline Blvd");
@@ -105,7 +105,7 @@ public class NewOrderNotificationTest extends TestCase {
 		assertEquals(i1.getMerchantItemId(), "");
 		assertEquals(i1.getMerchantPrivateItemData().length, 0);
 		assertEquals(i1.getQuantity(), 1);
-		assertEquals(i1.getUnitPriceAmount(), 35.00f);
+		assertEquals(i1.getUnitPriceAmount(), 35.00f, 0f);
 		assertEquals(i1.getUnitPriceCurrency(), "USD");
 		assertEquals(i1.getTaxTableSelector(), "food");
 
@@ -121,7 +121,7 @@ public class NewOrderNotificationTest extends TestCase {
 		// Some more tests maybe...
 
 		assertEquals(i2.getQuantity(), 1);
-		assertEquals(i2.getUnitPriceAmount(), 178.00f);
+		assertEquals(i2.getUnitPriceAmount(), 178.00f, 0f);
 		assertEquals(i2.getUnitPriceCurrency(), "USD");
 		assertEquals(i2.getTaxTableSelector(), "");
 
@@ -132,7 +132,7 @@ public class NewOrderNotificationTest extends TestCase {
 
 		Shipping s = n.getShipping();
 		assertTrue(s instanceof MerchantCalculatedShippingAdjustment);
-		assertEquals(s.getShippingCost(), 13.00f);
+		assertEquals(s.getShippingCost(), 13.00f, 0f);
 		assertEquals(s.getShippingName(), "SuperShip");
 	}
 

@@ -50,8 +50,8 @@ public class ChargeAmountNotificationTest extends TestCase {
 				"95d44287-12b1-4722-bc56-cfaa73f4c0d1");
 		assertEquals(n.getTimestamp(), Utils
 				.parseDate("2006-03-18T18:25:31.593Z"));
-		assertEquals(n.getLatestChargeAmount(), 226.06f);
-		assertEquals(n.getTotalChargeAmount(), 226.06f);
+		assertEquals(n.getLatestChargeAmount(), 226.06f, 0f);
+		assertEquals(n.getTotalChargeAmount(), 226.06f, 0f);
 		assertEquals(n.getCurrencyCode(), "USD");
 	}
 

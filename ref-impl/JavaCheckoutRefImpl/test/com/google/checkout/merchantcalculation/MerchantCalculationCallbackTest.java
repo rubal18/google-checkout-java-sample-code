@@ -72,7 +72,7 @@ public class MerchantCalculationCallbackTest extends TestCase {
 		assertEquals(i1.getMerchantItemId(), "");
 		assertEquals(i1.getMerchantPrivateItemData().length, 0);
 		assertEquals(i1.getQuantity(), 1);
-		assertEquals(i1.getUnitPriceAmount(), 35.00f);
+		assertEquals(i1.getUnitPriceAmount(), 35.00f, 0f);
 		assertEquals(i1.getUnitPriceCurrency(), "USD");
 		assertEquals(i1.getTaxTableSelector(), "food");
 

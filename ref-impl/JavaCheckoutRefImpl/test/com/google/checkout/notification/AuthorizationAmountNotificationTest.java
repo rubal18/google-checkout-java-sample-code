@@ -49,7 +49,7 @@ public class AuthorizationAmountNotificationTest extends TestCase {
 		assertEquals(n.getSerialNumber(),
 				"bea6bc1b-e1e2-44fe-80ff-2391b25c2510");
 		assertEquals(n.getTimestamp(), Utils.parseDate("2006-03-18T20:25:31"));
-		assertEquals(n.getAuthorizationAmount(), 226.06f);
+		assertEquals(n.getAuthorizationAmount(), 226.06f, 0f);
 		assertEquals(n.getAuthorizationExpirationDate(), Utils
 				.parseDate("2006-03-18T20:25:31"));
 		assertEquals(n.getAvsResponse(), "Y");

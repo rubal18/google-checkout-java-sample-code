@@ -50,8 +50,8 @@ public class RefundAmountNotificationTest extends TestCase {
 				"d669f8c7-6d75-4ad6-9278-d2fc997d15f2");
 		assertEquals(n.getTimestamp(), Utils
 				.parseDate("2006-03-18T20:25:31.823Z"));
-		assertEquals(n.getLatestRefundAmount(), 226.06f);
-		assertEquals(n.getTotalRefundAmount(), 226.06f);
+		assertEquals(n.getLatestRefundAmount(), 226.06f, 0f);
+		assertEquals(n.getTotalRefundAmount(), 226.06f, 0f);
 		assertEquals(n.getCurrencyCode(), "USD");
 	}
 

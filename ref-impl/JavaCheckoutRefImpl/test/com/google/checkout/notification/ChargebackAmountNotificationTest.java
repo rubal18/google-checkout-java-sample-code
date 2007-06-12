@@ -50,8 +50,8 @@ public class ChargebackAmountNotificationTest extends TestCase {
 				"bea6bc1b-e1e2-44fe-80ff-0180e33a2614");
 		assertEquals(n.getTimestamp(), Utils
 				.parseDate("2006-03-18T19:10:04.423Z"));
-		assertEquals(n.getLatestChargebackAmount(), 226.06f);
-		assertEquals(n.getTotalChargebackAmount(), 226.06f);
+		assertEquals(n.getLatestChargebackAmount(), 226.06f, 0f);
+		assertEquals(n.getTotalChargebackAmount(), 226.06f, 0f);
 		assertEquals(n.getCurrencyCode(), "USD");
 	}
 
