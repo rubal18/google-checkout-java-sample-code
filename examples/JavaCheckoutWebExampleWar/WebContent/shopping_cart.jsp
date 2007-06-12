@@ -82,7 +82,7 @@
 	  	  
 	  TaxArea ta = new TaxArea();
 	  ta.addStateCode(taxState);
-	  cart.addDefaultTaxRule(Double.parseDouble(taxAmount), Boolean.parseBoolean(shippingTaxed), ta);	
+	  cart.addDefaultTaxRule(Double.parseDouble(taxAmount), Boolean.valueOf(shippingTaxed).booleanValue(), ta);	
 	  
 	  prettyXml = cart.getXmlPretty();
 	  responseXml = "";

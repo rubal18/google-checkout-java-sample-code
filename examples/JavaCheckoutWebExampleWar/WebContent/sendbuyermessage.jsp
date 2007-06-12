@@ -68,7 +68,7 @@
 	  
 	  messageRequest.setGoogleOrderNo(orderNumber);
 	  messageRequest.setMessage(message);
-	  messageRequest.setSendEmail(Boolean.parseBoolean(sendEmail));
+	  messageRequest.setSendEmail(Boolean.valueOf(sendEmail).booleanValue());
 	  
 	  prettyXml = messageRequest.getXmlPretty();
 	  responseXml = "";

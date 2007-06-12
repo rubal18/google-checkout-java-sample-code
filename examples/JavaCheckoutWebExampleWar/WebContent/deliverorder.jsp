@@ -71,7 +71,7 @@
 	  deliverRequest.setGoogleOrderNo(orderNumber);
 	  deliverRequest.setCarrier(carrier);
 	  deliverRequest.setTrackingNo(trackingNumber);
-	  deliverRequest.setSendEmail(Boolean.parseBoolean(sendEmail));
+	  deliverRequest.setSendEmail(Boolean.valueOf(sendEmail).booleanValue());
 	  
 	  prettyXml = deliverRequest.getXmlPretty();
 	  responseXml = "";
