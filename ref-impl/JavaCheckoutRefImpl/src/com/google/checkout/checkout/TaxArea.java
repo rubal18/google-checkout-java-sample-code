@@ -108,10 +108,24 @@ public class TaxArea {
 	public void addPostalArea(String countryCode, String postalCodePattern) {
 		Element pa = Utils.createNewContainer(document, root, "postal-area");
 		Utils.createNewElementAndSet(document, pa, "country-code", countryCode);
-		Utils.createNewElementAndSet(document, pa, "postal-code-pattern",
+
+		if (postalCodePattern != null)
+		{
+		  Utils.createNewElementAndSet(document, pa, "postal-code-pattern",
 				postalCodePattern);
+		}
 	}
 
+	/**
+	 * This method adds a &lt;postal-area&gt; element.
+	 * 
+	 * @param countryCode
+	 *            The country code.
+	 */
+	public void addPostalArea(String countryCode) {
+		addPostalArea(countryCode, null);
+	}
+	
 	/**
 	 * This method adds a &lt;world-area&gt; element.
 	 * 

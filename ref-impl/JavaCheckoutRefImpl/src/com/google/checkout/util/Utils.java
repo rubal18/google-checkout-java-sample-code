@@ -345,7 +345,6 @@ public class Utils {
 
 			StringWriter sw = new StringWriter();
 			trans.transform(new DOMSource(document), new StreamResult(sw));
-			System.out.println(sw.toString());
 			return sw.toString();
 		} catch (TransformerException tEx) {
 			tEx.printStackTrace();
