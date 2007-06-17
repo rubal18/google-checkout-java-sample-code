@@ -1013,13 +1013,15 @@ public class CheckoutShoppingCartRequest extends AbstractCheckoutRequest {
 		Element pUrl = Utils.createNewContainer(document, pUrls,
 				"parameterized-url");
 		pUrl.setAttribute("url", url);
-
+		
+		Element eParams = Utils.createNewContainer(document, pUrl,
+		"parameters");
+		
 		Iterator it = parameters.iterator();
 		UrlParameter param;
 		while (it.hasNext()) {
 			param = (UrlParameter) it.next();
-			Element eParams = Utils.createNewContainer(document, pUrl,
-					"parameters");
+
 			Element eParam = Utils.createNewContainer(document, eParams,
 					"url-parameter");
 			eParam.setAttribute("name", param.getName());
