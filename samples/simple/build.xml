@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="simple" default="default" basedir=".">
+    <description>Builds, tests, and runs the project simple.</description>
+    <import file="nbproject/build-impl.xml"/>
+    
+    <property name="checkout-sdk.bundle" value="../../checkout-sdk/dist/checkout-sdk-0.6.zip"/>
+    
+    <target name="-pre-compile" depends="init">
+      <property name="checkout-sdk.home" value="${build.dir}/checkout-sdk"/>
+      <unzip src="${checkout-sdk.bundle}" dest="${checkout-sdk.home}"/>
+      <copy file="${checkout-sdk.home}/checkout-sdk.jar" todir="${build.web.dir}/WEB-INF/lib"/>
+    </target>
+    <target name="-post-compile" depends="init">
+      <copy todir="${build.web.dir}">
+        <fileset dir="${checkout-sdk.home}/web">
+          <exclude name="web/WEB-INF/checkout-fragment-for-web.xml"/>
+        </fileset>
+      </copy>
+      <copy file="web/WEB-INF/web.xml" todir="${build.web.dir}/WEB-INF"/>
+      <copy file="${checkout-sdk.home}/lib/com_google_checkout_example_settings.properties" todir="${build.classes.dir}"/>
+    </target>    
+</project>
