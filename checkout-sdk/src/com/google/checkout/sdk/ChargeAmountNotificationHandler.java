@@ -27,13 +27,14 @@ import com.google.checkout.notification.ChargeAmountNotification;
  * @author Inderjeet Singh (inder@google.com)
  */
 public class ChargeAmountNotificationHandler extends
-    AbstractNotificationProcessor implements NotificationHandler {
+    AbstractNotificationProcessor implements MessageHandler {
   
   
   public String process(MerchantConstants mc, String notificationMsg)
   throws CheckoutException {
     try {
-      ChargeAmountNotification notification = new ChargeAmountNotification(notificationMsg);
+      ChargeAmountNotification notification = 
+          new ChargeAmountNotification(notificationMsg);
       String ack = getAckString();
       GoogleOrder order = GoogleOrder.findOrCreate(mc.getMerchantId(),
           notification.getGoogleOrderNo());

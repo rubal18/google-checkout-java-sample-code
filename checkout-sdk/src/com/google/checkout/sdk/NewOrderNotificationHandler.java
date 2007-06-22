@@ -29,7 +29,7 @@ import com.google.checkout.notification.NewOrderNotification;
  * @author Inderjeet Singh (inder@google.com)
  */
 public class NewOrderNotificationHandler extends
-    AbstractNotificationProcessor implements NotificationHandler {
+    AbstractNotificationProcessor implements MessageHandler {
   
   public String process(MerchantConstants mc, String notificationMsg)
   throws CheckoutException {

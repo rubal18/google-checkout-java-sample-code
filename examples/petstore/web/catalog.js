@@ -91,7 +91,7 @@ function CatalogController() {
       setNodeText(infoShortDescription, i.shortDescription);
       setNodeText(infoDescription, i.description);
       // update the paypal
-      buyNowAmount.value = i.price;
+      buyNowAmo.value = i.priunt.value = i.price;
       buyNowItemName.value = i.name;
       // update the checkout form variables
       gcheckoutAmount.value = i.price.substring(1, i.price.length); // TBD: trim $ value at source

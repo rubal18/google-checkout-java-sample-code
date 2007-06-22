@@ -12,6 +12,7 @@
     <copy todir="${build.classes.dir}">
       <fileset dir="${ref-impl.home}/build/classes">
         <include name="**/*.class"/>
+        <include name="**/*.xsl"/>
       </fileset>
       <fileset dir="${common-example.home}/build/classes">
         <include name="**/*.class"/>

@@ -30,7 +30,7 @@ import com.google.checkout.notification.RiskInformationNotification;
  */
 public class RiskInformationNotificationHandler extends
     AbstractNotificationProcessor implements
-    NotificationHandler {
+    MessageHandler {
   
   public String process(MerchantConstants mc, String notificationMsg)
   throws CheckoutException {

@@ -39,19 +39,25 @@ import org.w3c.dom.NodeList;
  * @author simonjsmith
  * @author Inderjeet Singh (inder@google.com)
  */
-public class CheckoutNotificationServlet extends javax.servlet.http.HttpServlet {
+public class CheckoutMessageHandlerServlet extends javax.servlet.http.HttpServlet {
   
+    private static final String DEFAULT_HANDLER_TYPE = "notification-handler";
+    
   /** Overrides servlet method to load notification processor configuration from web.xml */
   public void init(ServletConfig config) throws ServletException {
     ServletContext context = config.getServletContext();
     String fileName = context.getInitParameter("checkout-config-file");
     InputStream is = context.getResourceAsStream(fileName);
+    String handlerType = config.getInitParameter("handler-type");
+    if (handlerType == null) {
+        handlerType = DEFAULT_HANDLER_TYPE;
+    }
     if (is == null) { // try default path
       fileName = "/WEB-INF/checkout-config.xml";
       is = context.getResourceAsStream(fileName);
     }
     if (is != null) {
-      readAndConfigure(is);
+      readAndConfigure(is, handlerType);
     }
   }
   
@@ -89,27 +95,27 @@ public class CheckoutNotificationServlet extends javax.servlet.http.HttpServlet 
   
   
   /** Overrides base class method to load the configuration from web.xml deployment descriptor */
-  protected String dispatch(String notificationString) throws Exception {
-    NotificationHandler np = getNotificationProcessor(notificationString);
-    if (np != null) {
-      return np.process(MerchantConstantsFactory.getMerchantConstants(),
-          notificationString);
+  protected String dispatch(String message) throws Exception {
+    MessageHandler mh = getMessageHandler(message);
+    if (mh != null) {
+      return mh.process(MerchantConstantsFactory.getMerchantConstants(),
+          message);
     }
     return null;
   }
   
-  private NotificationHandler getNotificationProcessor(String notificationString) {
-    for (Iterator it=npTable.keySet().iterator(); it.hasNext(); ) {
+  private MessageHandler getMessageHandler(String message) {
+    for (Iterator it=mhTable.keySet().iterator(); it.hasNext(); ) {
       String key = (String) it.next();
-      if (notificationString.indexOf(key) > -1) {
-        return (NotificationHandler) npTable.get(key);
+      if (message.indexOf(key) > -1) {
+        return (MessageHandler) mhTable.get(key);
       }
     }
     return null;
   }
-  private void readAndConfigure(InputStream is) {
+  private void readAndConfigure(InputStream is, String handlerType) {
     Document doc = Utils.newDocumentFromInputStream(is);
-    NodeList elements = doc.getElementsByTagName("notification-handler");
+    NodeList elements = doc.getElementsByTagName(handlerType);
     for (int i = 0; i < elements.getLength(); ++i) {
       try {
         Element element = (Element) elements.item(i);
@@ -117,7 +123,7 @@ public class CheckoutNotificationServlet extends javax.servlet.http.HttpServlet 
         String target = Utils.getElementStringValue(doc, element, "message-type").trim();
         Class c = Class.forName(className);
         Object obj = c.newInstance();
-        npTable.put(target, obj);
+        mhTable.put(target, obj);
       } catch (ClassNotFoundException e) {
         e.printStackTrace(); // TBD: Fix
       } catch (SecurityException e) {
@@ -147,5 +153,5 @@ public class CheckoutNotificationServlet extends javax.servlet.http.HttpServlet 
     return xml.toString();
   }
   
-  private HashMap npTable = new HashMap();
+  private HashMap mhTable = new HashMap();
 }

@@ -30,10 +30,10 @@ import com.google.checkout.notification.ChargebackAmountNotification;
  */
 public class ChargebackAmountNotificationHandler extends
     AbstractNotificationProcessor implements
-    NotificationHandler {
+    MessageHandler {
   
   public String process(MerchantConstants mc, String notificationMsg)
-  throws CheckoutException {
+      throws CheckoutException {
     try {
       ChargebackAmountNotification notification =
           new ChargebackAmountNotification(notificationMsg);

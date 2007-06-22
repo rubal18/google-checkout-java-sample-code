@@ -23,6 +23,6 @@ import com.google.checkout.MerchantConstants;
  *
  * @author Inderjeet Singh (inder@google.com)
  */
-public interface NotificationHandler {
-  public String process(MerchantConstants mc, String notification) throws CheckoutException;  
+public interface MessageHandler {
+  public String process(MerchantConstants mc, String message) throws CheckoutException;  
 }

@@ -29,7 +29,7 @@ import com.google.checkout.notification.AuthorizationAmountNotification;
  * @author Inderjeet Singh (inde@google.com)
  */
 public class AuthorizationAmountNotificationHandler extends
-    AbstractNotificationProcessor implements NotificationHandler {
+    AbstractNotificationProcessor implements MessageHandler {
   
   public String process(MerchantConstants mc, String notificationMsg)
   throws CheckoutException {
