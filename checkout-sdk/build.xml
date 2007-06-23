@@ -65,6 +65,17 @@
         <exclude name="**/nbproject/genfiles.properties"/>
       </fileset>
     </copy>    
+    <copy todir="${sdkdist.dir}/samples">
+      <fileset dir="../samples">
+        <exclude name="**/build/**"/>
+        <exclude name="**/dist/**"/>
+        <exclude name="**/build.properties"/>
+        <exclude name="**/nbproject/private/**"/>
+        <exclude name="**/nbproject/genfiles.properties"/>
+        <exclude name="**/nbproject/ant-deploy.xml"/>
+        <exclude name="**/nbproject/build-impl.xml"/>
+      </fileset>
+    </copy>
     <delete dir="${dist.dir}/javadoc"/>
     <zip zipfile="${dist.dir}/checkout-sdk-${release.version}.zip" basedir="${sdkdist.dir}"/>
   </target>
