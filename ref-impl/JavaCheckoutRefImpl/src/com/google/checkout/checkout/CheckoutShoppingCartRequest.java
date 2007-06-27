@@ -654,6 +654,26 @@ public class CheckoutShoppingCartRequest extends AbstractCheckoutRequest {
 	}
 
 	/**
+	 * Set the value of the &lt;calculation-mode&gt; element. The value of this
+	 * element determines whether Google will send the addresses one at a time
+	 * or in batch to your merchant calculations handler.
+	 * 
+	 * @param calcMode
+	 *            The CalculationMode.
+	 * 
+	 * @see CalculationMode
+	 */
+	public void setCalculationMode(CalculationMode calcMode) {
+
+		Element mcfs = Utils.findContainerElseCreate(document,
+				checkoutFlowSupport, "merchant-checkout-flow-support");
+		Element merchantCalcs = Utils.findContainerElseCreate(document, mcfs,
+				"merchant-calculations");
+		Utils.findElementAndSetElseCreateAndSet(document, merchantCalcs,
+				"calculation-mode", calcMode.toString());
+	}
+
+	/**
 	 * Sets the value of the &lt;analytics-data&gt; element. Google Analytics
 	 * uses this to Track Google Checkout Orders.
 	 * 
@@ -1013,10 +1033,10 @@ public class CheckoutShoppingCartRequest extends AbstractCheckoutRequest {
 		Element pUrl = Utils.createNewContainer(document, pUrls,
 				"parameterized-url");
 		pUrl.setAttribute("url", url);
-		
-		Element eParams = Utils.createNewContainer(document, pUrl,
-		"parameters");
-		
+
+		Element eParams = Utils
+				.createNewContainer(document, pUrl, "parameters");
+
 		Iterator it = parameters.iterator();
 		UrlParameter param;
 		while (it.hasNext()) {
