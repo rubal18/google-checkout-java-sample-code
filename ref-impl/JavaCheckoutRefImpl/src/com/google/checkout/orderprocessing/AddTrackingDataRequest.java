@@ -100,8 +100,7 @@ public class AddTrackingDataRequest extends AbstractCheckoutRequest {
 	 * @see com.google.checkout.CheckoutRequest#getPostUrl()
 	 */
 	public String getPostUrl() {
-		return "https://sandbox.google.com/checkout/cws/v2/Merchant/"
-				+ merchantConstants.getMerchantId() + "/request";
+		return merchantConstants.getRequestUrl();
 	}
 
 	/**
