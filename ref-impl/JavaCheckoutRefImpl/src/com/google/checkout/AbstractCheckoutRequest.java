@@ -94,8 +94,8 @@ public abstract class AbstractCheckoutRequest {
 					"application/xml; charset=UTF-8");
 			connection.setRequestProperty("accept", "application/xml");
 
-			PrintWriter output = new PrintWriter(new OutputStreamWriter(
-					connection.getOutputStream()));
+		      PrintWriter output = new PrintWriter(new OutputStreamWriter(
+		              connection.getOutputStream(), "UTF8"));
 			output.print(getXml());
 			output.flush();
 			output.close();

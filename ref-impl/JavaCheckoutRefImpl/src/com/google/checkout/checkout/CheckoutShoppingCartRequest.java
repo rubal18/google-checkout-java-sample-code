@@ -361,6 +361,56 @@ public class CheckoutShoppingCartRequest extends AbstractCheckoutRequest {
 		}
 	}
 
+	  /**
+	   * This method adds a merchant-calculated shipping method to an order. This
+	   * method handles merchant-calculated shipping methods that have shipping
+	   * restrictions.
+	   * 
+	   * @param name The name of the shipping method. This value will be displayed
+	   *        on the Google Checkout order review page.
+	   * 
+	   * @param defaultCost The default cost associated with the shipping method.
+	   *        This value is the amount that Gogle Checkout will charge for
+	   *        shipping if the merchant calculation callback request fails.
+	   * @param restrictions A list of country, state or zip code areas where the
+	   *        shipping method is either available or unavailable.
+	   * 
+	   * @param filters Similar to the shipping restrictions, filters will be
+	   *        applied before Google Checkout sends a
+	   *        <merchant-calculation-callback> to the merchant.
+	   * 
+	   * @see ShippingRestrictions
+	   */
+	  public void addMerchantCalculatedShippingMethod(String name,
+	      float defaultCost, ShippingRestrictions restrictions,
+	      AddressFilters filters) {
+
+	    Element mcfs =
+	        Utils.findContainerElseCreate(document, checkoutFlowSupport,
+	            "merchant-checkout-flow-support");
+	    Element shippingMethods =
+	        Utils.findContainerElseCreate(document, mcfs, "shipping-methods");
+
+	    Element newShip =
+	        Utils.createNewContainer(document, shippingMethods,
+	            "merchant-calculated-shipping");
+	    newShip.setAttribute("name", name);
+
+	    Element price =
+	        Utils.createNewElementAndSet(document, newShip, "price", defaultCost);
+	    price.setAttribute("currency", merchantConstants.getCurrencyCode());
+
+	    if (restrictions != null) {
+	      Utils.importElements(document, newShip, new Element[] {restrictions
+	          .getRootElement()});
+	    }
+
+	    if (filters != null) {
+	      Utils.importElements(document, newShip, new Element[] {filters
+	          .getRootElement()});
+	    }
+	  }	
+	
 	/**
 	 * This method adds an instore-pickup shipping option to an order.
 	 * 
